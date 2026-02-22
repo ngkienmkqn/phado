@@ -93,6 +93,16 @@ export default function AdminDashboard() {
                 if (!overlay[req.relatedToId]) overlay[req.relatedToId] = {};
                 overlay[req.relatedToId].spouse = updatedSpouse;
             }
+        } else if (req.type === 'add' && req.relation === 'child' && req.relatedToId) {
+            // Add completely new node
+            const newId = `child_${Date.now()}`;
+            overlay[newId] = {
+                id: newId,
+                name: req.newData?.name || 'Chưa rõ',
+                gender: req.newData?.gender || 'male',
+                generation: String(req.newData?.generation || ''),
+                parentId: req.relatedToId
+            };
         } else if (req.memberId) {
             // Normal edit
             if (!overlay[req.memberId]) overlay[req.memberId] = {};
@@ -237,7 +247,7 @@ export default function AdminDashboard() {
                                                         <h4 className="text-xl font-serif font-bold text-gold-300">
                                                             {req.type === 'add' ? req.newData?.name : req.memberName}
                                                             <span className="text-base text-gray-400 font-normal ml-2">
-                                                                ({`\u0110\u1EDDi ${req.memberGeneration || '?'}`})
+                                                                ({`Đời ${req.type === 'add' ? req.newData?.generation : (req.memberGeneration || '?')}`})
                                                             </span>
                                                         </h4>
                                                     </div>
@@ -289,12 +299,26 @@ export default function AdminDashboard() {
                                                     <div className="bg-blue-900/20 rounded-xl border border-blue-500/30 overflow-hidden mb-3">
                                                         <div className="px-4 py-2 bg-blue-500/10 border-b border-blue-500/20">
                                                             <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">
-                                                                ✨ Thêm Mới Vợ/Chồng
+                                                                {req.relation === 'child' ? '✨ Thêm Mới Con Cái' : '✨ Thêm Mới Vợ/Chồng'}
                                                             </span>
                                                         </div>
-                                                        <div className="px-4 py-3 border-b border-white/5 flex gap-3">
-                                                            <span className="text-sm text-blue-300 w-24 shrink-0 font-medium">Họ và tên:</span>
-                                                            <span className="text-sm text-blue-100 font-bold">{req.newData.name}</span>
+                                                        <div className="px-4 py-3 border-b border-white/5 flex flex-col gap-2">
+                                                            <div className="flex gap-3">
+                                                                <span className="text-sm text-blue-300 w-28 shrink-0 font-medium">Họ và tên:</span>
+                                                                <span className="text-sm text-blue-100 font-bold">{req.newData.name}</span>
+                                                            </div>
+                                                            {req.relation === 'child' && (
+                                                                <div className="flex gap-3">
+                                                                    <span className="text-sm text-blue-300 w-28 shrink-0 font-medium">Thuộc về bố/mẹ:</span>
+                                                                    <span className="text-sm text-blue-100 font-bold">{req.relatedToName}</span>
+                                                                </div>
+                                                            )}
+                                                            {req.relation === 'child' && (
+                                                                <div className="flex gap-3">
+                                                                    <span className="text-sm text-blue-300 w-28 shrink-0 font-medium">Giới tính:</span>
+                                                                    <span className="text-sm text-blue-100 font-bold">{req.newData.gender === 'male' ? 'Nam' : 'Nữ'}</span>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 )}

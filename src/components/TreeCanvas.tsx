@@ -272,12 +272,20 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const base = data.members || [];
         if (Object.keys(overlay).length === 0) return base;
 
-        return base.map(m => {
+        const updated = base.map(m => {
             if (overlay[m.id]) {
                 return { ...m, ...overlay[m.id] };
             }
             return m;
         });
+
+        // Add completely new members from overlay
+        const existingIds = new Set(base.map(m => String(m.id)));
+        const newMembers = Object.keys(overlay)
+            .filter(id => !existingIds.has(String(id)) && overlay[id].name)
+            .map(id => ({ id, ...overlay[id] } as unknown as MemberData));
+
+        return [...updated, ...newMembers];
     }, [data, overlay]);
 
     const [focusId, setFocusId] = useState<string | null>(members.length > 0 ? members[0].id : null);

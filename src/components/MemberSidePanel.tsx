@@ -61,6 +61,8 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     // In our legacy data, spouse is single string. We parse it into an array for editing.
     const [spouses, setSpouses] = useState<string[]>([]);
     const [newSpouse, setNewSpouse] = useState('');
+    const [newChildName, setNewChildName] = useState('');
+    const [newChildGender, setNewChildGender] = useState('male');
 
     useEffect(() => {
         if (member) {
@@ -162,6 +164,31 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         localStorage.setItem('phado_requests', JSON.stringify(requests));
         setSubmitted(true);
         setTimeout(() => { setSubmitted(false); setMode('view'); setNewSpouse(''); }, 2000);
+    };
+
+    const handleAddChildSubmit = () => {
+        if (!member || !newChildName.trim()) return;
+        const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
+
+        requests.push({
+            id: Date.now(),
+            type: 'add',
+            relatedToId: member.id,
+            relatedToName: member.name,
+            relation: 'child',
+            newData: {
+                name: newChildName.trim(),
+                gender: newChildGender,
+                generation: member.generation + 1
+            },
+            note: editNote || `Đề xuất thêm Con cho ${member.name}`,
+            by: editBy || 'Ẩn danh',
+            phone: editPhone || '',
+            time: new Date().toLocaleString('vi-VN'),
+        });
+        localStorage.setItem('phado_requests', JSON.stringify(requests));
+        setSubmitted(true);
+        setTimeout(() => { setSubmitted(false); setMode('view'); setNewChildName(''); }, 2000);
     };
 
     const updateSpouse = (index: number, newName: string) => {
@@ -275,9 +302,14 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                             <button onClick={() => setMode('edit')} className="w-full py-3.5 bg-[#8b5a2b] hover:bg-[#704218] text-white rounded-xl font-bold transition-all shadow-md flex items-center justify-center gap-2">
                                 <Edit3 size={18} /> Chỉnh Sửa Thông Tin
                             </button>
-                            <button onClick={() => setMode('add_spouse')} className="w-full py-3 bg-white border-2 border-[#d2b48c] hover:border-[#8b5a2b] text-[#5c4033] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                                <Plus size={18} /> Thêm Vợ/Chồng Mới
-                            </button>
+                            <div className="grid grid-cols-2 gap-3">
+                                <button onClick={() => setMode('add_spouse')} className="w-full py-3 bg-white border-2 border-[#d2b48c] hover:border-[#8b5a2b] text-[#5c4033] rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 text-[13px]">
+                                    <Plus size={16} /> Thêm Vợ/Chồng
+                                </button>
+                                <button onClick={() => setMode('add_child')} className="w-full py-3 bg-white border-2 border-[#d2b48c] hover:border-[#8b5a2b] text-[#5c4033] rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 text-[13px]">
+                                    <Plus size={16} /> Thêm Con Mới
+                                </button>
+                            </div>
                             <p className="text-center text-xs text-[#8b5a2b]/80 mt-1">Yêu cầu được gửi lên Admin duyệt</p>
                         </div>
                     </div>
@@ -423,6 +455,65 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                         <div className="flex gap-2 pt-2">
                             <button onClick={handleAddSpouseSubmit} disabled={!newSpouse.trim()}
                                 className="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all shadow-md flex justify-center items-center gap-2">
+                                <Plus size={18} /> Gửi Yêu Cầu Thêm
+                            </button>
+                            <button onClick={() => setMode('view')} className="py-3.5 px-5 bg-white border border-[#d2b48c] hover:bg-gray-50 text-[#5c4033] rounded-xl font-bold transition-all">
+                                Hủy
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* ADD CHILD MODE */}
+                {mode === 'add_child' && !submitted && (
+                    <div className="animate-fade-in space-y-4">
+                        <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-xl mb-4">
+                            <h4 className="font-bold text-emerald-900 text-sm mb-1">Thêm Con Mới cho {member.name}</h4>
+                            <p className="text-xs text-emerald-800">Người con này sẽ ở đời thứ {member.generation + 1}.</p>
+                        </div>
+
+                        <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Họ và Tên Con</label>
+                                <input type="text" value={newChildName} onChange={e => setNewChildName(e.target.value)} placeholder="VD: Nguyễn Văn A" autoFocus
+                                    className="w-full border border-[#d2b48c] rounded-lg py-3 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] focus:ring-1 focus:ring-[#8b5a2b]" />
+                            </div>
+
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Giới tính</label>
+                                <div className="flex gap-4">
+                                    <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
+                                        <input type="radio" name="childGender" value="male" checked={newChildGender === 'male'} onChange={() => setNewChildGender('male')} className="accent-[#8b5a2b]" /> Nam
+                                    </label>
+                                    <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
+                                        <input type="radio" name="childGender" value="female" checked={newChildGender === 'female'} onChange={() => setNewChildGender('female')} className="accent-[#8b5a2b]" /> Nữ
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ghi chú thêm (Tuỳ chọn)</label>
+                                <textarea value={editNote} onChange={e => setEditNote(e.target.value)} rows={2}
+                                    placeholder="Thêm thông tin năm sinh, gia cảnh..."
+                                    className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm resize-none focus:border-[#8b5a2b] outline-none" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên người gửi</label>
+                                    <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo</label>
+                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
+                            <button onClick={handleAddChildSubmit} disabled={!newChildName.trim()}
+                                className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all shadow-md flex justify-center items-center gap-2">
                                 <Plus size={18} /> Gửi Yêu Cầu Thêm
                             </button>
                             <button onClick={() => setMode('view')} className="py-3.5 px-5 bg-white border border-[#d2b48c] hover:bg-gray-50 text-[#5c4033] rounded-xl font-bold transition-all">
