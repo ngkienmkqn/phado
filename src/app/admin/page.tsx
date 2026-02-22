@@ -232,19 +232,36 @@ export default function AdminDashboard() {
                                         {pendingRequests.map(req => (
                                             <div key={req.id} className="p-6 hover:bg-white/5 transition-colors">
                                                 {/* Header */}
-                                                <div className="flex justify-between items-start mb-3">
+                                                <div className="flex flex-col gap-3 mb-4">
                                                     <div>
-                                                        <h4 className="text-lg font-serif font-bold text-gold-300">
+                                                        <h4 className="text-xl font-serif font-bold text-gold-300">
                                                             {req.type === 'add' ? req.newData?.name : req.memberName}
-                                                            <span className="text-sm text-gray-400 font-normal ml-2">
+                                                            <span className="text-base text-gray-400 font-normal ml-2">
                                                                 ({`\u0110\u1EDDi ${req.memberGeneration || '?'}`})
                                                             </span>
                                                         </h4>
-                                                        <p className="text-xs text-gray-500 mt-1">
-                                                            Gửi bởi: <strong className="text-gray-300">{req.by || 'Ẩn danh'}</strong>
-                                                            {req.phone && <span> &bull; SĐT/Zalo: <strong className="text-blue-400">{req.phone}</strong></span>}
-                                                            <span className="ml-1">&bull; {req.time}</span>
-                                                        </p>
+                                                    </div>
+
+                                                    {/* Contact Info Block */}
+                                                    <div className="bg-[#1a1a24] border border-white/10 rounded-lg p-3 flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">Người gửi:</span>
+                                                            <strong className="text-gray-200 text-sm whitespace-nowrap">{req.by || 'Ẩn danh'}</strong>
+                                                        </div>
+                                                        <div className="hidden md:block w-px h-4 bg-white/10"></div>
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">SĐT / Zalo:</span>
+                                                            {req.phone ? (
+                                                                <strong className="text-blue-400 text-sm">{req.phone}</strong>
+                                                            ) : (
+                                                                <span className="text-gray-500 text-sm italic">Không cung cấp</span>
+                                                            )}
+                                                        </div>
+                                                        <div className="hidden md:block w-px h-4 bg-white/10"></div>
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">Thời gian:</span>
+                                                            <span className="text-gray-400 text-sm">{req.time}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
 
