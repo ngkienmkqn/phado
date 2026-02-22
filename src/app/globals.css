@@ -2,6 +2,8 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: 'Noto Sans', 'Segoe UI', Tahoma, sans-serif;
+  --font-serif: 'Noto Serif', 'Noto Sans', serif;
   --color-gold-50: #fefce8;
   --color-gold-100: #fef9c3;
   --color-gold-200: #fef08a;
