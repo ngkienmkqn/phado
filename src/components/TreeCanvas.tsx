@@ -99,7 +99,9 @@ const CustomPersonNode = memo(({ data }: { data: Record<string, unknown> }) => {
                 <div className="mt-auto z-10 pb-1 pt-1">
                     {typedData.spouse && (
                         <div className="flex items-start gap-1.5 text-[11px] text-[#5c4033]/90">
-                            <span className="text-[#c27ba0] text-xs leading-none mt-[1px]">❤</span>
+                            <strong className="text-[#8b5a2b] whitespace-nowrap">
+                                {typedData.gender === 'male' ? 'Vợ:' : typedData.gender === 'female' ? 'Chồng:' : 'Vợ/C:'}
+                            </strong>
                             <span className="leading-tight">{typedData.spouse}</span>
                         </div>
                     )}
