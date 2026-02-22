@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fefce8;
+  --color-gold-100: #fef9c3;
+  --color-gold-200: #fef08a;
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-500: #d4a012;
+  --color-gold-600: #b8860b;
+  --color-gold-700: #92700c;
+  --color-gold-800: #6b5210;
+  --color-gold-900: #3d2e06;
+}
+
+:root {
+  --background: #f4efe6;
+  --foreground: #3e2723;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* Traditional serif font for family tree */
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .bg-glass {
+    @apply bg-[#fdfbf7]/80 backdrop-blur-md border border-[#d2b48c] shadow-lg text-[#5c4033];
+  }
+}
