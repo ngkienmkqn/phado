@@ -35,26 +35,12 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <div className="inline-block relative w-[100px] h-[100px] mb-6 animate-spin-slow opacity-80 filter sepia saturate-200 hue-rotate-15">
-            {/* Abstract Phoenix icon mimicking classical heraldry */}
-            <svg viewBox="0 0 100 100" className="w-full h-full text-gold-400 fill-current drop-shadow-[0_0_15px_rgba(212,160,18,0.5)]">
-              <path d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 85C30.7 85 15 69.3 15 50S30.7 15 50 15s35 15.7 35 35-15.7 35-35 35z" opacity="0.2" />
-              <path d="M50 25c-13.8 0-25 11.2-25 25s11.2 25 25 25 25-11.2 25-25-11.2-25-25-25zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z" />
-              <circle cx="50" cy="50" r="5" />
-              {/* Internal sparks */}
-              <path d="M35 50L15 50M85 50L65 50M50 35L50 15M50 85L50 65M39.4 39.4L25.3 25.3M74.7 74.7L60.6 60.6M60.6 39.4L74.7 25.3M25.3 74.7L39.4 60.6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </div>
-
-          <h1 className="text-5xl md:text-[5.5rem] font-serif font-black mb-4 bg-linear-to-b from-[#ffedb3] via-[#facc15] to-[#996515] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] leading-tight tracking-tight uppercase">
-            Phả Đồ Mộc Tộc
+          <h1 className="text-5xl md:text-[5.5rem] font-serif font-black mb-6 bg-linear-to-b from-[#ffedb3] via-[#facc15] to-[#996515] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] leading-tight tracking-tight uppercase text-center px-4 pt-16">
+            Phả Đồ {familyDataRaw.familyName} Cẩm Giang
           </h1>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-gold-300 mb-6 drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]">
-            {familyDataRaw.familyName}
-          </h2>
-          <p className="text-lg md:text-xl font-medium text-[#c0a880] tracking-[0.3em] uppercase mb-16 relative">
+          <p className="text-lg md:text-2xl font-medium text-[#c0a880] tracking-[0.3em] uppercase mb-16 relative">
             <span className="absolute -left-12 top-1/2 w-8 h-px bg-gold-600/50"></span>
-            CẨM GIANG · TỪ NĂM {familyDataRaw.since}
+            - TỪ NĂM {familyDataRaw.since} -
             <span className="absolute -right-12 top-1/2 w-8 h-px bg-gold-600/50"></span>
           </p>
 
