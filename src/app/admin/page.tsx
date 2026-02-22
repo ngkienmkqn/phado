@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -15,6 +15,11 @@ interface FieldChange {
 }
 
 interface PendingRequest {
+    type?: 'edit' | 'add';
+    relatedToId?: string;
+    relatedToName?: string;
+    relation?: string;
+    newData?: any;
     id: number;
     memberId: string;
     memberName: string;
@@ -206,7 +211,7 @@ export default function AdminDashboard() {
                                                 <div className="flex justify-between items-start mb-3">
                                                     <div>
                                                         <h4 className="text-lg font-serif font-bold text-gold-300">
-                                                            {req.memberName}
+                                                            {req.type === 'add' ? req.newData?.name : req.memberName}
                                                             <span className="text-sm text-gray-400 font-normal ml-2">
                                                                 ({`\u0110\u1EDDi ${req.memberGeneration || '?'}`})
                                                             </span>

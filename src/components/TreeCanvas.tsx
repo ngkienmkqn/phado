@@ -201,14 +201,7 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
 
     const filteredOptions = useMemo(() => {
         const normalizedSearch = removeDiacritics(searchTerm.toLowerCase());
-        // Deduplicate by name+generation to avoid showing duplicate members
-        const seen = new Set<string>();
-        return options.filter(m => {
-            const key = `${m.name}|${m.generation}`;
-            if (seen.has(key)) return false;
-            seen.add(key);
-            return removeDiacritics(m.name.toLowerCase()).includes(normalizedSearch);
-        }).slice(0, 30);
+        return options.filter(m => removeDiacritics(m.name.toLowerCase()).includes(normalizedSearch)).slice(0, 30);
     }, [searchTerm, options]);
 
     return (
@@ -233,6 +226,7 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
                                 value={searchTerm}
                                 onChange={e => setSearchTerm(e.target.value)}
                                 onClick={e => e.stopPropagation()}
+                                onTouchStart={e => e.stopPropagation()}
                                 autoFocus
                             />
                         </div>
@@ -529,19 +523,26 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             });
 
             if (m.parentId && subset.some(p => p.id === m.parentId)) {
-                iEdges.push({
-                    id: `e-${m.parentId}-${m.id}`,
-                    source: m.parentId,
-                    target: m.id,
-                    type: 'smoothstep',
-                    animated: false,
-                    style: {
-                        stroke: m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b',
-                        strokeWidth: m.id === focusId || m.parentId === focusId ? 5 : 3,
-                        opacity: m.id === focusId || m.parentId === focusId ? 1 : 0.6
-                    },
-                    markerEnd: { type: MarkerType.ArrowClosed, color: m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b' }
-                });
+                // IMPORTANT: Prevent drawing child arrow if m is actually just a spouse of parentId.
+                // In some flawed data structures, spouses might be linked via parentId.
+                const parentNode = subset.find(p => p.id === m.parentId);
+                const isSpouseOfParent = parentNode && (parentNode.spouse === m.name || m.spouse === parentNode.name);
+
+                if (!isSpouseOfParent) {
+                    iEdges.push({
+                        id: `e-${m.parentId}-${m.id}`,
+                        source: m.parentId,
+                        target: m.id,
+                        type: 'smoothstep',
+                        animated: false,
+                        style: {
+                            stroke: m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b',
+                            strokeWidth: m.id === focusId || m.parentId === focusId ? 5 : 3,
+                            opacity: m.id === focusId || m.parentId === focusId ? 1 : 0.6
+                        },
+                        markerEnd: { type: MarkerType.ArrowClosed, color: m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b' }
+                    });
+                }
             }
         });
 
@@ -624,7 +625,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             if (found !== -1) { lcaIndexA = i; lcaIndexB = found; break; }
         }
 
-        if (lcaIndexA === -1) return 'Hai ng\u01B0\u1EDDi kh\u00F4ng c\u00F3 chung T\u1ED5 Ti\u00EAn trong d\u1EEF li\u1EC7u';
+        if (lcaIndexA === -1) return "Hai ng\u01B0\u1EDDi kh\u00F4ng c\u00F3 chung T\u1ED5 Ti\u00EAn trong d\u1EEF li\u1EC7u";
 
         const personA = members.find(m => m.id === calcA) || pathA[0];
         const personB = members.find(m => m.id === calcB) || pathB[0];
@@ -633,65 +634,65 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const genA = pathA[0].generation;
         const genB = pathB[0].generation;
         const diff = genA - genB;
-        const spouseNote = (isASpouse || isBSpouse) ? ` (T\u00EDnh theo d\u00F2ng h\u1ECD c\u1EE7a ch\u1ED3ng/v\u1EE3 c\u1EE7a ${isASpouse ? personA.name : personB.name})` : '';
+        const spouseNote = (isASpouse || isBSpouse) ? ` (T\u00EDnh theo d\u00F2ng h\u1ECD c\u1EE7a ${isASpouse ? `ch\u1ED3ng/v\u1EE3 c\u1EE7a ${personA.name}` : `ch\u1ED3ng/v\u1EE3 c\u1EE7a ${personB.name}`})` : '';
 
-        let resultTitle = '';
-        let resultReason = '';
+        let resultTitle = "";
+        let resultReason = "";
 
         if (diff === 0) {
             const isDirect = (distA === 1 && distB === 1);
-            resultTitle = 'A g\u1ECDi B l\u00E0 ANH/CH\u1ECA/EM';
+            resultTitle = `A g\u1ECDi B l\u00E0 ANH/CH\u1ECA/EM`;
             if (isDirect) {
-                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng do m\u1ED9t cha m\u1EB9 sinh ra, \u0111\u1EC1u thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${genA}. V\u00EC l\u00E0 anh ch\u1ECB em ru\u1ED9t, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
+                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng do m\u1ED9t cha m\u1EB9 sinh ra, \u0111\u1EC1u thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${personA.generation}. V\u00EC l\u00E0 anh ch\u1ECB em ru\u1ED9t, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
             } else {
-                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${genA}, c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. Hai ng\u01B0\u1EDDi l\u00E0 anh ch\u1ECB em h\u1ECD, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
+                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${personA.generation}, c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || 'kh\u00F4ng r\u00F5'}. Hai ng\u01B0\u1EDDi l\u00E0 anh ch\u1ECB em h\u1ECD, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
             }
         } else if (diff > 0) {
-            let term = '';
-            const isDirect = distB === 0;
+            let term = "";
+            let isDirect = distB === 0;
             if (isDirect) {
-                if (diff === 1) term = 'CHA / M\u1EB8';
-                else if (diff === 2) term = '\u00D4NG / B\u00C0';
-                else if (diff === 3) term = 'C\u1EE4 (C\u1ED1)';
-                else if (diff === 4) term = 'K\u1EF4 (S\u01A1)';
-                else term = `T\u1ED4 TI\u00CAN (c\u00E1ch ${diff} \u0111\u1EDDi)`;
+                if (diff === 1) term = "CHA / MẸ";
+                else if (diff === 2) term = "ÔNG / BÀ";
+                else if (diff === 3) term = "CỤ (Cố)";
+                else if (diff === 4) term = "KỴ (Sơ)";
+                else term = `TỔ TIÊN (cách ${diff} đời)`;
             } else {
-                if (diff === 1) term = 'B\u00C1C / CH\u00DA / C\u00D4';
-                else if (diff === 2) term = '\u00D4NG / B\u00C0';
-                else if (diff === 3) term = 'C\u1EE4 (C\u1ED1)';
-                else if (diff === 4) term = 'K\u1EF4 (S\u01A1)';
-                else term = `TI\u00CAN T\u1ED4 (c\u00E1ch ${diff} \u0111\u1EDDi)`;
+                if (diff === 1) term = "BÁC / CHÚ / CÔ";
+                else if (diff === 2) term = "ÔNG / BÀ";
+                else if (diff === 3) term = "CỤ (Cố)";
+                else if (diff === 4) term = "KỴ (Sơ)";
+                else term = `TIÊN TỔ (cách ${diff} đời)`;
             }
             resultTitle = `A g\u1ECDi B l\u00E0 ${term}`;
             if (isDirect) {
-                resultReason = `${personB.name} (\u0110\u1EDDi ${genB}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personA.name} (\u0110\u1EDDi ${genA}). ${diff === 1 ? `${personB.name} l\u00E0 cha/m\u1EB9 \u0111\u1EBB sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} l\u00E0 \u00F4ng/b\u00E0 \u0111\u1EBB sinh ra cha/m\u1EB9 c\u1EE7a ${personA.name}.` : `${personB.name} c\u00E1ch ${personA.name} ${diff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} ph\u1EA3i g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personB.name} (\u0110\u1EDDi ${personB.generation}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personA.name} (\u0110\u1EDDi ${personA.generation}). ${diff === 1 ? `${personB.name} l\u00E0 cha/m\u1EB9 \u0111\u1EBB sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} l\u00E0 \u00F4ng/b\u00E0 \u0111\u1EBB sinh ra cha/m\u1EB9 c\u1EE7a ${personA.name}.` : `${personB.name} c\u00E1ch ${personA.name} ${diff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} ph\u1EA3i g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
             } else {
-                resultReason = `${personA.name} (\u0110\u1EDDi ${genA}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${genB}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personB.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personA.name} ${diff} \u0111\u1EDDi. Theo ph\u1EA3 h\u1EC7, ${personA.name} ph\u1EA3i k\u00EDnh tr\u1ECDng g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${personB.generation}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personB.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personA.name} ${diff} \u0111\u1EDDi. Theo ph\u1EA3 h\u1EC7, ${personA.name} ph\u1EA3i k\u00EDnh tr\u1ECDng g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
             }
         } else {
             const absDiff = Math.abs(diff);
-            let term = '';
-            const isDirect = distA === 0;
+            let term = "";
+            let isDirect = distA === 0;
             if (isDirect) {
-                if (absDiff === 1) term = 'CON';
-                else if (absDiff === 2) term = 'CH\u00C1U';
-                else if (absDiff === 3) term = 'CH\u1EAET';
-                else if (absDiff === 4) term = 'CH\u00DAT';
-                else if (absDiff === 5) term = 'CH\u00CDT';
-                else term = `H\u1EACU DU\u1EC6 (c\u00E1ch ${absDiff} \u0111\u1EDDi)`;
+                if (absDiff === 1) term = "CON";
+                else if (absDiff === 2) term = "CHÁU";
+                else if (absDiff === 3) term = "CHẮT";
+                else if (absDiff === 4) term = "CHÚT";
+                else if (absDiff === 5) term = "CHÍT";
+                else term = `HẬU DUỆ (cách ${absDiff} đời)`;
             } else {
-                if (absDiff === 1) term = 'CH\u00C1U';
-                else if (absDiff === 2) term = 'CH\u00C1U';
-                else if (absDiff === 3) term = 'CH\u1EAET';
-                else if (absDiff === 4) term = 'CH\u00DAT';
-                else if (absDiff === 5) term = 'CH\u00CDT';
-                else term = `H\u1EACU DU\u1EC6 (c\u00E1ch ${absDiff} \u0111\u1EDDi)`;
+                if (absDiff === 1) term = "CHÁU";
+                else if (absDiff === 2) term = "CHÁU";
+                else if (absDiff === 3) term = "CHẮT";
+                else if (absDiff === 4) term = "CHÚT";
+                else if (absDiff === 5) term = "CHÍT";
+                else term = `HẬU DUỆ (cách ${absDiff} đời)`;
             }
             resultTitle = `A g\u1ECDi B l\u00E0 ${term}`;
             if (isDirect) {
-                resultReason = `${personA.name} (\u0110\u1EDDi ${genA}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personB.name} (\u0110\u1EDDi ${genB}). ${absDiff === 1 ? `${personA.name} \u0111\u00E3 sinh ra ${personB.name}, n\u00EAn ${personB.name} l\u00E0 con c\u1EE7a ${personA.name}.` : absDiff === 2 ? `${personA.name} l\u00E0 \u00F4ng/b\u00E0, \u0111\u00E3 sinh ra cha/m\u1EB9 c\u1EE7a ${personB.name}.` : `${personA.name} c\u00E1ch ${personB.name} ${absDiff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personB.name} (\u0110\u1EDDi ${personB.generation}). ${absDiff === 1 ? `${personA.name} \u0111\u00E3 sinh ra ${personB.name}, n\u00EAn ${personB.name} l\u00E0 con c\u1EE7a ${personA.name}.` : absDiff === 2 ? `${personA.name} l\u00E0 \u00F4ng/b\u00E0, \u0111\u00E3 sinh ra cha/m\u1EB9 c\u1EE7a ${personB.name}.` : `${personA.name} c\u00E1ch ${personB.name} ${absDiff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
             } else {
-                resultReason = `${personA.name} (\u0110\u1EDDi ${genA}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${genB}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personA.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personB.name} ${absDiff} \u0111\u1EDDi. V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${personB.generation}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personA.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personB.name} ${absDiff} \u0111\u1EDDi. V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
             }
         }
 
@@ -699,7 +700,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             <div className="flex flex-col items-center gap-2.5">
                 <span className="text-[#5c4033] text-[17px] font-bold uppercase block">{resultTitle}</span>
                 <div className="text-[13px] font-normal text-[#5c4033]/90 bg-[#e8dcb8]/40 p-3.5 rounded-xl text-left border border-[#d2b48c] shadow-inner leading-relaxed">
-                    <span className="text-[#8b5a2b] font-bold block mb-1">{'\uD83E\uDDD0 L\u00FD gi\u1EA3i c\u1EB7n k\u1EBD:'}</span>
+                    <span className="text-[#8b5a2b] font-bold block mb-1">{'\uD83E\uDDD0'} L\u00FD gi\u1EA3i c\u1EB7n k\u1EBD:</span>
                     {resultReason}{spouseNote}
                 </div>
             </div>
