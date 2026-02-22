@@ -54,7 +54,7 @@ export default function BookPage() {
                         </h1>
                         <div className="w-32 h-1 bg-gold-600 mb-12"></div>
                         <p className="text-xl text-gray-600 italic">Lập từ năm {familyDataRaw.since}</p>
-                        <p className="text-xl text-gray-600 mt-4">Kỷ yếu lưu truyền muôn đời</p>
+                        <p className="text-xl text-gray-600 mt-4">Gia ph\u1EA3 l\u01B0u truy\u1EC1n mu\u00F4n \u0111\u1EDDi</p>
                     </div>
                     <div className="mt-auto pt-10 text-gray-400 font-sans text-sm">
                         Xuất bản năm {new Date().getFullYear()} · Tổng số {familyDataRaw.totalMembers} thành viên
