@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { X, ChevronRight, User, CalendarDays, Edit3, Trash2, Plus, ArrowLeft } from 'lucide-react';
+import { X, ChevronRight, User, CalendarDays, Edit3, Trash2, Plus, ArrowLeft, Search } from 'lucide-react';
+
+const removeDiacritics = (str: string) => {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
+};
 
 interface MemberData {
     id: string;
@@ -64,6 +68,13 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     const [newChildName, setNewChildName] = useState('');
     const [newChildGender, setNewChildGender] = useState('male');
 
+    const [spouseInputMode, setSpouseInputMode] = useState<'existing' | 'new'>('existing');
+    const [childInputMode, setChildInputMode] = useState<'existing' | 'new'>('existing');
+    const [searchSpouseTerm, setSearchSpouseTerm] = useState('');
+    const [searchChildTerm, setSearchChildTerm] = useState('');
+    const [selectedSpouse, setSelectedSpouse] = useState<MemberData | null>(null);
+    const [selectedChild, setSelectedChild] = useState<MemberData | null>(null);
+
     useEffect(() => {
         if (member) {
             setEditName(member.name || '');
@@ -85,6 +96,12 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
 
             setSubmitted(false);
             setMode('view');
+            setSpouseInputMode('existing');
+            setChildInputMode('existing');
+            setSearchSpouseTerm('');
+            setSearchChildTerm('');
+            setSelectedSpouse(null);
+            setSelectedChild(null);
         }
     }, [member]);
 
@@ -97,6 +114,18 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         if (!member) return [];
         return allMembers.filter(m => m.parentId === member.id);
     }, [member, allMembers]);
+
+    const spouseSearchResults = useMemo(() => {
+        if (!searchSpouseTerm.trim() || searchSpouseTerm.length < 2) return [];
+        const term = removeDiacritics(searchSpouseTerm.toLowerCase());
+        return allMembers.filter(m => m.id !== member?.id && removeDiacritics(m.name.toLowerCase()).includes(term)).slice(0, 5);
+    }, [searchSpouseTerm, allMembers, member]);
+
+    const childSearchResults = useMemo(() => {
+        if (!searchChildTerm.trim() || searchChildTerm.length < 2) return [];
+        const term = removeDiacritics(searchChildTerm.toLowerCase());
+        return allMembers.filter(m => m.id !== member?.id && m.parentId !== member?.id && removeDiacritics(m.name.toLowerCase()).includes(term)).slice(0, 5);
+    }, [searchChildTerm, allMembers, member]);
 
     const getChanges = () => {
         if (!member) return [];
@@ -142,8 +171,12 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     };
 
     const handleAddSpouseSubmit = () => {
-        if (!member || !newSpouse.trim()) return;
+        if (!member) return;
+        if (spouseInputMode === 'new' && !newSpouse.trim()) return;
+        if (spouseInputMode === 'existing' && !selectedSpouse) return;
+
         const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
+        const nameToUse = spouseInputMode === 'existing' ? selectedSpouse!.name : newSpouse.trim();
 
         requests.push({
             id: Date.now(),
@@ -152,7 +185,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             relatedToName: member.name,
             relation: 'spouse',
             newData: {
-                name: newSpouse.trim(),
+                name: nameToUse,
                 gender: member.gender === 'male' ? 'female' : 'male',
                 generation: member.generation
             },
@@ -163,32 +196,53 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         });
         localStorage.setItem('phado_requests', JSON.stringify(requests));
         setSubmitted(true);
-        setTimeout(() => { setSubmitted(false); setMode('view'); setNewSpouse(''); }, 2000);
+        setTimeout(() => { setSubmitted(false); setMode('view'); setNewSpouse(''); setSelectedSpouse(null); }, 2000);
     };
 
     const handleAddChildSubmit = () => {
-        if (!member || !newChildName.trim()) return;
+        if (!member) return;
+        if (childInputMode === 'new' && !newChildName.trim()) return;
+        if (childInputMode === 'existing' && !selectedChild) return;
+
         const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
 
-        requests.push({
-            id: Date.now(),
-            type: 'add',
-            relatedToId: member.id,
-            relatedToName: member.name,
-            relation: 'child',
-            newData: {
-                name: newChildName.trim(),
-                gender: newChildGender,
-                generation: member.generation + 1
-            },
-            note: editNote || `Đề xuất thêm Con cho ${member.name}`,
-            by: editBy || 'Ẩn danh',
-            phone: editPhone || '',
-            time: new Date().toLocaleString('vi-VN'),
-        });
+        if (childInputMode === 'existing') {
+            requests.push({
+                id: Date.now(),
+                type: 'edit',
+                memberId: selectedChild!.id,
+                memberName: selectedChild!.name,
+                memberGeneration: selectedChild!.generation,
+                changes: [
+                    { field: 'parentId', label: 'Thuộc về', oldValue: 'Trống/Mới', newValue: member.id }
+                ],
+                note: editNote || `Gắn kết bé ${selectedChild!.name} làm con của ${member.name} (Chưa được nối cành nhánh).`,
+                by: editBy || 'Ẩn danh',
+                phone: editPhone || '',
+                time: new Date().toLocaleString('vi-VN'),
+            });
+        } else {
+            requests.push({
+                id: Date.now(),
+                type: 'add',
+                relatedToId: member.id,
+                relatedToName: member.name,
+                relation: 'child',
+                newData: {
+                    name: newChildName.trim(),
+                    gender: newChildGender,
+                    generation: member.generation + 1
+                },
+                note: editNote || `Đề xuất thêm Con mới cho ${member.name}`,
+                by: editBy || 'Ẩn danh',
+                phone: editPhone || '',
+                time: new Date().toLocaleString('vi-VN'),
+            });
+        }
+
         localStorage.setItem('phado_requests', JSON.stringify(requests));
         setSubmitted(true);
-        setTimeout(() => { setSubmitted(false); setMode('view'); setNewChildName(''); }, 2000);
+        setTimeout(() => { setSubmitted(false); setMode('view'); setNewChildName(''); setSelectedChild(null); }, 2000);
     };
 
     const updateSpouse = (index: number, newName: string) => {
@@ -425,76 +479,57 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                             <p className="text-xs text-blue-800">Thông tin này sẽ được thêm mới độc lập, không ghi đè lên những người vợ/chồng cũ (nếu có).</p>
                         </div>
 
-                        <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Họ và Tên Vợ/Chồng Mới</label>
-                                <input type="text" value={newSpouse} onChange={e => setNewSpouse(e.target.value)} placeholder="VD: Phạm Thị Hoa" autoFocus
-                                    className="w-full border border-[#d2b48c] rounded-lg py-3 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] focus:ring-1 focus:ring-[#8b5a2b]" />
-                            </div>
+                        <div className="flex gap-2">
+                            <button onClick={() => setSpouseInputMode('existing')} className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-colors ${spouseInputMode === 'existing' ? 'bg-[#8b5a2b] text-white border-[#8b5a2b]' : 'bg-white text-[#5c4033] border-[#d2b48c] hover:bg-gray-50'}`}>Chọn người đã có</button>
+                            <button onClick={() => setSpouseInputMode('new')} className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-colors ${spouseInputMode === 'new' ? 'bg-[#8b5a2b] text-white border-[#8b5a2b]' : 'bg-white text-[#5c4033] border-[#d2b48c] hover:bg-gray-50'}`}>Tạo mới hoàn toàn</button>
+                        </div>
 
+                        {spouseInputMode === 'existing' ? (
+                            <div className="bg-[#fcfaf5] p-4 rounded-xl border border-[#d2b48c] space-y-3">
+                                <label className="text-xs text-[#8b5a2b] font-bold block">Tìm kiếm người dùng có sẵn trong phả đồ</label>
+                                {!selectedSpouse ? (
+                                    <>
+                                        <div className="relative">
+                                            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                            <input type="text" value={searchSpouseTerm} onChange={e => setSearchSpouseTerm(e.target.value)} placeholder="Nhập tên để tìm kiếm..." autoFocus
+                                                className="w-full border border-[#d2b48c] rounded-lg py-2.5 pl-9 pr-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                        </div>
+                                        {searchSpouseTerm.length >= 2 && (
+                                            <div className="mt-2 bg-white border border-[#e8dcb8] rounded-lg shadow-sm max-h-48 overflow-y-auto">
+                                                {spouseSearchResults.length > 0 ? spouseSearchResults.map(m => (
+                                                    <div key={m.id} onClick={() => { setSelectedSpouse(m); setSearchSpouseTerm(''); }} className="p-3 hover:bg-[#8b5a2b]/10 cursor-pointer border-b border-[#e8dcb8] last:border-0">
+                                                        <div className="text-sm font-bold text-[#3e2723]">{m.name}</div>
+                                                        <div className="text-xs text-[#5c4033]/70">Đời thứ {m.generation} • {m.gender === 'male' ? 'Nam' : 'Nữ'}</div>
+                                                    </div>
+                                                )) : <div className="p-3 text-sm text-gray-500 text-center">Không tìm thấy ai</div>}
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 flex justify-between items-center animate-fade-in">
+                                        <div>
+                                            <div className="text-sm font-bold text-emerald-900">{selectedSpouse.name}</div>
+                                            <div className="text-xs text-emerald-700">Đã chọn để liên kết</div>
+                                        </div>
+                                        <button onClick={() => setSelectedSpouse(null)} className="text-emerald-700 hover:bg-emerald-100 p-1.5 rounded-full"><X size={16} /></button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Họ và Tên Vợ/Chồng Mới</label>
+                                    <input type="text" value={newSpouse} onChange={e => setNewSpouse(e.target.value)} placeholder="VD: Phạm Thị Hoa" autoFocus
+                                        className="w-full border border-[#d2b48c] rounded-lg py-3 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
                             <div>
                                 <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ghi chú thêm (Tuỳ chọn)</label>
                                 <textarea value={editNote} onChange={e => setEditNote(e.target.value)} rows={2}
-                                    placeholder="Thêm thông tin năm sinh, quê quán để Admin dễ duyệt..."
-                                    className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm resize-none focus:border-[#8b5a2b] outline-none" />
-                            </div>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên người gửi</label>
-                                    <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng..."
-                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
-                                </div>
-                                <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo liên hệ</label>
-                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
-                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-2 pt-2">
-                            <button onClick={handleAddSpouseSubmit} disabled={!newSpouse.trim()}
-                                className="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all shadow-md flex justify-center items-center gap-2">
-                                <Plus size={18} /> Gửi Yêu Cầu Thêm
-                            </button>
-                            <button onClick={() => setMode('view')} className="py-3.5 px-5 bg-white border border-[#d2b48c] hover:bg-gray-50 text-[#5c4033] rounded-xl font-bold transition-all">
-                                Hủy
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {/* ADD CHILD MODE */}
-                {mode === 'add_child' && !submitted && (
-                    <div className="animate-fade-in space-y-4">
-                        <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-xl mb-4">
-                            <h4 className="font-bold text-emerald-900 text-sm mb-1">Thêm Con Mới cho {member.name}</h4>
-                            <p className="text-xs text-emerald-800">Người con này sẽ ở đời thứ {member.generation + 1}.</p>
-                        </div>
-
-                        <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Họ và Tên Con</label>
-                                <input type="text" value={newChildName} onChange={e => setNewChildName(e.target.value)} placeholder="VD: Nguyễn Văn A" autoFocus
-                                    className="w-full border border-[#d2b48c] rounded-lg py-3 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] focus:ring-1 focus:ring-[#8b5a2b]" />
-                            </div>
-
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Giới tính</label>
-                                <div className="flex gap-4">
-                                    <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
-                                        <input type="radio" name="childGender" value="male" checked={newChildGender === 'male'} onChange={() => setNewChildGender('male')} className="accent-[#8b5a2b]" /> Nam
-                                    </label>
-                                    <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
-                                        <input type="radio" name="childGender" value="female" checked={newChildGender === 'female'} onChange={() => setNewChildGender('female')} className="accent-[#8b5a2b]" /> Nữ
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ghi chú thêm (Tuỳ chọn)</label>
-                                <textarea value={editNote} onChange={e => setEditNote(e.target.value)} rows={2}
-                                    placeholder="Thêm thông tin năm sinh, gia cảnh..."
+                                    placeholder="Thêm thông tin, quê quán để Admin dễ duyệt..."
                                     className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm resize-none focus:border-[#8b5a2b] outline-none" />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
@@ -512,9 +547,108 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                         </div>
 
                         <div className="flex gap-2 pt-2">
-                            <button onClick={handleAddChildSubmit} disabled={!newChildName.trim()}
+                            <button onClick={handleAddSpouseSubmit} disabled={spouseInputMode === 'new' ? !newSpouse.trim() : !selectedSpouse}
+                                className="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all shadow-md flex justify-center items-center gap-2">
+                                <Plus size={18} /> Gửi Yêu Cầu Liên Kết
+                            </button>
+                            <button onClick={() => setMode('view')} className="py-3.5 px-5 bg-white border border-[#d2b48c] hover:bg-gray-50 text-[#5c4033] rounded-xl font-bold transition-all">
+                                Hủy
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* ADD CHILD MODE */}
+                {mode === 'add_child' && !submitted && (
+                    <div className="animate-fade-in space-y-4">
+                        <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-xl mb-4">
+                            <h4 className="font-bold text-emerald-900 text-sm mb-1">Thêm Con Mới cho {member.name}</h4>
+                            <p className="text-xs text-emerald-800">Người con này sẽ ở đời thứ {member.generation + 1}.</p>
+                        </div>
+
+                        <div className="flex gap-2">
+                            <button onClick={() => setChildInputMode('existing')} className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-colors ${childInputMode === 'existing' ? 'bg-[#8b5a2b] text-white border-[#8b5a2b]' : 'bg-white text-[#5c4033] border-[#d2b48c] hover:bg-gray-50'}`}>Chọn người đã có</button>
+                            <button onClick={() => setChildInputMode('new')} className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-colors ${childInputMode === 'new' ? 'bg-[#8b5a2b] text-white border-[#8b5a2b]' : 'bg-white text-[#5c4033] border-[#d2b48c] hover:bg-gray-50'}`}>Tạo mới hoàn toàn</button>
+                        </div>
+
+                        {childInputMode === 'existing' ? (
+                            <div className="bg-[#fcfaf5] p-4 rounded-xl border border-[#d2b48c] space-y-3">
+                                <label className="text-xs text-[#8b5a2b] font-bold block">Tìm kiếm người dùng có sẵn trong phả đồ</label>
+                                {!selectedChild ? (
+                                    <>
+                                        <div className="relative">
+                                            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                            <input type="text" value={searchChildTerm} onChange={e => setSearchChildTerm(e.target.value)} placeholder="Nhập tên để tìm kiếm..." autoFocus
+                                                className="w-full border border-[#d2b48c] rounded-lg py-2.5 pl-9 pr-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                        </div>
+                                        {searchChildTerm.length >= 2 && (
+                                            <div className="mt-2 bg-white border border-[#e8dcb8] rounded-lg shadow-sm max-h-48 overflow-y-auto">
+                                                {childSearchResults.length > 0 ? childSearchResults.map(m => (
+                                                    <div key={m.id} onClick={() => { setSelectedChild(m); setSearchChildTerm(''); }} className="p-3 hover:bg-[#8b5a2b]/10 cursor-pointer border-b border-[#e8dcb8] last:border-0">
+                                                        <div className="text-sm font-bold text-[#3e2723]">{m.name}</div>
+                                                        <div className="text-xs text-[#5c4033]/70">Đời thứ {m.generation} • {m.gender === 'male' ? 'Nam' : 'Nữ'}</div>
+                                                    </div>
+                                                )) : <div className="p-3 text-sm text-gray-500 text-center">Không tìm thấy ai</div>}
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 flex justify-between items-center animate-fade-in">
+                                        <div>
+                                            <div className="text-sm font-bold text-emerald-900">{selectedChild.name}</div>
+                                            <div className="text-xs text-emerald-700">Đã chọn để liên kết nhánh gốc</div>
+                                        </div>
+                                        <button onClick={() => setSelectedChild(null)} className="text-emerald-700 hover:bg-emerald-100 p-1.5 rounded-full"><X size={16} /></button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Họ và Tên Con</label>
+                                    <input type="text" value={newChildName} onChange={e => setNewChildName(e.target.value)} placeholder="VD: Nguyễn Văn A" autoFocus
+                                        className="w-full border border-[#d2b48c] rounded-lg py-3 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                </div>
+
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Giới tính</label>
+                                    <div className="flex gap-4">
+                                        <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
+                                            <input type="radio" name="childGender" value="male" checked={newChildGender === 'male'} onChange={() => setNewChildGender('male')} className="accent-[#8b5a2b]" /> Nam
+                                        </label>
+                                        <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
+                                            <input type="radio" name="childGender" value="female" checked={newChildGender === 'female'} onChange={() => setNewChildGender('female')} className="accent-[#8b5a2b]" /> Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-4">
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ghi chú thêm (Tuỳ chọn)</label>
+                                <textarea value={editNote} onChange={e => setEditNote(e.target.value)} rows={2}
+                                    placeholder="Thêm thông tin, lý do thêm để Admin duyệt..."
+                                    className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm resize-none focus:border-[#8b5a2b] outline-none" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên người gửi</label>
+                                    <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo</label>
+                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
+                            <button onClick={handleAddChildSubmit} disabled={childInputMode === 'new' ? !newChildName.trim() : !selectedChild}
                                 className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all shadow-md flex justify-center items-center gap-2">
-                                <Plus size={18} /> Gửi Yêu Cầu Thêm
+                                <Plus size={18} /> Gửi Yêu Cầu Liên Kết
                             </button>
                             <button onClick={() => setMode('view')} className="py-3.5 px-5 bg-white border border-[#d2b48c] hover:bg-gray-50 text-[#5c4033] rounded-xl font-bold transition-all">
                                 Hủy
