@@ -519,8 +519,12 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
         if (diff === 0) {
             const isDirect = (distA === 1 && distB === 1);
-            resultTitle = `A gọi B là Anh/Chị/Em`;
-            resultReason = `A và B ngang hàng ngang vế bới cùng thuộc Đời thứ ${personA.generation}. Do đó tuổi ai lớn hơn sẽ làm Anh/Chị. ${isDirect ? '(Là anh chị em ruột)' : '(Là anh chị em họ)'}.`;
+            resultTitle = `A g\u1ECDi B l\u00E0 ANH/CH\u1ECA/EM`;
+            if (isDirect) {
+                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng do m\u1ED9t cha m\u1EB9 sinh ra, \u0111\u1EC1u thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${personA.generation}. V\u00EC l\u00E0 anh ch\u1ECB em ru\u1ED9t, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
+            } else {
+                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${personA.generation}, c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || 'kh\u00F4ng r\u00F5'}. Hai ng\u01B0\u1EDDi l\u00E0 anh ch\u1ECB em h\u1ECD, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
+            }
         } else if (diff > 0) {
             let term = "";
             let isDirect = distB === 0;
@@ -537,8 +541,12 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 else if (diff === 4) term = "KỴ (Sơ)";
                 else term = `TIÊN TỔ (cách ${diff} đời)`;
             }
-            resultTitle = `A gọi B là ${term}`;
-            resultReason = `Tuy về mặt tuổi tác B có thể nhỏ tuổi hơn A, nhưng xét theo gia phả bề bậc thì A thuộc bề dưới (Đời ${personA.generation}), còn B thuộc bề trên (Đời ${personB.generation}). Do B cao hơn A tới ${diff} đời, theo truyền thống dòng họ A bắt buộc kính trọng gọi B là ${term}.`;
+            resultTitle = `A g\u1ECDi B l\u00E0 ${term}`;
+            if (isDirect) {
+                resultReason = `${personB.name} (\u0110\u1EDDi ${personB.generation}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personA.name} (\u0110\u1EDDi ${personA.generation}). ${diff === 1 ? `${personB.name} l\u00E0 cha/m\u1EB9 \u0111\u1EBB sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} l\u00E0 \u00F4ng/b\u00E0 \u0111\u1EBB sinh ra cha/m\u1EB9 c\u1EE7a ${personA.name}.` : `${personB.name} c\u00E1ch ${personA.name} ${diff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} ph\u1EA3i g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+            } else {
+                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${personB.generation}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personB.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personA.name} ${diff} \u0111\u1EDDi. Theo ph\u1EA3 h\u1EC7, ${personA.name} ph\u1EA3i k\u00EDnh tr\u1ECDng g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+            }
         } else {
             const absDiff = Math.abs(diff);
             let term = "";
@@ -558,8 +566,12 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 else if (absDiff === 5) term = "CHÍT";
                 else term = `HẬU DUỆ (cách ${absDiff} đời)`;
             }
-            resultTitle = `A gọi B là ${term}`;
-            resultReason = `Dù A có thể ít tuổi hơn, mang thân hình một đứa trẻ con, nhưng bậc hàm xét theo phả hệ thì A thuộc bề trên (Đời ${personA.generation}), còn B bề dưới (Đời ${personB.generation}). Do A cao hơn B ${absDiff} đời vế, nên B phải xưng con cháu với A. Suy ra A gọi B là ${term}.`;
+            resultTitle = `A g\u1ECDi B l\u00E0 ${term}`;
+            if (isDirect) {
+                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personB.name} (\u0110\u1EDDi ${personB.generation}). ${absDiff === 1 ? `${personA.name} \u0111\u00E3 sinh ra ${personB.name}, n\u00EAn ${personB.name} l\u00E0 con c\u1EE7a ${personA.name}.` : absDiff === 2 ? `${personA.name} l\u00E0 \u00F4ng/b\u00E0, \u0111\u00E3 sinh ra cha/m\u1EB9 c\u1EE7a ${personB.name}.` : `${personA.name} c\u00E1ch ${personB.name} ${absDiff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+            } else {
+                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${personB.generation}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personA.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personB.name} ${absDiff} \u0111\u1EDDi. V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+            }
         }
 
         return (
