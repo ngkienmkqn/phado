@@ -491,13 +491,32 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
     // Relationship Calculator Logic
     const calculateRelation = useCallback((): React.ReactNode => {
-        if (!calcA || !calcB || calcA === calcB) return "Vui lòng chọn 2 người khác nhau";
+        if (!calcA || !calcB || calcA === calcB) return "Vui l\u00F2ng ch\u1ECDn 2 ng\u01B0\u1EDDi kh\u00E1c nhau";
+
+        // Resolve spouses: if a person has no parentId and no children, they may be a spouse
+        // Find their partner (the member who lists them as spouse) and use partner's lineage
+        const resolveToBloodline = (memberId: string): string => {
+            const person = members.find(m => m.id === memberId);
+            if (!person) return memberId;
+            // If person has parentId, they're already in the bloodline
+            if (person.parentId) return memberId;
+            // If person has no parentId, check if someone lists them as spouse
+            const partner = members.find(m => m.spouse === person.name);
+            if (partner) return partner.id;
+            return memberId;
+        };
+
+        const resolvedA = resolveToBloodline(calcA);
+        const resolvedB = resolveToBloodline(calcB);
+        const isASpouse = resolvedA !== calcA;
+        const isBSpouse = resolvedB !== calcB;
+
         const pathA: MemberData[] = [];
-        let currA = members.find(m => m.id === calcA);
+        let currA = members.find(m => m.id === resolvedA);
         while (currA) { pathA.push(currA); currA = currA.parentId ? members.find(m => m.id === currA?.parentId) : undefined; }
 
         const pathB: MemberData[] = [];
-        let currB = members.find(m => m.id === calcB);
+        let currB = members.find(m => m.id === resolvedB);
         while (currB) { pathB.push(currB); currB = currB.parentId ? members.find(m => m.id === currB?.parentId) : undefined; }
 
         let lcaIndexA = -1, lcaIndexB = -1;
@@ -506,13 +525,16 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             if (found !== -1) { lcaIndexA = i; lcaIndexB = found; break; }
         }
 
-        if (lcaIndexA === -1) return "Hai người không có chung Tổ Tiên trong dữ liệu";
+        if (lcaIndexA === -1) return "Hai ng\u01B0\u1EDDi kh\u00F4ng c\u00F3 chung T\u1ED5 Ti\u00EAn trong d\u1EEF li\u1EC7u";
 
-        const personA = pathA[0];
-        const personB = pathB[0];
+        const personA = members.find(m => m.id === calcA) || pathA[0];
+        const personB = members.find(m => m.id === calcB) || pathB[0];
         const distA = lcaIndexA;
         const distB = lcaIndexB;
-        const diff = personA.generation - personB.generation;
+        const genA = pathA[0].generation;
+        const genB = pathB[0].generation;
+        const diff = genA - genB;
+        const spouseNote = (isASpouse || isBSpouse) ? ` (T\u00EDnh theo d\u00F2ng h\u1ECD c\u1EE7a ${isASpouse ? `ch\u1ED3ng/v\u1EE3 c\u1EE7a ${personA.name}` : `ch\u1ED3ng/v\u1EE3 c\u1EE7a ${personB.name}`})` : '';
 
         let resultTitle = "";
         let resultReason = "";
@@ -578,8 +600,8 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             <div className="flex flex-col items-center gap-2.5">
                 <span className="text-[#5c4033] text-[17px] font-bold uppercase block">{resultTitle}</span>
                 <div className="text-[13px] font-normal text-[#5c4033]/90 bg-[#e8dcb8]/40 p-3.5 rounded-xl text-left border border-[#d2b48c] shadow-inner leading-relaxed">
-                    <span className="text-[#8b5a2b] font-bold block mb-1">🧐 Lý giải cặn kẽ:</span>
-                    {resultReason}
+                    <span className="text-[#8b5a2b] font-bold block mb-1">{'\uD83E\uDDD0'} L\u00FD gi\u1EA3i c\u1EB7n k\u1EBD:</span>
+                    {resultReason}{spouseNote}
                 </div>
             </div>
         );
