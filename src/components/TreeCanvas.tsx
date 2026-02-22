@@ -623,77 +623,73 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 </button>
             </div>
 
-            {/* Mobile Bottom Sheet modals */}
+            {/* Mobile Full Screen modals */}
             {activeMobileTab && (
-                <div className="fixed inset-0 z-50 sm:hidden flex flex-col justify-end">
-                    <div className="absolute inset-0 bg-[#3e2723]/30 backdrop-blur-sm" onClick={() => setActiveMobileTab(null)}></div>
-                    <div className="w-full bg-[#fdfbf7] rounded-t-3xl shadow-[0_-10px_40px_rgba(92,64,51,0.3)] relative flex flex-col overflow-hidden h-[90vh] animate-in slide-in-from-bottom-full border-t border-[#d2b48c]">
-                        <div className="w-12 h-1.5 bg-[#d2b48c] rounded-full mx-auto my-3 opacity-50 shrink-0"></div>
+                <div className="fixed inset-0 z-50 sm:hidden bg-[#fdfbf7] flex flex-col h-[100dvh] animate-in slide-in-from-bottom-full">
 
-                        <div className="flex justify-between items-center px-5 shrink-0">
-                            <h2 className="text-[#5c4033] font-serif font-bold text-xl items-center gap-2 flex">
-                                {activeMobileTab === 'search' ? <><Search size={20} /> Tìm thành viên</> : <><Calculator size={20} /> Phép Tính Xưng Hô</>}
-                            </h2>
-                            <button onClick={() => setActiveMobileTab(null)} className="p-2 bg-[#e8dcb8]/50 rounded-full text-[#8b5a2b]"><X size={20} /></button>
-                        </div>
+                    <div className="flex justify-between items-center px-5 shrink-0">
+                        <h2 className="text-[#5c4033] font-serif font-bold text-xl items-center gap-2 flex">
+                            {activeMobileTab === 'search' ? <><Search size={20} /> Tìm thành viên</> : <><Calculator size={20} /> Phép Tính Xưng Hô</>}
+                        </h2>
+                        <button onClick={() => setActiveMobileTab(null)} className="p-2 bg-[#e8dcb8]/50 rounded-full text-[#8b5a2b]"><X size={20} /></button>
+                    </div>
 
-                        <div className="p-5 overflow-y-auto flex-1">
-                            {activeMobileTab === 'search' && (
-                                <div className="space-y-4">
-                                    <div className="relative">
-                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8b5a2b]" size={18} />
-                                        <input
-                                            type="text"
-                                            placeholder="Gõ tên cần tìm (ví dụ: giang)"
-                                            className="w-full bg-white border-2 border-[#d2b48c] rounded-xl py-4 pl-12 pr-4 text-base text-[#3e2723] focus:outline-none focus:border-[#8b5a2b] shadow-inner"
-                                            value={mobileSearchTerm}
-                                            onChange={(e) => setMobileSearchTerm(e.target.value)}
-                                            autoFocus
-                                        />
-                                    </div>
-                                    <div className="max-h-[50vh] overflow-y-auto bg-white rounded-xl border border-[#e8dcb8]">
-                                        {mobileSearchTerm.length > 1 ? (
-                                            members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(mobileSearchTerm.toLowerCase()))).slice(0, 20).map(m => (
-                                                <div
-                                                    key={m.id}
-                                                    onClick={() => {
-                                                        setFocusId(m.id);
-                                                        setActiveMobileTab(null);
-                                                        setMobileSearchTerm('');
-                                                    }}
-                                                    className="px-4 py-3 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 active:bg-[#8b5a2b]/20 cursor-pointer"
-                                                >
-                                                    <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
-                                                    <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p className="text-sm text-[#8b5a2b]/90 text-center italic bg-[#f4efe6] p-3 rounded-lg">Bạn chỉ cần gõ tên chữ thường không dấu. Hệ thống sẽ lọc kết quả bên dưới để bạn chọn.</p>
-                                        )}
-                                    </div>
+                    <div className="p-5 overflow-y-auto flex-1">
+                        {activeMobileTab === 'search' && (
+                            <div className="space-y-4">
+                                <div className="relative">
+                                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8b5a2b]" size={18} />
+                                    <input
+                                        type="text"
+                                        placeholder="Gõ tên cần tìm (ví dụ: giang)"
+                                        className="w-full bg-white border-2 border-[#d2b48c] rounded-xl py-4 pl-12 pr-4 text-base text-[#3e2723] focus:outline-none focus:border-[#8b5a2b] shadow-inner"
+                                        value={mobileSearchTerm}
+                                        onChange={(e) => setMobileSearchTerm(e.target.value)}
+                                        autoFocus
+                                    />
                                 </div>
-                            )}
-
-                            {activeMobileTab === 'calc' && (
-                                <div className="space-y-5">
-                                    <div>
-                                        <label className="text-sm text-[#8b5a2b] mb-2 block font-bold uppercase">1. Chọn người hỏi (A)</label>
-                                        <SearchableDropdown value={calcA} onChange={setCalcA} options={members} placeholder="-- Chọn người A --" />
-                                    </div>
-                                    <div>
-                                        <label className="text-sm text-[#8b5a2b] mb-2 block font-bold uppercase">2. Chọn người bị gọi (B)</label>
-                                        <SearchableDropdown value={calcB} onChange={setCalcB} options={members} placeholder="-- Chọn người B --" />
-                                    </div>
-                                    {calcA && calcB && (
-                                        <div className="mt-4 p-5 rounded-2xl bg-[#e8dcb8]/30 border-2 border-[#d2b48c]">
-                                            <div className="text-[#5c4033] text-lg font-bold text-center leading-relaxed">
-                                                {calculateRelation()}
+                                <div className="max-h-[50vh] overflow-y-auto bg-white rounded-xl border border-[#e8dcb8]">
+                                    {mobileSearchTerm.length > 1 ? (
+                                        members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(mobileSearchTerm.toLowerCase()))).slice(0, 20).map(m => (
+                                            <div
+                                                key={m.id}
+                                                onClick={() => {
+                                                    setFocusId(m.id);
+                                                    setActiveMobileTab(null);
+                                                    setMobileSearchTerm('');
+                                                }}
+                                                className="px-4 py-3 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 active:bg-[#8b5a2b]/20 cursor-pointer"
+                                            >
+                                                <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
+                                                <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
                                             </div>
-                                        </div>
+                                        ))
+                                    ) : (
+                                        <p className="text-sm text-[#8b5a2b]/90 text-center italic bg-[#f4efe6] p-3 rounded-lg">Bạn chỉ cần gõ tên chữ thường không dấu. Hệ thống sẽ lọc kết quả bên dưới để bạn chọn.</p>
                                     )}
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
+
+                        {activeMobileTab === 'calc' && (
+                            <div className="space-y-5">
+                                <div>
+                                    <label className="text-sm text-[#8b5a2b] mb-2 block font-bold uppercase">1. Chọn người hỏi (A)</label>
+                                    <SearchableDropdown value={calcA} onChange={setCalcA} options={members} placeholder="-- Chọn người A --" />
+                                </div>
+                                <div>
+                                    <label className="text-sm text-[#8b5a2b] mb-2 block font-bold uppercase">2. Chọn người bị gọi (B)</label>
+                                    <SearchableDropdown value={calcB} onChange={setCalcB} options={members} placeholder="-- Chọn người B --" />
+                                </div>
+                                {calcA && calcB && (
+                                    <div className="mt-4 p-5 rounded-2xl bg-[#e8dcb8]/30 border-2 border-[#d2b48c]">
+                                        <div className="text-[#5c4033] text-lg font-bold text-center leading-relaxed">
+                                            {calculateRelation()}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
@@ -743,19 +739,22 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                         </div>
                     </div>
                 </div>
-            )}
+            )
+            }
 
             {/* Main Canvas Area */}
-            {finalNodes.length > 0 ? (
-                <ReactFlowProvider>
-                    <LayoutFlow initialNodes={finalNodes} initialEdges={finalEdges} />
-                </ReactFlowProvider>
-            ) : (
-                <div className="w-full h-full flex items-center justify-center text-[#5c4033] font-serif animated-pulse">Đang định dạng thẻ...</div>
-            )}
+            {
+                finalNodes.length > 0 ? (
+                    <ReactFlowProvider>
+                        <LayoutFlow initialNodes={finalNodes} initialEdges={finalEdges} />
+                    </ReactFlowProvider>
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center text-[#5c4033] font-serif animated-pulse">Đang định dạng thẻ...</div>
+                )
+            }
 
             {/* Side Details Panel */}
             <MemberSidePanel member={selectedMember} onClose={() => setSelectedMember(null)} allMembers={members} onViewMember={handleViewDetails} />
-        </div>
+        </div >
     );
 }
