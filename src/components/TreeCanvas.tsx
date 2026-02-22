@@ -282,6 +282,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
 
     const [activeMobileTab, setActiveMobileTab] = useState<'search' | 'calc' | null>(null);
+    const [mobileSearchTerm, setMobileSearchTerm] = useState('');
     const [isDesktopToolsOpen, setIsDesktopToolsOpen] = useState(true);
     const [showHelp, setShowHelp] = useState(() => {
         if (typeof window !== 'undefined') {
@@ -645,20 +646,31 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                                             type="text"
                                             placeholder="Gõ tên cần tìm (ví dụ: giang)"
                                             className="w-full bg-white border-2 border-[#d2b48c] rounded-xl py-4 pl-12 pr-4 text-base text-[#3e2723] focus:outline-none focus:border-[#8b5a2b] shadow-inner"
-                                            onChange={(e) => {
-                                                const val = removeDiacritics(e.target.value.toLowerCase());
-                                                if (val.length > 2) {
-                                                    const found = members.find(m => removeDiacritics(m.name.toLowerCase()).includes(val));
-                                                    if (found) {
-                                                        setFocusId(found.id);
-                                                        setActiveMobileTab(null);
-                                                    }
-                                                }
-                                            }}
+                                            value={mobileSearchTerm}
+                                            onChange={(e) => setMobileSearchTerm(e.target.value)}
                                             autoFocus
                                         />
                                     </div>
-                                    <p className="text-sm text-[#8b5a2b]/90 text-center italic bg-[#f4efe6] p-3 rounded-lg">Bạn chỉ cần gõ tên chữ thường không dấu. Hệ thống sẽ tự tìm và zoom vào người đó trên phả đồ.</p>
+                                    <div className="max-h-[50vh] overflow-y-auto bg-white rounded-xl border border-[#e8dcb8]">
+                                        {mobileSearchTerm.length > 1 ? (
+                                            members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(mobileSearchTerm.toLowerCase()))).slice(0, 20).map(m => (
+                                                <div
+                                                    key={m.id}
+                                                    onClick={() => {
+                                                        setFocusId(m.id);
+                                                        setActiveMobileTab(null);
+                                                        setMobileSearchTerm('');
+                                                    }}
+                                                    className="px-4 py-3 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 active:bg-[#8b5a2b]/20 cursor-pointer"
+                                                >
+                                                    <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
+                                                    <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p className="text-sm text-[#8b5a2b]/90 text-center italic bg-[#f4efe6] p-3 rounded-lg">Bạn chỉ cần gõ tên chữ thường không dấu. Hệ thống sẽ lọc kết quả bên dưới để bạn chọn.</p>
+                                        )}
+                                    </div>
                                 </div>
                             )}
 
