@@ -35,8 +35,8 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <h1 className="text-5xl md:text-[5.5rem] font-serif font-black mb-6 bg-linear-to-b from-[#ffedb3] via-[#facc15] to-[#996515] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] leading-tight tracking-tight uppercase text-center px-4 pt-16">
-            Phả Đồ {familyDataRaw.familyName} Cẩm Giang
+          <h1 className="text-5xl md:text-[5.5rem] font-serif font-black mb-6 bg-linear-to-b from-[#ffedb3] via-[#facc15] to-[#996515] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] leading-tight tracking-tight uppercase px-4 pt-16 text-center">
+            Phả Đồ {familyDataRaw.familyName}
           </h1>
           <p className="text-lg md:text-2xl font-medium text-[#c0a880] tracking-[0.3em] uppercase mb-16 relative">
             <span className="absolute -left-12 top-1/2 w-8 h-px bg-gold-600/50"></span>
