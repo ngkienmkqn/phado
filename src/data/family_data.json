@@ -2,7 +2,7 @@
   "familyName": "Nguyễn Cẩm Giang",
   "since": 1469,
   "totalGenerations": 23,
-  "totalMembers": 977,
+  "totalMembers": 1051,
   "exportDate": "2026-02-22T16:06:39.470Z",
   "dataSource": "Excel member list merged with PDF relationship data",
   "members": [
@@ -40,6 +40,34 @@
       ]
     },
     {
+      "id": "m7",
+      "name": "BIỆT CƯ ĐẾN GIA BÌNH",
+      "alias": null,
+      "generation": 2,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m3",
+      "childrenIds": [
+        "m11"
+      ]
+    },
+    {
+      "id": "m8",
+      "name": "BIỆT CƯ ĐẾN GIA BÌNH",
+      "alias": null,
+      "generation": 2,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m3",
+      "childrenIds": []
+    },
+    {
       "id": "m9",
       "name": "NGUYỄN LỆNH CÔNG hiệu PHÚC HẬU",
       "alias": null,
@@ -70,6 +98,19 @@
       ]
     },
     {
+      "id": "m12",
+      "name": "THẤT TRUYỀN",
+      "alias": null,
+      "generation": 3,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m13",
       "name": "NGUYỄN LỆNH CÔNG húy BAO",
       "alias": null,
@@ -86,6 +127,19 @@
         "m19",
         "m18"
       ]
+    },
+    {
+      "id": "m15",
+      "name": "THẤT TRUYỀN",
+      "alias": null,
+      "generation": 4,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m11",
+      "childrenIds": []
     },
     {
       "id": "m16",
@@ -193,6 +247,19 @@
       ]
     },
     {
+      "id": "m32",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 7,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m33",
       "name": "NGUYỄN NGÔ CHUNG",
       "alias": null,
@@ -221,6 +288,32 @@
       "childrenIds": [
         "m43"
       ]
+    },
+    {
+      "id": "m38",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 8,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m31",
+      "childrenIds": []
+    },
+    {
+      "id": "m39",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 8,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m40",
@@ -266,6 +359,32 @@
       ]
     },
     {
+      "id": "m44",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 9,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m45",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 9,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m46",
       "name": "Ô. HỮU DUNG",
       "alias": null,
@@ -294,6 +413,32 @@
       "childrenIds": [
         "m53"
       ]
+    },
+    {
+      "id": "m49",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 10,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m50",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 10,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m51",
@@ -326,6 +471,32 @@
       ]
     },
     {
+      "id": "m54",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 11,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m55",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 11,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m56",
       "name": "NGUYỄN QUÝ CÔNG",
       "alias": null,
@@ -343,6 +514,45 @@
         "m63",
         "m64"
       ]
+    },
+    {
+      "id": "m58",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 12,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m53",
+      "childrenIds": []
+    },
+    {
+      "id": "m59",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 12,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m60",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 12,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m61",
@@ -376,6 +586,19 @@
       ]
     },
     {
+      "id": "m64",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 13,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m56",
+      "childrenIds": []
+    },
+    {
       "id": "m65",
       "name": "CỤ KHUYẾT DANH",
       "alias": null,
@@ -393,6 +616,19 @@
         "m77",
         "m74"
       ]
+    },
+    {
+      "id": "m66",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 13,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m67",
@@ -463,6 +699,19 @@
       ]
     },
     {
+      "id": "m74",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 14,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m65",
+      "childrenIds": []
+    },
+    {
       "id": "m75",
       "name": "CỤ TRÙM SONG",
       "alias": null,
@@ -507,6 +756,19 @@
         "m98",
         "m99"
       ]
+    },
+    {
+      "id": "m78",
+      "name": "Thất truyền",
+      "alias": null,
+      "generation": 14,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m79",
@@ -943,6 +1205,19 @@
       "childrenIds": [
         "m171"
       ]
+    },
+    {
+      "id": "m119",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 16,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m94",
+      "childrenIds": []
     },
     {
       "id": "m120",
@@ -1660,6 +1935,32 @@
       "childrenIds": [
         "m308"
       ]
+    },
+    {
+      "id": "m175",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 17,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m120",
+      "childrenIds": []
+    },
+    {
+      "id": "m176",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 17,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m120",
+      "childrenIds": []
     },
     {
       "id": "m177",
@@ -3218,6 +3519,19 @@
       ]
     },
     {
+      "id": "m304",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 18,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m171",
+      "childrenIds": []
+    },
+    {
       "id": "m305",
       "name": "NGUYỄN VĂN KIẾN",
       "alias": null,
@@ -3231,6 +3545,19 @@
       "childrenIds": [
         "m553"
       ]
+    },
+    {
+      "id": "m306",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 18,
+      "gender": "male",
+      "status": "Đã mất",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m171",
+      "childrenIds": []
     },
     {
       "id": "m307",
@@ -3256,6 +3583,19 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": "m174",
+      "childrenIds": []
+    },
+    {
+      "id": "m309",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 18,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m172",
       "childrenIds": []
     },
     {
@@ -3561,6 +3901,32 @@
     },
     {
       "id": "m338",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 18,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m192",
+      "childrenIds": []
+    },
+    {
+      "id": "m339",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 18,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m192",
+      "childrenIds": []
+    },
+    {
+      "id": "m340",
       "name": "NGUYỄN ...",
       "alias": null,
       "generation": 18,
@@ -6127,6 +6493,58 @@
       ]
     },
     {
+      "id": "m554",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 19,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m303",
+      "childrenIds": []
+    },
+    {
+      "id": "m555",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 19,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m303",
+      "childrenIds": []
+    },
+    {
+      "id": "m556",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 19,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m303",
+      "childrenIds": []
+    },
+    {
+      "id": "m557",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 19,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m303",
+      "childrenIds": []
+    },
+    {
       "id": "m558",
       "name": "NGUYỄN VĂN QUYỀN",
       "alias": null,
@@ -6140,6 +6558,19 @@
       "childrenIds": [
         "m839"
       ]
+    },
+    {
+      "id": "m559",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 19,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m303",
+      "childrenIds": []
     },
     {
       "id": "m560",
@@ -6488,6 +6919,19 @@
     {
       "id": "m593",
       "name": "NGUYỄN THỊ XUYÊN",
+      "alias": null,
+      "generation": 19,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m594",
+      "name": "NGUYỄN THỊ KIỂM",
       "alias": null,
       "generation": 19,
       "gender": "female",
@@ -6904,6 +7348,19 @@
         "m964",
         "m965"
       ]
+    },
+    {
+      "id": "m632",
+      "name": "Nguyễn Thị Lý",
+      "alias": null,
+      "generation": 20,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": "-- - -- - 1990",
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m633",
@@ -8792,6 +9249,19 @@
       "childrenIds": []
     },
     {
+      "id": "m797",
+      "name": "Nguyễn Thị Hường",
+      "alias": null,
+      "generation": 20,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": "-- - -- - 1986",
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m798",
       "name": "NGUYỄN VĂN CÔNG",
       "alias": null,
@@ -9287,6 +9757,19 @@
       "childrenIds": [
         "m1072"
       ]
+    },
+    {
+      "id": "m838",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 20,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m552",
+      "childrenIds": []
     },
     {
       "id": "m839",
@@ -10008,8 +10491,34 @@
       "childrenIds": []
     },
     {
+      "id": "m906",
+      "name": "NGUYỄN THỊ HOA",
+      "alias": null,
+      "generation": 20,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m907",
       "name": "NGUYỄN THỊ THƠM",
+      "alias": null,
+      "generation": 20,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m908",
+      "name": "NGUYỄN THỊ THANH",
       "alias": null,
       "generation": 20,
       "gender": "female",
@@ -10255,6 +10764,19 @@
       "childrenIds": []
     },
     {
+      "id": "m935",
+      "name": "NGUYỄN VĂN SÁU",
+      "alias": null,
+      "generation": 20,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": "Vũ Thị Quy",
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m937",
       "name": "NGUYỄN THỊ PHƯỢNG",
       "alias": null,
@@ -10348,6 +10870,19 @@
       "childrenIds": []
     },
     {
+      "id": "m946",
+      "name": "NGUYỄN THỊ HỆ",
+      "alias": null,
+      "generation": 20,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m947",
       "name": "NGUYỄN THỊ NGÂN",
       "alias": null,
@@ -10363,6 +10898,19 @@
     {
       "id": "m948",
       "name": "NGUYỄN THỊ HUẾ",
+      "alias": null,
+      "generation": 20,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m949",
+      "name": "NGUYỄN THỊ HƯỜNG",
       "alias": null,
       "generation": 20,
       "gender": "female",
@@ -11891,6 +12439,19 @@
       "childrenIds": []
     },
     {
+      "id": "m1073",
+      "name": "NGUYỄN ...",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": "m836",
+      "childrenIds": []
+    },
+    {
       "id": "m1074",
       "name": "NGUYỄN VĂN THẮNG",
       "alias": null,
@@ -11940,6 +12501,19 @@
       "birthLunar": null,
       "spouse": "Trịnh Thị Kim Dung",
       "parentId": "m846",
+      "childrenIds": []
+    },
+    {
+      "id": "m1079",
+      "name": "NGUYỄN VĂN PHƯƠNG",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": "Trần Thị Oanh",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -12125,6 +12699,32 @@
       "childrenIds": []
     },
     {
+      "id": "m1097",
+      "name": "NGUYỄN THỊ THƠM",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1098",
+      "name": "NGUYỄN THỊ LAN",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1099",
       "name": "NGUYỄN THỊ THUẬN",
       "alias": null,
@@ -12151,8 +12751,34 @@
       "childrenIds": []
     },
     {
+      "id": "m1102",
+      "name": "NGUYỄN VĂN THÀNH",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": "Lê Thị Huyền",
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1104",
       "name": "NGUYỄN THỊ HƯƠNG",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1105",
+      "name": "NGUYỄN THỊ HOA",
       "alias": null,
       "generation": 21,
       "gender": "female",
@@ -12424,8 +13050,34 @@
       "childrenIds": []
     },
     {
+      "id": "m1134",
+      "name": "NGUYỄN THỊ HOA",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1135",
       "name": "NGUYỄN THỊ NHÀI",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1136",
+      "name": "NGUYỄN THỊ GÁI",
       "alias": null,
       "generation": 21,
       "gender": "female",
@@ -12463,6 +13115,19 @@
       "childrenIds": []
     },
     {
+      "id": "m1141",
+      "name": "NGUYỄN THỊ HƯƠNG",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1142",
       "name": "NGUYỄN VĂN HƯỞNG",
       "alias": null,
@@ -12489,8 +13154,34 @@
       "childrenIds": []
     },
     {
+      "id": "m1145",
+      "name": "NGUYỄN THỊ HIỀN",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1146",
       "name": "NGUYỄN THỊ HÀ",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1147",
+      "name": "NGUYỄN THỊ NGA",
       "alias": null,
       "generation": 21,
       "gender": "female",
@@ -12606,6 +13297,19 @@
       "childrenIds": []
     },
     {
+      "id": "m1159",
+      "name": "NGUYỄN VĂN MẠNH",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": "26 - 08 - 2002",
+      "birthLunar": "18 - 07 - 2002",
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1160",
       "name": "NGUYỄN KHÁNH CHI",
       "alias": null,
@@ -12653,6 +13357,19 @@
       "status": "Còn sống",
       "birthSolar": "14 - 02 - 2005",
       "birthLunar": "06 - 01 - 2005",
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1164",
+      "name": "NGUYỄN THU HÀ",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": "27 - 01 - 2010",
+      "birthLunar": "13 - 12 - 2009",
       "spouse": null,
       "parentId": null,
       "childrenIds": []
@@ -12723,11 +13440,76 @@
       "childrenIds": []
     },
     {
+      "id": "m1173",
+      "name": "NGUYỄN VĂN BÌNH",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1174",
       "name": "NGUYỄN VĂN DUY",
       "alias": null,
       "generation": 21,
       "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1175",
+      "name": "NGUYỄN VĂN ĐÔNG",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1176",
+      "name": "NGUYỄN THỊ HIỀN",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1177",
+      "name": "NGUYỄN THỊ THƠM",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1178",
+      "name": "NGUYỄN THỊ THẢO",
+      "alias": null,
+      "generation": 21,
+      "gender": "female",
       "status": "Còn sống",
       "birthSolar": null,
       "birthLunar": null,
@@ -12823,6 +13605,19 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Phạm Thị Hải",
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1190",
+      "name": "NGUYỄN VĂN BÌNH",
+      "alias": null,
+      "generation": 21,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": "Phan Thị hồng",
       "parentId": null,
       "childrenIds": []
     },
@@ -13373,6 +14168,19 @@
       "childrenIds": []
     },
     {
+      "id": "m1235",
+      "name": "NGUYỄN THỊ HÀ",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1236",
       "name": "NGUYỄN THỊ TRANG",
       "alias": null,
@@ -13386,8 +14194,47 @@
       "childrenIds": []
     },
     {
+      "id": "m1237",
+      "name": "NGUYỄN THỊ NGÂN",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1238",
+      "name": "NGUYỄN THỊ ANH",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1239",
       "name": "NGUYỄN THỊ THÙY",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1240",
+      "name": "NGUYỄN THỊ NGÂN",
       "alias": null,
       "generation": 22,
       "gender": "female",
@@ -13451,6 +14298,19 @@
       "childrenIds": []
     },
     {
+      "id": "m1247",
+      "name": "NGUYỄN THỊ THỦY",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1248",
       "name": "NGUYỄN VĂN CƯƠNG",
       "alias": null,
@@ -13503,8 +14363,60 @@
       "childrenIds": []
     },
     {
+      "id": "m1254",
+      "name": "NGUYỄN THỊ LOAN",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1255",
+      "name": "NGUYỄN VĂN HẢI",
+      "alias": null,
+      "generation": 22,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1256",
       "name": "Nguyễn Thị Huyền",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1257",
+      "name": "NGUYỄN THỊ YẾN",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1258",
+      "name": "NGUYỄN THỊ ANH",
       "alias": null,
       "generation": 22,
       "gender": "female",
@@ -13620,6 +14532,19 @@
       "childrenIds": []
     },
     {
+      "id": "m1268",
+      "name": "NGUYỄN THỊ NGA",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1269",
       "name": "Nguyễn Xuân Quang",
       "alias": null,
@@ -13711,11 +14636,37 @@
       "childrenIds": []
     },
     {
+      "id": "m1276",
+      "name": "NGUYỄN THỊ YẾN",
+      "alias": null,
+      "generation": 22,
+      "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
       "id": "m1277",
       "name": "NGUYỄN THỊ MƠ",
       "alias": null,
       "generation": 22,
       "gender": "female",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1278",
+      "name": "NGUYỄN GIA HUY",
+      "alias": null,
+      "generation": 22,
+      "gender": "male",
       "status": "Còn sống",
       "birthSolar": null,
       "birthLunar": null,
@@ -13739,6 +14690,19 @@
     {
       "id": "m1280",
       "name": "NGUYỄN VĂN HUY",
+      "alias": null,
+      "generation": 23,
+      "gender": "male",
+      "status": "Còn sống",
+      "birthSolar": null,
+      "birthLunar": null,
+      "spouse": null,
+      "parentId": null,
+      "childrenIds": []
+    },
+    {
+      "id": "m1281",
+      "name": "NGUYỄN VĂN HƯNG",
       "alias": null,
       "generation": 23,
       "gender": "male",
