@@ -627,8 +627,8 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             {activeMobileTab && (
                 <div className="fixed inset-0 z-50 sm:hidden flex flex-col justify-end">
                     <div className="absolute inset-0 bg-[#3e2723]/30 backdrop-blur-sm" onClick={() => setActiveMobileTab(null)}></div>
-                    <div className="w-full bg-[#fdfbf7] rounded-t-3xl shadow-[0_-10px_40px_rgba(92,64,51,0.3)] relative flex flex-col overflow-hidden max-h-[85vh] animate-in slide-in-from-bottom-full border-t border-[#d2b48c]">
-                        <div className="w-12 h-1.5 bg-[#d2b48c] rounded-full mx-auto my-3 opacity-50"></div>
+                    <div className="w-full bg-[#fdfbf7] rounded-t-3xl shadow-[0_-10px_40px_rgba(92,64,51,0.3)] relative flex flex-col overflow-hidden h-[90vh] animate-in slide-in-from-bottom-full border-t border-[#d2b48c]">
+                        <div className="w-12 h-1.5 bg-[#d2b48c] rounded-full mx-auto my-3 opacity-50 shrink-0"></div>
 
                         <div className="flex justify-between items-center px-5 shrink-0">
                             <h2 className="text-[#5c4033] font-serif font-bold text-xl items-center gap-2 flex">
