@@ -21,6 +21,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import ELK from 'elkjs/lib/elk.bundled.js';
 import { Info, Calculator, X, ChevronRight, User, CalendarDays, Search, Focus, ChevronDown, Map, HelpCircle } from 'lucide-react';
+import MemberSidePanel from './MemberSidePanel';
 
 const elk = new ELK();
 
@@ -247,204 +248,6 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
                     </div>
                 </div>
             )}
-        </div>
-    );
-};
-
-// Side Panel Component
-const MemberSidePanel = ({ member, onClose }: { member: MemberData | null, onClose: () => void }) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
-    const [editBy, setEditBy] = useState('');
-    // Editable fields - pre-filled with current data
-    const [editName, setEditName] = useState('');
-    const [editBirth, setEditBirth] = useState('');
-    const [editSpouse, setEditSpouse] = useState('');
-    const [editStatus, setEditStatus] = useState('');
-    const [editGender, setEditGender] = useState('');
-    const [editGeneration, setEditGeneration] = useState('');
-    const [editNote, setEditNote] = useState('');
-
-    // Pre-fill when member changes or edit mode starts
-    useEffect(() => {
-        if (member) {
-            setEditName(member.name || '');
-            setEditBirth(member.birthSolar || '');
-            setEditSpouse(member.spouse || '');
-            setEditStatus(member.status || '');
-            setEditGender(member.gender || '');
-            setEditGeneration(String(member.generation || ''));
-            setEditNote('');
-            setEditBy('');
-            setSubmitted(false);
-            setIsEditing(false);
-        }
-    }, [member]);
-
-    const getChanges = () => {
-        if (!member) return [];
-        const changes: { field: string; label: string; oldValue: string; newValue: string }[] = [];
-        if (editName !== (member.name || '')) changes.push({ field: 'name', label: 'H\u1ECD v\u00E0 t\u00EAn', oldValue: member.name || '', newValue: editName });
-        if (editBirth !== (member.birthSolar || '')) changes.push({ field: 'birthSolar', label: 'N\u0103m sinh', oldValue: member.birthSolar || '', newValue: editBirth });
-        if (editSpouse !== (member.spouse || '')) changes.push({ field: 'spouse', label: 'V\u1EE3/Ch\u1ED3ng', oldValue: member.spouse || '', newValue: editSpouse });
-        if (editStatus !== (member.status || '')) changes.push({ field: 'status', label: 'Tr\u1EA1ng th\u00E1i', oldValue: member.status || '', newValue: editStatus });
-        if (editGender !== (member.gender || '')) changes.push({ field: 'gender', label: 'Gi\u1EDBi t\u00EDnh', oldValue: member.gender || '', newValue: editGender });
-        if (editGeneration !== String(member.generation || '')) changes.push({ field: 'generation', label: '\u0110\u1EDDi', oldValue: String(member.generation || ''), newValue: editGeneration });
-        return changes;
-    };
-
-    const handleSubmit = () => {
-        if (!member) return;
-        const changes = getChanges();
-        if (changes.length === 0 && !editNote) return;
-
-        const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
-        requests.push({
-            id: Date.now(),
-            memberId: member.id,
-            memberName: member.name,
-            memberGeneration: member.generation,
-            changes,
-            note: editNote || '',
-            by: editBy || '\u1EA8n danh',
-            time: new Date().toLocaleString('vi-VN'),
-        });
-        localStorage.setItem('phado_requests', JSON.stringify(requests));
-        setSubmitted(true);
-        setTimeout(() => { setSubmitted(false); setIsEditing(false); }, 2500);
-    };
-
-    if (!member) return null;
-    const changes = getChanges();
-    const hasChanges = changes.length > 0 || editNote.length > 0;
-
-    return (
-        <div className="absolute top-0 right-0 bottom-0 w-full md:w-[400px] bg-[#fcfaf5] border-l border-[#d2b48c] shadow-2xl z-50 flex flex-col transform transition-transform duration-300 translate-x-0">
-            <div className="p-4 border-b border-[#e8dcb8] flex justify-between items-center bg-[#f7f3e8]">
-                <h2 className="text-lg font-serif text-[#5c4033] font-bold">
-                    {isEditing ? '\u270F\uFE0F Ch\u1EC9nh s\u1EEDa th\u00F4ng tin' : 'Th\u00F4ng tin chi ti\u1EBFt'}
-                </h2>
-                <button onClick={onClose} className="text-[#8b5a2b] hover:text-[#5c4033] bg-[#e8dcb8]/40 hover:bg-[#d2b48c]/40 p-2 rounded-full transition-colors"><X size={20} /></button>
-            </div>
-            <div className="p-5 flex-1 overflow-y-auto">
-                {!isEditing ? (
-                    <>
-                        {/* View Mode */}
-                        <div className="flex flex-col items-center mb-6">
-                            <div className="w-20 h-20 rounded-full bg-[#f4efe6] border-2 border-[#8b5a2b]/30 flex items-center justify-center mb-3 shadow-md text-[#8b5a2b]">
-                                <User size={36} className="text-[#8b5a2b]" />
-                            </div>
-                            <h3 className="text-xl font-serif font-bold text-[#3e2723] text-center mb-1">{member.name}</h3>
-                            <span className="text-[#8b5a2b] text-xs font-bold uppercase tracking-wider">{'\u0110\u1EDDi th\u1EE9'} {member.generation}</span>
-                            {member.status && <span className="mt-2 text-xs px-3 py-1 rounded-sm bg-[#e8dcb8]/60 text-[#5c4033] border border-[#d2b48c]">{member.status}</span>}
-                        </div>
-                        <div className="bg-[#f7f3e8] p-4 rounded-xl border border-[#e8dcb8] space-y-3">
-                            <div className="flex items-center gap-3">
-                                <CalendarDays size={16} className="text-[#8b5a2b] shrink-0" />
-                                <span className="text-sm text-[#5c4033]">{`N\u0103m sinh:`}</span>
-                                <span className="text-sm text-[#3e2723] font-bold ml-auto">{member.birthSolar || 'Kh\u00F4ng r\u00F5'}</span>
-                            </div>
-                            {member.spouse && (
-                                <div className="flex items-center gap-3 pt-3 border-t border-[#e8dcb8]">
-                                    <User size={16} className="text-[#c27ba0] shrink-0" />
-                                    <span className="text-sm text-[#5c4033]">{`V\u1EE3/Ch\u1ED3ng:`}</span>
-                                    <span className="text-sm text-[#3e2723] font-bold ml-auto text-right line-clamp-2">{member.spouse}</span>
-                                </div>
-                            )}
-                        </div>
-                        <button onClick={() => setIsEditing(true)} className="w-full mt-5 py-3 bg-[#8b5a2b] hover:bg-[#704218] text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 shadow-md">
-                            {`C\u1EADp Nh\u1EADt H\u1ED3 S\u01A1`} <ChevronRight size={16} />
-                        </button>
-                        <p className="text-center text-xs text-[#8b5a2b]/70 mt-2">{`S\u1EEDa tr\u1EF1c ti\u1EBFp, admin duy\u1EC7t xong t\u1EF1 \u0111\u1ED9ng \u00E1p d\u1EE5ng`}</p>
-                    </>
-                ) : submitted ? (
-                    <div className="mt-8 p-6 bg-green-50 border-2 border-green-300 rounded-xl text-center">
-                        <div className="text-4xl mb-3">{'\u2705'}</div>
-                        <p className="text-green-800 font-bold text-lg">{'\u0110\u00E3 g\u1EEDi th\u00E0nh c\u00F4ng!'}</p>
-                        <p className="text-green-700 text-sm mt-1">{`Admin duy\u1EC7t xong s\u1EBD t\u1EF1 \u0111\u1ED9ng c\u1EADp nh\u1EADt.`}</p>
-                    </div>
-                ) : (
-                    <>
-                        {/* Edit Mode - Pre-filled form */}
-                        <div className="space-y-3">
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`H\u1ECD v\u00E0 t\u00EAn`}</label>
-                                <input type="text" value={editName} onChange={e => setEditName(e.target.value)}
-                                    className={`w-full border rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] ${editName !== (member.name || '') ? 'border-amber-400 bg-amber-50' : 'border-[#d2b48c]'}`} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`\u0110\u1EDDi th\u1EE9`}</label>
-                                    <input type="text" value={editGeneration} onChange={e => setEditGeneration(e.target.value)}
-                                        className={`w-full border rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] ${editGeneration !== String(member.generation || '') ? 'border-amber-400 bg-amber-50' : 'border-[#d2b48c]'}`} />
-                                </div>
-                                <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`Gi\u1EDBi t\u00EDnh`}</label>
-                                    <select value={editGender} onChange={e => setEditGender(e.target.value)}
-                                        className={`w-full border rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] ${editGender !== (member.gender || '') ? 'border-amber-400 bg-amber-50' : 'border-[#d2b48c]'}`}>
-                                        <option value="male">Nam</option>
-                                        <option value="female">{`N\u1EEF`}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`N\u0103m sinh (D\u01B0\u01A1ng l\u1ECBch)`}</label>
-                                <input type="text" value={editBirth} onChange={e => setEditBirth(e.target.value)} placeholder="VD: 16 - 06 - 1991"
-                                    className={`w-full border rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] ${editBirth !== (member.birthSolar || '') ? 'border-amber-400 bg-amber-50' : 'border-[#d2b48c]'}`} />
-                            </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`V\u1EE3/Ch\u1ED3ng`}</label>
-                                <input type="text" value={editSpouse} onChange={e => setEditSpouse(e.target.value)} placeholder={`\u0110\u1EC3 tr\u1ED1ng n\u1EBFu kh\u00F4ng c\u00F3`}
-                                    className={`w-full border rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] ${editSpouse !== (member.spouse || '') ? 'border-amber-400 bg-amber-50' : 'border-[#d2b48c]'}`} />
-                            </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`Tr\u1EA1ng th\u00E1i`}</label>
-                                <select value={editStatus} onChange={e => setEditStatus(e.target.value)}
-                                    className={`w-full border rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] ${editStatus !== (member.status || '') ? 'border-amber-400 bg-amber-50' : 'border-[#d2b48c]'}`}>
-                                    <option value="">{`Kh\u00F4ng r\u00F5`}</option>
-                                    <option value="C\u00F2n s\u1ED1ng">{`C\u00F2n s\u1ED1ng`}</option>
-                                    <option value="\u0110\u00E3 m\u1EA5t">{`\u0110\u00E3 m\u1EA5t`}</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`Ghi ch\u00FA th\u00EAm (tu\u1EF3 ch\u1ECDn)`}</label>
-                                <textarea value={editNote} onChange={e => setEditNote(e.target.value)} rows={2}
-                                    placeholder={`VD: C\u1EE5 Ng\u00E2n l\u00E0 con ch\u1EE9 kh\u00F4ng ph\u1EA3i v\u1EE3...`}
-                                    className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] resize-none" />
-                            </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">{`T\u00EAn ng\u01B0\u1EDDi g\u1EEDi (tu\u1EF3 ch\u1ECDn)`}</label>
-                                <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder={`VD: B\u00E0 Th\u01A1m`}
-                                    className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
-                            </div>
-                        </div>
-
-                        {/* Changes preview */}
-                        {changes.length > 0 && (
-                            <div className="mt-4 p-3 bg-amber-50 border border-amber-300 rounded-xl">
-                                <p className="text-xs font-bold text-amber-800 mb-2">{`\u0110ang thay \u0111\u1ED5i ${changes.length} tr\u01B0\u1EDDng:`}</p>
-                                {changes.map((c, i) => (
-                                    <div key={i} className="text-xs text-amber-900 mb-1">
-                                        <span className="font-bold">{c.label}:</span>{' '}
-                                        <span className="line-through text-red-600">{c.oldValue || '(tr\u1ED1ng)'}</span>{' \u2192 '}
-                                        <span className="text-green-700 font-bold">{c.newValue || '(tr\u1ED1ng)'}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        <div className="flex gap-2 mt-4">
-                            <button onClick={handleSubmit} disabled={!hasChanges}
-                                className="flex-1 py-3 bg-[#8b5a2b] hover:bg-[#704218] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-colors shadow-md">
-                                {`G\u1EEDi y\u00EAu c\u1EA7u s\u1EEDa`}
-                            </button>
-                            <button onClick={() => setIsEditing(false)} className="py-3 px-4 bg-[#e8dcb8] hover:bg-[#d2b48c] text-[#5c4033] rounded-xl font-bold transition-colors">
-                                {`Hu\u1EF7`}
-                            </button>
-                        </div>
-                    </>
-                )}
-            </div>
         </div>
     );
 };
@@ -917,7 +720,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             )}
 
             {/* Side Details Panel */}
-            <MemberSidePanel member={selectedMember} onClose={() => setSelectedMember(null)} />
+            <MemberSidePanel member={selectedMember} onClose={() => setSelectedMember(null)} allMembers={members} onViewMember={handleViewDetails} />
         </div>
     );
 }

@@ -72,11 +72,34 @@ export default function AdminDashboard() {
     const handleApprove = (req: PendingRequest) => {
         // Load existing overlay
         const overlay: Record<string, Record<string, string>> = JSON.parse(localStorage.getItem('phado_overlay') || '{}');
-        // Apply each change
-        if (!overlay[req.memberId]) overlay[req.memberId] = {};
-        for (const change of req.changes) {
-            overlay[req.memberId][change.field] = change.newValue;
+
+        if (req.type === 'add' && req.relation === 'spouse' && req.relatedToId) {
+            // Find current spouse value
+            let currentSpouse = '';
+            if (overlay[req.relatedToId] && overlay[req.relatedToId].spouse !== undefined) {
+                currentSpouse = overlay[req.relatedToId].spouse;
+            } else {
+                const baseMember = familyDataRaw.members.find((m: any) => m.id === req.relatedToId);
+                if (baseMember && baseMember.spouse) {
+                    currentSpouse = baseMember.spouse as string;
+                }
+            }
+
+            // Append new spouse
+            const newSpouseName = req.newData?.name;
+            if (newSpouseName) {
+                const updatedSpouse = currentSpouse ? `${currentSpouse} | ${newSpouseName}` : newSpouseName;
+                if (!overlay[req.relatedToId]) overlay[req.relatedToId] = {};
+                overlay[req.relatedToId].spouse = updatedSpouse;
+            }
+        } else if (req.memberId) {
+            // Normal edit
+            if (!overlay[req.memberId]) overlay[req.memberId] = {};
+            for (const change of req.changes || []) {
+                overlay[req.memberId][change.field] = change.newValue;
+            }
         }
+
         localStorage.setItem('phado_overlay', JSON.stringify(overlay));
 
         // Remove from pending
@@ -222,8 +245,8 @@ export default function AdminDashboard() {
                                                     </div>
                                                 </div>
 
-                                                {/* Structured Diff View */}
-                                                {req.changes && req.changes.length > 0 && (
+                                                {/* Edit Diff View */}
+                                                {req.type !== 'add' && req.changes && req.changes.length > 0 && (
                                                     <div className="bg-black/30 rounded-xl border border-white/10 overflow-hidden mb-3">
                                                         <div className="px-4 py-2 bg-white/5 border-b border-white/10">
                                                             <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
@@ -238,6 +261,21 @@ export default function AdminDashboard() {
                                                                 <span className="text-sm text-green-400 font-bold">{c.newValue || `(tr\u1ED1ng)`}</span>
                                                             </div>
                                                         ))}
+                                                    </div>
+                                                )}
+
+                                                {/* Add New View */}
+                                                {req.type === 'add' && req.newData && (
+                                                    <div className="bg-blue-900/20 rounded-xl border border-blue-500/30 overflow-hidden mb-3">
+                                                        <div className="px-4 py-2 bg-blue-500/10 border-b border-blue-500/20">
+                                                            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">
+                                                                ✨ Thêm Mới Vợ/Chồng
+                                                            </span>
+                                                        </div>
+                                                        <div className="px-4 py-3 border-b border-white/5 flex gap-3">
+                                                            <span className="text-sm text-blue-300 w-24 shrink-0 font-medium">Họ và tên:</span>
+                                                            <span className="text-sm text-blue-100 font-bold">{req.newData.name}</span>
+                                                        </div>
                                                     </div>
                                                 )}
 
