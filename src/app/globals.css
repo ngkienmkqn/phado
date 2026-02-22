@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -21,7 +22,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-noto-serif), var(--font-inter), 'Noto Serif', 'Inter', sans-serif;
+  font-family: 'Noto Sans', 'Noto Serif', 'Segoe UI', Tahoma, sans-serif;
   overflow-x: hidden;
 }
 

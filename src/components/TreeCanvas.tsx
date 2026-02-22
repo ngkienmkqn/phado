@@ -252,6 +252,29 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
 
 // Side Panel Component
 const MemberSidePanel = ({ member, onClose }: { member: MemberData | null, onClose: () => void }) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editBirth, setEditBirth] = useState('');
+    const [editNote, setEditNote] = useState('');
+    const [editBy, setEditBy] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = () => {
+        if (!member || (!editBirth && !editNote)) return;
+        const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
+        requests.push({
+            id: Date.now(),
+            type: editBirth ? 'Sửa lỗi' : 'Góp ý',
+            memberName: `${member.name} (Đời ${member.generation})`,
+            memberId: member.id,
+            request: [editBirth && `Năm sinh: ${editBirth}`, editNote].filter(Boolean).join('. '),
+            by: editBy || 'Ẩn danh',
+            time: new Date().toLocaleString('vi-VN'),
+        });
+        localStorage.setItem('phado_requests', JSON.stringify(requests));
+        setSubmitted(true);
+        setTimeout(() => { setSubmitted(false); setIsEditing(false); setEditBirth(''); setEditNote(''); setEditBy(''); }, 2000);
+    };
+
     if (!member) return null;
     return (
         <div className="absolute top-0 right-0 bottom-0 w-full md:w-[400px] bg-[#fcfaf5] border-l border-[#d2b48c] shadow-2xl z-50 flex flex-col transform transition-transform duration-300 translate-x-0">
@@ -289,10 +312,44 @@ const MemberSidePanel = ({ member, onClose }: { member: MemberData | null, onClo
                         )}
                     </div>
 
-                    <button className="w-full mt-6 py-3.5 bg-[#8b5a2b] hover:bg-[#704218] text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 shadow-md">
-                        Cập Nhật Hồ Sơ <ChevronRight size={16} />
-                    </button>
-                    <p className="text-center text-xs text-[#8b5a2b]/80 mt-2 italic">Dành cho việc thêm thông tin ngày tháng năm</p>
+                    {!isEditing ? (
+                        <>
+                            <button onClick={() => setIsEditing(true)} className="w-full mt-6 py-3.5 bg-[#8b5a2b] hover:bg-[#704218] text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 shadow-md">
+                                Cập Nhật Hồ Sơ <ChevronRight size={16} />
+                            </button>
+                            <p className="text-center text-xs text-[#8b5a2b]/80 mt-2 italic">Bấm để gửi yêu cầu sửa/bổ sung thông tin</p>
+                        </>
+                    ) : submitted ? (
+                        <div className="mt-4 p-5 bg-green-50 border-2 border-green-300 rounded-xl text-center">
+                            <div className="text-3xl mb-2">✅</div>
+                            <p className="text-green-800 font-bold text-lg">Đã gửi thành công!</p>
+                            <p className="text-green-700 text-sm mt-1">Admin sẽ duyệt và cập nhật sớm nhất.</p>
+                        </div>
+                    ) : (
+                        <div className="mt-4 space-y-3 bg-[#f7f3e8] p-4 rounded-xl border-2 border-[#d2b48c]">
+                            <h4 className="font-bold text-[#5c4033] text-base">📝 Gửi yêu cầu sửa thông tin</h4>
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">Năm sinh (nếu cần sửa)</label>
+                                <input type="text" value={editBirth} onChange={e => setEditBirth(e.target.value)} placeholder="VD: 1958" className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">Ghi chú / Nội dung yêu cầu</label>
+                                <textarea value={editNote} onChange={e => setEditNote(e.target.value)} placeholder="VD: Thêm cháu nội tên Nguyễn Phúc An..." rows={3} className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b] resize-none" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1">Tên người gửi (tuỳ chọn)</label>
+                                <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Bà Thơm" className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                            </div>
+                            <div className="flex gap-2 pt-2">
+                                <button onClick={handleSubmit} disabled={!editBirth && !editNote} className="flex-1 py-3 bg-[#8b5a2b] hover:bg-[#704218] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-colors shadow-md">
+                                    Gửi Yêu Cầu
+                                </button>
+                                <button onClick={() => { setIsEditing(false); setEditBirth(''); setEditNote(''); setEditBy(''); }} className="py-3 px-4 bg-[#e8dcb8] hover:bg-[#d2b48c] text-[#5c4033] rounded-xl font-bold transition-colors">
+                                    Huỷ
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
