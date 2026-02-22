@@ -253,7 +253,30 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
 };
 
 export default function TreeCanvas({ data }: { data: FamilyData }) {
-    const members = useMemo(() => data.members || [], [data]);
+    const [overlay, setOverlay] = useState<Record<string, Record<string, string>>>({});
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem('phado_overlay');
+            if (stored) {
+                try {
+                    setOverlay(JSON.parse(stored));
+                } catch (e) { }
+            }
+        }
+    }, []);
+
+    const members = useMemo(() => {
+        const base = data.members || [];
+        if (Object.keys(overlay).length === 0) return base;
+
+        return base.map(m => {
+            if (overlay[m.id]) {
+                return { ...m, ...overlay[m.id] };
+            }
+            return m;
+        });
+    }, [data, overlay]);
 
     const [focusId, setFocusId] = useState<string | null>(members.length > 0 ? members[0].id : null);
     const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);

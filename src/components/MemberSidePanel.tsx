@@ -55,6 +55,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     const [editGeneration, setEditGeneration] = useState('');
     const [editNote, setEditNote] = useState('');
     const [editBy, setEditBy] = useState('');
+    const [editPhone, setEditPhone] = useState('');
 
     // Advanced Spouse States
     // In our legacy data, spouse is single string. We parse it into an array for editing.
@@ -70,6 +71,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             setEditGeneration(String(member.generation || ''));
             setEditNote('');
             setEditBy('');
+            setEditPhone('');
 
             // Parse spouses (split by comma or pipe if they exist)
             if (member.spouse) {
@@ -128,6 +130,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             changes,
             note: editNote || '',
             by: editBy || 'Ẩn danh',
+            phone: editPhone || '',
             time: new Date().toLocaleString('vi-VN'),
         });
 
@@ -153,6 +156,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             },
             note: editNote || `Đề xuất thêm Vợ/Chồng cho ${member.name}`,
             by: editBy || 'Ẩn danh',
+            phone: editPhone || '',
             time: new Date().toLocaleString('vi-VN'),
         });
         localStorage.setItem('phado_requests', JSON.stringify(requests));
@@ -343,10 +347,17 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                     placeholder="Giải thích lý do sửa..."
                                     className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm resize-none focus:border-[#8b5a2b] outline-none" />
                             </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên người gửi (bạn)</label>
-                                <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng đời 20"
-                                    className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên người gửi</label>
+                                    <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo liên hệ</label>
+                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
                             </div>
                         </div>
 
@@ -395,10 +406,17 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                     placeholder="Thêm thông tin năm sinh, quê quán để Admin dễ duyệt..."
                                     className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm resize-none focus:border-[#8b5a2b] outline-none" />
                             </div>
-                            <div>
-                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên của bạn</label>
-                                <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng"
-                                    className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Tên người gửi</label>
+                                    <input type="text" value={editBy} onChange={e => setEditBy(e.target.value)} placeholder="VD: Anh Tùng..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo liên hệ</label>
+                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                </div>
                             </div>
                         </div>
 

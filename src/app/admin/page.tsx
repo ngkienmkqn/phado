@@ -27,6 +27,7 @@ interface PendingRequest {
     changes: FieldChange[];
     note: string;
     by: string;
+    phone?: string;
     time: string;
 }
 
@@ -240,7 +241,9 @@ export default function AdminDashboard() {
                                                             </span>
                                                         </h4>
                                                         <p className="text-xs text-gray-500 mt-1">
-                                                            {`G\u1EEDi b\u1EDFi: `}<strong className="text-gray-300">{req.by}</strong> {` \u2022 ${req.time}`}
+                                                            Gửi bởi: <strong className="text-gray-300">{req.by || 'Ẩn danh'}</strong>
+                                                            {req.phone && <span> &bull; SĐT/Zalo: <strong className="text-blue-400">{req.phone}</strong></span>}
+                                                            <span className="ml-1">&bull; {req.time}</span>
                                                         </p>
                                                     </div>
                                                 </div>
