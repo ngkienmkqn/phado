@@ -94,13 +94,15 @@ export default function DirectoryPage() {
                                     <span>{member.birthSolar || 'Chưa cập nhật ngày sinh'}</span>
                                 </div>
 
-                                <a
-                                    href="tel:0900000000"
-                                    className="mt-2 w-full flex items-center justify-center gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-500/30 py-3 rounded-xl transition-colors font-medium text-lg"
-                                >
-                                    <Phone className="w-5 h-5" />
-                                    Gọi Điện
-                                </a>
+                                {(member as any).phone && (
+                                    <a
+                                        href={`tel:${(member as any).phone}`}
+                                        className="mt-2 w-full flex items-center justify-center gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-500/30 py-3 rounded-xl transition-colors font-medium text-lg"
+                                    >
+                                        <Phone className="w-5 h-5" />
+                                        Gọi Điện
+                                    </a>
+                                )}
                             </div>
                         </div>
                     ))}

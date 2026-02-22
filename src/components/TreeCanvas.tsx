@@ -307,7 +307,12 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
     const [activeMobileTab, setActiveMobileTab] = useState<'search' | 'calc' | null>(null);
     const [isDesktopToolsOpen, setIsDesktopToolsOpen] = useState(true);
-    const [showHelp, setShowHelp] = useState(true); // Default open for elderly assistance
+    const [showHelp, setShowHelp] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('phado_hide_help') !== 'true';
+        }
+        return true;
+    });
     const [calcA, setCalcA] = useState('');
     const [calcB, setCalcB] = useState('');
 
@@ -579,7 +584,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
             {/* Desktop Help Button */}
             <button onClick={() => setShowHelp(true)} className="hidden sm:flex absolute bottom-6 right-[380px] z-40 items-center gap-2 bg-[#8b5a2b] hover:bg-[#5c4033] text-white px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105">
-                <HelpCircle size={18} /> Hướng Dẫn Kính Lão
+                <HelpCircle size={18} /> Hướng Dẫn
             </button>
 
             {/* Mobile Bottom Navigation Bar */}
@@ -664,41 +669,47 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 </div>
             )}
 
-            {/* Help / Elderly Instruction Modal */}
+            {/* Help / Instruction Modal */}
             {showHelp && (
                 <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-[#3e2723]/60 backdrop-blur-sm" onClick={() => setShowHelp(false)}></div>
-                    <div className="bg-[#fdfbf7] w-full max-w-md rounded-2xl shadow-2xl relative flex flex-col overflow-hidden animate-in zoom-in-95 border-2 border-[#d2b48c]">
-                        <div className="bg-[#5c4033] text-[#fdfbf7] p-4 text-center">
+                    <div className="bg-[#fdfbf7] w-full max-w-lg rounded-2xl shadow-2xl relative flex flex-col overflow-hidden animate-in zoom-in-95 border-2 border-[#d2b48c]">
+                        <div className="bg-[#5c4033] text-[#fdfbf7] p-4 text-center relative">
+                            <button onClick={() => setShowHelp(false)} className="absolute right-3 top-3 text-white/70 hover:text-white p-1"><X size={20} /></button>
                             <h2 className="text-2xl font-serif font-bold">Hướng Dẫn Sử Dụng</h2>
-                            <p className="text-sm text-[#e8dcb8] opacity-90">Sổ Tay Gia Phả Điện Tử Dành Cho Các Cụ</p>
+                            <p className="text-sm text-[#e8dcb8] opacity-90">Sổ Tay Gia Phả Điện Tử</p>
                         </div>
-                        <div className="p-6 space-y-5 overflow-y-auto max-h-[60vh] text-[#3e2723] text-base leading-relaxed">
-                            <div className="flex gap-4 items-start">
-                                <div className="w-10 h-10 rounded-full bg-[#f4efe6] flex items-center justify-center shrink-0 border border-[#d2b48c] text-[#8b5a2b] font-bold">1</div>
-                                <div>
-                                    <strong className="block text-[#5c4033] text-lg">Di chuyển và Phóng To</strong>
-                                    Dùng ngón tay chạm và kéo trên màn hình để di chuyển sơ đồ. Dùng 2 ngón tay chụm lại hoặc kéo ra để thu phóng.
+                        <div className="p-5 space-y-4 overflow-y-auto max-h-[60vh] text-[#3e2723] text-[15px] leading-relaxed">
+                            {/* Desktop-specific instructions */}
+                            <div className="hidden sm:block">
+                                <h3 className="font-bold text-[#5c4033] text-lg mb-3 border-b border-[#e8dcb8] pb-2">💻 Trên Máy Tính</h3>
+                                <div className="space-y-3">
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">1</span><div><strong>Di chuyển:</strong> Giữ chuột trái và kéo để dịch chuyển phả đồ. Lăn con lăn chuột để phóng to/thu nhỏ.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">2</span><div><strong>Xem nhánh khác:</strong> Bấm nút <span className="inline-block bg-[#8b5a2b] text-white px-1.5 py-0.5 rounded text-xs">Lấy làm tâm</span> trên thẻ bất kỳ để hiển thị cha mẹ, anh chị em, và con cái của người đó.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">3</span><div><strong>Xem chi tiết:</strong> Bấm vào thẻ hoặc nút <span className="inline-block bg-[#e8dcb8] text-[#5c4033] px-1.5 py-0.5 rounded text-xs">ⓘ</span> ở góc dưới để mở bảng thông tin chi tiết bên phải.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">4</span><div><strong>Tìm kiếm:</strong> Dùng ô tìm kiếm ở góc phải, gõ tên không dấu (ví dụ &quot;giang&quot;), hệ thống tự động zoom tới người đó.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">5</span><div><strong>Phép tính Xưng hô:</strong> Chọn 2 người (A và B), hệ thống sẽ cho biết A gọi B là gì kèm lý giải chi tiết.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">6</span><div><strong>Ẩn/Hiện công cụ:</strong> Bấm dấu <span className="inline-block bg-[#e8dcb8] text-[#5c4033] px-1.5 py-0.5 rounded text-xs">✕</span> trên bảng Tìm Kiếm để thu gọn bảng, nhấn nút &quot;Mở Công Cụ Thêm&quot; để mở lại.</div></div>
                                 </div>
                             </div>
-                            <div className="flex gap-4 items-start">
-                                <div className="w-10 h-10 rounded-full bg-[#f4efe6] flex items-center justify-center shrink-0 border border-[#d2b48c] text-[#8b5a2b] font-bold">2</div>
-                                <div>
-                                    <strong className="block text-[#5c4033] text-lg">Xem Nhánh Khác</strong>
-                                    Hệ thống chỉ chiếu nhánh gia đình của 1 người đang "Làm tâm điểm". Hãy bấm <span className="inline-block bg-[#8b5a2b] text-white px-2 py-0.5 rounded text-xs">Lấy làm tâm</span> trên một bức ảnh nếu muốn hiển thị cha mẹ và con cháu của người đó.
-                                </div>
-                            </div>
-                            <div className="flex gap-4 items-start">
-                                <div className="w-10 h-10 rounded-full bg-[#f4efe6] flex items-center justify-center shrink-0 border border-[#d2b48c] text-[#8b5a2b] font-bold">3</div>
-                                <div>
-                                    <strong className="block text-[#5c4033] text-lg">Xem chi tiết</strong>
-                                    Hãy <b>bấm thẳng vào mặt khung gỗ (Hoặc nút (i) ở góc dưới)</b> để mở bảng chi tiết ngày tháng năm sinh hoặc vợ/chồng bên cạnh.
+                            {/* Mobile-specific instructions */}
+                            <div className="sm:hidden">
+                                <h3 className="font-bold text-[#5c4033] text-lg mb-3 border-b border-[#e8dcb8] pb-2">📱 Trên Điện Thoại</h3>
+                                <div className="space-y-3">
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">1</span><div><strong>Di chuyển:</strong> Dùng ngón tay chạm và kéo để dịch phả đồ. Chụm/mở 2 ngón tay để phóng to/thu nhỏ.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">2</span><div><strong>Xem nhánh khác:</strong> Chạm nút <span className="inline-block bg-[#8b5a2b] text-white px-1.5 py-0.5 rounded text-xs">Lấy làm tâm</span> trên thẻ bất kỳ.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">3</span><div><strong>Xem chi tiết:</strong> Chạm vào thẻ hoặc nút ⓘ ở góc dưới thẻ để mở bảng thông tin.</div></div>
+                                    <div className="flex gap-3 items-start"><span className="shrink-0 w-7 h-7 rounded-full bg-[#8b5a2b] text-white flex items-center justify-center text-sm font-bold">4</span><div><strong>Thanh công cụ dưới:</strong> Bấm &quot;Tìm Người&quot; để tìm kiếm, &quot;Xưng Hô&quot; để tính quan hệ, &quot;HDSD&quot; để xem lại hướng dẫn này.</div></div>
                                 </div>
                             </div>
                         </div>
-                        <div className="p-4 border-t border-[#e8dcb8] bg-[#f4efe6] text-center">
+                        <div className="p-4 border-t border-[#e8dcb8] bg-[#f4efe6] flex flex-col gap-3">
+                            <label className="flex items-center gap-3 cursor-pointer text-sm text-[#5c4033]">
+                                <input type="checkbox" className="w-5 h-5 accent-[#8b5a2b] rounded" onChange={(e) => { if (e.target.checked) localStorage.setItem('phado_hide_help', 'true'); else localStorage.removeItem('phado_hide_help'); }} />
+                                Không hiện lại khi mở trang
+                            </label>
                             <button onClick={() => setShowHelp(false)} className="w-full bg-[#8b5a2b] hover:bg-[#5c4033] text-white font-bold text-lg py-3 rounded-xl shadow-md transition-colors">
-                                Đã Hiểu Rõ, Đóng Lại
+                                Đã Hiểu, Đóng Lại ✓
                             </button>
                         </div>
                     </div>

@@ -21,8 +21,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  /* Traditional serif font for family tree */
+  font-family: var(--font-noto-serif), var(--font-inter), 'Noto Serif', 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
