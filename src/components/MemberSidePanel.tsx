@@ -513,35 +513,50 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                 </div>
                             </div>
 
-                            {/* Contact info fields */}
-                            <div className="pt-3 border-t border-[#e8dcb8]/50">
-                                <span className="text-xs text-[#8b5a2b] font-bold uppercase tracking-wider block mb-3">Thông tin liên hệ</span>
-                                <div className="space-y-3">
-                                    <div>
-                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><Phone size={12} /> Số điện thoại</label>
-                                        <input type="tel" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0901234567"
-                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                            {/* Contact info fields with privacy toggles */}
+                            {(() => {
+                                const overlay = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('phado_overlay') || '{}') : {};
+                                const currentPub: string[] = member && overlay[member.id]?.publicFields ? JSON.parse(overlay[member.id].publicFields) : [];
+                                const toggleField = (field: string) => {
+                                    if (!member) return;
+                                    if (!overlay[member.id]) overlay[member.id] = {};
+                                    const arr = overlay[member.id].publicFields ? JSON.parse(overlay[member.id].publicFields) : [];
+                                    const idx = arr.indexOf(field);
+                                    if (idx >= 0) arr.splice(idx, 1); else arr.push(field);
+                                    overlay[member.id].publicFields = JSON.stringify(arr);
+                                    localStorage.setItem('phado_overlay', JSON.stringify(overlay));
+                                };
+                                const fields = [
+                                    { key: 'phone', label: 'Số điện thoại', icon: <Phone size={12} />, type: 'tel', value: editPhone, setter: setEditPhone, placeholder: 'VD: 0901234567' },
+                                    { key: 'facebook', label: 'Facebook', icon: <Globe size={12} />, type: 'text', value: editFacebook, setter: setEditFacebook, placeholder: 'Link hoặc tên tài khoản' },
+                                    { key: 'address', label: 'Địa chỉ', icon: <MapPin size={12} />, type: 'text', value: editAddress, setter: setEditAddress, placeholder: 'VD: 123 Nguyễn Trãi, Q1' },
+                                    { key: 'industry', label: 'Ngành nghề', icon: <Briefcase size={12} />, type: 'text', value: editIndustry, setter: setEditIndustry, placeholder: 'VD: Kỹ sư phần mềm' },
+                                ];
+                                return (
+                                    <div className="pt-3 border-t border-[#e8dcb8]/50">
+                                        <span className="text-xs text-[#8b5a2b] font-bold uppercase tracking-wider block mb-3">Thông tin liên hệ</span>
+                                        <div className="space-y-3">
+                                            {fields.map(f => (
+                                                <div key={f.key}>
+                                                    <div className="flex items-center justify-between mb-1.5">
+                                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1">{f.icon} {f.label}</label>
+                                                        <button type="button" onClick={() => { toggleField(f.key); window.dispatchEvent(new Event('storage')); }}
+                                                            className={`flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors ${currentPub.includes(f.key) ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-gray-100 text-gray-500 border border-gray-300'}`}
+                                                            title={currentPub.includes(f.key) ? 'Đang công khai — bấm để ẩn' : 'Đang ẩn — bấm để công khai'}>
+                                                            {currentPub.includes(f.key) ? <><Eye size={10} /> Công khai</> : <><EyeOff size={10} /> Ẩn</>}
+                                                        </button>
+                                                    </div>
+                                                    <input type={f.type} value={f.value} onChange={e => f.setter(e.target.value)} placeholder={f.placeholder}
+                                                        className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <p className="text-[10px] text-amber-700 mt-2 bg-amber-50 p-2 rounded border border-amber-200">
+                                            🔒 <strong>Bảo mật:</strong> Bấm 👁 / 🔒 bên cạnh để chọn công khai hoặc ẩn từng mục.
+                                        </p>
                                     </div>
-                                    <div>
-                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><Globe size={12} /> Facebook</label>
-                                        <input type="text" value={editFacebook} onChange={e => setEditFacebook(e.target.value)} placeholder="Link hoặc tên tài khoản"
-                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
-                                    </div>
-                                    <div>
-                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><MapPin size={12} /> Địa chỉ</label>
-                                        <input type="text" value={editAddress} onChange={e => setEditAddress(e.target.value)} placeholder="VD: 123 Nguyễn Trãi, Q1, TP.HCM"
-                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
-                                    </div>
-                                    <div>
-                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><Briefcase size={12} /> Ngành nghề</label>
-                                        <input type="text" value={editIndustry} onChange={e => setEditIndustry(e.target.value)} placeholder="VD: Kỹ sư phần mềm"
-                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
-                                    </div>
-                                </div>
-                                <p className="text-[10px] text-amber-700 mt-2 bg-amber-50 p-2 rounded border border-amber-200">
-                                    🔒 <strong>Bảo mật:</strong> Thông tin liên hệ mặc định ẩn. Admin sẽ quyết định cho phép công khai mục nào.
-                                </p>
-                            </div>
+                                );
+                            })()}
                         </div>
 
                         <div className="bg-white p-4 rounded-xl border border-[#e8dcb8] shadow-sm space-y-3">

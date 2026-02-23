@@ -34,6 +34,11 @@ body {
   }
 }
 
+/* Allow expand button to overflow outside React Flow node wrapper */
+.react-flow__node {
+  overflow: visible !important;
+}
+
 @media print {
 
   /* Hide everything except the tree canvas */

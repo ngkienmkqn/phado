@@ -5,7 +5,13 @@ import Link from 'next/link';
 import { Users, ShieldCheck, CheckCircle, XCircle, Lock, LogOut, Trash2, Eye, EyeOff, FileText } from 'lucide-react';
 import familyDataRaw from '@/data/family_data.json';
 
-const ADMIN_PASSWORD = '856226';
+const DEFAULT_PASSWORD = '856226';
+const getAdminPassword = () => {
+    if (typeof window !== 'undefined') {
+        return localStorage.getItem('phado_admin_pass') || DEFAULT_PASSWORD;
+    }
+    return DEFAULT_PASSWORD;
+};
 
 interface FieldChange {
     field: string;
@@ -41,6 +47,9 @@ export default function AdminDashboard() {
     const [newBlogTitle, setNewBlogTitle] = useState('');
     const [newBlogContent, setNewBlogContent] = useState('');
     const [newBlogAuthor, setNewBlogAuthor] = useState('');
+    const [showPassChange, setShowPassChange] = useState(false);
+    const [newPass, setNewPass] = useState('');
+    const [passMsg, setPassMsg] = useState('');
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -63,12 +72,12 @@ export default function AdminDashboard() {
     }, [isAuthenticated]);
 
     const handleLogin = () => {
-        if (password === ADMIN_PASSWORD) {
+        if (password === getAdminPassword()) {
             setIsAuthenticated(true);
             sessionStorage.setItem('phado_admin', 'true');
             setError('');
         } else {
-            setError('Sai m\u1EADt kh\u1EA9u. Vui l\u00F2ng th\u1EED l\u1EA1i.');
+            setError('Sai mật khẩu. Vui lòng thử lại.');
         }
     };
 
@@ -237,10 +246,30 @@ export default function AdminDashboard() {
                         <span>Quản Lý Blog</span>
                     </button>
                 </nav>
-                <div className="p-4 border-t border-white/10">
+                <div className="p-4 border-t border-white/10 space-y-2">
+                    <button onClick={() => setShowPassChange(!showPassChange)} className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-gold-400 transition-colors w-full">
+                        <Lock className="w-5 h-5" />
+                        <span>Đổi Mật Khẩu</span>
+                    </button>
+                    {showPassChange && (
+                        <div className="px-4 pb-2 space-y-2">
+                            <input type="password" value={newPass} onChange={e => setNewPass(e.target.value)} placeholder="Mật khẩu mới..."
+                                className="w-full bg-[#1a1a24] border border-white/10 rounded-lg py-2 px-3 text-white text-sm focus:outline-none focus:border-gold-500" />
+                            <button onClick={() => {
+                                if (newPass.length < 4) { setPassMsg('Mật khẩu phải ít nhất 4 ký tự'); return; }
+                                localStorage.setItem('phado_admin_pass', newPass);
+                                setPassMsg('✅ Đã đổi mật khẩu thành công!');
+                                setNewPass('');
+                                setTimeout(() => setPassMsg(''), 3000);
+                            }} className="w-full bg-gold-600 hover:bg-gold-500 text-black font-bold py-2 rounded-lg text-sm transition-colors">
+                                Lưu
+                            </button>
+                            {passMsg && <p className="text-xs text-gold-400">{passMsg}</p>}
+                        </div>
+                    )}
                     <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-gray-400 hover:text-red-400 transition-colors w-full">
                         <LogOut className="w-5 h-5" />
-                        <span>{`\u0110\u0103ng Xu\u1EA5t`}</span>
+                        <span>Đăng Xuất</span>
                     </button>
                 </div>
             </aside>
