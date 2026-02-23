@@ -358,37 +358,73 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     }, [members]);
 
     const layoutFlowRef = useRef<{ getNodes: () => Node[], setViewport: (vp: { x: number, y: number, zoom: number }) => void }>(null);
+    const savedTransformRef = useRef<string>('');
+
+    // Direct DOM manipulation for print — bypasses React Flow's async viewport updates
+    useEffect(() => {
+        const handleBeforePrint = () => {
+            const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
+            if (!viewport) return;
+
+            // Save original transform
+            savedTransformRef.current = viewport.style.transform;
+
+            // Get all node DOM elements to compute actual bounding box
+            const nodeEls = document.querySelectorAll('.react-flow__node');
+            if (nodeEls.length === 0) return;
+
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            nodeEls.forEach(el => {
+                const htmlEl = el as HTMLElement;
+                // React Flow nodes have transform: translate(Xpx, Ypx)
+                const match = htmlEl.style.transform.match(/translate\((-?[\d.]+)px,\s*(-?[\d.]+)px\)/);
+                if (match) {
+                    const nx = parseFloat(match[1]);
+                    const ny = parseFloat(match[2]);
+                    const nw = htmlEl.offsetWidth || 280;
+                    const nh = htmlEl.offsetHeight || 180;
+                    minX = Math.min(minX, nx);
+                    minY = Math.min(minY, ny);
+                    maxX = Math.max(maxX, nx + nw);
+                    maxY = Math.max(maxY, ny + nh);
+                }
+            });
+
+            if (minX === Infinity) return;
+
+            const treeW = maxX - minX;
+            const treeH = maxY - minY;
+            const treeCenterX = minX + treeW / 2;
+            const treeCenterY = minY + treeH / 2;
+
+            // Use window inner dimensions as the print container size reference
+            const containerW = window.innerWidth;
+            const containerH = window.innerHeight;
+            const scale = Math.min(containerW / (treeW + 80), containerH / (treeH + 80), 1);
+            const tx = containerW / 2 - treeCenterX * scale;
+            const ty = containerH / 2 - treeCenterY * scale;
+
+            viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+            viewport.style.transformOrigin = '0 0';
+        };
+
+        const handleAfterPrint = () => {
+            const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
+            if (viewport && savedTransformRef.current) {
+                viewport.style.transform = savedTransformRef.current;
+            }
+        };
+
+        window.addEventListener('beforeprint', handleBeforePrint);
+        window.addEventListener('afterprint', handleAfterPrint);
+        return () => {
+            window.removeEventListener('beforeprint', handleBeforePrint);
+            window.removeEventListener('afterprint', handleAfterPrint);
+        };
+    }, []);
 
     const handlePrint = useCallback(() => {
-        if (!layoutFlowRef.current) { window.print(); return; }
-        const allNodes = layoutFlowRef.current.getNodes();
-        if (allNodes.length === 0) { window.print(); return; }
-
-        // Calculate bounding box of all nodes
-        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-        for (const n of allNodes) {
-            const w = (n.width || 280);
-            const h = (n.height || 180);
-            if (n.position.x < minX) minX = n.position.x;
-            if (n.position.y < minY) minY = n.position.y;
-            if (n.position.x + w > maxX) maxX = n.position.x + w;
-            if (n.position.y + h > maxY) maxY = n.position.y + h;
-        }
-
-        const treeW = maxX - minX;
-        const treeH = maxY - minY;
-        // A4 landscape at 96dpi ≈ 1123 x 794, with margins
-        const pageW = 1050;
-        const pageH = 720;
-        const zoom = Math.min(pageW / treeW, pageH / treeH, 1) * 0.85;
-        const x = (pageW - treeW * zoom) / 2 - minX * zoom;
-        const y = (pageH - treeH * zoom) / 2 - minY * zoom + 20;
-
-        layoutFlowRef.current.setViewport({ x, y, zoom });
-
-        setTimeout(() => {
-            window.print();
-        }, 500);
+        window.print();
     }, []);
 
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
