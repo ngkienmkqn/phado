@@ -615,13 +615,6 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                     >
                         <Search size={22} /> Mở Công Cụ Thêm
                     </button>
-                    <button
-                        onClick={handlePrint}
-                        className="flex items-center justify-center bg-[#fdfbf7]/95 backdrop-blur-md border border-[#d2b48c] shadow-xl rounded-full p-3 hover:scale-105 transition-transform text-[#8b5a2b] font-bold gap-2"
-                        title="In phả đồ"
-                    >
-                        <Printer size={20} /> In Phả Đồ
-                    </button>
                 </div>
             )}
 
