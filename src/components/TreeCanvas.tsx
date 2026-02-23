@@ -678,7 +678,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         <div className="w-full h-full relative overflow-hidden bg-[#f4efe6]">
             {/* Desktop Side Navigation / Widgets Toggle Button */}
             {!isDesktopToolsOpen && (
-                <div className="hidden sm:flex absolute top-24 right-6 z-40 flex-col gap-3 print:hidden">
+                <div data-print-hide className="hidden sm:flex absolute top-24 right-6 z-40 flex-col gap-3 print:hidden">
                     <button
                         onClick={() => setIsDesktopToolsOpen(true)}
                         className="flex items-center justify-center bg-[#fdfbf7]/95 backdrop-blur-md border border-[#d2b48c] shadow-xl rounded-full p-4 hover:scale-105 transition-transform text-[#8b5a2b] font-bold gap-2"
@@ -689,7 +689,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             )}
 
             {/* Desktop Side Navigation / Widgets */}
-            <div className={`hidden sm:flex absolute top-24 right-6 bottom-6 flex-col gap-4 z-40 w-[340px] pointer-events-none transition-all duration-300 ${isDesktopToolsOpen ? 'translate-x-0 opacity-100' : 'translate-x-[120%] opacity-0'}`}>
+            <div data-print-hide className={`hidden sm:flex absolute top-24 right-6 bottom-6 flex-col gap-4 z-40 w-[340px] pointer-events-none transition-all duration-300 ${isDesktopToolsOpen ? 'translate-x-0 opacity-100' : 'translate-x-[120%] opacity-0'}`}>
                 {/* Desktop Search widget */}
                 <div className="bg-[#fdfbf7]/95 backdrop-blur-md border border-[#d2b48c] shadow-xl rounded-2xl p-4 w-full pointer-events-auto shrink-0">
                     <div className="flex justify-between items-center mb-3">
@@ -743,7 +743,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             </div>
 
             {/* Desktop Help + Print Buttons */}
-            <div className="hidden sm:flex absolute bottom-6 right-[380px] z-40 gap-2 print:hidden">
+            <div data-print-hide className="hidden sm:flex absolute bottom-6 right-[380px] z-40 gap-2 print:hidden">
                 <button onClick={handlePrint} className="flex items-center gap-2 bg-[#fdfbf7] hover:bg-[#e8dcb8] text-[#8b5a2b] border border-[#d2b48c] px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105">
                     <Printer size={18} /> In Phả Đồ
                 </button>
@@ -753,7 +753,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             </div>
 
             {/* Mobile Bottom Navigation Bar */}
-            <div className="fixed sm:hidden bottom-0 left-0 right-0 h-16 bg-[#fdfbf7] border-t-2 border-[#d2b48c] flex justify-around items-center z-50 shadow-[0_-10px_30px_rgba(92,64,51,0.15)] pb-safe">
+            <div data-print-hide className="fixed sm:hidden bottom-0 left-0 right-0 h-16 bg-[#fdfbf7] border-t-2 border-[#d2b48c] flex justify-around items-center z-50 shadow-[0_-10px_30px_rgba(92,64,51,0.15)] pb-safe">
                 <button onClick={() => setActiveMobileTab('search')} className={`flex flex-col items-center justify-center w-full h-full transition-colors ${activeMobileTab === 'search' ? 'text-[#5c4033] bg-[#e8dcb8]/40' : 'text-[#8b5a2b] hover:bg-[#e8dcb8]/20'}`}>
                     <Search size={22} className={activeMobileTab === 'search' ? 'scale-110 transition-transform' : ''} />
                     <span className="text-[11px] mt-1 font-bold">Tìm Người</span>
@@ -772,7 +772,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
             {/* Mobile Full Screen modals */}
             {activeMobileTab && (
-                <div className="fixed inset-0 z-50 sm:hidden bg-[#fdfbf7] flex flex-col h-[100dvh] animate-in slide-in-from-bottom-full">
+                <div data-print-hide className="fixed inset-0 z-50 sm:hidden bg-[#fdfbf7] flex flex-col h-[100dvh] animate-in slide-in-from-bottom-full">
 
                     <div className="flex justify-between items-center px-5 shrink-0">
                         <h2 className="text-[#5c4033] font-serif font-bold text-xl items-center gap-2 flex">
@@ -843,7 +843,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
             {/* Help / Instruction Modal */}
             {showHelp && (
-                <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+                <div data-print-hide className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-[#3e2723]/60 backdrop-blur-sm" onClick={() => setShowHelp(false)}></div>
                     <div className="bg-[#fdfbf7] w-full max-w-lg rounded-2xl shadow-2xl relative flex flex-col overflow-hidden animate-in zoom-in-95 border-2 border-[#d2b48c]">
                         <div className="bg-[#5c4033] text-[#fdfbf7] p-4 text-center relative">

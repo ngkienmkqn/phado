@@ -75,12 +75,8 @@ body {
     display: none !important;
   }
 
-  /* Hide all floating panels, modals, search bars */
-  div[class*="backdrop-blur"],
-  div[class*="fixed"],
-  div[class*="z-40"],
-  div[class*="z-50"],
-  div[class*="z-100"] {
+  /* Hide floating overlay panels (NOT tree nodes!) */
+  [data-print-hide] {
     display: none !important;
   }
 
