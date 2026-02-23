@@ -397,12 +397,14 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             const treeCenterX = minX + treeW / 2;
             const treeCenterY = minY + treeH / 2;
 
-            // Use window inner dimensions as the print container size reference
-            const containerW = window.innerWidth;
-            const containerH = window.innerHeight;
-            const scale = Math.min(containerW / (treeW + 80), containerH / (treeH + 80), 1);
-            const tx = containerW / 2 - treeCenterX * scale;
-            const ty = containerH / 2 - treeCenterY * scale;
+            // Use the .react-flow container dimensions, then shrink for print margins
+            const rfContainer = document.querySelector('.react-flow') as HTMLElement;
+            const containerW = (rfContainer?.offsetWidth || window.innerWidth) * 0.85;
+            const containerH = (rfContainer?.offsetHeight || window.innerHeight) * 0.85;
+            const padding = 200;
+            const scale = Math.min(containerW / (treeW + padding), containerH / (treeH + padding), 0.7);
+            const tx = containerW / (2 * 0.85) - treeCenterX * scale;
+            const ty = 40 + (containerH / (2 * 0.85) - treeCenterY * scale) * 0.5;
 
             viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
             viewport.style.transformOrigin = '0 0';
