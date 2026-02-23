@@ -362,7 +362,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const savedContainerStyleRef = useRef<{ width: string, height: string }>({ width: '', height: '' });
     const savedWrapperStyleRef = useRef<{ width: string, height: string }>({ width: '', height: '' });
 
-    // Direct DOM manipulation for print — let BROWSER handle fit-to-page scaling
+    // Direct DOM manipulation for print — compute scale to fit A4 landscape
     useEffect(() => {
         const handleBeforePrint = () => {
             const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
@@ -399,17 +399,28 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
             const treeW = maxX - minX;
             const treeH = maxY - minY;
+            const treeCX = minX + treeW / 2;
+            const treeCY = minY + treeH / 2;
 
-            // Resize BOTH wrapper and container to exact tree size
+            // A4 landscape printable area: (297-20)mm × (210-20)mm at 96dpi
+            const pageW = 1047;
+            const pageH = 718;
+
+            // Scale to fit tree within one page
+            const scale = Math.min(pageW / treeW, pageH / treeH);
+            const tx = pageW / 2 - treeCX * scale;
+            const ty = pageH / 2 - treeCY * scale;
+
+            // Set containers to exact page size
             if (wrapper) {
-                wrapper.style.width = `${treeW}px`;
-                wrapper.style.height = `${treeH}px`;
+                wrapper.style.width = `${pageW}px`;
+                wrapper.style.height = `${pageH}px`;
             }
-            rfContainer.style.width = `${treeW}px`;
-            rfContainer.style.height = `${treeH}px`;
+            rfContainer.style.width = `${pageW}px`;
+            rfContainer.style.height = `${pageH}px`;
 
-            // Move viewport so tree starts at (0, 0) — browser scales to fit page
-            viewport.style.transform = `translate(${-minX}px, ${-minY}px) scale(1)`;
+            // Apply computed transform — tree fits and centers within page
+            viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
             viewport.style.transformOrigin = '0 0';
         };
 
