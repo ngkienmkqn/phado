@@ -71,7 +71,7 @@ const CustomPersonNode = memo(({ data }: { data: Record<string, unknown> }) => {
     return (
         <div
             onClick={() => typedData.onViewDetails?.(typedData.id)}
-            className={`relative flex flex-col w-[280px] min-h-[160px] h-auto rounded-2xl border-[3px] transition-all cursor-pointer shadow-xl overflow-hidden group
+            className={`relative flex flex-col w-[280px] min-h-[160px] h-auto rounded-2xl border-[3px] transition-all cursor-pointer shadow-xl group
             ${isFocused ? 'border-[#5c4033] bg-[#5c4033] scale-105 shadow-2xl shadow-[#5c4033]/40 z-50' :
                     'border-[#8b5a2b] bg-[#8b5a2b] hover:bg-[#704218]'}`}
         >
@@ -522,7 +522,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             if (found !== -1) { lcaIndexA = i; lcaIndexB = found; break; }
         }
 
-        if (lcaIndexA === -1) return "Hai ng\u01B0\u1EDDi kh\u00F4ng c\u00F3 chung T\u1ED5 Ti\u00EAn trong d\u1EEF li\u1EC7u";
+        if (lcaIndexA === -1) return "Hai người không có chung Tổ Tiên trong dữ liệu";
 
         const personA = members.find(m => m.id === calcA) || pathA[0];
         const personB = members.find(m => m.id === calcB) || pathB[0];
@@ -531,18 +531,18 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const genA = pathA[0].generation;
         const genB = pathB[0].generation;
         const diff = genA - genB;
-        const spouseNote = (isASpouse || isBSpouse) ? ` (T\u00EDnh theo d\u00F2ng h\u1ECD c\u1EE7a ${isASpouse ? `ch\u1ED3ng/v\u1EE3 c\u1EE7a ${personA.name}` : `ch\u1ED3ng/v\u1EE3 c\u1EE7a ${personB.name}`})` : '';
+        const spouseNote = (isASpouse || isBSpouse) ? ` (Tính theo dòng họ của ${isASpouse ? `chồng/vợ của ${personA.name}` : `chồng/vợ của ${personB.name}`})` : '';
 
         let resultTitle = "";
         let resultReason = "";
 
         if (diff === 0) {
             const isDirect = (distA === 1 && distB === 1);
-            resultTitle = `A g\u1ECDi B l\u00E0 ANH/CH\u1ECA/EM`;
+            resultTitle = `A gọi B là ANH/CHỊ/EM`;
             if (isDirect) {
-                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng do m\u1ED9t cha m\u1EB9 sinh ra, \u0111\u1EC1u thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${personA.generation}. V\u00EC l\u00E0 anh ch\u1ECB em ru\u1ED9t, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
+                resultReason = `${personA.name} và ${personB.name} cùng do một cha mẹ sinh ra, đều thuộc Đời thứ ${personA.generation}. Vì là anh chị em ruột, ai lớn tuổi hơn làm Anh/Chị.`;
             } else {
-                resultReason = `${personA.name} v\u00E0 ${personB.name} c\u00F9ng thu\u1ED9c \u0110\u1EDDi th\u1EE9 ${personA.generation}, c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || 'kh\u00F4ng r\u00F5'}. Hai ng\u01B0\u1EDDi l\u00E0 anh ch\u1ECB em h\u1ECD, ai l\u1EDBn tu\u1ED5i h\u01A1n l\u00E0m Anh/Ch\u1ECB.`;
+                resultReason = `${personA.name} và ${personB.name} cùng thuộc Đời thứ ${personA.generation}, có chung tổ tiên là ${pathA[lcaIndexA]?.name || 'không rõ'}. Hai người là anh chị em họ, ai lớn tuổi hơn làm Anh/Chị.`;
             }
         } else if (diff > 0) {
             let term = "";
@@ -560,11 +560,11 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 else if (diff === 4) term = "KỴ (Sơ)";
                 else term = `TIÊN TỔ (cách ${diff} đời)`;
             }
-            resultTitle = `A g\u1ECDi B l\u00E0 ${term}`;
+            resultTitle = `A gọi B là ${term}`;
             if (isDirect) {
-                resultReason = `${personB.name} (\u0110\u1EDDi ${personB.generation}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personA.name} (\u0110\u1EDDi ${personA.generation}). ${diff === 1 ? `${personB.name} l\u00E0 cha/m\u1EB9 \u0111\u1EBB sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} l\u00E0 \u00F4ng/b\u00E0 \u0111\u1EBB sinh ra cha/m\u1EB9 c\u1EE7a ${personA.name}.` : `${personB.name} c\u00E1ch ${personA.name} ${diff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} ph\u1EA3i g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personB.name} (Đời ${personB.generation}) nằm trên dòng huyết thống trực tiếp của ${personA.name} (Đời ${personA.generation}). ${diff === 1 ? `${personB.name} là cha/mẹ đẻ sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} là ông/bà đẻ sinh ra cha/mẹ của ${personA.name}.` : `${personB.name} cách ${personA.name} ${diff} đời trực hệ.`} Vì vậy ${personA.name} phải gọi ${personB.name} là ${term}.`;
             } else {
-                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${personB.generation}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personB.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personA.name} ${diff} \u0111\u1EDDi. Theo ph\u1EA3 h\u1EC7, ${personA.name} ph\u1EA3i k\u00EDnh tr\u1ECDng g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personA.name} (Đời ${personA.generation}) và ${personB.name} (Đời ${personB.generation}) có chung tổ tiên là ${pathA[lcaIndexA]?.name || '(không rõ)'}. ${personB.name} thuộc đời bề trên, cao hơn ${personA.name} ${diff} đời. Theo phả hệ, ${personA.name} phải kính trọng gọi ${personB.name} là ${term}.`;
             }
         } else {
             const absDiff = Math.abs(diff);
@@ -585,11 +585,11 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 else if (absDiff === 5) term = "CHÍT";
                 else term = `HẬU DUỆ (cách ${absDiff} đời)`;
             }
-            resultTitle = `A g\u1ECDi B l\u00E0 ${term}`;
+            resultTitle = `A gọi B là ${term}`;
             if (isDirect) {
-                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) n\u1EB1m tr\u00EAn d\u00F2ng huy\u1EBFt th\u1ED1ng tr\u1EF1c ti\u1EBFp c\u1EE7a ${personB.name} (\u0110\u1EDDi ${personB.generation}). ${absDiff === 1 ? `${personA.name} \u0111\u00E3 sinh ra ${personB.name}, n\u00EAn ${personB.name} l\u00E0 con c\u1EE7a ${personA.name}.` : absDiff === 2 ? `${personA.name} l\u00E0 \u00F4ng/b\u00E0, \u0111\u00E3 sinh ra cha/m\u1EB9 c\u1EE7a ${personB.name}.` : `${personA.name} c\u00E1ch ${personB.name} ${absDiff} \u0111\u1EDDi tr\u1EF1c h\u1EC7.`} V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personA.name} (Đời ${personA.generation}) nằm trên dòng huyết thống trực tiếp của ${personB.name} (Đời ${personB.generation}). ${absDiff === 1 ? `${personA.name} đã sinh ra ${personB.name}, nên ${personB.name} là con của ${personA.name}.` : absDiff === 2 ? `${personA.name} là ông/bà, đã sinh ra cha/mẹ của ${personB.name}.` : `${personA.name} cách ${personB.name} ${absDiff} đời trực hệ.`} Vì vậy ${personA.name} gọi ${personB.name} là ${term}.`;
             } else {
-                resultReason = `${personA.name} (\u0110\u1EDDi ${personA.generation}) v\u00E0 ${personB.name} (\u0110\u1EDDi ${personB.generation}) c\u00F3 chung t\u1ED5 ti\u00EAn l\u00E0 ${pathA[lcaIndexA]?.name || '(kh\u00F4ng r\u00F5)'}. ${personA.name} thu\u1ED9c \u0111\u1EDDi b\u1EC1 tr\u00EAn, cao h\u01A1n ${personB.name} ${absDiff} \u0111\u1EDDi. V\u00EC v\u1EADy ${personA.name} g\u1ECDi ${personB.name} l\u00E0 ${term}.`;
+                resultReason = `${personA.name} (Đời ${personA.generation}) và ${personB.name} (Đời ${personB.generation}) có chung tổ tiên là ${pathA[lcaIndexA]?.name || '(không rõ)'}. ${personA.name} thuộc đời bề trên, cao hơn ${personB.name} ${absDiff} đời. Vì vậy ${personA.name} gọi ${personB.name} là ${term}.`;
             }
         }
 
@@ -597,7 +597,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             <div className="flex flex-col items-center gap-2.5">
                 <span className="text-[#5c4033] text-[17px] font-bold uppercase block">{resultTitle}</span>
                 <div className="text-[13px] font-normal text-[#5c4033]/90 bg-[#e8dcb8]/40 p-3.5 rounded-xl text-left border border-[#d2b48c] shadow-inner leading-relaxed">
-                    <span className="text-[#8b5a2b] font-bold block mb-1">{'\uD83E\uDDD0'} L\u00FD gi\u1EA3i c\u1EB7n k\u1EBD:</span>
+                    <span className="text-[#8b5a2b] font-bold block mb-1">🧐 Lý giải cặn kẽ:</span>
                     {resultReason}{spouseNote}
                 </div>
             </div>
