@@ -40,8 +40,6 @@ body {
 }
 
 @media print {
-
-  /* Hide everything except the tree canvas */
   body {
     background: white !important;
   }
@@ -49,24 +47,22 @@ body {
   header,
   nav,
   footer,
-  .print\\:hidden,
-  .react-flow__controls,
-  .react-flow__minimap,
-  .react-flow__background,
-  .react-flow__attribution,
-  button,
-  a[href="/"],
-  a[href="/admin"] {
+  button {
     display: none !important;
   }
 
-  /* Make the tree fill the page */
+  .react-flow__controls,
+  .react-flow__minimap,
+  .react-flow__background,
+  .react-flow__attribution {
+    display: none !important;
+  }
+
   .react-flow {
     height: 100vh !important;
     width: 100vw !important;
   }
 
-  /* Show node cards cleanly */
   .react-flow__node {
     break-inside: avoid;
   }
