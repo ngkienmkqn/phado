@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Users, ShieldCheck, CheckCircle, XCircle, Lock, LogOut, Trash2 } from 'lucide-react';
+import { Users, ShieldCheck, CheckCircle, XCircle, Lock, LogOut, Trash2, Eye, EyeOff, FileText } from 'lucide-react';
 import familyDataRaw from '@/data/family_data.json';
 
-const ADMIN_PASSWORD = 'phado2025';
+const ADMIN_PASSWORD = '856226';
 
 interface FieldChange {
     field: string;
@@ -35,8 +35,12 @@ export default function AdminDashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [activeTab, setActiveTab] = useState<'pending' | 'members'>('pending');
+    const [activeTab, setActiveTab] = useState<'pending' | 'members' | 'blog'>('pending');
     const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
+    const [blogPosts, setBlogPosts] = useState<any[]>([]);
+    const [newBlogTitle, setNewBlogTitle] = useState('');
+    const [newBlogContent, setNewBlogContent] = useState('');
+    const [newBlogAuthor, setNewBlogAuthor] = useState('');
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -50,6 +54,10 @@ export default function AdminDashboard() {
             const stored = localStorage.getItem('phado_requests');
             if (stored) {
                 try { setPendingRequests(JSON.parse(stored)); } catch { setPendingRequests([]); }
+            }
+            const blogStored = localStorage.getItem('phado_blog');
+            if (blogStored) {
+                try { setBlogPosts(JSON.parse(blogStored)); } catch { setBlogPosts([]); }
             }
         }
     }, [isAuthenticated]);
@@ -130,6 +138,39 @@ export default function AdminDashboard() {
         localStorage.setItem('phado_requests', '[]');
     };
 
+    // Privacy toggle
+    const togglePublicField = (memberId: string, field: string) => {
+        const overlay: Record<string, any> = JSON.parse(localStorage.getItem('phado_overlay') || '{}');
+        if (!overlay[memberId]) overlay[memberId] = {};
+        const current: string[] = overlay[memberId].publicFields ? JSON.parse(overlay[memberId].publicFields) : [];
+        const idx = current.indexOf(field);
+        if (idx >= 0) current.splice(idx, 1); else current.push(field);
+        overlay[memberId].publicFields = JSON.stringify(current);
+        localStorage.setItem('phado_overlay', JSON.stringify(overlay));
+    };
+
+    // Blog CRUD
+    const handleAddBlog = () => {
+        if (!newBlogTitle.trim() || !newBlogContent.trim()) return;
+        const post = {
+            id: Date.now(),
+            title: newBlogTitle.trim(),
+            content: newBlogContent.trim(),
+            author: newBlogAuthor.trim() || 'Admin',
+            date: new Date().toLocaleDateString('vi-VN'),
+        };
+        const updated = [post, ...blogPosts];
+        setBlogPosts(updated);
+        localStorage.setItem('phado_blog', JSON.stringify(updated));
+        setNewBlogTitle(''); setNewBlogContent(''); setNewBlogAuthor('');
+    };
+
+    const handleDeleteBlog = (id: number) => {
+        const updated = blogPosts.filter(p => p.id !== id);
+        setBlogPosts(updated);
+        localStorage.setItem('phado_blog', JSON.stringify(updated));
+    };
+
     // Login Screen
     if (!isAuthenticated) {
         return (
@@ -188,7 +229,12 @@ export default function AdminDashboard() {
                     <button onClick={() => setActiveTab('members')}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === 'members' ? 'bg-gold-500/20 text-gold-400' : 'hover:bg-white/5 text-gray-400'}`}>
                         <Users className="w-5 h-5" />
-                        <span>{`Danh S\u00E1ch Th\u00E0nh Vi\u00EAn`}</span>
+                        <span>Danh Sách Thành Viên</span>
+                    </button>
+                    <button onClick={() => setActiveTab('blog')}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === 'blog' ? 'bg-gold-500/20 text-gold-400' : 'hover:bg-white/5 text-gray-400'}`}>
+                        <FileText className="w-5 h-5" />
+                        <span>Quản Lý Blog</span>
                     </button>
                 </nav>
                 <div className="p-4 border-t border-white/10">
@@ -362,32 +408,92 @@ export default function AdminDashboard() {
                     {activeTab === 'members' && (
                         <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
                             <div className="p-4 border-b border-white/10 bg-[#121218] flex justify-between items-center">
-                                <h3 className="font-semibold text-lg">{`T\u1ED5ng c\u1ED9ng ${familyDataRaw.totalMembers} th\u00E0nh vi\u00EAn`}</h3>
+                                <h3 className="font-semibold text-lg">Tổng cộng {familyDataRaw.totalMembers} thành viên</h3>
                             </div>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left border-collapse">
                                     <thead>
                                         <tr className="bg-[#1a1a24] text-gray-400 text-sm uppercase tracking-wider">
                                             <th className="p-4 font-semibold border-b border-white/10">ID</th>
-                                            <th className="p-4 font-semibold border-b border-white/10">{`H\u1ECD v\u00E0 T\u00EAn`}</th>
-                                            <th className="p-4 font-semibold border-b border-white/10">{`\u0110\u1EDDi`}</th>
-                                            <th className="p-4 font-semibold border-b border-white/10">{`V\u1EE3/Ch\u1ED3ng`}</th>
+                                            <th className="p-4 font-semibold border-b border-white/10">Họ và Tên</th>
+                                            <th className="p-4 font-semibold border-b border-white/10">Đời</th>
+                                            <th className="p-4 font-semibold border-b border-white/10">Vợ/Chồng</th>
+                                            <th className="p-4 font-semibold border-b border-white/10">Công khai</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-white/5">
-                                        {familyDataRaw.members.slice(0, 30).map(m => (
-                                            <tr key={m.id} className="hover:bg-white/5 transition-colors">
-                                                <td className="p-4 text-sm text-gray-500">{m.id}</td>
-                                                <td className="p-4 font-medium text-white">{m.name}</td>
-                                                <td className="p-4 text-gold-400">{`\u0110\u1EDDi ${m.generation}`}</td>
-                                                <td className="p-4 text-gray-400">{m.spouse || '-'}</td>
-                                            </tr>
-                                        ))}
+                                        {familyDataRaw.members.slice(0, 30).map(m => {
+                                            const overlay: Record<string, any> = JSON.parse(localStorage.getItem('phado_overlay') || '{}');
+                                            const pub: string[] = overlay[m.id]?.publicFields ? JSON.parse(overlay[m.id].publicFields) : [];
+                                            const fields = ['phone', 'facebook', 'address', 'industry'];
+                                            const labels: Record<string, string> = { phone: 'SĐT', facebook: 'FB', address: 'Đ/c', industry: 'Nghề' };
+                                            return (
+                                                <tr key={m.id} className="hover:bg-white/5 transition-colors">
+                                                    <td className="p-4 text-sm text-gray-500">{m.id}</td>
+                                                    <td className="p-4 font-medium text-white">{m.name}</td>
+                                                    <td className="p-4 text-gold-400">Đời {m.generation}</td>
+                                                    <td className="p-4 text-gray-400">{m.spouse || '-'}</td>
+                                                    <td className="p-4">
+                                                        <div className="flex gap-1 flex-wrap">
+                                                            {fields.map(f => (
+                                                                <button key={f} onClick={() => { togglePublicField(m.id, f); window.location.reload(); }}
+                                                                    className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors ${pub.includes(f) ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-white/5 text-gray-500 border border-white/10'}`}>
+                                                                    {pub.includes(f) ? '👁' : '🔒'} {labels[f]}
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
                             <div className="p-4 text-center text-sm text-gray-500 border-t border-white/10">
-                                {`Hi\u1EC3n th\u1ECB 30 / ${familyDataRaw.totalMembers} th\u00E0nh vi\u00EAn \u0111\u1EA7u ti\u00EAn.`}
+                                Hiển thị 30 / {familyDataRaw.totalMembers} thành viên đầu tiên.
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'blog' && (
+                        <div className="space-y-6">
+                            {/* New Blog Post Form */}
+                            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                                <h3 className="text-lg font-bold text-gold-400">📝 Viết bài mới</h3>
+                                <input type="text" value={newBlogTitle} onChange={e => setNewBlogTitle(e.target.value)} placeholder="Tiêu đề bài viết..."
+                                    className="w-full bg-[#1a1a24] border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gold-500" />
+                                <textarea value={newBlogContent} onChange={e => setNewBlogContent(e.target.value)} rows={5} placeholder="Nội dung bài viết..."
+                                    className="w-full bg-[#1a1a24] border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gold-500 resize-none" />
+                                <input type="text" value={newBlogAuthor} onChange={e => setNewBlogAuthor(e.target.value)} placeholder="Tác giả (mặc định: Admin)"
+                                    className="w-full bg-[#1a1a24] border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gold-500" />
+                                <button onClick={handleAddBlog} className="bg-gold-600 hover:bg-gold-500 text-black font-bold py-3 px-8 rounded-xl transition-colors">
+                                    Đăng bài
+                                </button>
+                            </div>
+
+                            {/* Existing Posts */}
+                            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+                                <div className="p-4 border-b border-white/10 bg-[#121218]">
+                                    <h3 className="font-semibold text-lg">Bài viết đã đăng ({blogPosts.length})</h3>
+                                </div>
+                                {blogPosts.length === 0 ? (
+                                    <div className="p-8 text-center text-gray-500">Chưa có bài viết nào.</div>
+                                ) : (
+                                    <div className="divide-y divide-white/5">
+                                        {blogPosts.map(post => (
+                                            <div key={post.id} className="p-4 flex justify-between items-start gap-4">
+                                                <div className="flex-1">
+                                                    <h4 className="text-white font-bold">{post.title}</h4>
+                                                    <p className="text-sm text-gray-400 mt-1 line-clamp-2">{post.content}</p>
+                                                    <span className="text-xs text-gray-500 mt-2 block">{post.date} · {post.author}</span>
+                                                </div>
+                                                <button onClick={() => handleDeleteBlog(post.id)} className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors shrink-0">
+                                                    <Trash2 size={18} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

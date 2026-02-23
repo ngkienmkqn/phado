@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Users, Search, TreeDeciduous, BookOpen, Calendar, Settings } from "lucide-react";
 import familyDataRaw from '@/data/family_data.json';
+import BlogSection from '@/components/BlogSection';
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
@@ -90,6 +91,8 @@ export default function Home() {
         {/* Decorative corner element */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
       </header>
+
+      <BlogSection />
 
       {/* Inject custom CSS directly for the drift/spin animations */}
       <style dangerouslySetInnerHTML={{

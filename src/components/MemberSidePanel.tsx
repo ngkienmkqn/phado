@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { X, ChevronRight, User, CalendarDays, Edit3, Trash2, Plus, ArrowLeft, Search } from 'lucide-react';
+import { X, ChevronRight, User, CalendarDays, Edit3, Trash2, Plus, ArrowLeft, Search, Phone, MapPin, Briefcase, Globe, Camera, Eye, EyeOff } from 'lucide-react';
 
 const removeDiacritics = (str: string) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
@@ -60,6 +60,10 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     const [editNote, setEditNote] = useState('');
     const [editBy, setEditBy] = useState('');
     const [editPhone, setEditPhone] = useState('');
+    const [editFacebook, setEditFacebook] = useState('');
+    const [editAddress, setEditAddress] = useState('');
+    const [editIndustry, setEditIndustry] = useState('');
+    const [editAvatarUrl, setEditAvatarUrl] = useState('');
 
     // Advanced Spouse States
     // In our legacy data, spouse is single string. We parse it into an array for editing.
@@ -84,7 +88,11 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             setEditGeneration(String(member.generation || ''));
             setEditNote('');
             setEditBy('');
-            setEditPhone('');
+            setEditPhone((member as any).phone || '');
+            setEditFacebook((member as any).facebook || '');
+            setEditAddress((member as any).address || '');
+            setEditIndustry((member as any).industry || '');
+            setEditAvatarUrl((member as any).avatarUrl || '');
 
             // Parse spouses (split by comma or pipe if they exist)
             if (member.spouse) {
@@ -135,6 +143,11 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         if (editStatus !== (member.status || '')) changes.push({ field: 'status', label: 'Trạng thái', oldValue: member.status || '', newValue: editStatus });
         if (editGender !== (member.gender || '')) changes.push({ field: 'gender', label: 'Giới tính', oldValue: member.gender || '', newValue: editGender });
         if (editGeneration !== String(member.generation || '')) changes.push({ field: 'generation', label: 'Đời thứ', oldValue: String(member.generation || ''), newValue: editGeneration });
+        if (editPhone !== ((member as any).phone || '')) changes.push({ field: 'phone', label: 'Số điện thoại', oldValue: (member as any).phone || '', newValue: editPhone });
+        if (editFacebook !== ((member as any).facebook || '')) changes.push({ field: 'facebook', label: 'Facebook', oldValue: (member as any).facebook || '', newValue: editFacebook });
+        if (editAddress !== ((member as any).address || '')) changes.push({ field: 'address', label: 'Địa chỉ', oldValue: (member as any).address || '', newValue: editAddress });
+        if (editIndustry !== ((member as any).industry || '')) changes.push({ field: 'industry', label: 'Ngành nghề', oldValue: (member as any).industry || '', newValue: editIndustry });
+        if (editAvatarUrl !== ((member as any).avatarUrl || '')) changes.push({ field: 'avatarUrl', label: 'Ảnh đại diện', oldValue: (member as any).avatarUrl ? '(có ảnh)' : '(chưa có)', newValue: editAvatarUrl ? '(ảnh mới)' : '(xóa ảnh)' });
 
         const currentSpouseStr = spouses.join(' | ');
         const oldSpouseStr = member.spouse || '';
@@ -282,9 +295,13 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                 {mode === 'view' && (
                     <div className="animate-fade-in">
                         <div className="flex flex-col items-center mb-6">
-                            <div className="w-20 h-20 rounded-full bg-[#f4efe6] border-2 border-[#8b5a2b]/30 flex items-center justify-center mb-3 shadow-md text-[#8b5a2b]">
-                                <User size={36} className="text-[#8b5a2b]" />
-                            </div>
+                            {(member as any).avatarUrl ? (
+                                <img src={(member as any).avatarUrl} alt={member.name} className="w-20 h-20 rounded-full object-cover border-2 border-[#8b5a2b]/30 mb-3 shadow-md" />
+                            ) : (
+                                <div className="w-20 h-20 rounded-full bg-[#f4efe6] border-2 border-[#8b5a2b]/30 flex items-center justify-center mb-3 shadow-md text-[#8b5a2b]">
+                                    <User size={36} className="text-[#8b5a2b]" />
+                                </div>
+                            )}
                             <h3 className="text-xl font-serif font-bold text-[#3e2723] text-center mb-1">{member.name}</h3>
                             <span className="text-[#8b5a2b] text-xs font-bold uppercase tracking-wider">Đời thứ {member.generation} • {member.gender === 'male' ? 'Nam' : 'Nữ'}</span>
                             {member.status && <span className="mt-2 text-xs px-3 py-1 rounded-sm bg-[#e8dcb8]/60 text-[#5c4033] border border-[#d2b48c] font-medium">{member.status}</span>}
@@ -297,6 +314,47 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                 <span className="text-sm font-medium text-[#5c4033]">Năm sinh:</span>
                                 <span className="text-sm text-[#3e2723] font-bold ml-auto">{member.birthSolar || 'Không rõ'}</span>
                             </div>
+
+                            {/* Contact Info - only show if public or always show labels */}
+                            {(() => {
+                                const pub = ((member as any).publicFields as string[]) || [];
+                                const phone = (member as any).phone as string;
+                                const fb = (member as any).facebook as string;
+                                const addr = (member as any).address as string;
+                                const ind = (member as any).industry as string;
+                                return (
+                                    <>
+                                        {phone && pub.includes('phone') && (
+                                            <div className="flex items-center gap-3">
+                                                <Phone size={18} className="text-green-600 shrink-0" />
+                                                <span className="text-sm font-medium text-[#5c4033]">SĐT:</span>
+                                                <a href={`tel:${phone}`} className="text-sm text-green-700 font-bold ml-auto hover:underline">{phone}</a>
+                                            </div>
+                                        )}
+                                        {fb && pub.includes('facebook') && (
+                                            <div className="flex items-center gap-3">
+                                                <Globe size={18} className="text-blue-500 shrink-0" />
+                                                <span className="text-sm font-medium text-[#5c4033]">Facebook:</span>
+                                                <a href={fb.startsWith('http') ? fb : `https://facebook.com/${fb}`} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 font-bold ml-auto hover:underline truncate max-w-[150px]">Xem trang</a>
+                                            </div>
+                                        )}
+                                        {addr && pub.includes('address') && (
+                                            <div className="flex items-center gap-3">
+                                                <MapPin size={18} className="text-red-400 shrink-0" />
+                                                <span className="text-sm font-medium text-[#5c4033]">Địa chỉ:</span>
+                                                <span className="text-sm text-[#3e2723] font-bold ml-auto text-right max-w-[180px]">{addr}</span>
+                                            </div>
+                                        )}
+                                        {ind && pub.includes('industry') && (
+                                            <div className="flex items-center gap-3">
+                                                <Briefcase size={18} className="text-amber-600 shrink-0" />
+                                                <span className="text-sm font-medium text-[#5c4033]">Nghề nghiệp:</span>
+                                                <span className="text-sm text-[#3e2723] font-bold ml-auto">{ind}</span>
+                                            </div>
+                                        )}
+                                    </>
+                                );
+                            })()}
 
                             {/* Parents Lineage */}
                             {parentNode && (
@@ -423,6 +481,66 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         <option value="Đã mất">Đã mất</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            {/* Avatar upload */}
+                            <div>
+                                <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ảnh đại diện</label>
+                                <div className="flex items-center gap-3">
+                                    {editAvatarUrl ? (
+                                        <img src={editAvatarUrl} alt="Preview" className="w-14 h-14 rounded-full object-cover border-2 border-[#8b5a2b]/30" />
+                                    ) : (
+                                        <div className="w-14 h-14 rounded-full bg-[#f4efe6] border-2 border-[#8b5a2b]/20 flex items-center justify-center text-[#8b5a2b]/50">
+                                            <Camera size={24} />
+                                        </div>
+                                    )}
+                                    <label className="flex-1 text-center py-2 bg-[#f4efe6] border border-[#d2b48c] rounded-lg text-sm text-[#8b5a2b] font-bold cursor-pointer hover:bg-[#e8dcb8] transition-colors">
+                                        📷 Chọn ảnh
+                                        <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (!file) return;
+                                            if (file.size > 500 * 1024) { alert('Ảnh quá lớn (tối đa 500KB)'); return; }
+                                            const reader = new FileReader();
+                                            reader.onload = (ev) => setEditAvatarUrl(ev.target?.result as string);
+                                            reader.readAsDataURL(file);
+                                        }} />
+                                    </label>
+                                    {editAvatarUrl && (
+                                        <button onClick={() => setEditAvatarUrl('')} className="p-2 text-red-400 hover:text-red-600 rounded-md transition-colors" title="Xóa ảnh">
+                                            <Trash2 size={16} />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Contact info fields */}
+                            <div className="pt-3 border-t border-[#e8dcb8]/50">
+                                <span className="text-xs text-[#8b5a2b] font-bold uppercase tracking-wider block mb-3">Thông tin liên hệ</span>
+                                <div className="space-y-3">
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><Phone size={12} /> Số điện thoại</label>
+                                        <input type="tel" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0901234567"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><Globe size={12} /> Facebook</label>
+                                        <input type="text" value={editFacebook} onChange={e => setEditFacebook(e.target.value)} placeholder="Link hoặc tên tài khoản"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><MapPin size={12} /> Địa chỉ</label>
+                                        <input type="text" value={editAddress} onChange={e => setEditAddress(e.target.value)} placeholder="VD: 123 Nguyễn Trãi, Q1, TP.HCM"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5 flex items-center gap-1"><Briefcase size={12} /> Ngành nghề</label>
+                                        <input type="text" value={editIndustry} onChange={e => setEditIndustry(e.target.value)} placeholder="VD: Kỹ sư phần mềm"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                </div>
+                                <p className="text-[10px] text-amber-700 mt-2 bg-amber-50 p-2 rounded border border-amber-200">
+                                    🔒 <strong>Bảo mật:</strong> Thông tin liên hệ mặc định ẩn. Admin sẽ quyết định cho phép công khai mục nào.
+                                </p>
                             </div>
                         </div>
 
