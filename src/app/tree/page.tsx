@@ -9,7 +9,7 @@ export default function TreePage() {
                 <div className="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto">
                     <div className="bg-[#fdfbf7]/90 backdrop-blur-md border border-[#d2b48c] shadow-md px-4 py-2 rounded-xl flex items-center gap-4">
                         <h1 className="font-serif font-bold text-lg text-[#5c4033]">
-                            Phả Đồ {familyDataRaw.familyName}
+                            Phả Đồ Họ {familyDataRaw.familyName}
                         </h1>
                         <span className="text-xs text-[#8b5a2b] font-bold border-l border-[#d2b48c] pl-4 py-1">
                             Từ năm {familyDataRaw.since} · {familyDataRaw.totalGenerations} Đời

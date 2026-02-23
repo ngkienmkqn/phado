@@ -14,7 +14,7 @@ const notoSerif = Noto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Phả Đồ Nguyễn Cẩm Giang",
+  title: "Phả Đồ Họ Nguyễn Cẩm Giang",
   description: "Gia phả điện tử dòng họ Nguyễn Cẩm Giang - Từ năm 1469",
 };
 
