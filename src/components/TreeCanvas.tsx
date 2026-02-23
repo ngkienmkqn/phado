@@ -359,22 +359,21 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
     const layoutFlowRef = useRef<{ getNodes: () => Node[], setViewport: (vp: { x: number, y: number, zoom: number }) => void }>(null);
     const savedTransformRef = useRef<string>('');
-    const savedContainerStyleRef = useRef<{ width: string, height: string, position: string }>({ width: '', height: '', position: '' });
+    const savedContainerStyleRef = useRef<{ width: string, height: string }>({ width: '', height: '' });
+    const savedWrapperStyleRef = useRef<{ width: string, height: string }>({ width: '', height: '' });
 
     // Direct DOM manipulation for print — let BROWSER handle fit-to-page scaling
     useEffect(() => {
         const handleBeforePrint = () => {
             const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
             const rfContainer = document.querySelector('.react-flow') as HTMLElement;
+            const wrapper = document.getElementById('tree-print-wrapper');
             if (!viewport || !rfContainer) return;
 
             // Save originals
             savedTransformRef.current = viewport.style.transform;
-            savedContainerStyleRef.current = {
-                width: rfContainer.style.width,
-                height: rfContainer.style.height,
-                position: rfContainer.style.position,
-            };
+            savedContainerStyleRef.current = { width: rfContainer.style.width, height: rfContainer.style.height };
+            if (wrapper) savedWrapperStyleRef.current = { width: wrapper.style.width, height: wrapper.style.height };
 
             // Get all node DOM elements to compute bounding box
             const nodeEls = document.querySelectorAll('.react-flow__node');
@@ -401,12 +400,15 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             const treeW = maxX - minX;
             const treeH = maxY - minY;
 
-            // Resize container to exactly the tree size — browser will scale this to fit page
+            // Resize BOTH wrapper and container to exact tree size
+            if (wrapper) {
+                wrapper.style.width = `${treeW}px`;
+                wrapper.style.height = `${treeH}px`;
+            }
             rfContainer.style.width = `${treeW}px`;
             rfContainer.style.height = `${treeH}px`;
-            rfContainer.style.position = 'relative';
 
-            // Move viewport so tree starts at (0, 0) — no scaling, browser does that
+            // Move viewport so tree starts at (0, 0) — browser scales to fit page
             viewport.style.transform = `translate(${-minX}px, ${-minY}px) scale(1)`;
             viewport.style.transformOrigin = '0 0';
         };
@@ -414,13 +416,17 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const handleAfterPrint = () => {
             const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
             const rfContainer = document.querySelector('.react-flow') as HTMLElement;
+            const wrapper = document.getElementById('tree-print-wrapper');
             if (viewport && savedTransformRef.current) {
                 viewport.style.transform = savedTransformRef.current;
             }
             if (rfContainer) {
                 rfContainer.style.width = savedContainerStyleRef.current.width;
                 rfContainer.style.height = savedContainerStyleRef.current.height;
-                rfContainer.style.position = savedContainerStyleRef.current.position;
+            }
+            if (wrapper) {
+                wrapper.style.width = savedWrapperStyleRef.current.width;
+                wrapper.style.height = savedWrapperStyleRef.current.height;
             }
         };
 
@@ -684,7 +690,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     }, [calcA, calcB, members]);
 
     return (
-        <div className="w-full h-full relative overflow-hidden bg-[#f4efe6]">
+        <div id="tree-print-wrapper" className="w-full h-full relative overflow-hidden bg-[#f4efe6]">
             {/* Desktop Side Navigation / Widgets Toggle Button */}
             {!isDesktopToolsOpen && (
                 <div data-print-hide className="hidden sm:flex absolute top-24 right-6 z-40 flex-col gap-3 print:hidden">
