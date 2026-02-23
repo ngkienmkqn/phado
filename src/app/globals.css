@@ -80,16 +80,13 @@ body {
     display: none !important;
   }
 
-  /* Make tree fill the print page */
+  /* Let beforeprint handler set the exact tree size — browser scales to fit page */
   .react-flow {
-    height: 100vh !important;
-    width: 100vw !important;
     overflow: visible !important;
-    position: relative !important;
   }
 
   .react-flow__viewport {
-    transform-origin: center center !important;
+    transform-origin: 0 0 !important;
   }
 
   .react-flow__node {

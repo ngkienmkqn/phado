@@ -359,24 +359,30 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
     const layoutFlowRef = useRef<{ getNodes: () => Node[], setViewport: (vp: { x: number, y: number, zoom: number }) => void }>(null);
     const savedTransformRef = useRef<string>('');
+    const savedContainerStyleRef = useRef<{ width: string, height: string, position: string }>({ width: '', height: '', position: '' });
 
-    // Direct DOM manipulation for print — bypasses React Flow's async viewport updates
+    // Direct DOM manipulation for print — let BROWSER handle fit-to-page scaling
     useEffect(() => {
         const handleBeforePrint = () => {
             const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
-            if (!viewport) return;
+            const rfContainer = document.querySelector('.react-flow') as HTMLElement;
+            if (!viewport || !rfContainer) return;
 
-            // Save original transform
+            // Save originals
             savedTransformRef.current = viewport.style.transform;
+            savedContainerStyleRef.current = {
+                width: rfContainer.style.width,
+                height: rfContainer.style.height,
+                position: rfContainer.style.position,
+            };
 
-            // Get all node DOM elements to compute actual bounding box
+            // Get all node DOM elements to compute bounding box
             const nodeEls = document.querySelectorAll('.react-flow__node');
             if (nodeEls.length === 0) return;
 
             let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
             nodeEls.forEach(el => {
                 const htmlEl = el as HTMLElement;
-                // React Flow nodes have transform: translate(Xpx, Ypx)
                 const match = htmlEl.style.transform.match(/translate\((-?[\d.]+)px,\s*(-?[\d.]+)px\)/);
                 if (match) {
                     const nx = parseFloat(match[1]);
@@ -394,25 +400,27 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
             const treeW = maxX - minX;
             const treeH = maxY - minY;
-            const treeCenterX = minX + treeW / 2;
-            const treeCenterY = minY + treeH / 2;
 
-            // Use the actual container size, fit tree exactly
-            const rfContainer = document.querySelector('.react-flow') as HTMLElement;
-            const cW = rfContainer?.offsetWidth || window.innerWidth;
-            const cH = rfContainer?.offsetHeight || window.innerHeight;
-            const scale = Math.min(cW / treeW, cH / treeH);
-            const tx = cW / 2 - treeCenterX * scale;
-            const ty = cH / 2 - treeCenterY * scale;
+            // Resize container to exactly the tree size — browser will scale this to fit page
+            rfContainer.style.width = `${treeW}px`;
+            rfContainer.style.height = `${treeH}px`;
+            rfContainer.style.position = 'relative';
 
-            viewport.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+            // Move viewport so tree starts at (0, 0) — no scaling, browser does that
+            viewport.style.transform = `translate(${-minX}px, ${-minY}px) scale(1)`;
             viewport.style.transformOrigin = '0 0';
         };
 
         const handleAfterPrint = () => {
             const viewport = document.querySelector('.react-flow__viewport') as HTMLElement;
+            const rfContainer = document.querySelector('.react-flow') as HTMLElement;
             if (viewport && savedTransformRef.current) {
                 viewport.style.transform = savedTransformRef.current;
+            }
+            if (rfContainer) {
+                rfContainer.style.width = savedContainerStyleRef.current.width;
+                rfContainer.style.height = savedContainerStyleRef.current.height;
+                rfContainer.style.position = savedContainerStyleRef.current.position;
             }
         };
 
