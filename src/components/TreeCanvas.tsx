@@ -20,7 +20,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import ELK from 'elkjs/lib/elk.bundled.js';
-import { Info, Calculator, X, ChevronRight, User, CalendarDays, Search, Focus, ChevronDown, Map, HelpCircle } from 'lucide-react';
+import { Info, Calculator, X, ChevronRight, User, CalendarDays, Search, Focus, ChevronDown, Map, HelpCircle, Plus, Minus, Printer } from 'lucide-react';
 import MemberSidePanel from './MemberSidePanel';
 
 const elk = new ELK();
@@ -46,6 +46,9 @@ interface MemberData {
     onFocus?: (id: string) => void;
     onViewDetails?: (id: string) => void;
     isFocused?: boolean;
+    hasChildren?: boolean;
+    isExpanded?: boolean;
+    onExpand?: (id: string) => void;
     [key: string]: unknown;
 }
 
@@ -131,6 +134,17 @@ const CustomPersonNode = memo(({ data }: { data: Record<string, unknown> }) => {
                     <Info size={18} />
                 </button>
             </div>
+
+            {/* Expand children button */}
+            {typedData.hasChildren && (
+                <button
+                    onClick={(e) => { e.stopPropagation(); typedData.onExpand?.(typedData.id); }}
+                    className={`absolute -bottom-3 left-1/2 -translate-x-1/2 z-30 w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all shadow-md ${typedData.isExpanded ? 'bg-[#5c4033] border-[#3e2723] text-white' : 'bg-[#fdfbf7] border-[#8b5a2b] text-[#8b5a2b] hover:bg-[#8b5a2b] hover:text-white'}`}
+                    title={typedData.isExpanded ? 'Thu gọn nhánh con' : 'Mở rộng thêm đời dưới'}
+                >
+                    {typedData.isExpanded ? <Minus size={14} /> : <Plus size={14} />}
+                </button>
+            )}
 
             {/* Invisible handles for routing */}
             <Handle type="target" position={Position.Top} className="opacity-0 w-1! h-1! border-none!" />
@@ -290,6 +304,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
     const [focusId, setFocusId] = useState<string | null>(members.length > 0 ? members[0].id : null);
     const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
+    const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
 
     const [activeMobileTab, setActiveMobileTab] = useState<'search' | 'calc' | null>(null);
     const [mobileSearchTerm, setMobileSearchTerm] = useState('');
@@ -319,6 +334,29 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         if (member) setSelectedMember(member as MemberData);
     }, [members]);
 
+    const handleExpand = useCallback((id: string) => {
+        setExpandedNodes(prev => {
+            const next = new Set(prev);
+            if (next.has(id)) next.delete(id); else next.add(id);
+            return next;
+        });
+    }, []);
+
+    // Recursively collect all descendants of a node
+    const collectDescendants = useCallback((parentId: string, depth: number, maxDepth: number): MemberData[] => {
+        if (depth >= maxDepth) return [];
+        const children = members.filter(m => m.parentId === parentId);
+        const result: MemberData[] = [...children];
+        for (const child of children) {
+            result.push(...collectDescendants(child.id, depth + 1, maxDepth));
+        }
+        return result;
+    }, [members]);
+
+    const handlePrint = useCallback(() => {
+        window.print();
+    }, []);
+
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
         let subset: MemberData[] = [];
 
@@ -338,6 +376,24 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 // Children
                 const children = members.filter(m => m.parentId === focusId);
                 subset.push(...children);
+
+                // Expanded descendants: for each child that is expanded, recursively add their descendants
+                const addExpanded = (parentId: string) => {
+                    if (!expandedNodes.has(parentId)) return;
+                    const grandChildren = members.filter(m => m.parentId === parentId);
+                    for (const gc of grandChildren) {
+                        if (!subset.some(s => s.id === gc.id)) {
+                            subset.push(gc);
+                        }
+                        addExpanded(gc.id); // recursively expand further if those are also expanded
+                    }
+                };
+                // Expand from focused node itself
+                addExpanded(focusId);
+                // Expand from each direct child
+                for (const child of children) {
+                    addExpanded(child.id);
+                }
             }
         }
 
@@ -347,6 +403,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const iEdges: Edge[] = [];
 
         subset.forEach((m: MemberData) => {
+            const hasChildren = members.some(c => c.parentId === m.id);
             iNodes.push({
                 id: m.id,
                 type: 'person',
@@ -355,7 +412,10 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                     ...m,
                     onFocus: handleFocus,
                     onViewDetails: handleViewDetails,
-                    isFocused: m.id === focusId
+                    isFocused: m.id === focusId,
+                    hasChildren,
+                    isExpanded: expandedNodes.has(m.id),
+                    onExpand: handleExpand,
                 } as Record<string, unknown>
             });
 
@@ -387,7 +447,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const eEdges = iEdges.map((edge) => ({ id: edge.id, sources: [edge.source], targets: [edge.target] }));
 
         return { elkNodes: eNodes, elkEdges: eEdges, initialNodes: iNodes, initialEdges: iEdges };
-    }, [members, focusId, handleFocus, handleViewDetails]);
+    }, [members, focusId, handleFocus, handleViewDetails, expandedNodes, handleExpand]);
 
     const [finalNodes, setFinalNodes] = useState<Node[]>([]);
     const [finalEdges, setFinalEdges] = useState<Edge[]>([]);
@@ -548,12 +608,21 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         <div className="w-full h-full relative overflow-hidden bg-[#f4efe6]">
             {/* Desktop Side Navigation / Widgets Toggle Button */}
             {!isDesktopToolsOpen && (
-                <button
-                    onClick={() => setIsDesktopToolsOpen(true)}
-                    className="hidden sm:flex absolute top-24 right-6 z-40 items-center justify-center bg-[#fdfbf7]/95 backdrop-blur-md border border-[#d2b48c] shadow-xl rounded-full p-4 hover:scale-105 transition-transform text-[#8b5a2b] font-bold gap-2 animate-in slide-in-from-right"
-                >
-                    <Search size={22} /> Mở Công Cụ Thêm
-                </button>
+                <div className="hidden sm:flex absolute top-24 right-6 z-40 flex-col gap-3 print:hidden">
+                    <button
+                        onClick={() => setIsDesktopToolsOpen(true)}
+                        className="flex items-center justify-center bg-[#fdfbf7]/95 backdrop-blur-md border border-[#d2b48c] shadow-xl rounded-full p-4 hover:scale-105 transition-transform text-[#8b5a2b] font-bold gap-2"
+                    >
+                        <Search size={22} /> Mở Công Cụ Thêm
+                    </button>
+                    <button
+                        onClick={handlePrint}
+                        className="flex items-center justify-center bg-[#fdfbf7]/95 backdrop-blur-md border border-[#d2b48c] shadow-xl rounded-full p-3 hover:scale-105 transition-transform text-[#8b5a2b] font-bold gap-2"
+                        title="In phả đồ"
+                    >
+                        <Printer size={20} /> In Phả Đồ
+                    </button>
+                </div>
             )}
 
             {/* Desktop Side Navigation / Widgets */}
@@ -610,10 +679,15 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 </div>
             </div>
 
-            {/* Desktop Help Button */}
-            <button onClick={() => setShowHelp(true)} className="hidden sm:flex absolute bottom-6 right-[380px] z-40 items-center gap-2 bg-[#8b5a2b] hover:bg-[#5c4033] text-white px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105">
-                <HelpCircle size={18} /> Hướng Dẫn
-            </button>
+            {/* Desktop Help + Print Buttons */}
+            <div className="hidden sm:flex absolute bottom-6 right-[380px] z-40 gap-2 print:hidden">
+                <button onClick={handlePrint} className="flex items-center gap-2 bg-[#fdfbf7] hover:bg-[#e8dcb8] text-[#8b5a2b] border border-[#d2b48c] px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105">
+                    <Printer size={18} /> In Phả Đồ
+                </button>
+                <button onClick={() => setShowHelp(true)} className="flex items-center gap-2 bg-[#8b5a2b] hover:bg-[#5c4033] text-white px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105">
+                    <HelpCircle size={18} /> Hướng Dẫn
+                </button>
+            </div>
 
             {/* Mobile Bottom Navigation Bar */}
             <div className="fixed sm:hidden bottom-0 left-0 right-0 h-16 bg-[#fdfbf7] border-t-2 border-[#d2b48c] flex justify-around items-center z-50 shadow-[0_-10px_30px_rgba(92,64,51,0.15)] pb-safe">
