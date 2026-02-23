@@ -164,14 +164,15 @@ const LayoutFlow = forwardRef(function LayoutFlowInner({
 }: {
     initialNodes: Node[],
     initialEdges: Edge[],
-}, ref: React.Ref<{ fitView: () => void }>) {
+}, ref: React.Ref<{ getNodes: () => Node[], setViewport: (vp: { x: number, y: number, zoom: number }) => void }>) {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    const { fitView } = useReactFlow();
+    const { fitView, getNodes: rfGetNodes, setViewport: rfSetViewport } = useReactFlow();
 
     useImperativeHandle(ref, () => ({
-        fitView: () => fitView({ padding: 0.3, duration: 0, minZoom: 0.1, maxZoom: 0.8 }),
-    }), [fitView]);
+        getNodes: rfGetNodes,
+        setViewport: (vp: { x: number, y: number, zoom: number }) => rfSetViewport(vp, { duration: 0 }),
+    }), [rfGetNodes, rfSetViewport]);
 
     useEffect(() => {
         setNodes(initialNodes);
@@ -356,16 +357,38 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         return result;
     }, [members]);
 
-    const layoutFlowRef = useRef<{ fitView: () => void }>(null);
+    const layoutFlowRef = useRef<{ getNodes: () => Node[], setViewport: (vp: { x: number, y: number, zoom: number }) => void }>(null);
 
     const handlePrint = useCallback(() => {
-        // Fit all nodes into view first, then print after re-render
-        if (layoutFlowRef.current) {
-            layoutFlowRef.current.fitView();
+        if (!layoutFlowRef.current) { window.print(); return; }
+        const allNodes = layoutFlowRef.current.getNodes();
+        if (allNodes.length === 0) { window.print(); return; }
+
+        // Calculate bounding box of all nodes
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        for (const n of allNodes) {
+            const w = (n.width || 280);
+            const h = (n.height || 180);
+            if (n.position.x < minX) minX = n.position.x;
+            if (n.position.y < minY) minY = n.position.y;
+            if (n.position.x + w > maxX) maxX = n.position.x + w;
+            if (n.position.y + h > maxY) maxY = n.position.y + h;
         }
+
+        const treeW = maxX - minX;
+        const treeH = maxY - minY;
+        // A4 landscape at 96dpi ≈ 1123 x 794, with margins
+        const pageW = 1050;
+        const pageH = 720;
+        const zoom = Math.min(pageW / treeW, pageH / treeH, 1) * 0.85;
+        const x = (pageW - treeW * zoom) / 2 - minX * zoom;
+        const y = (pageH - treeH * zoom) / 2 - minY * zoom + 20;
+
+        layoutFlowRef.current.setViewport({ x, y, zoom });
+
         setTimeout(() => {
             window.print();
-        }, 600);
+        }, 500);
     }, []);
 
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
