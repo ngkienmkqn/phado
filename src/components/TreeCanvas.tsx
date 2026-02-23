@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, memo, useState, useEffect } from 'react';
+import React, { useCallback, useMemo, memo, useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import {
     ReactFlow,
     Controls,
@@ -158,16 +158,20 @@ const nodeTypes = {
     person: CustomPersonNode,
 };
 
-function LayoutFlow({
+const LayoutFlow = forwardRef(function LayoutFlowInner({
     initialNodes,
     initialEdges,
 }: {
     initialNodes: Node[],
     initialEdges: Edge[],
-}) {
+}, ref: React.Ref<{ fitView: () => void }>) {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const { fitView } = useReactFlow();
+
+    useImperativeHandle(ref, () => ({
+        fitView: () => fitView({ padding: 0.3, duration: 0, minZoom: 0.1, maxZoom: 0.8 }),
+    }), [fitView]);
 
     useEffect(() => {
         setNodes(initialNodes);
@@ -184,7 +188,6 @@ function LayoutFlow({
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onNodeClick={(e, node) => {
-                // Ensure clicks always trigger details even if internal card click fails
                 const m = node.data as any;
                 if (m.onViewDetails) m.onViewDetails(node.id);
             }}
@@ -207,7 +210,7 @@ function LayoutFlow({
             <Background color="rgba(139, 90, 43, 0.15)" gap={32} size={1} />
         </ReactFlow>
     );
-}
+});
 
 // Elder-friendly Searchable Dropdown
 const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: string, onChange: (val: string) => void, options: MemberData[], placeholder: string }) => {
@@ -353,8 +356,16 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         return result;
     }, [members]);
 
+    const layoutFlowRef = useRef<{ fitView: () => void }>(null);
+
     const handlePrint = useCallback(() => {
-        window.print();
+        // Fit all nodes into view first, then print after re-render
+        if (layoutFlowRef.current) {
+            layoutFlowRef.current.fitView();
+        }
+        setTimeout(() => {
+            window.print();
+        }, 600);
     }, []);
 
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
@@ -823,7 +834,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             {
                 finalNodes.length > 0 ? (
                     <ReactFlowProvider>
-                        <LayoutFlow initialNodes={finalNodes} initialEdges={finalEdges} />
+                        <LayoutFlow ref={layoutFlowRef} initialNodes={finalNodes} initialEdges={finalEdges} />
                     </ReactFlowProvider>
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-[#5c4033] font-serif animated-pulse">Đang định dạng thẻ...</div>
