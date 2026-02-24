@@ -313,6 +313,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const [activeMobileTab, setActiveMobileTab] = useState<'search' | 'calc' | null>(null);
     const [mobileSearchTerm, setMobileSearchTerm] = useState('');
     const [isDesktopToolsOpen, setIsDesktopToolsOpen] = useState(true);
+    const [desktopSearchTerm, setDesktopSearchTerm] = useState('');
     const [showHelp, setShowHelp] = useState(() => {
         if (typeof window !== 'undefined') {
             return localStorage.getItem('phado_hide_help') !== 'true';
@@ -778,20 +779,36 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                         <button onClick={() => setIsDesktopToolsOpen(false)} className="text-[#8b5a2b] hover:text-[#5c4033] bg-[#e8dcb8]/40 hover:bg-[#d2b48c]/40 p-1.5 rounded-full transition-colors"><X size={16} /></button>
                     </div>
                     <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8b5a2b]" size={16} />
+                        <Search className="absolute left-3 top-[14px] text-[#8b5a2b]" size={16} />
                         <input
                             type="text"
                             placeholder="Gõ tên không dấu (ví dụ: giang)..."
                             className="w-full bg-white border border-[#d2b48c] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e2723] focus:outline-none focus:border-[#8b5a2b] transition-colors shadow-inner"
-                            onChange={(e) => {
-                                const val = removeDiacritics(e.target.value.toLowerCase());
-                                if (val.length > 2) {
-                                    const found = members.find(m => removeDiacritics(m.name.toLowerCase()).includes(val));
-                                    if (found) setFocusId(found.id);
-                                }
-                            }}
+                            value={desktopSearchTerm}
+                            onChange={(e) => setDesktopSearchTerm(e.target.value)}
                         />
                     </div>
+                    {desktopSearchTerm.length > 1 && (
+                        <div className="max-h-[250px] overflow-y-auto bg-white rounded-xl border border-[#e8dcb8] mt-2">
+                            {members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(desktopSearchTerm.toLowerCase()))).slice(0, 20).map(m => (
+                                <div
+                                    key={m.id}
+                                    onClick={() => {
+                                        setFocusId(m.id);
+                                        setDesktopSearchTerm('');
+                                        setRelationPath([]);
+                                    }}
+                                    className="px-3 py-2.5 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 cursor-pointer"
+                                >
+                                    <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
+                                    <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
+                                </div>
+                            ))}
+                            {members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(desktopSearchTerm.toLowerCase()))).length === 0 && (
+                                <p className="text-sm text-[#8b5a2b]/80 text-center italic p-3">Không tìm thấy</p>
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 {/* Desktop Calculator widget */}
