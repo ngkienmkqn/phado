@@ -260,7 +260,7 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
                                 className="px-4 py-3 sm:py-2.5 hover:bg-[#8b5a2b]/10 cursor-pointer border-b border-[#e8dcb8] last:border-0"
                             >
                                 <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
-                                <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
+                                <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.parentId ? ` - Con: ${options.find(p => p.id === m.parentId)?.name || ''}` : ''}</div>
                             </div>
                         )) : (
                             <div className="p-4 text-center text-[#8b5a2b]/70 text-sm">Không tìm thấy ai</div>
@@ -801,7 +801,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                                     className="px-3 py-2.5 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 cursor-pointer"
                                 >
                                     <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
-                                    <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
+                                    <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.parentId ? ` - Con: ${members.find(p => p.id === m.parentId)?.name || ''}` : ''}</div>
                                 </div>
                             ))}
                             {members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(desktopSearchTerm.toLowerCase()))).length === 0 && (
@@ -904,7 +904,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                                                 className="px-4 py-3 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 active:bg-[#8b5a2b]/20 cursor-pointer"
                                             >
                                                 <div className="text-[#3e2723] text-sm font-bold">{m.name}</div>
-                                                <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.spouse ? ` - Vợ/C: ${m.spouse}` : ''}</div>
+                                                <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.parentId ? ` - Con: ${members.find(p => p.id === m.parentId)?.name || ''}` : ''}</div>
                                             </div>
                                         ))
                                     ) : (
