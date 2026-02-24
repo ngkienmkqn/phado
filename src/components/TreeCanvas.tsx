@@ -321,6 +321,54 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     });
     const [calcA, setCalcA] = useState('');
     const [calcB, setCalcB] = useState('');
+    const [relationPath, setRelationPath] = useState<string[]>([]);
+
+    // Compute the relationship path whenever calcA/calcB change
+    useEffect(() => {
+        if (!calcA || !calcB || calcA === calcB) {
+            setRelationPath([]);
+            return;
+        }
+
+        // Resolve spouses to bloodline
+        const resolveToBloodline = (memberId: string): string => {
+            const person = members.find(m => m.id === memberId);
+            if (!person) return memberId;
+            if (person.parentId) return memberId;
+            const partner = members.find(m => m.spouse === person.name);
+            if (partner) return partner.id;
+            return memberId;
+        };
+
+        const resolvedA = resolveToBloodline(calcA);
+        const resolvedB = resolveToBloodline(calcB);
+
+        const pathA: MemberData[] = [];
+        let currA = members.find(m => m.id === resolvedA);
+        while (currA) { pathA.push(currA); currA = currA.parentId ? members.find(m => m.id === currA?.parentId) : undefined; }
+
+        const pathB: MemberData[] = [];
+        let currB = members.find(m => m.id === resolvedB);
+        while (currB) { pathB.push(currB); currB = currB.parentId ? members.find(m => m.id === currB?.parentId) : undefined; }
+
+        let lcaIndexA = -1, lcaIndexB = -1;
+        for (let i = 0; i < pathA.length; i++) {
+            const found = pathB.findIndex(m => m.id === pathA[i].id);
+            if (found !== -1) { lcaIndexA = i; lcaIndexB = found; break; }
+        }
+
+        if (lcaIndexA === -1) {
+            setRelationPath([]);
+            return;
+        }
+
+        const pathIds = new Set<string>();
+        for (let i = 0; i <= lcaIndexA; i++) pathIds.add(pathA[i].id);
+        for (let i = 0; i <= lcaIndexB; i++) pathIds.add(pathB[i].id);
+        pathIds.add(calcA);
+        pathIds.add(calcB);
+        setRelationPath(Array.from(pathIds));
+    }, [calcA, calcB, members]);
 
     useEffect(() => {
         if (!focusId && members.length > 0) {
@@ -456,8 +504,13 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
         let subset: MemberData[] = [];
 
+        // Relationship Path Mode: show only the path between two people
+        if (relationPath.length > 0) {
+            const pathSet = new Set(relationPath);
+            subset = members.filter(m => pathSet.has(m.id));
+        }
         // Focus Mode: only show focused person, their parents, and direct children
-        if (focusId) {
+        else if (focusId) {
             const focused = members.find(m => m.id === focusId);
             if (focused) {
                 subset.push(focused);
@@ -508,7 +561,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                     ...m,
                     onFocus: handleFocus,
                     onViewDetails: handleViewDetails,
-                    isFocused: m.id === focusId,
+                    isFocused: m.id === focusId || (relationPath.length > 0 && (m.id === calcA || m.id === calcB)),
                     hasChildren,
                     isExpanded: expandedNodes.has(m.id),
                     onExpand: handleExpand,
@@ -529,11 +582,11 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                         type: 'smoothstep',
                         animated: false,
                         style: {
-                            stroke: m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b',
-                            strokeWidth: m.id === focusId || m.parentId === focusId ? 5 : 3,
-                            opacity: m.id === focusId || m.parentId === focusId ? 1 : 0.6
+                            stroke: relationPath.length > 0 ? '#b8860b' : (m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b'),
+                            strokeWidth: relationPath.length > 0 ? 4 : (m.id === focusId || m.parentId === focusId ? 5 : 3),
+                            opacity: 1
                         },
-                        markerEnd: { type: MarkerType.ArrowClosed, color: m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b' }
+                        markerEnd: { type: MarkerType.ArrowClosed, color: relationPath.length > 0 ? '#b8860b' : (m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b') }
                     });
                 }
             }
@@ -543,7 +596,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const eEdges = iEdges.map((edge) => ({ id: edge.id, sources: [edge.source], targets: [edge.target] }));
 
         return { elkNodes: eNodes, elkEdges: eEdges, initialNodes: iNodes, initialEdges: iEdges };
-    }, [members, focusId, handleFocus, handleViewDetails, expandedNodes, handleExpand]);
+    }, [members, focusId, handleFocus, handleViewDetails, expandedNodes, handleExpand, relationPath, calcA, calcB]);
 
     const [finalNodes, setFinalNodes] = useState<Node[]>([]);
     const [finalEdges, setFinalEdges] = useState<Edge[]>([]);
