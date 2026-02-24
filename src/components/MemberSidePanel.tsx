@@ -147,7 +147,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         if (editFacebook !== ((member as any).facebook || '')) changes.push({ field: 'facebook', label: 'Facebook', oldValue: (member as any).facebook || '', newValue: editFacebook });
         if (editAddress !== ((member as any).address || '')) changes.push({ field: 'address', label: 'Địa chỉ', oldValue: (member as any).address || '', newValue: editAddress });
         if (editIndustry !== ((member as any).industry || '')) changes.push({ field: 'industry', label: 'Ngành nghề', oldValue: (member as any).industry || '', newValue: editIndustry });
-        if (editAvatarUrl !== ((member as any).avatarUrl || '')) changes.push({ field: 'avatarUrl', label: 'Ảnh đại diện', oldValue: (member as any).avatarUrl ? '(có ảnh)' : '(chưa có)', newValue: editAvatarUrl ? '(ảnh mới)' : '(xóa ảnh)' });
+        if (editAvatarUrl !== ((member as any).avatarUrl || '')) changes.push({ field: 'avatarUrl', label: 'Ảnh đại diện', oldValue: (member as any).avatarUrl ? '(có ảnh)' : '(chưa có)', newValue: editAvatarUrl });
 
         const currentSpouseStr = spouses.join(' | ');
         const oldSpouseStr = member.spouse || '';

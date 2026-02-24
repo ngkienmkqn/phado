@@ -67,23 +67,36 @@ interface FamilyData {
 const CustomPersonNode = memo(({ data }: { data: Record<string, unknown> }) => {
     const typedData = data as unknown as MemberData;
     const isFocused = typedData.isFocused;
+    const isFemale = typedData.gender === 'female';
+
+    // Get children count by gender from allMembers (passed via data)
+    const allMembers = (typedData as any).allMembers as MemberData[] | undefined;
+    const children = allMembers ? allMembers.filter(m => m.parentId === typedData.id) : [];
+    const sons = children.filter(c => c.gender !== 'female').length;
+    const daughters = children.filter(c => c.gender === 'female').length;
 
     return (
         <div
             onClick={() => typedData.onViewDetails?.(typedData.id)}
             className={`relative flex flex-col w-[280px] min-h-[160px] h-auto rounded-2xl border-[3px] transition-all cursor-pointer shadow-xl group
-            ${isFocused ? 'border-[#5c4033] bg-[#5c4033] scale-105 shadow-2xl shadow-[#5c4033]/40 z-50' :
-                    'border-[#8b5a2b] bg-[#8b5a2b] hover:bg-[#704218]'}`}
+            ${isFocused ? `border-[#5c4033] ${isFemale ? 'bg-[#8b4567]' : 'bg-[#5c4033]'} scale-105 shadow-2xl shadow-[#5c4033]/40 z-50` :
+                    `${isFemale ? 'border-[#a0527a] bg-[#a0527a] hover:bg-[#8b4060]' : 'border-[#8b5a2b] bg-[#8b5a2b] hover:bg-[#704218]'}`}`}
         >
             {/* Inner "Parchment/Paper" Area */}
             <div className="flex flex-col flex-1 bg-[#fdfbf7] m-[3px] rounded-xl p-3 border border-[#e8dcb8] relative overflow-hidden">
-                {/* Decorative gender corner ribbon */}
-                <div className={`absolute -right-6 -top-6 w-12 h-12 rotate-45 ${typedData.gender === 'female' ? 'bg-[#c27ba0]' : 'bg-[#6fa8dc]'} opacity-30`}></div>
+                {/* Gender indicator badge */}
+                <div className={`absolute -right-1 -top-1 w-6 h-6 rounded-bl-lg flex items-center justify-center text-[10px] font-bold text-white ${isFemale ? 'bg-[#c27ba0]' : 'bg-[#6fa8dc]'}`}>
+                    {isFemale ? '♀' : '♂'}
+                </div>
 
                 <div className="flex items-start gap-4">
                     {/* Frame Avatar */}
-                    <div className="w-12 h-12 rounded-full flex shrink-0 items-center justify-center border-2 border-[#8b5a2b]/30 bg-[#f4efe6] text-[#8b5a2b] shadow-sm z-10">
-                        <User size={24} />
+                    <div className={`w-12 h-12 rounded-full flex shrink-0 items-center justify-center border-2 ${isFemale ? 'border-[#c27ba0]/40 bg-[#fce4ec]' : 'border-[#8b5a2b]/30 bg-[#f4efe6]'} text-[#8b5a2b] shadow-sm z-10 overflow-hidden`}>
+                        {(typedData as any).avatarUrl ? (
+                            <img src={(typedData as any).avatarUrl} alt="" className="w-full h-full object-cover" />
+                        ) : (
+                            <User size={24} />
+                        )}
                     </div>
 
                     <div className="flex flex-col flex-1 min-w-0 z-10 pt-0.5">
@@ -99,13 +112,23 @@ const CustomPersonNode = memo(({ data }: { data: Record<string, unknown> }) => {
                     </div>
                 </div>
 
-                <div className="mt-auto z-10 pb-1 pt-1">
+                <div className="mt-auto z-10 pb-1 pt-1 space-y-1">
                     {typedData.spouse && (
                         <div className="flex items-start gap-1.5 text-[11px] text-[#5c4033]/90">
                             <strong className="text-[#8b5a2b] whitespace-nowrap">
-                                {typedData.gender === 'male' ? 'Vợ:' : typedData.gender === 'female' ? 'Chồng:' : 'Vợ/C:'}
+                                {isFemale ? 'Chồng:' : 'Vợ:'}
                             </strong>
                             <span className="leading-tight">{typedData.spouse}</span>
+                        </div>
+                    )}
+                    {children.length > 0 && (
+                        <div className="flex items-center gap-1.5 text-[10px] text-[#5c4033]/70">
+                            <span>👶</span>
+                            <span>
+                                {sons > 0 && <span className="text-[#6fa8dc] font-bold">{sons} trai</span>}
+                                {sons > 0 && daughters > 0 && ', '}
+                                {daughters > 0 && <span className="text-[#c27ba0] font-bold">{daughters} gái</span>}
+                            </span>
                         </div>
                     )}
                 </div>
@@ -222,7 +245,11 @@ const SearchableDropdown = ({ value, onChange, options, placeholder }: { value: 
 
     const filteredOptions = useMemo(() => {
         const normalizedSearch = removeDiacritics(searchTerm.toLowerCase());
-        return options.filter(m => removeDiacritics(m.name.toLowerCase()).includes(normalizedSearch)).slice(0, 30);
+        return options.filter(m => {
+            const norm = removeDiacritics(m.name.toLowerCase());
+            const spouseNorm = m.spouse ? removeDiacritics(m.spouse.toLowerCase()) : '';
+            return norm.includes(normalizedSearch) || spouseNorm.includes(normalizedSearch);
+        }).slice(0, 30);
     }, [searchTerm, options]);
 
     return (
@@ -560,6 +587,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 position: { x: 0, y: 0 },
                 data: {
                     ...m,
+                    allMembers: members,
                     onFocus: handleFocus,
                     onViewDetails: handleViewDetails,
                     isFocused: m.id === focusId || (relationPath.length > 0 && (m.id === calcA || m.id === calcB)),
@@ -790,7 +818,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                     </div>
                     {desktopSearchTerm.length > 1 && (
                         <div className="max-h-[250px] overflow-y-auto bg-white rounded-xl border border-[#e8dcb8] mt-2">
-                            {members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(desktopSearchTerm.toLowerCase()))).slice(0, 20).map(m => (
+                            {members.filter(m => { const s = removeDiacritics(desktopSearchTerm.toLowerCase()); return removeDiacritics(m.name.toLowerCase()).includes(s) || (m.spouse && removeDiacritics(m.spouse.toLowerCase()).includes(s)); }).slice(0, 20).map(m => (
                                 <div
                                     key={m.id}
                                     onClick={() => {
@@ -804,7 +832,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                                     <div className="text-xs text-[#5c4033]/80 mt-0.5">Đời thứ {m.generation} {m.parentId ? ` - Bố: ${members.find(p => p.id === m.parentId)?.name || ''}` : ''}</div>
                                 </div>
                             ))}
-                            {members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(desktopSearchTerm.toLowerCase()))).length === 0 && (
+                            {members.filter(m => { const s = removeDiacritics(desktopSearchTerm.toLowerCase()); return removeDiacritics(m.name.toLowerCase()).includes(s) || (m.spouse && removeDiacritics(m.spouse.toLowerCase()).includes(s)); }).length === 0 && (
                                 <p className="text-sm text-[#8b5a2b]/80 text-center italic p-3">Không tìm thấy</p>
                             )}
                         </div>
@@ -893,7 +921,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                                 </div>
                                 <div className="max-h-[50vh] overflow-y-auto bg-white rounded-xl border border-[#e8dcb8]">
                                     {mobileSearchTerm.length > 1 ? (
-                                        members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(removeDiacritics(mobileSearchTerm.toLowerCase()))).slice(0, 20).map(m => (
+                                        members.filter(m => { const s = removeDiacritics(mobileSearchTerm.toLowerCase()); return removeDiacritics(m.name.toLowerCase()).includes(s) || (m.spouse && removeDiacritics(m.spouse.toLowerCase()).includes(s)); }).slice(0, 20).map(m => (
                                             <div
                                                 key={m.id}
                                                 onClick={() => {
