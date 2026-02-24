@@ -380,11 +380,19 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         <span className="text-xs text-[#8b5a2b] font-bold uppercase tracking-wider">Vợ / Chồng</span>
                                     </div>
                                     <div className="space-y-2">
-                                        {spouses.map((sp, idx) => (
-                                            <div key={idx} className="p-3 bg-pink-50/50 border border-pink-100/80 rounded-lg flex items-center justify-between">
-                                                <div className="text-sm font-bold text-[#3e2723]">{sp}</div>
-                                            </div>
-                                        ))}
+                                        {spouses.map((sp, idx) => {
+                                            const spouseMember = allMembers.find(m => m.name === sp || m.spouse === member.name);
+                                            return (
+                                                <div
+                                                    key={idx}
+                                                    className={`p-3 bg-pink-50/50 border border-pink-100/80 rounded-lg flex items-center justify-between ${spouseMember ? 'cursor-pointer hover:bg-pink-100/50 transition-colors' : ''}`}
+                                                    onClick={() => spouseMember && onViewMember(spouseMember.id)}
+                                                >
+                                                    <div className="text-sm font-bold text-[#3e2723]">{sp}</div>
+                                                    {spouseMember && <ChevronRight size={14} className="text-[#8b5a2b]/60" />}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
