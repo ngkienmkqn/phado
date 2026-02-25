@@ -858,7 +858,9 @@
       "birthLunar": null,
       "spouse": "Cụ Nhương Bà",
       "parentId": "m50",
-      "childrenIds": []
+      "childrenIds": [
+        "m80"
+      ]
     },
     {
       "id": "m62",
@@ -913,7 +915,9 @@
       "birthLunar": null,
       "spouse": "Cụ Bảo Bà",
       "parentId": "m53",
-      "childrenIds": []
+      "childrenIds": [
+        "m87"
+      ]
     },
     {
       "id": "m66",
@@ -1037,7 +1041,10 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": "m55",
-      "childrenIds": []
+      "childrenIds": [
+        "m97",
+        "m98"
+      ]
     },
     {
       "id": "m75",
@@ -1124,8 +1131,10 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m61",
+      "childrenIds": [
+        "m106"
+      ]
     },
     {
       "id": "m81",
@@ -1226,8 +1235,10 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Cụ Uyển Bà",
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m65",
+      "childrenIds": [
+        "m123"
+      ]
     },
     {
       "id": "m88",
@@ -1372,8 +1383,10 @@
       "birthSolar": "-- - -- - 1847",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m74",
+      "childrenIds": [
+        "m149"
+      ]
     },
     {
       "id": "m98",
@@ -1385,7 +1398,7 @@
       "birthSolar": "-- - -- - 1862",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m74",
       "childrenIds": []
     },
     {
@@ -1504,7 +1517,7 @@
       "birthSolar": "-- - -- - 1886",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m80",
       "childrenIds": []
     },
     {
@@ -1739,7 +1752,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Phạm Thị Ngóng",
-      "parentId": null,
+      "parentId": "m87",
       "childrenIds": [
         "m169",
         "m170",
@@ -2154,7 +2167,7 @@
       "birthSolar": "-- - -- - 1885",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m97",
       "childrenIds": []
     },
     {
@@ -2444,10 +2457,10 @@
       "parentId": "m123",
       "childrenIds": [
         "m306",
+        "m308",
         "m309",
         "m311",
-        "m312",
-        "m315"
+        "m312"
       ]
     },
     {
@@ -2527,7 +2540,9 @@
       "spouse": "Trần Thị Liên",
       "parentId": "m123",
       "childrenIds": [
-        "m442"
+        "m313",
+        "m314",
+        "m316"
       ]
     },
     {
@@ -2622,7 +2637,8 @@
       "childrenIds": [
         "m344",
         "m346",
-        "m348"
+        "m348",
+        "m349"
       ]
     },
     {
@@ -2754,8 +2770,8 @@
       "spouse": "Trần Thị Cừ",
       "parentId": "m121",
       "childrenIds": [
-        "m336",
-        "m369"
+        "m369",
+        "m371"
       ]
     },
     {
@@ -2796,7 +2812,7 @@
       "spouse": "Hoàng Thị Chuyên",
       "parentId": "m123",
       "childrenIds": [
-        "m371"
+        "m375"
       ]
     },
     {
@@ -2891,11 +2907,12 @@
       "spouse": "Thang Thị Láng",
       "parentId": "m125",
       "childrenIds": [
+        "m386",
         "m387",
+        "m388",
         "m389",
         "m391",
-        "m392",
-        "m520"
+        "m392"
       ]
     },
     {
@@ -2962,8 +2979,8 @@
       "spouse": "Trần Thị Tám",
       "parentId": "m125",
       "childrenIds": [
-        "m308",
         "m393",
+        "m394",
         "m395",
         "m397",
         "m398"
@@ -3033,8 +3050,8 @@
       "spouse": null,
       "parentId": "m125",
       "childrenIds": [
-        "m402",
-        "m503"
+        "m400",
+        "m402"
       ]
     },
     {
@@ -3142,11 +3159,11 @@
       "spouse": null,
       "parentId": "m125",
       "childrenIds": [
-        "m347",
-        "m375",
-        "m394",
+        "m319",
         "m409",
+        "m411",
         "m412",
+        "m425",
         "m427"
       ]
     },
@@ -3162,7 +3179,6 @@
       "spouse": null,
       "parentId": "m125",
       "childrenIds": [
-        "m386",
         "m415",
         "m416"
       ]
@@ -3477,6 +3493,7 @@
         "m444",
         "m445",
         "m446",
+        "m447",
         "m448",
         "m450"
       ]
@@ -3571,12 +3588,12 @@
       "spouse": null,
       "parentId": "m141",
       "childrenIds": [
-        "m368",
-        "m422",
         "m460",
+        "m461",
         "m463",
         "m465",
-        "m467"
+        "m467",
+        "m469"
       ]
     },
     {
@@ -3684,7 +3701,9 @@
       "spouse": "Trần Thị Mai",
       "parentId": "m145",
       "childrenIds": [
-        "m421",
+        "m472",
+        "m474",
+        "m476",
         "m477"
       ]
     },
@@ -3821,8 +3840,8 @@
       "spouse": null,
       "parentId": "m145",
       "childrenIds": [
-        "m324",
         "m487",
+        "m488",
         "m489"
       ]
     },
@@ -3851,7 +3870,7 @@
       "spouse": null,
       "parentId": "m166",
       "childrenIds": [
-        "m321"
+        "m491"
       ]
     },
     {
@@ -4099,7 +4118,9 @@
       "spouse": "Trương Thị Xảo",
       "parentId": "m147",
       "childrenIds": [
+        "m534",
         "m535",
+        "m536",
         "m537",
         "m539"
       ]
@@ -4247,7 +4268,9 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": "m147",
-      "childrenIds": []
+      "childrenIds": [
+        "m548"
+      ]
     },
     {
       "id": "m301",
@@ -4355,8 +4378,11 @@
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m207",
-      "childrenIds": []
+      "parentId": "m169",
+      "childrenIds": [
+        "m556",
+        "m558"
+      ]
     },
     {
       "id": "m309",
@@ -4422,7 +4448,7 @@
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m175",
       "childrenIds": []
     },
     {
@@ -4435,8 +4461,12 @@
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null,
       "spouse": "Đỗ Thị Lan",
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m175",
+      "childrenIds": [
+        "m560",
+        "m561",
+        "m743"
+      ]
     },
     {
       "id": "m315",
@@ -4448,11 +4478,8 @@
       "birthSolar": "-- - -- - 1979",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m169",
-      "childrenIds": [
-        "m556",
-        "m558"
-      ]
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m316",
@@ -4464,7 +4491,7 @@
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m175",
       "childrenIds": []
     },
     {
@@ -4503,8 +4530,10 @@
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m220",
+      "childrenIds": [
+        "m685"
+      ]
     },
     {
       "id": "m320",
@@ -4534,7 +4563,7 @@
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m271",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -4576,8 +4605,11 @@
       "birthSolar": "-- - -- - 1967",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m269",
-      "childrenIds": []
+      "parentId": null,
+      "childrenIds": [
+        "m570",
+        "m572"
+      ]
     },
     {
       "id": "m325",
@@ -4629,7 +4661,16 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": null,
-      "childrenIds": []
+      "childrenIds": [
+        "m575",
+        "m576",
+        "m577",
+        "m578",
+        "m584",
+        "m587",
+        "m590",
+        "m591"
+      ]
     },
     {
       "id": "m329",
@@ -4735,7 +4776,7 @@
       "birthSolar": "-- - -- - 1967",
       "birthLunar": null,
       "spouse": "Quách Thị Hiến",
-      "parentId": "m192",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -4886,7 +4927,7 @@
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m220",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -4912,8 +4953,11 @@
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m182",
+      "childrenIds": [
+        "m597",
+        "m598"
+      ]
     },
     {
       "id": "m350",
@@ -5178,7 +5222,7 @@
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m251",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -5217,15 +5261,8 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Trương Thị Bé",
-      "parentId": "m195",
-      "childrenIds": [
-        "m624",
-        "m625",
-        "m626",
-        "m628",
-        "m630",
-        "m633"
-      ]
+      "parentId": "m192",
+      "childrenIds": []
     },
     {
       "id": "m372",
@@ -5284,10 +5321,14 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Trịnh Thị Tính",
-      "parentId": "m220",
+      "parentId": "m195",
       "childrenIds": [
-        "m589",
-        "m694"
+        "m624",
+        "m625",
+        "m626",
+        "m628",
+        "m630",
+        "m633"
       ]
     },
     {
@@ -5447,8 +5488,11 @@
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m221",
-      "childrenIds": []
+      "parentId": "m202",
+      "childrenIds": [
+        "m662",
+        "m665"
+      ]
     },
     {
       "id": "m387",
@@ -5473,7 +5517,7 @@
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m202",
       "childrenIds": []
     },
     {
@@ -5551,10 +5595,8 @@
       "birthSolar": "-- - -- - 1954",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m220",
-      "childrenIds": [
-        "m685"
-      ]
+      "parentId": "m207",
+      "childrenIds": []
     },
     {
       "id": "m395",
@@ -5641,7 +5683,7 @@
       "birthSolar": "07 - 07 - 1961",
       "birthLunar": "25 - 05 - 1961",
       "spouse": "Giáp Thu Huế",
-      "parentId": null,
+      "parentId": "m212",
       "childrenIds": []
     },
     {
@@ -5682,8 +5724,7 @@
       "spouse": null,
       "parentId": null,
       "childrenIds": [
-        "m570",
-        "m572"
+        "m720"
       ]
     },
     {
@@ -5796,7 +5837,7 @@
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m220",
       "childrenIds": []
     },
     {
@@ -5932,7 +5973,7 @@
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m259",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -5945,7 +5986,7 @@
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m251",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -5987,8 +6028,11 @@
       "birthSolar": "-- - -- - 1979",
       "birthLunar": null,
       "spouse": "Trương Thị Lưu",
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m220",
+      "childrenIds": [
+        "m589",
+        "m694"
+      ]
     },
     {
       "id": "m426",
@@ -6232,12 +6276,8 @@
       "birthSolar": "-- - -- - 1986",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m175",
-      "childrenIds": [
-        "m560",
-        "m561",
-        "m743"
-      ]
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m443",
@@ -6301,8 +6341,12 @@
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m244",
+      "childrenIds": [
+        "m710",
+        "m711",
+        "m712"
+      ]
     },
     {
       "id": "m448",
@@ -6491,7 +6535,7 @@
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null,
       "spouse": "Trần Thị Lợi",
-      "parentId": null,
+      "parentId": "m251",
       "childrenIds": []
     },
     {
@@ -6600,7 +6644,7 @@
       "birthSolar": "-- - -- - 1963",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m251",
       "childrenIds": []
     },
     {
@@ -6642,7 +6686,7 @@
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m259",
       "childrenIds": []
     },
     {
@@ -6656,16 +6700,7 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": null,
-      "childrenIds": [
-        "m843",
-        "m844",
-        "m845",
-        "m846",
-        "m847",
-        "m849",
-        "m850",
-        "m851"
-      ]
+      "childrenIds": []
     },
     {
       "id": "m474",
@@ -6677,8 +6712,12 @@
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m259",
+      "childrenIds": [
+        "m732",
+        "m733",
+        "m734"
+      ]
     },
     {
       "id": "m475",
@@ -6703,7 +6742,7 @@
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m259",
       "childrenIds": []
     },
     {
@@ -6862,7 +6901,7 @@
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m269",
       "childrenIds": []
     },
     {
@@ -6904,7 +6943,7 @@
       "birthSolar": "-- - -- - 1935",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m271",
       "childrenIds": []
     },
     {
@@ -7075,7 +7114,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Trương Thị Đắc",
-      "parentId": "m212",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -7317,11 +7356,8 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m202",
-      "childrenIds": [
-        "m662",
-        "m665"
-      ]
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m521",
@@ -7398,8 +7434,8 @@
       "childrenIds": [
         "m586",
         "m604",
-        "m806",
-        "m853"
+        "m634",
+        "m806"
       ]
     },
     {
@@ -7454,7 +7490,9 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": null,
-      "childrenIds": []
+      "childrenIds": [
+        "m815"
+      ]
     },
     {
       "id": "m530",
@@ -7525,8 +7563,11 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m289",
+      "childrenIds": [
+        "m826",
+        "m827"
+      ]
     },
     {
       "id": "m535",
@@ -7551,7 +7592,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m289",
       "childrenIds": []
     },
     {
@@ -7611,7 +7652,16 @@
       "birthLunar": null,
       "spouse": null,
       "parentId": null,
-      "childrenIds": []
+      "childrenIds": [
+        "m843",
+        "m844",
+        "m845",
+        "m846",
+        "m847",
+        "m849",
+        "m850",
+        "m851"
+      ]
     },
     {
       "id": "m541",
@@ -7714,7 +7764,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Vũ Thu Hương",
-      "parentId": null,
+      "parentId": "m300",
       "childrenIds": []
     },
     {
@@ -7821,7 +7871,7 @@
       "birthSolar": "-- - -- - 1986",
       "birthLunar": null,
       "spouse": "Hoàng Bảo Vân Anh",
-      "parentId": "m315",
+      "parentId": "m308",
       "childrenIds": []
     },
     {
@@ -7847,7 +7897,7 @@
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m315",
+      "parentId": "m308",
       "childrenIds": [
         "m856",
         "m857",
@@ -7877,7 +7927,7 @@
       "birthSolar": "-- - -- - 2007",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m442",
+      "parentId": "m314",
       "childrenIds": []
     },
     {
@@ -7890,7 +7940,7 @@
       "birthSolar": "-- - -- - 2011",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m442",
+      "parentId": "m314",
       "childrenIds": []
     },
     {
@@ -8013,7 +8063,7 @@
       "birthSolar": "-- - -- - 2001",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m403",
+      "parentId": "m324",
       "childrenIds": []
     },
     {
@@ -8041,7 +8091,7 @@
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null,
       "spouse": "Kiều Thị Hương (bỏ)",
-      "parentId": "m403",
+      "parentId": "m324",
       "childrenIds": [
         "m863",
         "m864"
@@ -8083,7 +8133,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": []
     },
     {
@@ -8096,7 +8146,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": []
     },
     {
@@ -8109,7 +8159,7 @@
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": []
     },
     {
@@ -8122,7 +8172,7 @@
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": [
         "m865",
         "m866",
@@ -8183,6 +8233,7 @@
         "m868",
         "m869",
         "m870",
+        "m871",
         "m872"
       ]
     },
@@ -8209,7 +8260,7 @@
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": []
     },
     {
@@ -8250,7 +8301,7 @@
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null,
       "spouse": "Quách Thị Hải Yến",
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": [
         "m873",
         "m874",
@@ -8280,7 +8331,7 @@
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m375",
+      "parentId": "m425",
       "childrenIds": [
         "m948"
       ]
@@ -8295,7 +8346,7 @@
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": []
     },
     {
@@ -8308,7 +8359,7 @@
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m328",
       "childrenIds": []
     },
     {
@@ -8386,7 +8437,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m349",
       "childrenIds": []
     },
     {
@@ -8399,7 +8450,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m349",
       "childrenIds": []
     },
     {
@@ -8767,7 +8818,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m371",
+      "parentId": "m375",
       "childrenIds": []
     },
     {
@@ -8780,7 +8831,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m371",
+      "parentId": "m375",
       "childrenIds": []
     },
     {
@@ -8793,7 +8844,7 @@
       "birthSolar": "-- - -- - 1962",
       "birthLunar": null,
       "spouse": "VŨ THỊ PHƯƠNG",
-      "parentId": "m371",
+      "parentId": "m375",
       "childrenIds": [
         "m893",
         "m894",
@@ -8824,7 +8875,7 @@
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m371",
+      "parentId": "m375",
       "childrenIds": []
     },
     {
@@ -8850,7 +8901,7 @@
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null,
       "spouse": "TẠ THỊ MÙI",
-      "parentId": "m371",
+      "parentId": "m375",
       "childrenIds": [
         "m898",
         "m900",
@@ -8895,7 +8946,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m371",
+      "parentId": "m375",
       "childrenIds": []
     },
     {
@@ -8908,8 +8959,10 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
-      "childrenIds": []
+      "parentId": "m525",
+      "childrenIds": [
+        "m1036"
+      ]
     },
     {
       "id": "m635",
@@ -8963,9 +9016,9 @@
       "parentId": "m377",
       "childrenIds": [
         "m907",
+        "m909",
         "m911",
-        "m912",
-        "m1062"
+        "m912"
       ]
     },
     {
@@ -9293,7 +9346,7 @@
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null,
       "spouse": "Nghiêm Thị Phượng",
-      "parentId": "m520",
+      "parentId": "m386",
       "childrenIds": [
         "m934",
         "m935",
@@ -9336,7 +9389,7 @@
       "birthSolar": "-- - -- - 1994",
       "birthLunar": null,
       "spouse": "Vi Thị Hải",
-      "parentId": "m520",
+      "parentId": "m386",
       "childrenIds": []
     },
     {
@@ -9605,7 +9658,7 @@
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null,
       "spouse": "Cao Thị Tâm",
-      "parentId": "m394",
+      "parentId": "m319",
       "childrenIds": []
     },
     {
@@ -9725,7 +9778,7 @@
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m375",
+      "parentId": "m425",
       "childrenIds": []
     },
     {
@@ -9939,7 +9992,7 @@
       "birthSolar": "-- - -- - 2000",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m447",
       "childrenIds": []
     },
     {
@@ -9952,7 +10005,7 @@
       "birthSolar": "-- - -- - 2004",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m447",
       "childrenIds": []
     },
     {
@@ -9965,7 +10018,7 @@
       "birthSolar": "-- - -- - 2011",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m447",
       "childrenIds": []
     },
     {
@@ -10051,7 +10104,8 @@
       "spouse": "Thân Thị Nụ",
       "parentId": "m454",
       "childrenIds": [
-        "m957"
+        "m957",
+        "m958"
       ]
     },
     {
@@ -10077,7 +10131,7 @@
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null,
       "spouse": "Trần Thùy Linh",
-      "parentId": null,
+      "parentId": "m403",
       "childrenIds": []
     },
     {
@@ -10233,7 +10287,7 @@
       "birthSolar": "-- - -- - 2010",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m474",
       "childrenIds": []
     },
     {
@@ -10246,7 +10300,7 @@
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m474",
       "childrenIds": []
     },
     {
@@ -10259,7 +10313,7 @@
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m474",
       "childrenIds": []
     },
     {
@@ -10378,7 +10432,7 @@
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m442",
+      "parentId": "m314",
       "childrenIds": []
     },
     {
@@ -11378,7 +11432,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Trần Thị Mừng",
-      "parentId": null,
+      "parentId": "m529",
       "childrenIds": [
         "m1040",
         "m1042",
@@ -11531,7 +11585,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m534",
       "childrenIds": []
     },
     {
@@ -11544,7 +11598,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m534",
       "childrenIds": []
     },
     {
@@ -11761,7 +11815,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11774,7 +11828,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11787,7 +11841,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11800,7 +11854,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11813,7 +11867,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": "Vũ Thị Trang",
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": [
         "m1063",
         "m1064"
@@ -11842,7 +11896,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11855,7 +11909,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11868,7 +11922,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m473",
+      "parentId": "m540",
       "childrenIds": []
     },
     {
@@ -11894,10 +11948,8 @@
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m525",
-      "childrenIds": [
-        "m908"
-      ]
+      "parentId": null,
+      "childrenIds": []
     },
     {
       "id": "m854",
@@ -12130,7 +12182,7 @@
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m582",
       "childrenIds": []
     },
     {
@@ -12634,7 +12686,7 @@
       "birthSolar": "-- - -- - 1998",
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m853",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -12647,7 +12699,7 @@
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m638",
       "childrenIds": []
     },
     {
@@ -13296,7 +13348,7 @@
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m718",
       "childrenIds": []
     },
     {
@@ -14357,7 +14409,7 @@
       "birthSolar": "01 - 02 - 2011",
       "birthLunar": "29 - 12 - 2010",
       "spouse": null,
-      "parentId": null,
+      "parentId": "m634",
       "childrenIds": []
     },
     {
@@ -14710,7 +14762,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": "m638",
+      "parentId": null,
       "childrenIds": []
     },
     {
@@ -15377,7 +15429,8 @@
       "spouse": "Bùi Thị Huệ",
       "parentId": "m1013",
       "childrenIds": [
-        "m1142"
+        "m1142",
+        "m1143"
       ]
     },
     {
@@ -15769,7 +15822,7 @@
       "birthSolar": null,
       "birthLunar": null,
       "spouse": null,
-      "parentId": null,
+      "parentId": "m1113",
       "childrenIds": []
     },
     {
