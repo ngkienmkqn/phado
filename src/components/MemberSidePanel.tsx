@@ -385,11 +385,11 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                             return (
                                                 <div
                                                     key={idx}
-                                                    className={`p-3 bg-pink-50/50 border border-pink-100/80 rounded-lg flex items-center justify-between ${spouseMember ? 'cursor-pointer hover:bg-pink-100/50 transition-colors' : ''}`}
-                                                    onClick={() => spouseMember && onViewMember(spouseMember.id)}
+                                                    className="p-3 bg-pink-50/50 border border-pink-100/80 rounded-lg flex items-center justify-between cursor-pointer hover:bg-pink-100/50 transition-colors"
+                                                    onClick={() => spouseMember ? onViewMember(spouseMember.id) : setMode('edit')}
                                                 >
                                                     <div className="text-sm font-bold text-[#3e2723]">{sp}</div>
-                                                    {spouseMember && <ChevronRight size={14} className="text-[#8b5a2b]/60" />}
+                                                    <ChevronRight size={14} className="text-[#8b5a2b]/60" />
                                                 </div>
                                             );
                                         })}
