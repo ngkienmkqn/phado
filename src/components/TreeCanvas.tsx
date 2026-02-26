@@ -559,21 +559,22 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         if (relationPath.length > 0) {
             const pathSet = new Set(relationPath);
             subset = members.filter(m => pathSet.has(m.id));
-            // When showing all (not hiding females), also include siblings at each level
-            if (!hideFemale) {
-                const addedIds = new Set(pathSet);
-                const extraMembers: MemberData[] = [];
-                for (const pm of subset) {
-                    if (pm.parentId) {
-                        const siblings = members.filter(m => m.parentId === pm.parentId && !addedIds.has(m.id));
-                        for (const s of siblings) {
+            // Always include siblings at each level on the path
+            // When hideFemale is on, only add male siblings; when off, add all siblings
+            const addedIds = new Set(pathSet);
+            const extraMembers: MemberData[] = [];
+            for (const pm of subset) {
+                if (pm.parentId) {
+                    const siblings = members.filter(m => m.parentId === pm.parentId && !addedIds.has(m.id));
+                    for (const s of siblings) {
+                        if (!hideFemale || s.gender !== 'female') {
                             extraMembers.push(s);
                             addedIds.add(s.id);
                         }
                     }
                 }
-                subset.push(...extraMembers);
             }
+            subset.push(...extraMembers);
         }
         // Focus Mode: only show focused person, their parents, and direct children
         else if (focusId) {
@@ -622,6 +623,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
 
         const iNodes: Node[] = [];
         const iEdges: Edge[] = [];
+        const pathSetForEdges = new Set(relationPath);
 
         subset.forEach((m: MemberData) => {
             const hasChildren = members.some(c => c.parentId === m.id);
@@ -648,6 +650,18 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 const isSpouseOfParent = parentNode && (parentNode.spouse === m.name || m.spouse === parentNode.name);
 
                 if (!isSpouseOfParent) {
+                    // For relationship path mode: edges on the direct path are RED, others are normal
+                    const isOnPath = relationPath.length > 0 && pathSetForEdges.has(m.id) && pathSetForEdges.has(m.parentId!);
+                    const isOnPathMode = relationPath.length > 0;
+                    let edgeStroke = m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b';
+                    let edgeWidth = m.id === focusId || m.parentId === focusId ? 5 : 3;
+                    if (isOnPath) {
+                        edgeStroke = '#dc2626'; // RED for direct path
+                        edgeWidth = 5;
+                    } else if (isOnPathMode) {
+                        edgeStroke = '#8b5a2b'; // normal brown for sibling edges
+                        edgeWidth = 2;
+                    }
                     iEdges.push({
                         id: `e-${m.parentId}-${m.id}`,
                         source: m.parentId,
@@ -655,11 +669,11 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                         type: 'smoothstep',
                         animated: false,
                         style: {
-                            stroke: relationPath.length > 0 ? '#b8860b' : (m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b'),
-                            strokeWidth: relationPath.length > 0 ? 4 : (m.id === focusId || m.parentId === focusId ? 5 : 3),
+                            stroke: edgeStroke,
+                            strokeWidth: edgeWidth,
                             opacity: 1
                         },
-                        markerEnd: { type: MarkerType.ArrowClosed, color: relationPath.length > 0 ? '#b8860b' : (m.id === focusId || m.parentId === focusId ? '#654321' : '#8b5a2b') }
+                        markerEnd: { type: MarkerType.ArrowClosed, color: edgeStroke }
                     });
                 }
             }
