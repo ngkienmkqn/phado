@@ -123,7 +123,7 @@ const CustomPersonNode = memo(({ data }: { data: Record<string, unknown> }) => {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     // Find the spouse member by name
-                                    const spouseMember = allMembers?.find(m => m.name === typedData.spouse || m.spouse === typedData.name);
+                                    const spouseMember = allMembers?.find(m => m.id !== typedData.id && (m.name === typedData.spouse || m.spouse === typedData.name));
                                     if (spouseMember) {
                                         typedData.onFocus?.(spouseMember.id);
                                         typedData.onViewDetails?.(spouseMember.id);
