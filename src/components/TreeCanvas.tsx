@@ -559,20 +559,18 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         if (relationPath.length > 0) {
             const pathSet = new Set(relationPath);
             subset = members.filter(m => pathSet.has(m.id));
-            // When showing all (not hiding females), also include siblings of each path member
-            // so that daughters/sisters become visible along the path
+            // When showing all (not hiding females), also include siblings at each level
             if (!hideFemale) {
+                const addedIds = new Set(pathSet);
                 const extraMembers: MemberData[] = [];
                 for (const pm of subset) {
                     if (pm.parentId) {
-                        const siblings = members.filter(m => m.parentId === pm.parentId && !pathSet.has(m.id));
-                        extraMembers.push(...siblings);
+                        const siblings = members.filter(m => m.parentId === pm.parentId && !addedIds.has(m.id));
+                        for (const s of siblings) {
+                            extraMembers.push(s);
+                            addedIds.add(s.id);
+                        }
                     }
-                }
-                // Add children of each path member too
-                for (const pm of subset) {
-                    const children = members.filter(m => m.parentId === pm.id && !pathSet.has(m.id));
-                    extraMembers.push(...children);
                 }
                 subset.push(...extraMembers);
             }
