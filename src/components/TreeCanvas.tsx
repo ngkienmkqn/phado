@@ -772,66 +772,90 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         let resultTitle = "";
         let resultReason = "";
 
+        // Helper to get relationship term given generation diff and directness
+        const getRelationTerm = (genDiff: number, dA: number, dB: number): string => {
+            if (genDiff === 0) {
+                return 'ANH/CHỊ/EM';
+            } else if (genDiff > 0) {
+                // A is younger, B is elder
+                const isDirect = dB === 0;
+                if (isDirect) {
+                    if (genDiff === 1) return 'CHA / MẸ';
+                    if (genDiff === 2) return 'ÔNG / BÀ';
+                    if (genDiff === 3) return 'CỤ (Cố)';
+                    if (genDiff === 4) return 'KỴ (Sơ)';
+                    return `TỔ TIÊN (cách ${genDiff} đời)`;
+                } else {
+                    if (genDiff === 1) return 'BÁC / CHÚ / CÔ';
+                    if (genDiff === 2) return 'ÔNG / BÀ';
+                    if (genDiff === 3) return 'CỤ (Cố)';
+                    if (genDiff === 4) return 'KỴ (Sơ)';
+                    return `TIÊN TỔ (cách ${genDiff} đời)`;
+                }
+            } else {
+                // A is elder, B is younger
+                const absDiff = Math.abs(genDiff);
+                const isDirect = dA === 0;
+                if (isDirect) {
+                    if (absDiff === 1) return 'CON';
+                    if (absDiff === 2) return 'CHÁU';
+                    if (absDiff === 3) return 'CHẮT';
+                    if (absDiff === 4) return 'CHÚT';
+                    if (absDiff === 5) return 'CHÍT';
+                    return `HẬU DUỆ (cách ${absDiff} đời)`;
+                } else {
+                    if (absDiff === 1) return 'CHÁU';
+                    if (absDiff === 2) return 'CHÁU';
+                    if (absDiff === 3) return 'CHẮT';
+                    if (absDiff === 4) return 'CHÚT';
+                    if (absDiff === 5) return 'CHÍT';
+                    return `HẬU DUỆ (cách ${absDiff} đời)`;
+                }
+            }
+        };
+
+        // A → B
+        const termAB = getRelationTerm(diff, distA, distB);
+        resultTitle = `${personA.name} gọi ${personB.name} là ${termAB}`;
+
+        // B → A (reverse: swap diff, swap distA/distB)
+        const termBA = getRelationTerm(-diff, distB, distA);
+        const reverseTitle = `${personB.name} gọi ${personA.name} là ${termBA}`;
+
         if (diff === 0) {
             const isDirect = (distA === 1 && distB === 1);
-            resultTitle = `A gọi B là ANH/CHỊ/EM`;
             if (isDirect) {
                 resultReason = `${personA.name} và ${personB.name} cùng do một cha mẹ sinh ra, đều thuộc Đời thứ ${personA.generation}. Vì là anh chị em ruột, ai lớn tuổi hơn làm Anh/Chị.`;
             } else {
                 resultReason = `${personA.name} và ${personB.name} cùng thuộc Đời thứ ${personA.generation}, có chung tổ tiên là ${pathA[lcaIndexA]?.name || 'không rõ'}. Hai người là anh chị em họ, ai lớn tuổi hơn làm Anh/Chị.`;
             }
         } else if (diff > 0) {
-            let term = "";
-            let isDirect = distB === 0;
+            const isDirect = distB === 0;
             if (isDirect) {
-                if (diff === 1) term = "CHA / MẸ";
-                else if (diff === 2) term = "ÔNG / BÀ";
-                else if (diff === 3) term = "CỤ (Cố)";
-                else if (diff === 4) term = "KỴ (Sơ)";
-                else term = `TỔ TIÊN (cách ${diff} đời)`;
+                resultReason = `${personB.name} (Đời ${personB.generation}) nằm trên dòng huyết thống trực tiếp của ${personA.name} (Đời ${personA.generation}). ${diff === 1 ? `${personB.name} là cha/mẹ đẻ sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} là ông/bà đẻ sinh ra cha/mẹ của ${personA.name}.` : `${personB.name} cách ${personA.name} ${diff} đời trực hệ.`} Vì vậy ${personA.name} phải gọi ${personB.name} là ${termAB}.`;
             } else {
-                if (diff === 1) term = "BÁC / CHÚ / CÔ";
-                else if (diff === 2) term = "ÔNG / BÀ";
-                else if (diff === 3) term = "CỤ (Cố)";
-                else if (diff === 4) term = "KỴ (Sơ)";
-                else term = `TIÊN TỔ (cách ${diff} đời)`;
-            }
-            resultTitle = `A gọi B là ${term}`;
-            if (isDirect) {
-                resultReason = `${personB.name} (Đời ${personB.generation}) nằm trên dòng huyết thống trực tiếp của ${personA.name} (Đời ${personA.generation}). ${diff === 1 ? `${personB.name} là cha/mẹ đẻ sinh ra ${personA.name}.` : diff === 2 ? `${personB.name} là ông/bà đẻ sinh ra cha/mẹ của ${personA.name}.` : `${personB.name} cách ${personA.name} ${diff} đời trực hệ.`} Vì vậy ${personA.name} phải gọi ${personB.name} là ${term}.`;
-            } else {
-                resultReason = `${personA.name} (Đời ${personA.generation}) và ${personB.name} (Đời ${personB.generation}) có chung tổ tiên là ${pathA[lcaIndexA]?.name || '(không rõ)'}. ${personB.name} thuộc đời bề trên, cao hơn ${personA.name} ${diff} đời. Theo phả hệ, ${personA.name} phải kính trọng gọi ${personB.name} là ${term}.`;
+                resultReason = `${personA.name} (Đời ${personA.generation}) và ${personB.name} (Đời ${personB.generation}) có chung tổ tiên là ${pathA[lcaIndexA]?.name || '(không rõ)'}. ${personB.name} thuộc đời bề trên, cao hơn ${personA.name} ${diff} đời. Theo phả hệ, ${personA.name} phải kính trọng gọi ${personB.name} là ${termAB}.`;
             }
         } else {
             const absDiff = Math.abs(diff);
-            let term = "";
-            let isDirect = distA === 0;
+            const isDirect = distA === 0;
             if (isDirect) {
-                if (absDiff === 1) term = "CON";
-                else if (absDiff === 2) term = "CHÁU";
-                else if (absDiff === 3) term = "CHẮT";
-                else if (absDiff === 4) term = "CHÚT";
-                else if (absDiff === 5) term = "CHÍT";
-                else term = `HẬU DUỆ (cách ${absDiff} đời)`;
+                resultReason = `${personA.name} (Đời ${personA.generation}) nằm trên dòng huyết thống trực tiếp của ${personB.name} (Đời ${personB.generation}). ${absDiff === 1 ? `${personA.name} đã sinh ra ${personB.name}, nên ${personB.name} là con của ${personA.name}.` : absDiff === 2 ? `${personA.name} là ông/bà, đã sinh ra cha/mẹ của ${personB.name}.` : `${personA.name} cách ${personB.name} ${absDiff} đời trực hệ.`} Vì vậy ${personA.name} gọi ${personB.name} là ${termAB}.`;
             } else {
-                if (absDiff === 1) term = "CHÁU";
-                else if (absDiff === 2) term = "CHÁU";
-                else if (absDiff === 3) term = "CHẮT";
-                else if (absDiff === 4) term = "CHÚT";
-                else if (absDiff === 5) term = "CHÍT";
-                else term = `HẬU DUỆ (cách ${absDiff} đời)`;
-            }
-            resultTitle = `A gọi B là ${term}`;
-            if (isDirect) {
-                resultReason = `${personA.name} (Đời ${personA.generation}) nằm trên dòng huyết thống trực tiếp của ${personB.name} (Đời ${personB.generation}). ${absDiff === 1 ? `${personA.name} đã sinh ra ${personB.name}, nên ${personB.name} là con của ${personA.name}.` : absDiff === 2 ? `${personA.name} là ông/bà, đã sinh ra cha/mẹ của ${personB.name}.` : `${personA.name} cách ${personB.name} ${absDiff} đời trực hệ.`} Vì vậy ${personA.name} gọi ${personB.name} là ${term}.`;
-            } else {
-                resultReason = `${personA.name} (Đời ${personA.generation}) và ${personB.name} (Đời ${personB.generation}) có chung tổ tiên là ${pathA[lcaIndexA]?.name || '(không rõ)'}. ${personA.name} thuộc đời bề trên, cao hơn ${personB.name} ${absDiff} đời. Vì vậy ${personA.name} gọi ${personB.name} là ${term}.`;
+                resultReason = `${personA.name} (Đời ${personA.generation}) và ${personB.name} (Đời ${personB.generation}) có chung tổ tiên là ${pathA[lcaIndexA]?.name || '(không rõ)'}. ${personA.name} thuộc đời bề trên, cao hơn ${personB.name} ${absDiff} đời. Vì vậy ${personA.name} gọi ${personB.name} là ${termAB}.`;
             }
         }
 
         return (
             <div className="flex flex-col items-center gap-2.5">
-                <span className="text-[#5c4033] text-[17px] font-bold uppercase block">{resultTitle}</span>
+                <div className="w-full space-y-2">
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-center">
+                        <span className="text-red-700 text-[15px] font-bold uppercase block">🔴 {resultTitle}</span>
+                    </div>
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
+                        <span className="text-blue-700 text-[15px] font-bold uppercase block">🔵 {reverseTitle}</span>
+                    </div>
+                </div>
                 <div className="text-[13px] font-normal text-[#5c4033]/90 bg-[#e8dcb8]/40 p-3.5 rounded-xl text-left border border-[#d2b48c] shadow-inner leading-relaxed">
                     <span className="text-[#8b5a2b] font-bold block mb-1">🧐 Lý giải cặn kẽ:</span>
                     {resultReason}{spouseNote}
