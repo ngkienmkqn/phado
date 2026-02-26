@@ -555,26 +555,10 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
         let subset: MemberData[] = [];
 
-        // Relationship Path Mode: show the path between two people
+        // Relationship Path Mode: show ONLY the direct path between two people
         if (relationPath.length > 0) {
             const pathSet = new Set(relationPath);
             subset = members.filter(m => pathSet.has(m.id));
-            // Always include siblings at each level on the path
-            // When hideFemale is on, only add male siblings; when off, add all siblings
-            const addedIds = new Set(pathSet);
-            const extraMembers: MemberData[] = [];
-            for (const pm of subset) {
-                if (pm.parentId) {
-                    const siblings = members.filter(m => m.parentId === pm.parentId && !addedIds.has(m.id));
-                    for (const s of siblings) {
-                        if (!hideFemale || s.gender !== 'female') {
-                            extraMembers.push(s);
-                            addedIds.add(s.id);
-                        }
-                    }
-                }
-            }
-            subset.push(...extraMembers);
         }
         // Focus Mode: only show focused person, their parents, and direct children
         else if (focusId) {
