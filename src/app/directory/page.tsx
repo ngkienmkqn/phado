@@ -78,7 +78,7 @@ export default function DirectoryPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {filteredMembers.map(member => (
+                    {filteredMembers.map((member: any) => (
                         <div key={member.id} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors flex flex-col">
                             <div className="flex justify-between items-start mb-3">
                                 <div>

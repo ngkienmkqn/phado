@@ -456,7 +456,7 @@ export default function AdminDashboard() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-white/5">
-                                        {familyDataRaw.members.slice(0, 30).map(m => {
+                                        {familyDataRaw.members.slice(0, 30).map((m: any) => {
                                             const overlay: Record<string, any> = JSON.parse(localStorage.getItem('phado_overlay') || '{}');
                                             const pub: string[] = overlay[m.id]?.publicFields ? JSON.parse(overlay[m.id].publicFields) : [];
                                             const fields = ['phone', 'facebook', 'address', 'industry'];
