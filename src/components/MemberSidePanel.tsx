@@ -72,6 +72,25 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     const [newChildName, setNewChildName] = useState('');
     const [newChildGender, setNewChildGender] = useState('male');
 
+    // Full fields for spouse creation
+    const [spouseBirth, setSpouseBirth] = useState('');
+    const [spouseStatus, setSpouseStatus] = useState('');
+    const [spousePhone, setSpousePhone] = useState('');
+    const [spouseFacebook, setSpouseFacebook] = useState('');
+    const [spouseAddress, setSpouseAddress] = useState('');
+    const [spouseIndustry, setSpouseIndustry] = useState('');
+    const [spouseAvatarUrl, setSpouseAvatarUrl] = useState('');
+
+    // Full fields for child creation
+    const [childBirth, setChildBirth] = useState('');
+    const [childStatus, setChildStatus] = useState('');
+    const [childSpouse, setChildSpouse] = useState('');
+    const [childPhone, setChildPhone] = useState('');
+    const [childFacebook, setChildFacebook] = useState('');
+    const [childAddress, setChildAddress] = useState('');
+    const [childIndustry, setChildIndustry] = useState('');
+    const [childAvatarUrl, setChildAvatarUrl] = useState('');
+
     const [spouseInputMode, setSpouseInputMode] = useState<'existing' | 'new'>('existing');
     const [childInputMode, setChildInputMode] = useState<'existing' | 'new'>('existing');
     const [searchSpouseTerm, setSearchSpouseTerm] = useState('');
@@ -200,7 +219,14 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             newData: {
                 name: nameToUse,
                 gender: member.gender === 'male' ? 'female' : 'male',
-                generation: member.generation
+                generation: member.generation,
+                ...(spouseBirth && { birthSolar: spouseBirth }),
+                ...(spouseStatus && { status: spouseStatus }),
+                ...(spousePhone && { phone: spousePhone }),
+                ...(spouseFacebook && { facebook: spouseFacebook }),
+                ...(spouseAddress && { address: spouseAddress }),
+                ...(spouseIndustry && { industry: spouseIndustry }),
+                ...(spouseAvatarUrl && { avatarUrl: spouseAvatarUrl }),
             },
             note: editNote || `Đề xuất thêm Vợ/Chồng cho ${member.name}`,
             by: editBy || 'Ẩn danh',
@@ -209,7 +235,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         });
         localStorage.setItem('phado_requests', JSON.stringify(requests));
         setSubmitted(true);
-        setTimeout(() => { setSubmitted(false); setMode('view'); setNewSpouse(''); setSelectedSpouse(null); }, 2000);
+        setTimeout(() => { setSubmitted(false); setMode('view'); setNewSpouse(''); setSelectedSpouse(null); setSpouseBirth(''); setSpouseStatus(''); setSpousePhone(''); setSpouseFacebook(''); setSpouseAddress(''); setSpouseIndustry(''); setSpouseAvatarUrl(''); }, 2000);
     };
 
     const handleAddChildSubmit = () => {
@@ -244,7 +270,15 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                 newData: {
                     name: newChildName.trim(),
                     gender: newChildGender,
-                    generation: member.generation + 1
+                    generation: member.generation + 1,
+                    ...(childBirth && { birthSolar: childBirth }),
+                    ...(childStatus && { status: childStatus }),
+                    ...(childSpouse && { spouse: childSpouse }),
+                    ...(childPhone && { phone: childPhone }),
+                    ...(childFacebook && { facebook: childFacebook }),
+                    ...(childAddress && { address: childAddress }),
+                    ...(childIndustry && { industry: childIndustry }),
+                    ...(childAvatarUrl && { avatarUrl: childAvatarUrl }),
                 },
                 note: editNote || `Đề xuất thêm Con mới cho ${member.name}`,
                 by: editBy || 'Ẩn danh',
@@ -255,7 +289,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
 
         localStorage.setItem('phado_requests', JSON.stringify(requests));
         setSubmitted(true);
-        setTimeout(() => { setSubmitted(false); setMode('view'); setNewChildName(''); setSelectedChild(null); }, 2000);
+        setTimeout(() => { setSubmitted(false); setMode('view'); setNewChildName(''); setSelectedChild(null); setChildBirth(''); setChildStatus(''); setChildSpouse(''); setChildPhone(''); setChildFacebook(''); setChildAddress(''); setChildIndustry(''); setChildAvatarUrl(''); }, 2000);
     };
 
     const updateSpouse = (index: number, newName: string) => {
@@ -420,7 +454,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                         {/* Actions */}
                         <div className="mt-6 flex flex-col gap-3">
                             <button onClick={() => setMode('edit')} className="w-full py-3.5 bg-[#8b5a2b] hover:bg-[#704218] text-white rounded-xl font-bold transition-all shadow-md flex items-center justify-center gap-2">
-                                <Edit3 size={18} /> Chỉnh Sửa Thông Tin
+                                <Edit3 size={18} /> Đề Xuất Chỉnh Sửa
                             </button>
                             <div className="grid grid-cols-2 gap-3">
                                 <button onClick={() => setMode('add_spouse')} className="w-full py-3 bg-white border-2 border-[#d2b48c] hover:border-[#8b5a2b] text-[#5c4033] rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 text-[13px]">
@@ -663,6 +697,75 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                     <input type="text" value={newSpouse} onChange={e => setNewSpouse(e.target.value)} placeholder="VD: Phạm Thị Hoa" autoFocus
                                         className="w-full border border-[#d2b48c] rounded-lg py-3 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
                                 </div>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Năm sinh</label>
+                                        <input type="text" value={spouseBirth} onChange={e => setSpouseBirth(e.target.value)} placeholder="VD: 1990"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Trạng thái</label>
+                                        <select value={spouseStatus} onChange={e => setSpouseStatus(e.target.value)}
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]">
+                                            <option value="">Không rõ</option>
+                                            <option value="Còn sống">Còn sống</option>
+                                            <option value="Đã mất">Đã mất</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {/* Avatar */}
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ảnh đại diện</label>
+                                    <div className="flex items-center gap-3">
+                                        {spouseAvatarUrl ? (
+                                            <img src={spouseAvatarUrl} alt="Preview" className="w-14 h-14 rounded-full object-cover border-2 border-[#8b5a2b]/30" />
+                                        ) : (
+                                            <div className="w-14 h-14 rounded-full bg-[#f4efe6] border-2 border-[#8b5a2b]/20 flex items-center justify-center text-[#8b5a2b]/50">
+                                                <Camera size={24} />
+                                            </div>
+                                        )}
+                                        <label className="flex-1 text-center py-2 bg-[#f4efe6] border border-[#d2b48c] rounded-lg text-sm text-[#8b5a2b] font-bold cursor-pointer hover:bg-[#e8dcb8] transition-colors">
+                                            📷 Chọn ảnh
+                                            <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                                                const file = e.target.files?.[0];
+                                                if (!file) return;
+                                                if (file.size > 500 * 1024) { alert('Ảnh quá lớn (tối đa 500KB)'); return; }
+                                                const reader = new FileReader();
+                                                reader.onload = (ev) => setSpouseAvatarUrl(ev.target?.result as string);
+                                                reader.readAsDataURL(file);
+                                            }} />
+                                        </label>
+                                        {spouseAvatarUrl && (
+                                            <button onClick={() => setSpouseAvatarUrl('')} className="p-2 text-red-400 hover:text-red-600 rounded-md transition-colors" title="Xóa ảnh">
+                                                <Trash2 size={16} />
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                                {/* Contact info */}
+                                <div className="pt-3 border-t border-[#e8dcb8]/50 space-y-3">
+                                    <span className="text-xs text-[#8b5a2b] font-bold uppercase tracking-wider block">Thông tin liên hệ</span>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><Phone size={12} /> Số điện thoại</label>
+                                        <input type="tel" value={spousePhone} onChange={e => setSpousePhone(e.target.value)} placeholder="VD: 0901234567"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><Globe size={12} /> Facebook</label>
+                                        <input type="text" value={spouseFacebook} onChange={e => setSpouseFacebook(e.target.value)} placeholder="Link hoặc tên tài khoản"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><MapPin size={12} /> Địa chỉ</label>
+                                        <input type="text" value={spouseAddress} onChange={e => setSpouseAddress(e.target.value)} placeholder="VD: 123 Nguyễn Trãi, Q1"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><Briefcase size={12} /> Ngành nghề</label>
+                                        <input type="text" value={spouseIndustry} onChange={e => setSpouseIndustry(e.target.value)} placeholder="VD: Kỹ sư phần mềm"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                </div>
                             </div>
                         )}
 
@@ -760,6 +863,84 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         <label className="flex items-center gap-2 text-sm cursor-pointer text-[#3e2723]">
                                             <input type="radio" name="childGender" value="female" checked={newChildGender === 'female'} onChange={() => setNewChildGender('female')} className="accent-[#8b5a2b]" /> Nữ
                                         </label>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Năm sinh</label>
+                                        <input type="text" value={childBirth} onChange={e => setChildBirth(e.target.value)} placeholder="VD: 1990"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Trạng thái</label>
+                                        <select value={childStatus} onChange={e => setChildStatus(e.target.value)}
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]">
+                                            <option value="">Không rõ</option>
+                                            <option value="Còn sống">Còn sống</option>
+                                            <option value="Đã mất">Đã mất</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Vợ/Chồng</label>
+                                    <input type="text" value={childSpouse} onChange={e => setChildSpouse(e.target.value)} placeholder="VD: Trần Thị B"
+                                        className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                </div>
+
+                                {/* Avatar */}
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Ảnh đại diện</label>
+                                    <div className="flex items-center gap-3">
+                                        {childAvatarUrl ? (
+                                            <img src={childAvatarUrl} alt="Preview" className="w-14 h-14 rounded-full object-cover border-2 border-[#8b5a2b]/30" />
+                                        ) : (
+                                            <div className="w-14 h-14 rounded-full bg-[#f4efe6] border-2 border-[#8b5a2b]/20 flex items-center justify-center text-[#8b5a2b]/50">
+                                                <Camera size={24} />
+                                            </div>
+                                        )}
+                                        <label className="flex-1 text-center py-2 bg-[#f4efe6] border border-[#d2b48c] rounded-lg text-sm text-[#8b5a2b] font-bold cursor-pointer hover:bg-[#e8dcb8] transition-colors">
+                                            📷 Chọn ảnh
+                                            <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                                                const file = e.target.files?.[0];
+                                                if (!file) return;
+                                                if (file.size > 500 * 1024) { alert('Ảnh quá lớn (tối đa 500KB)'); return; }
+                                                const reader = new FileReader();
+                                                reader.onload = (ev) => setChildAvatarUrl(ev.target?.result as string);
+                                                reader.readAsDataURL(file);
+                                            }} />
+                                        </label>
+                                        {childAvatarUrl && (
+                                            <button onClick={() => setChildAvatarUrl('')} className="p-2 text-red-400 hover:text-red-600 rounded-md transition-colors" title="Xóa ảnh">
+                                                <Trash2 size={16} />
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Contact info */}
+                                <div className="pt-3 border-t border-[#e8dcb8]/50 space-y-3">
+                                    <span className="text-xs text-[#8b5a2b] font-bold uppercase tracking-wider block">Thông tin liên hệ</span>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><Phone size={12} /> Số điện thoại</label>
+                                        <input type="tel" value={childPhone} onChange={e => setChildPhone(e.target.value)} placeholder="VD: 0901234567"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><Globe size={12} /> Facebook</label>
+                                        <input type="text" value={childFacebook} onChange={e => setChildFacebook(e.target.value)} placeholder="Link hoặc tên tài khoản"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><MapPin size={12} /> Địa chỉ</label>
+                                        <input type="text" value={childAddress} onChange={e => setChildAddress(e.target.value)} placeholder="VD: 123 Nguyễn Trãi, Q1"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs text-[#8b5a2b] font-bold flex items-center gap-1 mb-1.5"><Briefcase size={12} /> Ngành nghề</label>
+                                        <input type="text" value={childIndustry} onChange={e => setChildIndustry(e.target.value)} placeholder="VD: Kỹ sư phần mềm"
+                                            className="w-full border border-[#d2b48c] rounded-lg py-2.5 px-3 text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
                                     </div>
                                 </div>
                             </div>
