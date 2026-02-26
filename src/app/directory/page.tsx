@@ -1,28 +1,38 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Phone, User, Calendar, MapPin } from 'lucide-react';
-import familyDataRaw from '@/data/family_data.json';
 
 export default function DirectoryPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [generationFilter, setGenerationFilter] = useState<string>('all');
+    const [familyDataRaw, setFamilyDataRaw] = useState<any>({ members: [], totalMembers: 0 });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('/api/family-data', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(data => { setFamilyDataRaw(data); setLoading(false); })
+            .catch(() => setLoading(false));
+    }, []);
 
     // Generate unique generations for filter dropdown
     const generations = useMemo(() => {
-        const gens = new Set(familyDataRaw.members.map(m => m.generation));
-        return Array.from(gens).sort((a, b) => a - b);
-    }, []);
+        const gens = new Set(familyDataRaw.members.map((m: any) => m.generation));
+        return Array.from(gens).sort((a: any, b: any) => a - b);
+    }, [familyDataRaw]);
 
     const filteredMembers = useMemo(() => {
-        return familyDataRaw.members.filter(m => {
+        return familyDataRaw.members.filter((m: any) => {
             const matchSearch = m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 (m.spouse && m.spouse.toLowerCase().includes(searchTerm.toLowerCase()));
-            const matchGen = generationFilter === 'all' || m.generation.toString() === generationFilter;
+            const matchGen = generationFilter === 'all' || m.generation?.toString() === generationFilter;
             return matchSearch && matchGen;
         });
-    }, [searchTerm, generationFilter]);
+    }, [searchTerm, generationFilter, familyDataRaw]);
+
+    if (loading) return <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center text-gold-400 text-xl">Đang tải...</div>;
 
     return (
         <div className="min-h-screen bg-[#0a0a0f] text-[#f0ebe0] font-sans">
@@ -52,8 +62,8 @@ export default function DirectoryPage() {
                             onChange={e => setGenerationFilter(e.target.value)}
                         >
                             <option value="all">Tất cả đời</option>
-                            {generations.map(g => (
-                                <option key={g} value={g}>Đời {g}</option>
+                            {generations.map((g: any) => (
+                                <option key={String(g)} value={String(g)}>Đời {g}</option>
                             ))}
                         </select>
                     </div>

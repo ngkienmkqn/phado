@@ -1,9 +1,19 @@
 import Link from "next/link";
 import { Users, Search, TreeDeciduous, BookOpen, Calendar, Settings } from "lucide-react";
-import familyDataRaw from '@/data/family_data.json';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import BlogSection from '@/components/BlogSection';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+function loadFamilyData() {
+  const filePath = join(process.cwd(), 'src', 'data', 'family_data.json');
+  return JSON.parse(readFileSync(filePath, 'utf8'));
+}
+
 export default function Home() {
+  const familyDataRaw = loadFamilyData();
   const currentYear = new Date().getFullYear();
   const histYears = currentYear - familyDataRaw.since;
 

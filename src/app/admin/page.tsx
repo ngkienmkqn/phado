@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Users, ShieldCheck, CheckCircle, XCircle, Lock, LogOut, Trash2, Eye, EyeOff, FileText } from 'lucide-react';
-import familyDataRaw from '@/data/family_data.json';
 
 const DEFAULT_PASSWORD = '856226';
 const getAdminPassword = () => {
@@ -44,6 +43,7 @@ export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState<'pending' | 'members' | 'blog'>('pending');
     const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
     const [blogPosts, setBlogPosts] = useState<any[]>([]);
+    const [familyDataRaw, setFamilyDataRaw] = useState<any>({ members: [], totalMembers: 0 });
     const [newBlogTitle, setNewBlogTitle] = useState('');
     const [newBlogContent, setNewBlogContent] = useState('');
     const [newBlogAuthor, setNewBlogAuthor] = useState('');
@@ -56,6 +56,11 @@ export default function AdminDashboard() {
             const saved = sessionStorage.getItem('phado_admin');
             if (saved === 'true') setIsAuthenticated(true);
         }
+        // Load family data from API (realtime)
+        fetch('/api/family-data', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(data => setFamilyDataRaw(data))
+            .catch(() => { });
     }, []);
 
     useEffect(() => {

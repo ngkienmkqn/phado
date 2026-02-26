@@ -1,8 +1,19 @@
 import TreeCanvas from "@/components/TreeCanvas";
-import familyDataRaw from "@/data/family_data.json";
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
-// We need to pass data to the client component.
+// Force dynamic rendering - never cache, always read latest data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+function loadFamilyData() {
+    const filePath = join(process.cwd(), 'src', 'data', 'family_data.json');
+    return JSON.parse(readFileSync(filePath, 'utf8'));
+}
+
 export default function TreePage() {
+    const familyDataRaw = loadFamilyData();
+
     return (
         <div className="w-full h-screen bg-[#f4efe6] text-[#3e2723] overflow-hidden flex flex-col">
             <header className="absolute top-0 left-0 right-0 z-10 p-4 pointer-events-none">

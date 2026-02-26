@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Printer } from 'lucide-react';
-import familyDataRaw from '@/data/family_data.json';
 
 // Utility to group members by generation
 const groupMembersByGen = (members: any[]) => {
@@ -18,8 +17,20 @@ const groupMembersByGen = (members: any[]) => {
 };
 
 export default function BookPage() {
-    const groupedMembers = useMemo(() => groupMembersByGen(familyDataRaw.members), []);
+    const [familyDataRaw, setFamilyDataRaw] = useState<any>({ members: [], since: 1469, totalMembers: 0 });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('/api/family-data', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(data => { setFamilyDataRaw(data); setLoading(false); })
+            .catch(() => setLoading(false));
+    }, []);
+
+    const groupedMembers = useMemo(() => groupMembersByGen(familyDataRaw.members), [familyDataRaw]);
     const generations = Object.keys(groupedMembers).sort((a, b) => Number(a) - Number(b));
+
+    if (loading) return <div className="min-h-screen bg-gold-50 flex items-center justify-center text-gold-600 text-xl font-serif">Đang tải...</div>;
 
     const handlePrint = () => {
         window.print();
