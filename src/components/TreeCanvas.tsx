@@ -372,6 +372,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const [calcA, setCalcA] = useState('');
     const [calcB, setCalcB] = useState('');
     const [relationPath, setRelationPath] = useState<string[]>([]);
+    const [hideFemale, setHideFemale] = useState(false);
 
     // Compute the relationship path whenever calcA/calcB change
     useEffect(() => {
@@ -596,6 +597,12 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
             }
         }
 
+        // Filter: hide females if toggle is on (keep females that are on the relationship path)
+        if (hideFemale && subset.length > 0) {
+            const pathSet = new Set(relationPath);
+            subset = subset.filter(m => m.gender !== 'female' || pathSet.has(m.id) || m.id === focusId);
+        }
+
         if (subset.length === 0) subset = members.slice(0, 10);
 
         const iNodes: Node[] = [];
@@ -647,7 +654,7 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const eEdges = iEdges.map((edge) => ({ id: edge.id, sources: [edge.source], targets: [edge.target] }));
 
         return { elkNodes: eNodes, elkEdges: eEdges, initialNodes: iNodes, initialEdges: iEdges };
-    }, [members, focusId, handleFocus, handleViewDetails, expandedNodes, handleExpand, relationPath, calcA, calcB]);
+    }, [members, focusId, handleFocus, handleViewDetails, expandedNodes, handleExpand, relationPath, calcA, calcB, hideFemale]);
 
     const [finalNodes, setFinalNodes] = useState<Node[]>([]);
     const [finalEdges, setFinalEdges] = useState<Edge[]>([]);
@@ -888,8 +895,18 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 </div>
             </div>
 
-            {/* Desktop Help + Print Buttons */}
+            {/* Desktop Help + Print + Male-Only Toggle Buttons */}
             <div data-print-hide className="hidden sm:flex absolute bottom-6 right-[380px] z-40 gap-2 print:hidden">
+                <button
+                    onClick={() => setHideFemale(!hideFemale)}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-all hover:scale-105 border ${hideFemale
+                        ? 'bg-[#6fa8dc] text-white border-[#5a8fbd] hover:bg-[#5a8fbd]'
+                        : 'bg-[#fdfbf7] text-[#8b5a2b] border-[#d2b48c] hover:bg-[#e8dcb8]'
+                        }`}
+                    title={hideFemale ? 'Đang ẩn phụ nữ — bấm để hiện lại' : 'Bấm để chỉ hiện Đinh Nam (ẩn phụ nữ)'}
+                >
+                    {hideFemale ? '♂ Đinh Nam' : '👨‍👩 Tất Cả'}
+                </button>
                 <button onClick={handlePrint} className="flex items-center gap-2 bg-[#fdfbf7] hover:bg-[#e8dcb8] text-[#8b5a2b] border border-[#d2b48c] px-4 py-2.5 rounded-full shadow-lg font-bold text-sm transition-transform hover:scale-105">
                     <Printer size={18} /> In Phả Đồ
                 </button>
@@ -908,6 +925,11 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                 <button onClick={() => setActiveMobileTab('calc')} className={`flex flex-col items-center justify-center w-full h-full transition-colors ${activeMobileTab === 'calc' ? 'text-[#5c4033] bg-[#e8dcb8]/40' : 'text-[#8b5a2b] hover:bg-[#e8dcb8]/20'}`}>
                     <Calculator size={22} className={activeMobileTab === 'calc' ? 'scale-110 transition-transform' : ''} />
                     <span className="text-[11px] mt-1 font-bold">Xưng Hô</span>
+                </button>
+                <div className="w-[2px] h-8 bg-[#e8dcb8]"></div>
+                <button onClick={() => setHideFemale(!hideFemale)} className={`flex flex-col items-center justify-center w-full h-full transition-colors ${hideFemale ? 'text-white bg-[#6fa8dc]' : 'text-[#8b5a2b] hover:bg-[#e8dcb8]/20'}`}>
+                    <User size={22} />
+                    <span className="text-[11px] mt-1 font-bold">{hideFemale ? '♂ Nam' : '👥 Tất Cả'}</span>
                 </button>
                 <div className="w-[2px] h-8 bg-[#e8dcb8]"></div>
                 <button onClick={() => setShowHelp(true)} className="flex flex-col items-center justify-center w-full h-full text-[#8b5a2b] hover:bg-[#e8dcb8]/20 transition-colors">
