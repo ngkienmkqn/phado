@@ -329,14 +329,24 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const base = data.members || [];
         if (Object.keys(overlay).length === 0) return base;
 
+        // Fields that should NEVER be overridden by localStorage overlay
+        // parentId and childrenIds must come from server data only
+        const protectedFields = new Set(['parentId', 'childrenIds', 'id', 'generation']);
+
         const updated = base.map(m => {
             if (overlay[m.id]) {
-                return { ...m, ...overlay[m.id] };
+                const safeOverlay: Record<string, any> = {};
+                for (const [key, val] of Object.entries(overlay[m.id])) {
+                    if (!protectedFields.has(key)) {
+                        safeOverlay[key] = val;
+                    }
+                }
+                return { ...m, ...safeOverlay };
             }
             return m;
         });
 
-        // Add completely new members from overlay
+        // Add completely new members from overlay (with parentId allowed for new nodes)
         const existingIds = new Set(base.map(m => String(m.id)));
         const newMembers = Object.keys(overlay)
             .filter(id => !existingIds.has(String(id)) && overlay[id].name)
