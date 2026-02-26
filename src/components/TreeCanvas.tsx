@@ -555,10 +555,27 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
     const { elkNodes, elkEdges, initialNodes, initialEdges } = useMemo(() => {
         let subset: MemberData[] = [];
 
-        // Relationship Path Mode: show only the path between two people
+        // Relationship Path Mode: show the path between two people
         if (relationPath.length > 0) {
             const pathSet = new Set(relationPath);
             subset = members.filter(m => pathSet.has(m.id));
+            // When showing all (not hiding females), also include siblings of each path member
+            // so that daughters/sisters become visible along the path
+            if (!hideFemale) {
+                const extraMembers: MemberData[] = [];
+                for (const pm of subset) {
+                    if (pm.parentId) {
+                        const siblings = members.filter(m => m.parentId === pm.parentId && !pathSet.has(m.id));
+                        extraMembers.push(...siblings);
+                    }
+                }
+                // Add children of each path member too
+                for (const pm of subset) {
+                    const children = members.filter(m => m.parentId === pm.id && !pathSet.has(m.id));
+                    extraMembers.push(...children);
+                }
+                subset.push(...extraMembers);
+            }
         }
         // Focus Mode: only show focused person, their parents, and direct children
         else if (focusId) {
@@ -972,6 +989,9 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
                                                     setFocusId(m.id);
                                                     setActiveMobileTab(null);
                                                     setMobileSearchTerm('');
+                                                    setCalcA('');
+                                                    setCalcB('');
+                                                    setRelationPath([]);
                                                 }}
                                                 className="px-4 py-3 border-b border-[#e8dcb8] last:border-b-0 hover:bg-[#8b5a2b]/10 active:bg-[#8b5a2b]/20 cursor-pointer"
                                             >
