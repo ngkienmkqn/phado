@@ -394,13 +394,23 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const resolvedA = resolveToBloodline(calcA);
         const resolvedB = resolveToBloodline(calcB);
 
-        const pathA: MemberData[] = [];
-        let currA = members.find(m => m.id === resolvedA);
-        while (currA) { pathA.push(currA); currA = currA.parentId ? members.find(m => m.id === currA?.parentId) : undefined; }
+        const memberLookup: Record<string, MemberData> = {};
+        for (const m of members) memberLookup[m.id] = m;
 
-        const pathB: MemberData[] = [];
-        let currB = members.find(m => m.id === resolvedB);
-        while (currB) { pathB.push(currB); currB = currB.parentId ? members.find(m => m.id === currB?.parentId) : undefined; }
+        const traceAncestors = (startId: string): MemberData[] => {
+            const path: MemberData[] = [];
+            const visited: Record<string, boolean> = {};
+            let curr: MemberData | undefined = memberLookup[startId];
+            while (curr && path.length < 50 && !visited[curr.id]) {
+                visited[curr.id] = true;
+                path.push(curr);
+                curr = curr.parentId ? memberLookup[curr.parentId] : undefined;
+            }
+            return path;
+        };
+
+        const pathA = traceAncestors(resolvedA);
+        const pathB = traceAncestors(resolvedB);
 
         let lcaIndexA = -1, lcaIndexB = -1;
         for (let i = 0; i < pathA.length; i++) {
@@ -728,13 +738,23 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         const isASpouse = resolvedA !== calcA;
         const isBSpouse = resolvedB !== calcB;
 
-        const pathA: MemberData[] = [];
-        let currA = members.find(m => m.id === resolvedA);
-        while (currA) { pathA.push(currA); currA = currA.parentId ? members.find(m => m.id === currA?.parentId) : undefined; }
+        const memberLookup2: Record<string, MemberData> = {};
+        for (const m of members) memberLookup2[m.id] = m;
 
-        const pathB: MemberData[] = [];
-        let currB = members.find(m => m.id === resolvedB);
-        while (currB) { pathB.push(currB); currB = currB.parentId ? members.find(m => m.id === currB?.parentId) : undefined; }
+        const traceAncestors2 = (startId: string): MemberData[] => {
+            const path: MemberData[] = [];
+            const visited: Record<string, boolean> = {};
+            let curr: MemberData | undefined = memberLookup2[startId];
+            while (curr && path.length < 50 && !visited[curr.id]) {
+                visited[curr.id] = true;
+                path.push(curr);
+                curr = curr.parentId ? memberLookup2[curr.parentId] : undefined;
+            }
+            return path;
+        };
+
+        const pathA = traceAncestors2(resolvedA);
+        const pathB = traceAncestors2(resolvedB);
 
         let lcaIndexA = -1, lcaIndexB = -1;
         for (let i = 0; i < pathA.length; i++) {

@@ -297,12 +297,18 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         return { treeNodes: nodes };
     }, [focusId, members]);
 
-    // ─── Relationship path ───────────────────────────────────────────
+    // ─── Relationship path (with cycle protection) ─────────────────
+    const memberMap = useMemo(() => {
+        const map = new Map<string, MemberData>();
+        for (const m of members) map.set(m.id, m);
+        return map;
+    }, [members]);
+
     const { relationResult, relationPath } = useMemo(() => {
         if (!calcA || !calcB || calcA === calcB) return { relationResult: null, relationPath: new Set<string>() };
 
         const resolveToBloodline = (memberId: string): string => {
-            const person = members.find(m => m.id === memberId);
+            const person = memberMap.get(memberId);
             if (!person) return memberId;
             if (person.parentId) return memberId;
             const partner = members.find(m => m.spouse === person.name);
@@ -313,13 +319,21 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         const resolvedA = resolveToBloodline(calcA);
         const resolvedB = resolveToBloodline(calcB);
 
-        const pathA: MemberData[] = [];
-        let currA = members.find(m => m.id === resolvedA);
-        while (currA) { pathA.push(currA); currA = currA.parentId ? members.find(m => m.id === currA?.parentId) : undefined; }
+        // Trace ancestor chain with cycle detection + depth cap
+        const traceAncestors = (startId: string): MemberData[] => {
+            const path: MemberData[] = [];
+            const visited = new Set<string>();
+            let curr = memberMap.get(startId);
+            while (curr && path.length < 50 && !visited.has(curr.id)) {
+                visited.add(curr.id);
+                path.push(curr);
+                curr = curr.parentId ? memberMap.get(curr.parentId) : undefined;
+            }
+            return path;
+        };
 
-        const pathB: MemberData[] = [];
-        let currB = members.find(m => m.id === resolvedB);
-        while (currB) { pathB.push(currB); currB = currB.parentId ? members.find(m => m.id === currB?.parentId) : undefined; }
+        const pathA = traceAncestors(resolvedA);
+        const pathB = traceAncestors(resolvedB);
 
         let lcaA = -1, lcaB = -1;
         for (let i = 0; i < pathA.length; i++) {
@@ -345,7 +359,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             relationResult: `🔴 ${personA.name} gọi ${personB.name} là ${termAB}\n🔵 ${personB.name} gọi ${personA.name} là ${termBA}`,
             relationPath: pIds,
         };
-    }, [calcA, calcB, members]);
+    }, [calcA, calcB, members, memberMap]);
 
     // ─── Search ──────────────────────────────────────────────────────
     const searchResults = useMemo(() => {
