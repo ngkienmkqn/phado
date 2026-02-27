@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Users, TreeDeciduous, BookOpen, Settings, Leaf } from "lucide-react";
+import { Users, TreeDeciduous, BookOpen, Settings, Leaf, HelpCircle } from "lucide-react";
 import BlogSection from '@/components/BlogSection';
 import { useState, useEffect } from 'react';
 
@@ -117,6 +117,13 @@ export default function Home() {
               <BookOpen className="w-12 h-12 text-pink-400 mb-4 group-hover:-translate-y-2 group-hover:scale-110 group-hover:text-pink-300 transition-all duration-300 drop-shadow-[0_0_8px_rgba(236,72,153,0.4)]" />
               <h3 className="font-serif font-bold text-xl text-pink-100 mb-2">Sách Gia Phả</h3>
               <p className="text-sm text-pink-200/50 text-center font-medium">Kỷ yếu lịch sử truyền nối</p>
+            </Link>
+
+            <Link href="/guide" className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-[#14100c]/80 border border-amber-900/30 hover:border-amber-500/50 hover:bg-[#1f1a11] transition-all overflow-hidden lg:col-span-1">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.1)_0,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <HelpCircle className="w-12 h-12 text-amber-400 mb-4 group-hover:-translate-y-2 group-hover:scale-110 group-hover:text-amber-300 transition-all duration-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]" />
+              <h3 className="font-serif font-bold text-xl text-amber-100 mb-2">Hướng Dẫn Sử Dụng</h3>
+              <p className="text-sm text-amber-200/50 text-center font-medium">Cho các bác, các cụ cao tuổi</p>
             </Link>
           </div>
         </div>
