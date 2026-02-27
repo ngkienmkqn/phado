@@ -439,11 +439,41 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         {childrenNodes.map(child => (
                                             <div
                                                 key={child.id}
-                                                onClick={() => onViewMember(child.id)}
-                                                className="p-2.5 bg-[#fdfbf7] border border-[#e8dcb8] rounded-lg cursor-pointer hover:border-[#8b5a2b] transition-all group flex items-center justify-between"
+                                                className="p-2.5 bg-[#fdfbf7] border border-[#e8dcb8] rounded-lg flex items-center justify-between group"
                                             >
-                                                <span className="text-sm font-medium text-[#3e2723] group-hover:text-[#8b5a2b]">{child.name}</span>
-                                                <ChevronRight size={14} className="text-[#d2b48c] group-hover:text-[#8b5a2b]" />
+                                                <span
+                                                    onClick={() => onViewMember(child.id)}
+                                                    className="text-sm font-medium text-[#3e2723] group-hover:text-[#8b5a2b] cursor-pointer flex-1"
+                                                >{child.name}</span>
+                                                <div className="flex items-center gap-1">
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            const reason = prompt(`Bạn muốn xóa "${child.name}" khỏi danh sách con của "${member.name}"?\n\nLý do:`);
+                                                            if (reason !== null) {
+                                                                fetch('/api/family-data', {
+                                                                    method: 'POST',
+                                                                    headers: { 'Content-Type': 'application/json' },
+                                                                    body: JSON.stringify({
+                                                                        type: 'remove_child',
+                                                                        parentId: member.id,
+                                                                        parentName: member.name,
+                                                                        childId: child.id,
+                                                                        childName: child.name,
+                                                                        reason: reason || 'Không có lý do',
+                                                                        timestamp: new Date().toISOString(),
+                                                                    }),
+                                                                });
+                                                                alert(`Yêu cầu xóa "${child.name}" đã được gửi lên Admin duyệt.`);
+                                                            }
+                                                        }}
+                                                        className="p-1 hover:bg-red-50 rounded-full transition-colors"
+                                                        title="Đề xuất xóa con"
+                                                    >
+                                                        <X size={14} className="text-red-400 hover:text-red-600" />
+                                                    </button>
+                                                    <ChevronRight size={14} className="text-[#d2b48c] group-hover:text-[#8b5a2b] cursor-pointer" onClick={() => onViewMember(child.id)} />
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

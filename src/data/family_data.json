@@ -61,7 +61,7 @@
       "gender": "male",
       "spouse": "Cụ bà hiệu Đôn Chất",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m3",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -73,7 +73,7 @@
       "gender": "female",
       "spouse": "BIỆT CƯ ĐẾN GIA BÌNH",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m3",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -85,7 +85,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m3",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -97,7 +97,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m3",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -109,7 +109,7 @@
       "gender": "male",
       "spouse": "Cụ bà hiệu Cung Thuận",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m5",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -133,7 +133,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m15",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -145,7 +145,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m15",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -157,7 +157,7 @@
       "gender": "male",
       "spouse": "Cụ Bà húy Thiện",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m9",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -181,7 +181,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m15",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -193,7 +193,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m13",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -205,7 +205,7 @@
       "gender": "male",
       "spouse": "Cụ Ngân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m13",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -217,7 +217,7 @@
       "gender": "female",
       "spouse": "THẦN VŨ VỆ",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m13",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -229,7 +229,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m13",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -241,7 +241,7 @@
       "gender": "male",
       "spouse": "Cụ húy Cần",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m16",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -265,7 +265,7 @@
       "gender": "male",
       "spouse": "Từ Ý Nhụ Nhân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m19",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -277,7 +277,7 @@
       "gender": "female",
       "spouse": "Ô. HÚY QUYỀN",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m19",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -289,7 +289,7 @@
       "gender": "male",
       "spouse": "Từ Đức Nhụ Nhân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m19",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -301,7 +301,7 @@
       "gender": "female",
       "spouse": "Ô. HÚY KIỆM",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m19",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -313,7 +313,7 @@
       "gender": "male",
       "spouse": "Từ Ân Phu Nhân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m19",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -337,7 +337,7 @@
       "gender": "male",
       "spouse": "Cụ bà húy Lê",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m20",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -361,7 +361,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m56",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -373,7 +373,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -385,7 +385,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -397,7 +397,7 @@
       "gender": "male",
       "spouse": "Cụ Bà húy Quyên",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m28",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -409,7 +409,7 @@
       "gender": "female",
       "spouse": "Ô. PHÚC HÒA",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m28",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -421,7 +421,7 @@
       "gender": "male",
       "spouse": "Mỹ Toàn Phu Nhân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m28",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -445,7 +445,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -457,7 +457,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -469,7 +469,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -481,7 +481,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m33",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -493,7 +493,7 @@
       "gender": "male",
       "spouse": "Kính Tín Phu Nhân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m35",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -517,7 +517,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -529,7 +529,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -541,7 +541,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -553,7 +553,7 @@
       "gender": "male",
       "spouse": "Cụ bà hiệu Từ Nghiêm",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m40",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -577,7 +577,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -589,7 +589,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -601,7 +601,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -613,7 +613,7 @@
       "gender": "male",
       "spouse": "Cụ Bà hiệu Từ Thế",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m46",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -637,7 +637,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -649,7 +649,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -661,7 +661,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -673,7 +673,7 @@
       "gender": "male",
       "spouse": "Từ Chất Phu Nhân",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m51",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -697,7 +697,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -709,7 +709,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -721,7 +721,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -733,7 +733,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m56",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -745,7 +745,7 @@
       "gender": "male",
       "spouse": "CỤ TỔ BÀ",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m56",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -757,7 +757,7 @@
       "gender": "female",
       "spouse": "Thất truyền",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m56",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -769,7 +769,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -781,7 +781,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m56",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -793,7 +793,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -805,7 +805,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1248",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -817,7 +817,7 @@
       "gender": "male",
       "spouse": "Cụ Chương Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m61",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -841,7 +841,7 @@
       "gender": "male",
       "spouse": "Cụ Chính Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m62",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -865,7 +865,7 @@
       "gender": "male",
       "spouse": "Đào Thị Hoàn",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m578",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -889,7 +889,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -901,7 +901,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -913,7 +913,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -925,7 +925,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -937,7 +937,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m65",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -949,7 +949,7 @@
       "gender": "male",
       "spouse": "Cụ Nhương Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1001",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -973,7 +973,7 @@
       "gender": "male",
       "spouse": "Cụ Điền Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -985,7 +985,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -997,7 +997,7 @@
       "gender": "male",
       "spouse": "Cụ Bảo Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m70",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1009,7 +1009,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m70",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1021,7 +1021,7 @@
       "gender": "male",
       "spouse": "Trần Thị Tư Hiệu",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m70",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1045,7 +1045,7 @@
       "gender": "male",
       "spouse": "Cụ Điền Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1057,7 +1057,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1069,7 +1069,7 @@
       "gender": "male",
       "spouse": "Cụ Bơ Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1081,7 +1081,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1093,7 +1093,7 @@
       "gender": "male",
       "spouse": "Cụ Bát Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1105,7 +1105,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1117,7 +1117,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m257",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1923",
       "birthLunar": null
@@ -1129,7 +1129,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m75",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1815",
       "birthLunar": null
@@ -1141,7 +1141,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m75",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1821",
       "birthLunar": null
@@ -1153,7 +1153,7 @@
       "gender": "male",
       "spouse": "Phan Thị Tấn",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m77",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1177,7 +1177,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m77",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1189,7 +1189,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m77",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1823",
       "birthLunar": null
@@ -1201,7 +1201,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m79",
       "childrenIds": [
         "m128"
       ],
@@ -1215,7 +1215,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m79",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1227,7 +1227,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m79",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1251,7 +1251,7 @@
       "gender": "male",
       "spouse": "Hiệu Diệu Thuận",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m87",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1881",
       "birthLunar": null
@@ -1287,7 +1287,7 @@
       "gender": "male",
       "spouse": "Cụ Uyển Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m83",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1311,7 +1311,7 @@
       "gender": "male",
       "spouse": "Trần Thị Huyên",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m85",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1335,7 +1335,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m158",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1359,7 +1359,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m89",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1383,7 +1383,7 @@
       "gender": "male",
       "spouse": "Cụ Trạch Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m91",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1407,7 +1407,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1419,7 +1419,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m94",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1847",
       "birthLunar": null
@@ -1431,7 +1431,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1443,7 +1443,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m945",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1862",
       "birthLunar": null
@@ -1455,7 +1455,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m95",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1851",
       "birthLunar": null
@@ -1467,7 +1467,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m95",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1854",
       "birthLunar": null
@@ -1503,7 +1503,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m98",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1515,7 +1515,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m98",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1527,7 +1527,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m99",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1583,7 +1583,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1595,7 +1595,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1607,7 +1607,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1619,7 +1619,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1903",
       "birthLunar": null
@@ -1631,7 +1631,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1643,7 +1643,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1655,7 +1655,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1667,7 +1667,7 @@
       "gender": "male",
       "spouse": "Cụ Tấn Bà",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m421",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1919",
       "birthLunar": null
@@ -1679,7 +1679,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1691,7 +1691,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1914",
       "birthLunar": null
@@ -1703,7 +1703,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1913",
       "birthLunar": null
@@ -1715,7 +1715,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1727,7 +1727,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1917",
       "birthLunar": null
@@ -1751,7 +1751,7 @@
       "gender": "male",
       "spouse": "Phạm Thị Ngóng",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m107",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1775,7 +1775,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m107",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1787,7 +1787,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m107",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1811,7 +1811,7 @@
       "gender": "male",
       "spouse": "Lý Thị Tam",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1835,7 +1835,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1847,7 +1847,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1859,7 +1859,7 @@
       "gender": "male",
       "spouse": "Thang Thị Đôi",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1871,7 +1871,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1883,7 +1883,7 @@
       "gender": "male",
       "spouse": "Thang Thị Bơ",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1907,7 +1907,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m158",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1919,7 +1919,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m158",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1931,7 +1931,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1943,7 +1943,7 @@
       "gender": "male",
       "spouse": "Lý Thị Nhớn",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m158",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1967,7 +1967,7 @@
       "gender": "male",
       "spouse": "Hà Thị Bốn",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m158",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -1991,7 +1991,7 @@
       "gender": "male",
       "spouse": "Trần Thị Húc",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m113",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1908",
       "birthLunar": null
@@ -2015,7 +2015,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m115",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1903",
       "birthLunar": null
@@ -2027,7 +2027,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m207",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1903",
       "birthLunar": null
@@ -2039,7 +2039,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m115",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2063,7 +2063,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m118",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1885",
       "birthLunar": null
@@ -2075,7 +2075,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2087,7 +2087,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2099,7 +2099,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m807",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2111,7 +2111,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2123,7 +2123,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2135,7 +2135,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2147,7 +2147,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m121",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2159,7 +2159,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2171,7 +2171,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m122",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1882",
       "birthLunar": null
@@ -2315,7 +2315,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m125",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2327,7 +2327,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m126",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1901",
       "birthLunar": null
@@ -2339,7 +2339,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m126",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1908",
       "birthLunar": null
@@ -2351,7 +2351,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m127",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2363,7 +2363,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m127",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2477,7 +2477,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m131",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1929",
       "birthLunar": null
@@ -2489,7 +2489,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1934",
       "birthLunar": null
@@ -2501,7 +2501,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m131",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2513,7 +2513,7 @@
       "gender": "male",
       "spouse": "Quách Thị Kỷ",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m856",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2537,7 +2537,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1932",
       "birthLunar": null
@@ -2549,7 +2549,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1940",
       "birthLunar": null
@@ -2561,7 +2561,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m726",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1944",
       "birthLunar": null
@@ -2573,7 +2573,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m726",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1945",
       "birthLunar": null
@@ -2585,7 +2585,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m726",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1947",
       "birthLunar": null
@@ -2597,7 +2597,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m697",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1952",
       "birthLunar": null
@@ -2609,7 +2609,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m269",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1954",
       "birthLunar": null
@@ -2633,7 +2633,7 @@
       "gender": "male",
       "spouse": "Đào Thị Nhiên",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1944",
       "birthLunar": null
@@ -2657,7 +2657,7 @@
       "gender": "male",
       "spouse": "Trần Thị Cừ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m143",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1956",
       "birthLunar": null
@@ -2681,7 +2681,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m145",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2693,7 +2693,7 @@
       "gender": "male",
       "spouse": "Hoàng Thị Chuyên",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m145",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2717,7 +2717,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m145",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2729,7 +2729,7 @@
       "gender": "male",
       "spouse": "Trần Thị Thụy",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m145",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": "14 - 02 - ----"
@@ -2753,7 +2753,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2765,7 +2765,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2777,7 +2777,7 @@
       "gender": "male",
       "spouse": "Thang Thị Láng",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2789,7 +2789,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2801,7 +2801,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2813,7 +2813,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m275",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2825,7 +2825,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2837,7 +2837,7 @@
       "gender": "male",
       "spouse": "Trần Thị Tám",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m617",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1927",
       "birthLunar": null
@@ -2861,7 +2861,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m148",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2873,7 +2873,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m148",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2885,7 +2885,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m148",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1936",
       "birthLunar": null
@@ -2897,7 +2897,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m150",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -2909,7 +2909,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m150",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1929",
       "birthLunar": "1929 - -- - ----"
@@ -2921,7 +2921,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m150",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1932",
       "birthLunar": "1932 - -- - ----"
@@ -2933,7 +2933,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m150",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1931",
       "birthLunar": null
@@ -2945,7 +2945,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1936",
       "birthLunar": null
@@ -2957,7 +2957,7 @@
       "gender": "male",
       "spouse": "Đinh Thị Lập",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m150",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1944",
       "birthLunar": null
@@ -2981,7 +2981,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1928",
       "birthLunar": null
@@ -2993,7 +2993,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1929",
       "birthLunar": null
@@ -3005,7 +3005,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1932",
       "birthLunar": null
@@ -3017,7 +3017,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1934",
       "birthLunar": null
@@ -3029,7 +3029,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1934",
       "birthLunar": null
@@ -3041,7 +3041,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1937",
       "birthLunar": null
@@ -3053,7 +3053,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1939",
       "birthLunar": null
@@ -3077,7 +3077,7 @@
       "gender": "male",
       "spouse": "Trần Thị Hảo",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1941",
       "birthLunar": null
@@ -3101,7 +3101,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m152",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1944",
       "birthLunar": null
@@ -3113,7 +3113,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3125,7 +3125,7 @@
       "gender": "male",
       "spouse": "Trần Thị Thọ",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m154",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1928",
       "birthLunar": null
@@ -3149,7 +3149,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m154",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1930",
       "birthLunar": null
@@ -3161,7 +3161,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m698",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1933",
       "birthLunar": null
@@ -3173,7 +3173,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m154",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1939",
       "birthLunar": null
@@ -3185,7 +3185,7 @@
       "gender": "male",
       "spouse": "Đào Thị Thanh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1942",
       "birthLunar": null
@@ -3209,7 +3209,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1933",
       "birthLunar": null
@@ -3221,7 +3221,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1944",
       "birthLunar": null
@@ -3233,7 +3233,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1947",
       "birthLunar": null
@@ -3245,7 +3245,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1940",
       "birthLunar": null
@@ -3257,7 +3257,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1952",
       "birthLunar": null
@@ -3269,7 +3269,7 @@
       "gender": "male",
       "spouse": "Trần Thị Nghĩa",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m941",
       "childrenIds": [],
       "birthSolar": "25 - 12 - 1955",
       "birthLunar": "12 - 11 - 1955"
@@ -3293,7 +3293,7 @@
       "gender": "male",
       "spouse": "Ngô Thị Cỏn",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m726",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1945",
       "birthLunar": null
@@ -3317,7 +3317,7 @@
       "gender": "male",
       "spouse": "Ngô Thị Hòa",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m287",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null
@@ -3341,7 +3341,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m697",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1952",
       "birthLunar": null
@@ -3353,7 +3353,7 @@
       "gender": "male",
       "spouse": "Trần Thị Mão",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m161",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1925",
       "birthLunar": null
@@ -3389,7 +3389,7 @@
       "gender": "male",
       "spouse": "Lý Thị Đôi",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1932",
       "birthLunar": null
@@ -3413,7 +3413,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1934",
       "birthLunar": null
@@ -3425,7 +3425,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1932",
       "birthLunar": null
@@ -3437,7 +3437,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1940",
       "birthLunar": null
@@ -3449,7 +3449,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1932",
       "birthLunar": null
@@ -3461,7 +3461,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m163",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1947",
       "birthLunar": null
@@ -3473,7 +3473,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m165",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1934",
       "birthLunar": null
@@ -3485,7 +3485,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m165",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1936",
       "birthLunar": null
@@ -3497,7 +3497,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m165",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1940",
       "birthLunar": null
@@ -3509,7 +3509,7 @@
       "gender": "male",
       "spouse": "Trần Thị Mai",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m165",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1940",
       "birthLunar": null
@@ -3533,7 +3533,7 @@
       "gender": "male",
       "spouse": "Trần Thị Hựu",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m165",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3557,7 +3557,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m167",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1955",
       "birthLunar": null
@@ -3569,7 +3569,7 @@
       "gender": "male",
       "spouse": "Trần Thị Năm",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m167",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1934",
       "birthLunar": null
@@ -3593,7 +3593,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m169",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1954",
       "birthLunar": null
@@ -3605,7 +3605,7 @@
       "gender": "male",
       "spouse": "Trần Thị Hồng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m169",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -3629,7 +3629,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m169",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1962",
       "birthLunar": null
@@ -3653,7 +3653,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3665,7 +3665,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3677,7 +3677,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m171",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1906",
       "birthLunar": null
@@ -3689,7 +3689,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3701,7 +3701,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3713,7 +3713,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m223",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1930",
       "birthLunar": null
@@ -3725,7 +3725,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -3737,7 +3737,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m178",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1900",
       "birthLunar": null
@@ -3749,7 +3749,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m180",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1926",
       "birthLunar": null
@@ -3869,7 +3869,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m180",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4073,7 +4073,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4085,7 +4085,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4097,7 +4097,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4109,7 +4109,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m193",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1900",
       "birthLunar": null
@@ -4121,7 +4121,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m193",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1928",
       "birthLunar": null
@@ -4133,7 +4133,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m194",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1940",
       "birthLunar": null
@@ -4145,7 +4145,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4157,7 +4157,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m196",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4244,7 +4244,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null
@@ -4256,7 +4256,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m203",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null
@@ -4268,7 +4268,7 @@
       "gender": "male",
       "spouse": "Đỗ Thị Lan",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m299",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null
@@ -4280,7 +4280,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m203",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1979",
       "birthLunar": null
@@ -4292,7 +4292,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1098",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -4304,7 +4304,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m203",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -4316,7 +4316,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m238",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -4328,7 +4328,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -4340,7 +4340,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m205",
       "childrenIds": [],
       "birthSolar": "19 - 05 - 1962",
       "birthLunar": "16 - 04 - 1962"
@@ -4352,7 +4352,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m205",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -4364,7 +4364,7 @@
       "gender": "male",
       "spouse": "Thang Thị Hoa",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m205",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -4388,7 +4388,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m207",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1967",
       "birthLunar": null
@@ -4400,7 +4400,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m207",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null
@@ -4412,7 +4412,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1046",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null
@@ -4424,7 +4424,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m697",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -4436,7 +4436,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4448,7 +4448,7 @@
       "gender": "male",
       "spouse": "Quách Thị Mạo",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m207",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -4472,7 +4472,7 @@
       "gender": "male",
       "spouse": "Đào Thị Phức",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m208",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1958",
       "birthLunar": null
@@ -4496,7 +4496,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m208",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4508,7 +4508,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m208",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4520,7 +4520,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m208",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -4532,7 +4532,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m208",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -4556,7 +4556,7 @@
       "gender": "male",
       "spouse": "Quách Thị Tuyền",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null
@@ -4580,7 +4580,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4592,7 +4592,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4604,7 +4604,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -4616,7 +4616,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m369",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -4628,7 +4628,7 @@
       "gender": "male",
       "spouse": "Trần Thị Sản",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -4652,7 +4652,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m212",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -4676,7 +4676,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m214",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -4688,7 +4688,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m214",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -4700,7 +4700,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m995",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4712,7 +4712,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4724,7 +4724,7 @@
       "gender": "male",
       "spouse": "Chử Thị Kim Anh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -4748,7 +4748,7 @@
       "gender": "male",
       "spouse": "Phạm Thị Diệu Hiền",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m216",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1979",
       "birthLunar": null
@@ -4772,7 +4772,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -4784,7 +4784,7 @@
       "gender": "male",
       "spouse": "Phạm Thị Hồng Thái",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m216",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -4808,7 +4808,7 @@
       "gender": "male",
       "spouse": "Đỗ Thị Lan",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m299",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null
@@ -4832,7 +4832,7 @@
       "gender": "male",
       "spouse": "Đào Thị Mỳ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1972",
       "birthLunar": null
@@ -4856,7 +4856,7 @@
       "gender": "male",
       "spouse": "Lê Thị Toản (bỏ)",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -4880,7 +4880,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m252",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -4892,7 +4892,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1165",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -4904,7 +4904,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1165",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4916,7 +4916,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -4928,7 +4928,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -4940,7 +4940,7 @@
       "gender": "male",
       "spouse": "Quách Thị Hương Anh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m933",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1986",
       "birthLunar": null
@@ -4964,7 +4964,7 @@
       "gender": "male",
       "spouse": "Trương Thị Bé",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1165",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -4988,7 +4988,7 @@
       "gender": "male",
       "spouse": "PHẠM THỊ KHOẢI",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m222",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5012,7 +5012,7 @@
       "gender": "male",
       "spouse": "Trịnh Thị Tính",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m223",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5036,7 +5036,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Quế",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m225",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5060,7 +5060,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m226",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5072,7 +5072,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ TRÌNH",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m226",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5096,7 +5096,7 @@
       "gender": "male",
       "spouse": "Lê Thị Liên",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m228",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5120,7 +5120,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m228",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1953",
       "birthLunar": null
@@ -5132,7 +5132,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m228",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5144,7 +5144,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m229",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null
@@ -5156,7 +5156,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m230",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5168,7 +5168,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -5180,7 +5180,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m496",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1960",
       "birthLunar": null
@@ -5192,7 +5192,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m496",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -5204,7 +5204,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m496",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1963",
       "birthLunar": null
@@ -5216,7 +5216,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m496",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1948",
       "birthLunar": null
@@ -5228,7 +5228,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m234",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1952",
       "birthLunar": null
@@ -5240,7 +5240,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m234",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1954",
       "birthLunar": null
@@ -5252,7 +5252,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -5264,7 +5264,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m237",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1958",
       "birthLunar": null
@@ -5288,7 +5288,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m238",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -5300,7 +5300,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m239",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1963",
       "birthLunar": "1963 - -- - ----"
@@ -5312,7 +5312,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m239",
       "childrenIds": [],
       "birthSolar": "-- - 12 - 1958",
       "birthLunar": "-- - 11 - 1958"
@@ -5324,7 +5324,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m298",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5336,7 +5336,7 @@
       "gender": "male",
       "spouse": "Giáp Thu Huế",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m241",
       "childrenIds": [],
       "birthSolar": "07 - 07 - 1961",
       "birthLunar": "25 - 05 - 1961"
@@ -5360,7 +5360,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m243",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -5372,7 +5372,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": "30 - 04 - 1974",
       "birthLunar": "09 - 04 - 1974"
@@ -5384,7 +5384,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m501",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -5396,7 +5396,7 @@
       "gender": "male",
       "spouse": "Cam My Huyền",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m245",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1977",
       "birthLunar": null
@@ -5420,7 +5420,7 @@
       "gender": "male",
       "spouse": "Lê Thanh Lý",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m245",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null
@@ -5444,7 +5444,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m247",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null
@@ -5456,7 +5456,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m247",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -5468,7 +5468,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m281",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -5480,7 +5480,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -5492,7 +5492,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m247",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -5504,7 +5504,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m249",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -5516,7 +5516,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m715",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null
@@ -5528,7 +5528,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -5540,7 +5540,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m250",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1977",
       "birthLunar": null
@@ -5552,7 +5552,7 @@
       "gender": "male",
       "spouse": "Trần Hồng Nhung",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m477",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1980",
       "birthLunar": null
@@ -5576,7 +5576,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m252",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -5588,7 +5588,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m252",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1968",
       "birthLunar": null
@@ -5600,7 +5600,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m252",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -5612,7 +5612,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m252",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null
@@ -5636,7 +5636,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1236",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -5648,7 +5648,7 @@
       "gender": "male",
       "spouse": "Phan Thị Liên",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m255",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1972",
       "birthLunar": null
@@ -5672,7 +5672,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m255",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -5684,7 +5684,7 @@
       "gender": "male",
       "spouse": "Trương Thị Lưu",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m463",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1979",
       "birthLunar": null
@@ -5708,7 +5708,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m257",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null
@@ -5720,7 +5720,7 @@
       "gender": "male",
       "spouse": "Hà Thị Bình",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m257",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null
@@ -5744,7 +5744,7 @@
       "gender": "male",
       "spouse": "Trần Thị Thanh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m259",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1963",
       "birthLunar": null
@@ -5768,7 +5768,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m295",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -5780,7 +5780,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1098",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -5792,7 +5792,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m905",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -5816,7 +5816,7 @@
       "gender": "male",
       "spouse": "Trần Lệ Quyên",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m264",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1971",
       "birthLunar": null
@@ -5840,7 +5840,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m875",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -5852,7 +5852,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m266",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -5864,7 +5864,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m269",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1978",
       "birthLunar": null
@@ -5888,7 +5888,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -5900,7 +5900,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -5924,7 +5924,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1034",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null
@@ -5936,7 +5936,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1034",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -5948,7 +5948,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1034",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -5960,7 +5960,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1034",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1980",
       "birthLunar": null
@@ -5972,7 +5972,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m275",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -5984,7 +5984,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m275",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1977",
       "birthLunar": null
@@ -6008,7 +6008,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -6020,7 +6020,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -6032,7 +6032,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1947",
       "birthLunar": null
@@ -6044,7 +6044,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -6056,7 +6056,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1959",
       "birthLunar": null
@@ -6068,7 +6068,7 @@
       "gender": "male",
       "spouse": "Trần Thị Phú",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1962",
       "birthLunar": null
@@ -6092,7 +6092,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1964",
       "birthLunar": null
@@ -6104,7 +6104,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1963",
       "birthLunar": null
@@ -6116,7 +6116,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": "30 - 04 - 1974",
       "birthLunar": "09 - 04 - 1974"
@@ -6128,7 +6128,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m281",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null
@@ -6140,7 +6140,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m281",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null
@@ -6152,7 +6152,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m281",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -6164,7 +6164,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m281",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1958",
       "birthLunar": null
@@ -6176,7 +6176,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1957",
       "birthLunar": null
@@ -6188,7 +6188,7 @@
       "gender": "male",
       "spouse": "Trần Thị Lợi",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -6212,7 +6212,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -6224,7 +6224,7 @@
       "gender": "male",
       "spouse": "Đinh Thị Xuyên",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m285",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -6248,7 +6248,7 @@
       "gender": "male",
       "spouse": "Trần Thị Huệ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m285",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null
@@ -6272,7 +6272,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m287",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -6284,7 +6284,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m287",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -6296,7 +6296,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m288",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1963",
       "birthLunar": null
@@ -6308,7 +6308,7 @@
       "gender": "male",
       "spouse": "Trần Thị Quý",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m289",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1965",
       "birthLunar": null
@@ -6332,7 +6332,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m289",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null
@@ -6344,7 +6344,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m291",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -6356,7 +6356,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m291",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -6368,7 +6368,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m291",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1977",
       "birthLunar": null
@@ -6380,7 +6380,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m945",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -6392,7 +6392,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m293",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -6404,7 +6404,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m214",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -6416,7 +6416,7 @@
       "gender": "male",
       "spouse": "Dương Thị Thủy",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -6440,7 +6440,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m715",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1949",
       "birthLunar": null
@@ -6452,7 +6452,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m295",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -6464,7 +6464,7 @@
       "gender": "male",
       "spouse": "Lý Thị Thảo",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m561",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1963",
       "birthLunar": null
@@ -6488,7 +6488,7 @@
       "gender": "male",
       "spouse": "Trần Thị Thu",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m558",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -6512,7 +6512,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -6536,7 +6536,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m298",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6548,7 +6548,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m298",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -6560,7 +6560,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1236",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6572,7 +6572,7 @@
       "gender": "male",
       "spouse": "Đỗ Thị Lan",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m299",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1970",
       "birthLunar": null
@@ -6596,7 +6596,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m301",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2000",
       "birthLunar": null
@@ -6608,7 +6608,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m301",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null
@@ -6620,7 +6620,7 @@
       "gender": "male",
       "spouse": "Phan Thị Thùy",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -6644,7 +6644,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6656,7 +6656,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m305",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1935",
       "birthLunar": null
@@ -6668,7 +6668,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6680,7 +6680,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6692,7 +6692,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6704,7 +6704,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6716,7 +6716,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1953",
       "birthLunar": null
@@ -6728,7 +6728,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6740,7 +6740,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6752,7 +6752,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m310",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1931",
       "birthLunar": null
@@ -6764,7 +6764,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m311",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1955",
       "birthLunar": null
@@ -6824,7 +6824,7 @@
       "gender": "male",
       "spouse": "Phạm Thị Bi",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m312",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1904",
       "birthLunar": null
@@ -6848,7 +6848,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Hón",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m312",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1907",
       "birthLunar": null
@@ -6872,7 +6872,7 @@
       "gender": "male",
       "spouse": "Trương Thị Đắc",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m346",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -6956,7 +6956,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m226",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7028,7 +7028,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Chuột",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m319",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7136,7 +7136,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7160,7 +7160,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m321",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1936",
       "birthLunar": null
@@ -7244,7 +7244,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m255",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -7256,7 +7256,7 @@
       "gender": "male",
       "spouse": "Trương thị Vụ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m167",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7376,7 +7376,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m319",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -7412,7 +7412,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m203",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -7424,7 +7424,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m107",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7436,7 +7436,7 @@
       "gender": "male",
       "spouse": "Phạm Thị Ngấn",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m335",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7460,7 +7460,7 @@
       "gender": "male",
       "spouse": "Vũ Thu Hương",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7508,7 +7508,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m341",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1936",
       "birthLunar": null
@@ -7520,7 +7520,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m342",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1955",
       "birthLunar": null
@@ -7532,7 +7532,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -7544,7 +7544,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1242",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7556,7 +7556,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m345",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7604,7 +7604,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m214",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7616,7 +7616,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m353",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2007",
       "birthLunar": null
@@ -7628,7 +7628,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1265",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2011",
       "birthLunar": null
@@ -7640,7 +7640,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m632",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -7652,7 +7652,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m700",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -7664,7 +7664,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -7676,7 +7676,7 @@
       "gender": "male",
       "spouse": "Trần Thị Ngọc",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m483",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7700,7 +7700,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m362",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7712,7 +7712,7 @@
       "gender": "male",
       "spouse": "Dương Thị Lợi",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m362",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -7736,7 +7736,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m364",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2001",
       "birthLunar": null
@@ -7748,7 +7748,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m699",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7760,7 +7760,7 @@
       "gender": "male",
       "spouse": "Kiều Thị Hương (bỏ)",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1180",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null
@@ -7784,7 +7784,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7796,7 +7796,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m995",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7808,7 +7808,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m369",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -7820,7 +7820,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m369",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7832,7 +7832,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m369",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null
@@ -7856,7 +7856,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m371",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -7868,7 +7868,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m371",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -7880,7 +7880,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m371",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null
@@ -7904,7 +7904,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m374",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -7928,7 +7928,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m375",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -7940,7 +7940,7 @@
       "gender": "male",
       "spouse": "Quách Thị Hải Yến",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m558",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -7964,7 +7964,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m376",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null
@@ -7976,7 +7976,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m378",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null
@@ -7988,7 +7988,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m380",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null
@@ -8000,7 +8000,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m381",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2003",
       "birthLunar": null
@@ -8012,7 +8012,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m382",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2005",
       "birthLunar": null
@@ -8024,7 +8024,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m384",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1997",
       "birthLunar": null
@@ -8036,7 +8036,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m684",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null
@@ -8048,7 +8048,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m386",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8060,7 +8060,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m632",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -8072,7 +8072,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m748",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8084,7 +8084,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m389",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8096,7 +8096,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m392",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2003",
       "birthLunar": null
@@ -8108,7 +8108,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m394",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2011",
       "birthLunar": null
@@ -8120,7 +8120,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m397",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -8132,7 +8132,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m397",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2019",
       "birthLunar": null
@@ -8144,7 +8144,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8156,7 +8156,7 @@
       "gender": "male",
       "spouse": "Bùi Thị Thơm",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m595",
       "childrenIds": [],
       "birthSolar": "16 - 07 - 1961",
       "birthLunar": "04 - 06 - 1961"
@@ -8168,7 +8168,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null
@@ -8180,7 +8180,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m401",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8192,7 +8192,7 @@
       "gender": "male",
       "spouse": "PHẠM THỊ HƯƠNG (vợ 1 đã bỏ)",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m846",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1971",
       "birthLunar": null
@@ -8204,7 +8204,7 @@
       "gender": "male",
       "spouse": "Đinh Thị Quỳnh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m403",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1998",
       "birthLunar": null
@@ -8228,7 +8228,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m463",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2002",
       "birthLunar": null
@@ -8240,7 +8240,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m945",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2013",
       "birthLunar": null
@@ -8252,7 +8252,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1004",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -8264,7 +8264,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m412",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -8276,7 +8276,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m412",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8288,7 +8288,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m412",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8300,7 +8300,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m412",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8312,7 +8312,7 @@
       "gender": "male",
       "spouse": "LÊ THỊ DÂM",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m412",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1950",
       "birthLunar": null
@@ -8336,7 +8336,7 @@
       "gender": "male",
       "spouse": "PHẠM THỊ HƯƠNG (vợ 1 đã bỏ)",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m846",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1971",
       "birthLunar": null
@@ -8348,7 +8348,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m414",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8360,7 +8360,7 @@
       "gender": "male",
       "spouse": "NGÔ THỊ QUẢN",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m414",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1959",
       "birthLunar": null
@@ -8384,7 +8384,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8396,7 +8396,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8408,7 +8408,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8420,7 +8420,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8432,7 +8432,7 @@
       "gender": "male",
       "spouse": "VŨ THỊ PHƯƠNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1962",
       "birthLunar": null
@@ -8456,7 +8456,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -8468,7 +8468,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1972",
       "birthLunar": null
@@ -8480,7 +8480,7 @@
       "gender": "male",
       "spouse": "TẠ THỊ MÙI",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null
@@ -8504,7 +8504,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8516,7 +8516,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8528,7 +8528,7 @@
       "gender": "male",
       "spouse": "LÊ THỊ DÂM",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1950",
       "birthLunar": null
@@ -8540,7 +8540,7 @@
       "gender": "male",
       "spouse": "HOÀNG THỊ LY",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1950",
       "birthLunar": null
@@ -8564,7 +8564,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8576,7 +8576,7 @@
       "gender": "male",
       "spouse": "BÙI THỊ NGHÌ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1959",
       "birthLunar": null
@@ -8600,7 +8600,7 @@
       "gender": "male",
       "spouse": "VŨ THỊ TIỆP",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1962",
       "birthLunar": null
@@ -8624,7 +8624,7 @@
       "gender": "male",
       "spouse": "BÙI THỊ HỒNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1965",
       "birthLunar": null
@@ -8648,7 +8648,7 @@
       "gender": "male",
       "spouse": "HÀ THỊ TUYẾT",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m745",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8672,7 +8672,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ THẢO | Phạm Thị Huê",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m578",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8696,7 +8696,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m578",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8708,7 +8708,7 @@
       "gender": "male",
       "spouse": "NGÔ THỊ ĐÀO",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m578",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8732,7 +8732,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ HẢO",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m421",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1969",
       "birthLunar": null
@@ -8756,7 +8756,7 @@
       "gender": "male",
       "spouse": "PHẠM THỊ HƯƠNG (vợ 1 đã bỏ)",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m421",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1971",
       "birthLunar": null
@@ -8780,7 +8780,7 @@
       "gender": "male",
       "spouse": "PHẠM THỊ HƯƠNG (vợ 1 đã bỏ)",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m846",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1971",
       "birthLunar": null
@@ -8804,7 +8804,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8816,7 +8816,7 @@
       "gender": "male",
       "spouse": "HOÀNG THỊ HƯỜNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null
@@ -8840,7 +8840,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8852,7 +8852,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m426",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8864,7 +8864,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m562",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null
@@ -8888,7 +8888,7 @@
       "gender": "male",
       "spouse": "Nghiêm Thị Phượng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m428",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null
@@ -8912,7 +8912,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m875",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -8924,7 +8924,7 @@
       "gender": "male",
       "spouse": "Vi Thị Hải",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m430",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1994",
       "birthLunar": null
@@ -8948,7 +8948,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m432",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -8960,7 +8960,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m435",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -8972,7 +8972,7 @@
       "gender": "male",
       "spouse": "Trần Thị Hoài",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1010",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -8996,7 +8996,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m437",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -9008,7 +9008,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null
@@ -9020,7 +9020,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m699",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9032,7 +9032,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m441",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -9044,7 +9044,7 @@
       "gender": "male",
       "spouse": "Lưu Thị Lan",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m443",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -9068,7 +9068,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m443",
       "childrenIds": [],
       "birthSolar": "05 - 07 - 1991",
       "birthLunar": "24 - 05 - 1991"
@@ -9080,7 +9080,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1247",
       "childrenIds": [],
       "birthSolar": "15 - 06 - 2008",
       "birthLunar": "12 - 05 - 2008"
@@ -9092,7 +9092,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m448",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -9104,7 +9104,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m448",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null
@@ -9116,7 +9116,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m450",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -9128,7 +9128,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m450",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -9140,7 +9140,7 @@
       "gender": "male",
       "spouse": "Lê Thị Dung",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m452",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1977",
       "birthLunar": null
@@ -9164,7 +9164,7 @@
       "gender": "male",
       "spouse": "Lê Phương Thu",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m452",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1979",
       "birthLunar": null
@@ -9188,7 +9188,7 @@
       "gender": "male",
       "spouse": "Cao Thị Tâm",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m513",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -9212,7 +9212,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m460",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -9224,7 +9224,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1241",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -9236,7 +9236,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m465",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -9248,7 +9248,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m466",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null
@@ -9260,7 +9260,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1176",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2001",
       "birthLunar": null
@@ -9272,7 +9272,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m469",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2006",
       "birthLunar": null
@@ -9284,7 +9284,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1276",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null
@@ -9296,7 +9296,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m684",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null
@@ -9308,7 +9308,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m474",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -9320,7 +9320,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null
@@ -9332,7 +9332,7 @@
       "gender": "male",
       "spouse": "Ngô Thị Hương",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m475",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -9356,7 +9356,7 @@
       "gender": "male",
       "spouse": "Trần Thị Hương",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m475",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -9380,7 +9380,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Huế",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m477",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -9404,7 +9404,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m536",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null
@@ -9416,7 +9416,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m899",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1998",
       "birthLunar": null
@@ -9428,7 +9428,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m988",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2000",
       "birthLunar": null
@@ -9440,7 +9440,7 @@
       "gender": "male",
       "spouse": "Quách Thị Hải Yến",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m558",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9452,7 +9452,7 @@
       "gender": "male",
       "spouse": "Trần Thị Ngọc",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m483",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9464,7 +9464,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m649",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null
@@ -9476,7 +9476,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m487",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2006",
       "birthLunar": null
@@ -9488,7 +9488,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m487",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2006",
       "birthLunar": null
@@ -9500,7 +9500,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m908",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null
@@ -9512,7 +9512,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1035",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2013",
       "birthLunar": null
@@ -9524,7 +9524,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m492",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -9536,7 +9536,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m496",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2000",
       "birthLunar": null
@@ -9548,7 +9548,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m524",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2004",
       "birthLunar": null
@@ -9560,7 +9560,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m875",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2011",
       "birthLunar": null
@@ -9572,7 +9572,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m501",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -9596,7 +9596,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m504",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9608,7 +9608,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m504",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null
@@ -9620,7 +9620,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1992",
       "birthLunar": null
@@ -9632,7 +9632,7 @@
       "gender": "male",
       "spouse": "Thân Thị Nụ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1244",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -9656,7 +9656,7 @@
       "gender": "male",
       "spouse": "Trần Thùy Linh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m508",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -9680,7 +9680,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m698",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -9692,7 +9692,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m514",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -9704,7 +9704,7 @@
       "gender": "male",
       "spouse": "VŨ THỊ PHƯƠNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m945",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1962",
       "birthLunar": null
@@ -9728,7 +9728,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m517",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9740,7 +9740,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m517",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2006",
       "birthLunar": null
@@ -9752,7 +9752,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m519",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2001",
       "birthLunar": null
@@ -9764,7 +9764,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m521",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null
@@ -9776,7 +9776,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m901",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1993",
       "birthLunar": null
@@ -9788,7 +9788,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m901",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1997",
       "birthLunar": null
@@ -9800,7 +9800,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m524",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2004",
       "birthLunar": null
@@ -9812,7 +9812,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1079",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2010",
       "birthLunar": null
@@ -9824,7 +9824,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m698",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -9836,7 +9836,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m807",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null
@@ -9848,7 +9848,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m807",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null
@@ -9860,7 +9860,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1004",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -9872,7 +9872,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1194",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -9884,7 +9884,7 @@
       "gender": "male",
       "spouse": "Trần Thị Ngọc",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1194",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9896,7 +9896,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1176",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2001",
       "birthLunar": null
@@ -9908,7 +9908,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m699",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -9920,7 +9920,7 @@
       "gender": "male",
       "spouse": "HOÀNG THỊ HƯỜNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1973",
       "birthLunar": null
@@ -9932,7 +9932,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -9944,7 +9944,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -9956,7 +9956,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m839",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1992",
       "birthLunar": null
@@ -9968,7 +9968,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1241",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -9980,7 +9980,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null
@@ -9992,7 +9992,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1076",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2000",
       "birthLunar": null
@@ -10004,7 +10004,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m648",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -10016,7 +10016,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1241",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -10028,7 +10028,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m549",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -10040,7 +10040,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1242",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -10052,7 +10052,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10064,7 +10064,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m553",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1960",
       "birthLunar": null
@@ -10076,7 +10076,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10088,7 +10088,7 @@
       "gender": "male",
       "spouse": "Quách Thị Hải Yến",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m558",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -10100,7 +10100,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m561",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1956",
       "birthLunar": null
@@ -10112,7 +10112,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m562",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null
@@ -10124,7 +10124,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10172,7 +10172,7 @@
       "gender": "male",
       "spouse": "Trương Thị Nghề",
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m567",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10220,7 +10220,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m935",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10292,7 +10292,7 @@
       "gender": "male",
       "spouse": "Trương Thị Huyền",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10316,7 +10316,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Quy",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10328,7 +10328,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m862",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -10364,7 +10364,7 @@
       "gender": "male",
       "spouse": "Bùi Thị Ân",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m87",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10400,7 +10400,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m281",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10520,7 +10520,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m997",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10688,7 +10688,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -10772,7 +10772,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m715",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10808,7 +10808,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1098",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10820,7 +10820,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m432",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -10832,7 +10832,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m288",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10880,7 +10880,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m154",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -10892,7 +10892,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m875",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10904,7 +10904,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -10916,7 +10916,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m423",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -10928,7 +10928,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m698",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -10940,7 +10940,7 @@
       "gender": "male",
       "spouse": "Bùi Thị Thơm",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m595",
       "childrenIds": [],
       "birthSolar": "16 - 07 - 1961",
       "birthLunar": "04 - 06 - 1961"
@@ -10988,7 +10988,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m941",
       "childrenIds": [],
       "birthSolar": "10 - 05 - 1973",
       "birthLunar": "08 - 04 - 1973"
@@ -11000,7 +11000,7 @@
       "gender": "male",
       "spouse": "Phạm Thị Thảo",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m724",
       "childrenIds": [],
       "birthSolar": "17 - 03 - 1976",
       "birthLunar": "17 - 02 - 1976"
@@ -11132,7 +11132,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11216,7 +11216,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1966",
       "birthLunar": null
@@ -11228,7 +11228,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m289",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11240,7 +11240,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Quy",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m109",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11264,7 +11264,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1992",
       "birthLunar": null
@@ -11312,7 +11312,7 @@
       "gender": "male",
       "spouse": "Ngô Thị Hồng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m613",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11336,7 +11336,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ THẢO | Phạm Thị Huê",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m578",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11360,7 +11360,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m283",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11408,7 +11408,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m432",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -11468,7 +11468,7 @@
       "gender": "male",
       "spouse": "Vũ Thị Trang",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11516,7 +11516,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m298",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11528,7 +11528,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m764",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1961",
       "birthLunar": null
@@ -11540,7 +11540,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ THẢO | Phạm Thị Huê",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m625",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11552,7 +11552,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m627",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11564,7 +11564,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m628",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11576,7 +11576,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m629",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -11588,7 +11588,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1194",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -11600,7 +11600,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1194",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -11612,7 +11612,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m786",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -11624,7 +11624,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m786",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2019",
       "birthLunar": null
@@ -11636,7 +11636,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1236",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -11648,7 +11648,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1139",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -11660,7 +11660,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1141",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -11672,7 +11672,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m645",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -11684,7 +11684,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m650",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -11696,7 +11696,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m651",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null
@@ -11708,7 +11708,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m653",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2004",
       "birthLunar": null
@@ -11720,7 +11720,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m653",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2007",
       "birthLunar": null
@@ -11732,7 +11732,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m655",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -11744,7 +11744,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m655",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2013",
       "birthLunar": null
@@ -11756,7 +11756,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m657",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null
@@ -11768,7 +11768,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m657",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -11780,7 +11780,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m659",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -11792,7 +11792,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m659",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -11804,7 +11804,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2023",
       "birthLunar": null
@@ -11816,7 +11816,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -11828,7 +11828,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m682",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -11840,7 +11840,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m933",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1972",
       "birthLunar": null
@@ -11852,7 +11852,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m690",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11864,7 +11864,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m691",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11876,7 +11876,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m691",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -11888,7 +11888,7 @@
       "gender": "male",
       "spouse": "TRỊNH THỊ HẢI",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m726",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -11912,7 +11912,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -11924,7 +11924,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -11936,7 +11936,7 @@
       "gender": "male",
       "spouse": "BÙI HƯƠNG LIÊN",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -11960,7 +11960,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -11972,7 +11972,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m695",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1983",
       "birthLunar": null
@@ -11984,7 +11984,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m697",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -11996,7 +11996,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m698",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -12008,7 +12008,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m699",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -12020,7 +12020,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m700",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12032,7 +12032,7 @@
       "gender": "male",
       "spouse": "LƯƠNG THỊ HỒNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1248",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -12056,7 +12056,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1248",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -12068,7 +12068,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m933",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1990",
       "birthLunar": null
@@ -12080,7 +12080,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m933",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1972",
       "birthLunar": null
@@ -12092,7 +12092,7 @@
       "gender": "male",
       "spouse": "VŨ THỊ NHUNG",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m933",
       "childrenIds": [],
       "birthSolar": "06 - 02 - 1995",
       "birthLunar": "07 - 01 - 1995"
@@ -12116,7 +12116,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m705",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12128,7 +12128,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Đã mất",
-      "parentId": null,
+      "parentId": "m705",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12140,7 +12140,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null
@@ -12152,7 +12152,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m708",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1974",
       "birthLunar": null
@@ -12164,7 +12164,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1094",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1976",
       "birthLunar": null
@@ -12176,7 +12176,7 @@
       "gender": "male",
       "spouse": "BÙI THỊ THU",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m710",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1982",
       "birthLunar": null
@@ -12200,7 +12200,7 @@
       "gender": "male",
       "spouse": "NGÔ THỊ THÙY CHI",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1246",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null
@@ -12224,7 +12224,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1246",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1984",
       "birthLunar": null
@@ -12248,7 +12248,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m713",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1988",
       "birthLunar": null
@@ -12260,7 +12260,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m713",
       "childrenIds": [],
       "birthSolar": "02 - 12 - 1993",
       "birthLunar": "19 - 10 - 1993"
@@ -12284,7 +12284,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m715",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -12296,7 +12296,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1174",
       "childrenIds": [],
       "birthSolar": "15 - 06 - 1996",
       "birthLunar": "30 - 04 - 1996"
@@ -12308,7 +12308,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1174",
       "childrenIds": [],
       "birthSolar": "07 - 01 - 2006",
       "birthLunar": "08 - 12 - 2005"
@@ -12320,7 +12320,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1046",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1991",
       "birthLunar": null
@@ -12332,7 +12332,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1046",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12344,7 +12344,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1046",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null
@@ -12356,7 +12356,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12368,7 +12368,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m723",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12380,7 +12380,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ PHƯƠNG | Lương Thị Thanh Huyền | Phan Thị hồng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m941",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null
@@ -12404,7 +12404,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m724",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2004",
       "birthLunar": null
@@ -12428,7 +12428,7 @@
       "gender": "male",
       "spouse": "TRỊNH THỊ HẢI",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m726",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1975",
       "birthLunar": null
@@ -12440,7 +12440,7 @@
       "gender": "male",
       "spouse": "ĐẶNG THỊ HUỆ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1996",
       "birthLunar": null
@@ -12464,7 +12464,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": "26 - 08 - 2002",
       "birthLunar": "18 - 07 - 2002"
@@ -12476,7 +12476,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12488,7 +12488,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1999",
       "birthLunar": null
@@ -12500,7 +12500,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "30 - 09 - 2007",
       "birthLunar": "20 - 08 - 2007"
@@ -12512,7 +12512,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m736",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2013",
       "birthLunar": null
@@ -12524,7 +12524,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1106",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -12536,7 +12536,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m739",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -12548,7 +12548,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m739",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -12560,7 +12560,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m649",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2021",
       "birthLunar": null
@@ -12572,7 +12572,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m745",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null
@@ -12584,7 +12584,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m748",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -12596,7 +12596,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m752",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -12608,7 +12608,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m760",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2003",
       "birthLunar": null
@@ -12620,7 +12620,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m762",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2006",
       "birthLunar": null
@@ -12632,7 +12632,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m762",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -12644,7 +12644,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m764",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2008",
       "birthLunar": null
@@ -12656,7 +12656,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m764",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -12668,7 +12668,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m662",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2009",
       "birthLunar": null
@@ -12680,7 +12680,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m776",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -12692,7 +12692,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m778",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -12704,7 +12704,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m778",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2021",
       "birthLunar": null
@@ -12716,7 +12716,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m780",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2012",
       "birthLunar": null
@@ -12728,7 +12728,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m795",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2004",
       "birthLunar": null
@@ -12740,7 +12740,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m766",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -12752,7 +12752,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m766",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -12764,7 +12764,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1184",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -12776,7 +12776,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1184",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -12788,7 +12788,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m996",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null
@@ -12800,7 +12800,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m996",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -12812,7 +12812,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m803",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2019",
       "birthLunar": null
@@ -12824,7 +12824,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m803",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -12836,7 +12836,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m803",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2019",
       "birthLunar": null
@@ -12848,7 +12848,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2016",
       "birthLunar": null
@@ -12860,7 +12860,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2023",
       "birthLunar": null
@@ -12872,7 +12872,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12884,7 +12884,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m837",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -12896,7 +12896,7 @@
       "gender": "male",
       "spouse": null,
       "status": null,
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12908,7 +12908,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12932,7 +12932,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m700",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12944,7 +12944,7 @@
       "gender": "male",
       "spouse": "Trịnh Thị Kim Dung",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m846",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12968,7 +12968,7 @@
       "gender": "male",
       "spouse": "Trần Thị Oanh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m289",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -12992,7 +12992,7 @@
       "gender": "male",
       "spouse": "Lê Thị Nhàn | Lương Thị Doan",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1106",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13016,7 +13016,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m249",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13148,7 +13148,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13184,7 +13184,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13196,7 +13196,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m698",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1987",
       "birthLunar": null
@@ -13244,7 +13244,7 @@
       "gender": "male",
       "spouse": "Lê Thị Huyền",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m578",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13268,7 +13268,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m699",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -13280,7 +13280,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m875",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13292,7 +13292,7 @@
       "gender": "male",
       "spouse": "Phùng Thị Như",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m562",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13424,7 +13424,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ PHƯƠNG | Lương Thị Thanh Huyền | Phan Thị hồng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m941",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null
@@ -13508,7 +13508,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m207",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13628,7 +13628,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m875",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13688,7 +13688,7 @@
       "gender": "male",
       "spouse": "Trương Thị Thùy",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m362",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13712,7 +13712,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m699",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1985",
       "birthLunar": null
@@ -13760,7 +13760,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m715",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -13772,7 +13772,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1981",
       "birthLunar": null
@@ -13784,7 +13784,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1236",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2015",
       "birthLunar": null
@@ -13820,7 +13820,7 @@
       "gender": "male",
       "spouse": "Lê Thị Nhàn | Lương Thị Doan",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1106",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -13904,7 +13904,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1255",
       "childrenIds": [],
       "birthSolar": "16 - 06 - 1991",
       "birthLunar": "05 - 05 - 1991"
@@ -13928,7 +13928,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m728",
       "childrenIds": [],
       "birthSolar": "26 - 08 - 2002",
       "birthLunar": "18 - 07 - 2002"
@@ -13964,7 +13964,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": "30 - 09 - 2007",
       "birthLunar": "20 - 08 - 2007"
@@ -14000,7 +14000,7 @@
       "gender": "male",
       "spouse": "Lê Thị Vân",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m143",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14096,7 +14096,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ PHƯƠNG | Lương Thị Thanh Huyền | Phan Thị hồng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m941",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null
@@ -14108,7 +14108,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14132,7 +14132,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m715",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1989",
       "birthLunar": null
@@ -14144,7 +14144,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14180,7 +14180,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1046",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14192,7 +14192,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m243",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14228,7 +14228,7 @@
       "gender": "male",
       "spouse": "Trần Thị Thùy",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m504",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14300,7 +14300,7 @@
       "gender": "male",
       "spouse": "TRẦN THỊ PHƯƠNG | Lương Thị Thanh Huyền | Phan Thị hồng",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m941",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1995",
       "birthLunar": null
@@ -14348,7 +14348,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m840",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14372,7 +14372,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m524",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14396,7 +14396,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1052",
       "childrenIds": [],
       "birthSolar": "-- - -- - 1986",
       "birthLunar": null
@@ -14408,7 +14408,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m988",
       "childrenIds": [],
       "birthSolar": "12 - 08 - 2001",
       "birthLunar": "23 - 06 - 2001"
@@ -14420,7 +14420,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1034",
       "childrenIds": [],
       "birthSolar": "27 - 08 - 2005",
       "birthLunar": "23 - 07 - 2005"
@@ -14432,7 +14432,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m993",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -14444,7 +14444,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m993",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2020",
       "birthLunar": null
@@ -14456,7 +14456,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1001",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2014",
       "birthLunar": null
@@ -14468,7 +14468,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1003",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2017",
       "birthLunar": null
@@ -14480,7 +14480,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1004",
       "childrenIds": [],
       "birthSolar": "11 - 11 - 2012",
       "birthLunar": "28 - 09 - 2012"
@@ -14492,7 +14492,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1004",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14504,7 +14504,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1260",
       "childrenIds": [],
       "birthSolar": "25 - 12 - 2015",
       "birthLunar": "15 - 11 - 2015"
@@ -14516,7 +14516,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1008",
       "childrenIds": [],
       "birthSolar": "06 - 07 - 2018",
       "birthLunar": "23 - 05 - 2018"
@@ -14528,7 +14528,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1222",
       "childrenIds": [],
       "birthSolar": "13 - 09 - 2010",
       "birthLunar": "06 - 08 - 2010"
@@ -14540,7 +14540,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1222",
       "childrenIds": [],
       "birthSolar": "16 - 04 - 2013",
       "birthLunar": "07 - 03 - 2013"
@@ -14552,7 +14552,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1015",
       "childrenIds": [],
       "birthSolar": "10 - 12 - 2012",
       "birthLunar": "27 - 10 - 2012"
@@ -14564,7 +14564,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1017",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2019",
       "birthLunar": null
@@ -14576,7 +14576,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1020",
       "childrenIds": [],
       "birthSolar": "09 - 09 - 2019",
       "birthLunar": "11 - 08 - 2019"
@@ -14588,7 +14588,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1176",
       "childrenIds": [],
       "birthSolar": "15 - 06 - 2021",
       "birthLunar": "06 - 05 - 2021"
@@ -14600,7 +14600,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1190",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2022",
       "birthLunar": null
@@ -14612,7 +14612,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1035",
       "childrenIds": [],
       "birthSolar": "-- - -- - 2018",
       "birthLunar": null
@@ -14684,7 +14684,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m710",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14732,7 +14732,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14780,7 +14780,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m632",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14840,7 +14840,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1077",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14852,7 +14852,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m362",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14876,7 +14876,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m632",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14888,7 +14888,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1102",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14912,7 +14912,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m301",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14924,7 +14924,7 @@
       "gender": "male",
       "spouse": "AN-NA",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1073",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14948,7 +14948,7 @@
       "gender": "male",
       "spouse": "Vũ Thùy Linh",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m278",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14972,7 +14972,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m418",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14984,7 +14984,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m243",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -14996,7 +14996,7 @@
       "gender": "male",
       "spouse": "Bùi Thị Huệ",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m416",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15068,7 +15068,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m298",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15080,7 +15080,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m595",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15104,7 +15104,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m255",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15116,7 +15116,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m632",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15140,7 +15140,7 @@
       "gender": "male",
       "spouse": "Lê Thị Uyên",
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m933",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15200,7 +15200,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m299",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15236,7 +15236,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m1236",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15332,7 +15332,7 @@
       "gender": "female",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m255",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15356,7 +15356,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m825",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
@@ -15380,7 +15380,7 @@
       "gender": "male",
       "spouse": null,
       "status": "Còn sống",
-      "parentId": null,
+      "parentId": "m905",
       "childrenIds": [],
       "birthSolar": null,
       "birthLunar": null
