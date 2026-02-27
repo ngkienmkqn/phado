@@ -1,21 +1,37 @@
+"use client";
+
 import Link from "next/link";
-import { Users, Search, TreeDeciduous, BookOpen, Calendar, Settings, Leaf } from "lucide-react";
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { Users, TreeDeciduous, BookOpen, Settings, Leaf } from "lucide-react";
 import BlogSection from '@/components/BlogSection';
+import { useState, useEffect } from 'react';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-function loadFamilyData() {
-  const filePath = join(process.cwd(), 'src', 'data', 'family_data.json');
-  return JSON.parse(readFileSync(filePath, 'utf8'));
+interface FamilyDataRaw {
+  familyName: string;
+  since: number;
+  totalGenerations: number;
+  totalMembers: number;
 }
 
 export default function Home() {
-  const familyDataRaw = loadFamilyData();
+  const [familyDataRaw, setData] = useState<FamilyDataRaw | null>(null);
+
+  useEffect(() => {
+    fetch('/api/family-data', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(setData);
+  }, []);
+
   const currentYear = new Date().getFullYear();
-  const histYears = currentYear - familyDataRaw.since;
+  const histYears = familyDataRaw ? currentYear - familyDataRaw.since : 0;
+
+  if (!familyDataRaw) return (
+    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin w-10 h-10 border-4 border-[#d4a012] border-t-transparent rounded-full mx-auto mb-3" />
+        <p className="text-[#c0a880] font-serif">Đang tải...</p>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-[#f0ebe0] font-sans selection:bg-[#d4a012] selection:text-[#0a0a0f] relative overflow-hidden">

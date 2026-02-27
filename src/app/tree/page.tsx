@@ -1,18 +1,39 @@
+"use client";
+
 import TreeCanvas from "@/components/TreeCanvas";
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { useState, useEffect } from 'react';
 
-// Force dynamic rendering - never cache, always read latest data
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-function loadFamilyData() {
-    const filePath = join(process.cwd(), 'src', 'data', 'family_data.json');
-    return JSON.parse(readFileSync(filePath, 'utf8'));
+interface MemberData {
+    id: string; name: string; generation: number; gender: string;
+    spouse?: string | null; status?: string | null; parentId?: string | null;
+    birthSolar?: string | null;[key: string]: unknown;
+}
+interface FamilyDataRaw {
+    familyName: string;
+    since: number;
+    totalGenerations: number;
+    totalMembers: number;
+    members: MemberData[];
+    [key: string]: unknown;
 }
 
 export default function TreePage() {
-    const familyDataRaw = loadFamilyData();
+    const [data, setData] = useState<FamilyDataRaw | null>(null);
+
+    useEffect(() => {
+        fetch('/api/family-data', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(setData);
+    }, []);
+
+    if (!data) return (
+        <div className="w-full h-screen flex items-center justify-center bg-[#f4efe6]">
+            <div className="text-center">
+                <div className="animate-spin w-10 h-10 border-4 border-[#8b6914] border-t-transparent rounded-full mx-auto mb-3" />
+                <p className="text-[#5c4033] font-serif">Đang tải phả đồ...</p>
+            </div>
+        </div>
+    );
 
     return (
         <div className="w-full h-screen bg-[#f4efe6] text-[#3e2723] overflow-hidden flex flex-col">
@@ -20,10 +41,10 @@ export default function TreePage() {
                 <div className="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto">
                     <div className="bg-[#fdfbf7]/90 backdrop-blur-md border border-[#d2b48c] shadow-md px-4 py-2 rounded-xl flex items-center gap-4">
                         <h1 className="font-serif font-bold text-lg text-[#5c4033]">
-                            Phả Đồ Họ {familyDataRaw.familyName}
+                            Phả Đồ Họ {data.familyName}
                         </h1>
                         <span className="text-xs text-[#8b5a2b] font-bold border-l border-[#d2b48c] pl-4 py-1">
-                            Từ năm {familyDataRaw.since} · {familyDataRaw.totalGenerations} Đời
+                            Từ năm {data.since} · {data.totalGenerations} Đời
                         </span>
                     </div>
                     <div className="flex gap-2">
@@ -35,7 +56,7 @@ export default function TreePage() {
             </header>
 
             <main className="flex-1 w-full h-full relative">
-                <TreeCanvas data={familyDataRaw} />
+                <TreeCanvas data={data} />
             </main>
         </div>
     );
