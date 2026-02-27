@@ -102,8 +102,8 @@ export default function GuidePage() {
                 <div className="absolute bottom-[10%] right-[5%] w-[30vw] h-[30vw] min-w-[200px] min-h-[200px] bg-purple-500/5 rounded-full blur-[100px]" />
             </div>
 
-            {/* Top bar */}
-            <header className="relative z-10 flex items-center justify-between px-4 py-4 md:px-8">
+            {/* Top bar - sticky */}
+            <header className="sticky top-0 z-20 flex items-center justify-between px-4 py-4 md:px-8 bg-[#0a0a0f]/90 backdrop-blur-xl">
                 <Link href="/" className="flex items-center gap-2 text-amber-300/80 hover:text-amber-200 transition-colors bg-white/5 border border-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
                     <ArrowLeft className="w-5 h-5" />
                     <span className="text-base font-medium">Về trang chủ</span>

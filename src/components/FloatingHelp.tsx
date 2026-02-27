@@ -72,7 +72,7 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
             )}
 
             {/* Floating help button */}
-            <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end gap-3">
+            <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-[999] flex flex-col items-end gap-3">
                 {/* Tips panel */}
                 {isOpen && (
                     <div className="bg-[#1a1510]/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl w-80 max-h-[70vh] overflow-y-auto shadow-2xl shadow-black/50 animate-in slide-in-from-bottom-4 duration-200">
@@ -103,8 +103,8 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${isOpen
-                            ? 'bg-amber-500 text-black rotate-90 shadow-amber-500/30'
-                            : 'bg-[#1a1510] border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-black hover:shadow-amber-500/30 animate-pulse'
+                        ? 'bg-amber-500 text-black rotate-90 shadow-amber-500/30'
+                        : 'bg-[#1a1510] border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-black hover:shadow-amber-500/30 animate-pulse'
                         }`}
                     style={{ animationDuration: isOpen ? '0s' : '3s' }}
                     title="Trợ giúp"
