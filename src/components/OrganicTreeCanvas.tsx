@@ -129,71 +129,148 @@ function PersonBubble({
 }
 
 // ─── SVG Branch Line connecting parent to child (tree trunk/branch style) ────
-function BranchLine({ x1, y1, x2, y2, layer }: { x1: number; y1: number; x2: number; y2: number; layer: number }) {
-    // Branch width tapers: thick at trunk (parent), thin at tip (child)
-    const baseWidth = layer === 0 ? 3.5 : layer === 1 ? 2.2 : layer === 2 ? 1.4 : 0.9;
-    const tipWidth = baseWidth * 0.45;
+function BranchLine({ x1, y1, x2, y2, layer, randomSeed = 0 }: { x1: number; y1: number; x2: number; y2: number; layer: number, randomSeed?: number }) {
+    // Advanced procedural branch generation for vector-like appearance
+    const baseWidth = layer === 0 ? 5.5 : layer === 1 ? 3.5 : layer === 2 ? 2.2 : 1.2;
+    const tipWidth = baseWidth * 0.4;
 
-    // Control points for natural curve
-    const midY = y1 + (y2 - y1) * 0.4;
-    // Slight organic offset for natural look
+    // Seeded random helper for consistent organic shapes
+    const seededRandom = (seed: number) => {
+        const x = Math.sin(seed + randomSeed * 1.5) * 10000;
+        return x - Math.floor(x);
+    };
+
     const dx = x2 - x1;
-    const wobble = dx * 0.08;
+    const dy = y2 - y1;
+    const dist = Math.sqrt(dx * dx + dy * dy);
 
-    // Build a filled "branch" shape using 2 bezier curves (left edge + right edge)
-    // Left edge goes from parent to child
-    const lx1 = x1 - baseWidth / 2;
-    const rx1 = x1 + baseWidth / 2;
-    const lx2 = x2 - tipWidth / 2;
-    const rx2 = x2 + tipWidth / 2;
+    // Natural curve control points
+    const midY = y1 + dy * 0.5;
+    const wobble = dx * 0.15 * (seededRandom(x1) > 0.5 ? 1 : -1);
+    const midX = x1 + dx * 0.5 + wobble;
 
-    const path = [
-        // Start at parent left
-        `M ${lx1} ${y1}`,
-        // Curve to child left
-        `C ${lx1 + wobble} ${midY}, ${lx2 - wobble * 0.3} ${midY + (y2 - y1) * 0.12}, ${lx2} ${y2}`,
-        // Line across child tip
-        `L ${rx2} ${y2}`,
-        // Curve back to parent right
-        `C ${rx2 + wobble * 0.3} ${midY + (y2 - y1) * 0.12}, ${rx1 + wobble} ${midY}, ${rx1} ${y1}`,
-        `Z`,
-    ].join(' ');
+    // Angle of the branch
+    const angle = Math.atan2(dy, dx);
 
-    // Unique gradient id
-    const gradId = `bark-${x1.toFixed(1)}-${y1.toFixed(1)}-${x2.toFixed(1)}-${y2.toFixed(1)}`.replace(/\./g, '_');
+    // Segment points for gnarled bark effect
+    const numSegments = Math.max(3, Math.floor(dist / 20));
+    const leftEdge = [];
+    const rightEdge = [];
+
+    for (let i = 0; i <= numSegments; i++) {
+        const t = i / numSegments;
+        // Bezier interpolation
+        const u = 1 - t;
+        const tt = t * t;
+        const uu = u * u;
+        const cx = uu * x1 + 2 * u * t * midX + tt * x2;
+        const cy = uu * y1 + 2 * u * t * midY + tt * y2;
+
+        // Tapering width with organic variance
+        let currentWidth = baseWidth * (1 - t) + tipWidth * t;
+        const variance = (seededRandom(i + x1) - 0.5) * currentWidth * 0.25;
+        currentWidth += (i > 0 && i < numSegments) ? variance : 0;
+
+        // Tangent approximation for perpendicular offset
+        const nx = (t < 0.5) ? (midX - x1) : (x2 - midX);
+        const ny = (t < 0.5) ? (midY - y1) : (y2 - midY);
+        const nAngle = Math.atan2(ny, nx) + Math.PI / 2;
+
+        const hw = currentWidth / 2;
+        leftEdge.push({ x: cx + Math.cos(nAngle) * hw, y: cy + Math.sin(nAngle) * hw });
+        rightEdge.push({ x: cx - Math.cos(nAngle) * hw, y: cy - Math.sin(nAngle) * hw });
+    }
+
+    // Build the main filled polygon string
+    let pathObj = `M ${leftEdge[0].x} ${leftEdge[0].y}`;
+    for (let i = 1; i <= numSegments; i++) {
+        pathObj += ` L ${leftEdge[i].x} ${leftEdge[i].y}`;
+    }
+    for (let i = numSegments; i >= 0; i--) {
+        pathObj += ` L ${rightEdge[i].x} ${rightEdge[i].y}`;
+    }
+    pathObj += ' Z';
+
+    // Unique gradient id based on position
+    const gradId = `bark-${Math.abs(x1).toFixed(0)}-${Math.abs(y1).toFixed(0)}-${layer}`;
+
+    // Bark texture lines
+    const barkLines = [];
+    const numBarkLines = Math.max(1, Math.floor(baseWidth / 1.5));
+    for (let b = 0; b < numBarkLines; b++) {
+        const offsetRatio = (b + 0.5) / numBarkLines - 0.5; // -0.5 to 0.5
+        let bPath = '';
+        for (let i = 0; i <= numSegments; i++) {
+            const t = i / numSegments;
+            const u = 1 - t;
+            const cx = u * u * x1 + 2 * u * t * midX + t * t * x2;
+            const cy = u * u * y1 + 2 * u * t * midY + t * t * y2;
+
+            const nAngle = Math.atan2((t < 0.5 ? midY - y1 : y2 - midY), (t < 0.5 ? midX - x1 : x2 - midX)) + Math.PI / 2;
+            const currentWidth = baseWidth * (1 - t) + tipWidth * t;
+
+            // Wavy along the bark
+            const wave = Math.sin(t * Math.PI * 4 + seededRandom(b) * 10) * currentWidth * 0.1;
+            const bx = cx + Math.cos(nAngle) * (currentWidth * offsetRatio + wave);
+            const by = cy + Math.sin(nAngle) * (currentWidth * offsetRatio + wave);
+
+            if (i === 0) bPath += `M ${bx} ${by}`;
+            else bPath += ` L ${bx} ${by}`;
+        }
+        barkLines.push(bPath);
+    }
+
+    // Twigs (small offshoots for leaves)
+    const twigs = [];
+    if (layer > 0 && dist > 30) {
+        const numTwigs = layer === 1 ? 2 : 1;
+        for (let t = 0; t < numTwigs; t++) {
+            const posT = 0.3 + seededRandom(t * 13 + x1) * 0.5;
+            const u = 1 - posT;
+            const tx = u * u * x1 + 2 * u * posT * midX + posT * posT * x2;
+            const ty = u * u * y1 + 2 * u * posT * midY + posT * posT * y2;
+
+            const twigLength = 10 + seededRandom(t * 27) * 15;
+            const twigDir = (seededRandom(t * 7) > 0.5 ? 1 : -1);
+            const twigAngle = angle + twigDir * Math.PI * (0.2 + seededRandom(t) * 0.2);
+
+            const ex = tx + Math.cos(twigAngle) * twigLength;
+            const ey = ty + Math.sin(twigAngle) * twigLength;
+
+            twigs.push(`M ${tx} ${ty} Q ${tx + (ex - tx) * 0.5} ${ty - Math.abs(ex - tx) * 0.2} ${ex} ${ey}`);
+        }
+    }
 
     return (
-        <>
+        <g>
             <defs>
-                <linearGradient id={gradId} x1="0" y1={y1} x2="0" y2={y2} gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#5d3a1a" />
-                    <stop offset="35%" stopColor="#6d4c2e" />
-                    <stop offset="70%" stopColor="#7a5a3c" />
-                    <stop offset="100%" stopColor="#8b6e50" />
+                <linearGradient id={gradId} x1="0" y1={y1} x2={x1} y2={y2} gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#4e3115" />
+                    <stop offset="40%" stopColor="#664323" />
+                    <stop offset="80%" stopColor="#553518" />
+                    <stop offset="100%" stopColor="#3d220d" />
                 </linearGradient>
             </defs>
-            {/* Shadow / depth */}
-            <path
-                d={path}
-                fill="#3d2b1f"
-                opacity="0.25"
-                transform="translate(0.3, 0.3)"
-            />
-            {/* Main branch body */}
-            <path
-                d={path}
-                fill={`url(#${gradId})`}
-            />
-            {/* Bark center highlight (thin line for texture) */}
-            <path
-                d={`M ${x1} ${y1} C ${x1 + wobble} ${midY}, ${x2 - wobble * 0.3} ${midY + (y2 - y1) * 0.12}, ${x2} ${y2}`}
-                fill="none"
-                stroke="#8b7355"
-                strokeWidth={baseWidth * 0.15}
-                opacity="0.35"
-                strokeLinecap="round"
-            />
-        </>
+
+            {/* Trunk Shadow */}
+            <path d={pathObj} fill="#2c1a0c" opacity="0.3" transform="translate(1, 1)" />
+
+            {/* Main Branch Base */}
+            <path d={pathObj} fill={`url(#${gradId})`} />
+
+            {/* Twigs */}
+            {twigs.map((twPath, i) => (
+                <path key={`twig-${i}`} d={twPath} fill="none" stroke={`url(#${gradId})`} strokeWidth={tipWidth * 0.6} strokeLinecap="round" />
+            ))}
+
+            {/* Bark Texture Lines */}
+            {barkLines.map((bPath, i) => (
+                <path key={`bark-${i}`} d={bPath} fill="none" stroke="#36200f" strokeWidth={0.3 + seededRandom(i) * 0.3} opacity={0.6} strokeLinecap="round" strokeDasharray={`${3 + seededRandom(x1) * 5}, ${1 + seededRandom(y1) * 2}`} />
+            ))}
+            {barkLines.map((bPath, i) => (
+                <path key={`bark-hi-${i}`} d={bPath} fill="none" stroke="#7a522e" strokeWidth={0.2} opacity={0.4} transform="translate(-0.3, -0.3)" />
+            ))}
+        </g>
     );
 }
 
@@ -529,6 +606,12 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                     50% { transform: translateY(3px) rotate(15deg); opacity: 0.3; }
                     100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
                 }
+                .tree-canopy .tree-leaf {
+                    animation-play-state: paused;
+                }
+                .tree-canopy:hover .tree-leaf {
+                    animation-play-state: running;
+                }
             `}</style>
 
             {/* Sky / ground gradient background */}
@@ -548,7 +631,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             }}>
 
                 {/* GREEN CANOPY TREE — matching family tree chart reference */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
+                <svg className="absolute inset-0 w-full h-full tree-canopy" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
                     <defs>
                         <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
                             <stop offset="0%" stopColor="#3E2723" />
@@ -602,9 +685,25 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                         </>);
                     })()}
 
+                    {/* ═══ PROCEDURAL BRANCHES ═══ */}
+                    {treeNodes.map((node) => {
+                        if (!node.parentNode) return null;
+                        return (
+                            <BranchLine
+                                key={`branch-${node.member.id}`}
+                                x1={node.parentNode.x}
+                                y1={node.parentNode.y}
+                                x2={node.x}
+                                y2={node.y}
+                                layer={node.layer - 1}
+                                randomSeed={node.x + node.y}
+                            />
+                        );
+                    })}
+
                     {/* ═══ BACK LEAVES ═══ Behind nodes */}
                     {leafSeeds.slice(0, Math.floor(leafSeeds.length / 2)).map((leaf, i) => (
-                        <use key={`bl-${i}`} href="#greenLeaf"
+                        <use key={`bl-${i}`} href="#greenLeaf" className="tree-leaf"
                             x={leaf.x - leaf.scale * 1.8} y={leaf.y - leaf.scale * 2.4}
                             width={leaf.scale * 3.6} height={leaf.scale * 4.8}
                             fill={leaf.color} opacity={0.75 + (i % 3) * 0.08}
@@ -615,7 +714,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
 
                     {/* ═══ FRONT LEAVES ═══ On top of nodes for depth */}
                     {leafSeeds.slice(Math.floor(leafSeeds.length / 2)).map((leaf, i) => (
-                        <use key={`fl-${i}`} href="#greenLeaf"
+                        <use key={`fl-${i}`} href="#greenLeaf" className="tree-leaf"
                             x={leaf.x - leaf.scale * 1.8} y={leaf.y - leaf.scale * 2.4}
                             width={leaf.scale * 3.6} height={leaf.scale * 4.8}
                             fill={leaf.color} opacity={0.6 + (i % 3) * 0.08}
