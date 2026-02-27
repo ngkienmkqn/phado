@@ -27,6 +27,27 @@ interface FamilyData {
 const removeDiacritics = (str: string) =>
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
 
+// ─── Circle positions mapped to the tree background image ───────────
+// The tree image has circular frames at these approximate positions (% of image)
+// Layer 0 (root/trunk, bottom): 1 slot
+// Layer 1 (lower branches): 2 slots
+// Layer 2 (mid branches): 4 slots  
+// Layer 3 (upper branches): 6 slots
+// Layer 4 (crown/top): 5 slots
+// Total: 18 slots. Root at bottom, descendants grow upward.
+const TREE_SLOTS: { x: number; y: number; size: number }[][] = [
+    // Layer 0: Root (trunk base) — 1 large ornate circle
+    [{ x: 50, y: 73, size: 58 }],
+    // Layer 1: Lower branches — 2 circles
+    [{ x: 33, y: 58, size: 52 }, { x: 67, y: 58, size: 52 }],
+    // Layer 2: Mid branches — 4 circles
+    [{ x: 20, y: 47, size: 46 }, { x: 40, y: 43, size: 46 }, { x: 60, y: 43, size: 46 }, { x: 80, y: 47, size: 46 }],
+    // Layer 3: Upper branches — 6 circles
+    [{ x: 15, y: 32, size: 40 }, { x: 30, y: 28, size: 40 }, { x: 43, y: 23, size: 40 }, { x: 57, y: 23, size: 40 }, { x: 70, y: 28, size: 40 }, { x: 85, y: 32, size: 40 }],
+    // Layer 4: Crown (top) — 5 circles
+    [{ x: 22, y: 16, size: 36 }, { x: 36, y: 12, size: 36 }, { x: 50, y: 9, size: 36 }, { x: 64, y: 12, size: 36 }, { x: 78, y: 16, size: 36 }],
+];
+
 // ─── Person Bubble on Tree ──────────────────────────────────────────
 function PersonBubble({
     member, x, y, size, isFocused, isOnRelPath, onClick, label
@@ -49,18 +70,17 @@ function PersonBubble({
             }}
             onClick={() => onClick(member)}
         >
-            {/* Glow for focused or relation path */}
+            {/* Glow ring */}
             {(isFocused || isOnRelPath) && (
                 <div className="absolute rounded-full"
                     style={{
-                        width: size + 14,
-                        height: size + 14,
+                        width: size + 12,
+                        height: size + 12,
                         border: `3px solid ${isOnRelPath ? '#dc2626' : '#f0c040'}`,
-                        boxShadow: `0 0 16px ${isOnRelPath ? 'rgba(220,38,38,0.5)' : 'rgba(240,192,64,0.5)'}`,
-                        top: -7,
+                        boxShadow: `0 0 14px ${isOnRelPath ? 'rgba(220,38,38,0.5)' : 'rgba(240,192,64,0.5)'}`,
+                        top: -6,
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        animation: isFocused ? 'pulse 2s infinite' : 'none',
                     }}
                 />
             )}
@@ -73,30 +93,30 @@ function PersonBubble({
                     height: size,
                     backgroundColor: isFemale ? '#c27ba0' : '#795548',
                     border: `3px solid ${isFemale ? '#a0527a' : '#5c3317'}`,
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.15)',
-                    fontSize: size > 50 ? 18 : 13,
+                    boxShadow: '0 3px 10px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.15)',
+                    fontSize: size > 45 ? 16 : 12,
                 }}
             >
                 {isFemale ? '♀' : '♂'}
             </div>
 
             {/* Name ribbon */}
-            <div className="mt-1 relative">
+            <div className="mt-0.5 relative">
                 <div
-                    className="px-2 py-0.5 rounded-md text-center whitespace-nowrap shadow-md"
+                    className="px-1.5 py-0.5 rounded-md text-center whitespace-nowrap shadow-md"
                     style={{
                         backgroundColor: isFemale ? '#8e3a6e' : '#4e342e',
                         color: 'white',
-                        fontSize: size > 50 ? 10 : 8,
+                        fontSize: size > 45 ? 9 : 7,
                         fontWeight: 700,
-                        maxWidth: 120,
+                        maxWidth: 110,
                         border: `1px solid ${isFemale ? '#a0527a' : '#6d4c41'}`,
                     }}
                 >
                     {shortName}
                 </div>
                 {label && (
-                    <div className="text-center mt-0.5" style={{ fontSize: 7, color: '#5d4037', fontWeight: 600, textShadow: '0 0 4px rgba(255,255,255,0.9)' }}>
+                    <div className="text-center" style={{ fontSize: 7, color: '#5d4037', fontWeight: 600, textShadow: '0 0 4px rgba(255,255,255,0.9)' }}>
                         {label}
                     </div>
                 )}
@@ -207,7 +227,11 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     const [calcA, setCalcA] = useState('');
     const [calcB, setCalcB] = useState('');
 
-    // ─── Build focused subset ────────────────────────────────────────
+    // ─── Build focused subset: root at BOTTOM, descendants grow UPWARD ──
+    // Layout: focused person → root (layer 0, trunk)
+    //         children → layer 1 (lower branches)
+    //         grandchildren → layer 2 (middle branches)
+    //         great-grandchildren → layer 3-4 (upper branches/crown)
     const { subset, positions } = useMemo(() => {
         const focused = members.find(m => m.id === focusId);
         if (!focused) return { subset: [], positions: {} };
@@ -215,69 +239,56 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         const sub: MemberData[] = [];
         const pos: Record<string, { x: number; y: number; size: number; label?: string }> = {};
 
-        // Gather family
-        const parent = focused.parentId ? members.find(m => m.id === focused.parentId) : undefined;
-        const grandparent = parent?.parentId ? members.find(m => m.id === parent.parentId) : undefined;
-        const siblings = focused.parentId
-            ? members.filter(m => m.parentId === focused.parentId && m.id !== focusId).slice(0, 4)
-            : [];
-        const children = members.filter(m => m.parentId === focusId).slice(0, 6);
+        // BFS from focused person downward (children, grandchildren, etc.)
+        // Layer 0: focused person (root/trunk)
+        // Layer 1: children
+        // Layer 2: grandchildren
+        // Layer 3+: great-grandchildren
 
-        // ── Position layout (% of container) ──
-        // Top = ancestor, center = focused, bottom = children
+        const layers: MemberData[][] = [[focused]];
+        let currentLayer = [focused];
 
-        // Grandparent
-        if (grandparent) {
-            sub.push(grandparent);
-            pos[grandparent.id] = { x: 50, y: 15, size: 46, label: `Đời ${grandparent.generation ?? '?'}` };
+        for (let depth = 1; depth < TREE_SLOTS.length; depth++) {
+            const nextLayer: MemberData[] = [];
+            const maxSlots = TREE_SLOTS[depth].length;
+            for (const parent of currentLayer) {
+                const kids = members.filter(m => m.parentId === parent.id);
+                for (const kid of kids) {
+                    if (nextLayer.length < maxSlots) {
+                        nextLayer.push(kid);
+                    }
+                }
+            }
+            if (nextLayer.length === 0) break;
+            layers.push(nextLayer);
+            currentLayer = nextLayer;
         }
 
-        // Parent
-        if (parent) {
-            sub.push(parent);
-            pos[parent.id] = { x: 50, y: grandparent ? 30 : 18, size: 52, label: `Đời ${parent.generation ?? '?'}` };
-        }
+        // Assign positions from TREE_SLOTS
+        for (let layerIdx = 0; layerIdx < layers.length; layerIdx++) {
+            const layerMembers = layers[layerIdx];
+            const slots = TREE_SLOTS[layerIdx];
 
-        // Focused person — center
-        const baseY = parent ? (grandparent ? 48 : 40) : 30;
-        sub.push(focused);
-        pos[focused.id] = { x: 50, y: baseY, size: 60, label: `Đời ${focused.generation ?? '?'} ★` };
-
-        // Siblings — left and right of focused (stay within tree: 32%-68%)
-        siblings.forEach((s, i) => {
-            sub.push(s);
-            const isLeft = i % 2 === 0;
-            const tier = Math.floor(i / 2);
-            pos[s.id] = {
-                x: isLeft ? 36 - tier * 4 : 64 + tier * 4,
-                y: baseY + tier * 5 + 2,
-                size: 42,
-                label: `Đời ${s.generation ?? '?'}`,
-            };
-        });
-
-        // Children — bottom, spread within tree width (34%-66%)
-        const childY = baseY + 18;
-        if (children.length <= 3) {
-            const positions_x = children.length === 1 ? [50] : children.length === 2 ? [42, 58] : [35, 50, 65];
-            children.forEach((c, i) => {
-                sub.push(c);
-                pos[c.id] = { x: positions_x[i], y: childY, size: 44, label: `Đời ${c.generation ?? '?'}` };
-            });
-        } else {
-            const totalW = Math.min(30, children.length * 8);
-            const startX = 50 - totalW / 2;
-            const step = children.length > 1 ? totalW / (children.length - 1) : 0;
-            children.forEach((c, i) => {
-                sub.push(c);
-                pos[c.id] = { x: startX + i * step, y: childY + (i % 2 === 0 ? 0 : 4), size: 38, label: `Đời ${c.generation ?? '?'}` };
-            });
+            if (layerMembers.length <= slots.length) {
+                // Center the members within available slots
+                const startIdx = Math.floor((slots.length - layerMembers.length) / 2);
+                layerMembers.forEach((m, i) => {
+                    sub.push(m);
+                    const slot = slots[startIdx + i];
+                    pos[m.id] = {
+                        x: slot.x,
+                        y: slot.y,
+                        size: slot.size,
+                        label: `Đ.${m.generation ?? '?'}${m.id === focusId ? ' ★' : ''}`,
+                    };
+                });
+            }
         }
 
         return { subset: sub, positions: pos };
     }, [focusId, members]);
 
-    // ─── Relationship path (for xưng hô highlighting) ────────────────
+    // ─── Relationship path ───────────────────────────────────────────
     const { relationResult, relationPath } = useMemo(() => {
         if (!calcA || !calcB || calcA === calcB) return { relationResult: null, relationPath: new Set<string>() };
 
@@ -346,12 +357,12 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     // ─── Render ──────────────────────────────────────────────────────
     return (
         <div className="w-full h-full relative overflow-hidden bg-[#f5f0e1]">
-            {/* Tree background */}
+            {/* Tree background — object-contain centers the image */}
             <div className="absolute inset-0 flex items-center justify-center">
-                <img src="/tree_bg.png" alt="Family Tree" className="w-full h-full object-contain opacity-75" draggable={false} />
+                <img src="/tree_bg.png" alt="Family Tree" className="w-full h-full object-contain opacity-80" draggable={false} />
             </div>
 
-            {/* Members on tree */}
+            {/* Members overlay — same container to match image positioning */}
             <div className="absolute inset-0">
                 {subset.map(m => {
                     const p = positions[m.id];
@@ -375,15 +386,15 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             </div>
 
             {/* Left Panel: Search + Xưng hô */}
-            <div className="absolute top-14 left-3 z-30 w-[250px] sm:w-[280px] space-y-3">
+            <div className="absolute top-14 left-3 z-30 w-[240px] sm:w-[270px] space-y-2">
                 {/* Search */}
-                <div className="bg-white/92 backdrop-blur-md border border-[#d2b48c] rounded-2xl shadow-xl p-3">
+                <div className="bg-white/92 backdrop-blur-md border border-[#d2b48c] rounded-2xl shadow-xl p-2.5">
                     <div className="relative">
-                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#8b5a2b]" />
+                        <Search className="absolute left-3 top-2 h-4 w-4 text-[#8b5a2b]" />
                         <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
-                            placeholder="Tìm thành viên..." className="w-full pl-9 pr-8 py-2 border border-[#d2b48c] rounded-xl text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
+                            placeholder="Tìm thành viên..." className="w-full pl-9 pr-8 py-1.5 border border-[#d2b48c] rounded-xl text-sm bg-white focus:outline-none focus:border-[#8b5a2b]" />
                         {searchTerm && (
-                            <button onClick={() => setSearchTerm('')} className="absolute right-2 top-2 p-0.5 hover:bg-gray-100 rounded-full">
+                            <button onClick={() => setSearchTerm('')} className="absolute right-2 top-1.5 p-0.5 hover:bg-gray-100 rounded-full">
                                 <X size={16} className="text-gray-400" />
                             </button>
                         )}
@@ -407,8 +418,8 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
 
                 {/* Xưng hô toggle */}
                 <button onClick={() => setShowCalc(!showCalc)}
-                    className="w-full bg-white/92 backdrop-blur-md border border-[#d2b48c] rounded-xl shadow-lg p-2.5 flex items-center justify-center gap-2 text-sm font-bold text-[#5c4033] hover:bg-[#f4efe6] transition-colors">
-                    <Calculator size={16} /> Phép tính xưng hô
+                    className="w-full bg-white/92 backdrop-blur-md border border-[#d2b48c] rounded-xl shadow-lg p-2 flex items-center justify-center gap-2 text-sm font-bold text-[#5c4033] hover:bg-[#f4efe6] transition-colors">
+                    <Calculator size={16} /> Tìm xưng hô
                 </button>
 
                 {/* Xưng hô calculator */}
@@ -452,7 +463,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             {/* Hint */}
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30">
                 <span className="bg-white/80 backdrop-blur-sm text-[#5d4037] text-[10px] font-bold px-4 py-1.5 rounded-full shadow border border-[#d2b48c]">
-                    Bấm vào người để xem chi tiết · Bấm &quot;Đặt làm gốc&quot; để chuyển nhánh
+                    🌳 Gốc ở dưới, tán lá ở trên · Bấm vào người để xem chi tiết
                 </span>
             </div>
 
@@ -530,15 +541,6 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                     </div>
                 </div>
             )}
-
-            {/* Pulse animation */}
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes pulse {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0.5; }
-                }
-            ` }} />
         </div>
     );
 }
