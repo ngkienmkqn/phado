@@ -1,6 +1,7 @@
 "use client";
 
 import TreeCanvas from "@/components/TreeCanvas";
+import FloatingHelp from "@/components/FloatingHelp";
 import { useState, useEffect } from 'react';
 
 interface MemberData {
@@ -58,6 +59,14 @@ export default function TreePage() {
             <main className="flex-1 w-full h-full relative">
                 <TreeCanvas data={data} />
             </main>
+
+            <FloatingHelp pageName="Cây Gia Phả" tips={[
+                { emoji: '🔍', text: 'Gõ tên vào ô "Tìm thành viên" góc trái để tìm nhanh bất kỳ ai' },
+                { emoji: '🤝', text: 'Nhấn "Tìm xưng hô" để biết gọi nhau là gì' },
+                { emoji: '✋', text: 'KÉO để di chuyển bản đồ, CHỤM 2 NGÓN để phóng to' },
+                { emoji: '👆', text: 'NHẤN vào tên bất kỳ ai để xem thông tin chi tiết' },
+                { emoji: '↩️', text: 'Nhấn "Quay lại" góc phải trên để về trang chủ' },
+            ]} />
         </div>
     );
 }

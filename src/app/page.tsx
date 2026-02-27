@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Users, TreeDeciduous, BookOpen, Settings, Leaf, HelpCircle } from "lucide-react";
 import BlogSection from '@/components/BlogSection';
+import FloatingHelp from '@/components/FloatingHelp';
 import { useState, useEffect } from 'react';
 
 interface FamilyDataRaw {
@@ -145,6 +146,14 @@ export default function Home() {
             animation: spin 20s linear infinite;
         }
       `}} />
+
+      <FloatingHelp pageName="Trang Chủ" tips={[
+        { emoji: '🌳', text: 'Nhấn "Cây Gia Phả" để xem bản đồ gia phả tương tác' },
+        { emoji: '🍃', text: 'Nhấn "Cây Phả Đồ Organic" để xem phả đồ dạng cây đẹp' },
+        { emoji: '👥', text: 'Nhấn "Danh Bạ" để tra cứu thành viên' },
+        { emoji: '📖', text: 'Nhấn "Sách Gia Phả" để xem và in sách' },
+        { emoji: '📱', text: 'Chữ nhỏ? Dùng 2 ngón tay phóng to trên điện thoại' },
+      ]} />
     </div>
   );
 }

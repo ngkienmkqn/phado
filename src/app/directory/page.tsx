@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Phone, User, Calendar, MapPin } from 'lucide-react';
+import { Search, Phone, User, Calendar } from 'lucide-react';
+import FloatingHelp from '@/components/FloatingHelp';
 
 export default function DirectoryPage() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +18,6 @@ export default function DirectoryPage() {
             .catch(() => setLoading(false));
     }, []);
 
-    // Generate unique generations for filter dropdown
     const generations = useMemo(() => {
         const gens = new Set(familyDataRaw.members.map((m: any) => m.generation));
         return Array.from(gens).sort((a: any, b: any) => a - b);
@@ -44,7 +44,6 @@ export default function DirectoryPage() {
                         </Link>
                         <h1 className="font-serif font-bold text-xl text-gold-400">Danh Bạ Dòng Họ</h1>
                     </div>
-
                     <div className="flex flex-col sm:flex-row gap-3 w-full md:w-1/2">
                         <div className="relative flex-1">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
@@ -96,17 +95,14 @@ export default function DirectoryPage() {
                                     <span className="bg-white/10 text-gray-300 text-[10px] px-2 py-1 rounded-md shrink-0">Đã mất</span>
                                 )}
                             </div>
-
                             <div className="mt-auto pt-4 flex flex-col gap-2">
-                                {/* Mock Data for Display Purposes */}
                                 <div className="flex items-center gap-2 text-sm text-gray-300 bg-black/20 p-2 rounded-lg">
                                     <Calendar className="w-4 h-4 text-gray-500" />
                                     <span>{member.birthSolar || 'Chưa cập nhật ngày sinh'}</span>
                                 </div>
-
-                                {(member as any).phone && (
+                                {member.phone && (
                                     <a
-                                        href={`tel:${(member as any).phone}`}
+                                        href={`tel:${member.phone}`}
                                         className="mt-2 w-full flex items-center justify-center gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-500/30 py-3 rounded-xl transition-colors font-medium text-lg"
                                     >
                                         <Phone className="w-5 h-5" />
@@ -125,6 +121,13 @@ export default function DirectoryPage() {
                     </div>
                 )}
             </main>
+
+            <FloatingHelp pageName="Danh Bạ Dòng Họ" tips={[
+                { emoji: '🔍', text: 'Gõ tên vào ô tìm kiếm phía trên để tìm người' },
+                { emoji: '📅', text: 'Chọn đời ở dropdown để lọc theo thế hệ' },
+                { emoji: '📞', text: 'Nhấn vào số điện thoại để gọi trực tiếp' },
+                { emoji: '🏠', text: 'Địa chỉ và quê quán hiển thị bên dưới tên' },
+            ]} />
         </div>
     );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import OrganicTreeCanvas from "@/components/OrganicTreeCanvas";
+import FloatingHelp from "@/components/FloatingHelp";
 import { useState, useEffect } from 'react';
 
 interface MemberData {
@@ -34,6 +35,13 @@ export default function TreeOrganicPage() {
     return (
         <div className="w-full h-screen overflow-hidden">
             <OrganicTreeCanvas data={data} />
+            <FloatingHelp pageName="Cây Phả Đồ Organic" tips={[
+                { emoji: '🌳', text: 'Gốc cây ở dưới, tán lá ở trên — như cây thật!' },
+                { emoji: '🔍', text: 'Gõ tên vào ô tìm kiếm góc trái để tìm người' },
+                { emoji: '🤝', text: 'Nhấn "Tìm xưng hô" để biết gọi nhau là gì' },
+                { emoji: '👆', text: 'NHẤN vào vòng tròn vàng bất kỳ để xem người đó' },
+                { emoji: '📱', text: 'CHỤM 2 NGÓN để phóng to/thu nhỏ; KÉO để di chuyển' },
+            ]} />
         </div>
     );
 }
