@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Users, ShieldCheck, CheckCircle, XCircle, Lock, LogOut, Trash2, Eye, EyeOff, FileText } from 'lucide-react';
 
-const DEFAULT_PASSWORD = '856226';
+const DEFAULT_PASSWORD = '123456';
 const getAdminPassword = () => {
     if (typeof window !== 'undefined') {
         return localStorage.getItem('phado_admin_pass') || DEFAULT_PASSWORD;
