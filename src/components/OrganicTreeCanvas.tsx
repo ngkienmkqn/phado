@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Search, X, ChevronRight, Calculator } from 'lucide-react';
 
 // ─── Types ───────────────────────────────────────────────────────────
@@ -27,113 +27,125 @@ interface FamilyData {
 const removeDiacritics = (str: string) =>
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
 
-// ─── Tree Node Position ──────────────────────────────────────────────
+// ─── Tree node with position ─────────────────────────────────────────
 interface TreeNode {
     member: MemberData;
-    x: number;
-    y: number;
+    x: number; // percentage
+    y: number; // percentage
     parentNode?: TreeNode;
-    size: number;
+    size: number; // px
+    layer: number;
 }
 
-// ─── SVG Leaf Component ──────────────────────────────────────────────
-function SvgLeaf({ cx, cy, rotation, scale = 1 }: { cx: number; cy: number; rotation: number; scale?: number }) {
+// ─── Person Bubble Component ─────────────────────────────────────────
+function PersonBubble({
+    node, isFocused, isOnRelPath, onClick
+}: {
+    node: TreeNode; isFocused: boolean; isOnRelPath: boolean;
+    onClick: (m: MemberData) => void;
+}) {
+    const { member, x, y, size } = node;
+    const isFemale = member.gender === 'female';
+    const shortName = member.name.length > 12 ? member.name.substring(0, 10) + '…' : member.name;
+
     return (
-        <g transform={`translate(${cx},${cy}) rotate(${rotation}) scale(${scale})`}>
-            <ellipse rx="6" ry="12" fill="#5a9e3c" opacity="0.7" />
-            <line x1="0" y1="-12" x2="0" y2="12" stroke="#3d7a28" strokeWidth="0.8" opacity="0.5" />
-        </g>
+        <div
+            className="absolute flex flex-col items-center cursor-pointer group"
+            style={{
+                left: `${x}%`,
+                top: `${y}%`,
+                transform: 'translate(-50%, -50%)',
+                zIndex: isFocused ? 30 : 20,
+                transition: 'all 0.4s ease',
+            }}
+            onClick={() => onClick(member)}
+        >
+            {/* Outer glow for focus/relation */}
+            {(isFocused || isOnRelPath) && (
+                <div className="absolute rounded-full animate-pulse"
+                    style={{
+                        width: size + 16,
+                        height: size + 16,
+                        top: -(16) / 2,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        boxShadow: isOnRelPath
+                            ? '0 0 20px rgba(220,38,38,0.6), 0 0 40px rgba(220,38,38,0.3)'
+                            : '0 0 20px rgba(218,165,32,0.7), 0 0 40px rgba(218,165,32,0.4)',
+                        border: `3px solid ${isOnRelPath ? '#dc2626' : '#daa520'}`,
+                    }}
+                />
+            )}
+
+            {/* Ornate gold circle frame */}
+            <div
+                className="relative rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300"
+                style={{
+                    width: size,
+                    height: size,
+                    background: `conic-gradient(from 0deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b, #8b6914, #daa520, #ffd700, #daa520, #b8860b)`,
+                    padding: 3,
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,215,0,0.5)',
+                }}
+            >
+                {/* Inner circle */}
+                <div
+                    className="w-full h-full rounded-full flex items-center justify-center overflow-hidden"
+                    style={{
+                        background: isFemale
+                            ? 'radial-gradient(circle at 30% 30%, #f8d7e8, #e8a0c0)'
+                            : 'radial-gradient(circle at 30% 30%, #f5f0e1, #d2b48c)',
+                        border: '2px solid rgba(139,109,20,0.5)',
+                    }}
+                >
+                    {/* Avatar emoji */}
+                    <span style={{ fontSize: size * 0.45 }}>
+                        {isFemale ? '👩' : '👨'}
+                    </span>
+                </div>
+            </div>
+
+            {/* Compact name ribbon */}
+            <div className="relative -mt-1" style={{ width: Math.min(100, size + 10) }}>
+                <svg viewBox="0 0 120 26" className="w-full" style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.2))' }}>
+                    <polygon points="0,4 6,4 10,0 110,0 114,4 120,4 120,20 114,20 110,24 10,24 6,20 0,20" fill="#c8912c" />
+                    <polygon points="3,5 6,5 10,1 110,1 114,5 117,5 117,19 114,19 110,23 10,23 6,19 3,19" fill="#daa520" />
+                    <rect x="10" y="2" width="100" height="1.5" rx="1" fill="#ffd700" opacity="0.5" />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center" style={{ paddingBottom: 1 }}>
+                    <span className="text-white font-bold drop-shadow-md text-center leading-none"
+                        style={{ fontSize: Math.max(7, Math.min(10, size * 0.15)) }}>
+                        {shortName}
+                    </span>
+                </div>
+            </div>
+
+            {/* Generation tag */}
+            <div className="text-center -mt-0.5" style={{ fontSize: 8, color: '#5d4037', fontWeight: 700, textShadow: '0 0 6px rgba(255,255,255,0.9)' }}>
+                Đ.{member.generation ?? '?'}{isFocused ? ' ★' : ''}
+            </div>
+        </div>
     );
 }
 
-// ─── SVG Branch (Bezier curve from parent to child) ──────────────────
-function SvgBranch({ x1, y1, x2, y2, thickness }: { x1: number; y1: number; x2: number; y2: number; thickness: number }) {
-    // Bezier curve going upward from parent to child
-    const midY = y1 + (y2 - y1) * 0.4;
-    const path = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY + (y2 - y1) * 0.1}, ${x2} ${y2}`;
-
+// ─── SVG Branch Line connecting parent to child ──────────────────────
+function BranchLine({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) {
+    const midY = y1 + (y2 - y1) * 0.45;
     return (
         <>
-            {/* Branch shadow */}
-            <path d={path} fill="none" stroke="#3d2b1f" strokeWidth={thickness + 2} opacity="0.15" strokeLinecap="round" />
-            {/* Branch wood */}
-            <path d={path} fill="none" stroke="#6d4c2e" strokeWidth={thickness} strokeLinecap="round" />
-            {/* Branch highlight */}
-            <path d={path} fill="none" stroke="#8b6f47" strokeWidth={Math.max(1, thickness - 3)} opacity="0.4" strokeLinecap="round" />
+            <path
+                d={`M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY + (y2 - y1) * 0.08}, ${x2} ${y2}`}
+                fill="none" stroke="#3d2b1f" strokeWidth="4" opacity="0.15" strokeLinecap="round"
+            />
+            <path
+                d={`M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY + (y2 - y1) * 0.08}, ${x2} ${y2}`}
+                fill="none" stroke="#6d4c2e" strokeWidth="2.5" strokeLinecap="round"
+            />
         </>
     );
 }
 
-// ─── SVG Person Circle ──────────────────────────────────────────────
-function SvgPerson({
-    node, isFocused, isOnRelPath, onClick
-}: {
-    node: TreeNode; isFocused: boolean; isOnRelPath: boolean; onClick: (m: MemberData) => void;
-}) {
-    const { member, x, y, size } = node;
-    const isFemale = member.gender === 'female';
-    const r = size / 2;
-    const shortName = member.name.length > 14 ? member.name.substring(0, 12) + '…' : member.name;
-
-    return (
-        <g className="cursor-pointer" onClick={() => onClick(member)} style={{ transition: 'transform 0.3s' }}>
-            {/* Glow ring */}
-            {(isFocused || isOnRelPath) && (
-                <circle cx={x} cy={y} r={r + 6}
-                    fill="none"
-                    stroke={isOnRelPath ? '#dc2626' : '#f0c040'}
-                    strokeWidth={3}
-                    opacity={0.8}
-                >
-                    {isFocused && (
-                        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite" />
-                    )}
-                </circle>
-            )}
-
-            {/* Gold frame ring */}
-            <circle cx={x} cy={y} r={r + 3} fill="none" stroke="#c5a55a" strokeWidth={2.5} opacity={0.8} />
-
-            {/* Circle background */}
-            <circle cx={x} cy={y} r={r}
-                fill={isFemale ? '#c27ba0' : '#795548'}
-                stroke={isFemale ? '#9c4d78' : '#4e342e'}
-                strokeWidth={2.5}
-            />
-
-            {/* Gradient sheen */}
-            <circle cx={x} cy={y - r * 0.2} r={r * 0.6}
-                fill="url(#sheenGrad)" opacity={0.25}
-            />
-
-            {/* Gender icon */}
-            <text x={x} y={y + 2} textAnchor="middle" dominantBaseline="middle"
-                fill="white" fontSize={r > 20 ? 18 : 14} fontWeight="bold"
-                style={{ pointerEvents: 'none' }}>
-                {isFemale ? '♀' : '♂'}
-            </text>
-
-            {/* Name banner */}
-            <rect x={x - 55} y={y + r + 4} width={110} height={16} rx={4}
-                fill={isFemale ? '#8e3a6e' : '#4e342e'} opacity={0.92}
-            />
-            <text x={x} y={y + r + 14} textAnchor="middle" dominantBaseline="middle"
-                fill="white" fontSize={9} fontWeight="700"
-                style={{ pointerEvents: 'none' }}>
-                {shortName}
-            </text>
-
-            {/* Generation label */}
-            <text x={x} y={y + r + 26} textAnchor="middle" dominantBaseline="middle"
-                fill="#5d4037" fontSize={8} fontWeight="600"
-                style={{ pointerEvents: 'none' }}>
-                Đ.{member.generation ?? '?'}{isFocused ? ' ★' : ''}
-            </text>
-        </g>
-    );
-}
-
-// ─── Searchable Dropdown for xưng hô ────────────────────────────────
+// ─── Searchable Dropdown ─────────────────────────────────────────────
 function MemberDropdown({ value, onChange, members, placeholder }: {
     value: string; onChange: (id: string) => void; members: MemberData[]; placeholder: string;
 }) {
@@ -210,33 +222,12 @@ function getRelationTerm(genDiff: number, dA: number, dB: number): string {
     }
     if (absDiff === 1) return 'CHÁU';
     if (absDiff === 2) return 'CHÁU';
-    if (absDiff === 3) return 'CHẮT';
-    if (absDiff === 4) return 'CHÚT';
-    if (absDiff === 5) return 'CHÍT';
     return `HẬU DUỆ (cách ${absDiff} đời)`;
 }
-
-// ─── SVG dimensions ──────────────────────────────────────────────────
-const SVG_W = 1200;
-const SVG_H = 800;
-const TRUNK_X = SVG_W / 2;
-const TRUNK_BOTTOM = SVG_H - 40;
-const TRUNK_TOP = SVG_H - 140;
-const ROOT_Y = TRUNK_TOP - 20;
-
-// Layer Y positions (bottom to top, root at bottom)
-const LAYER_Y = [
-    ROOT_Y,          // Layer 0: root (bottom)
-    ROOT_Y - 140,    // Layer 1: children
-    ROOT_Y - 280,    // Layer 2: grandchildren
-    ROOT_Y - 400,    // Layer 3: great-grandchildren
-    ROOT_Y - 500,    // Layer 4: great-great-grandchildren
-];
 
 // ─── Main Component ─────────────────────────────────────────────────
 export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     const { members } = data;
-    const svgRef = useRef<SVGSVGElement>(null);
 
     const initialFocus = useMemo(() => {
         const withFamily = members.find(m =>
@@ -252,22 +243,27 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     const [calcA, setCalcA] = useState('');
     const [calcB, setCalcB] = useState('');
 
-    // ─── Build tree nodes with position via BFS ──────────────────────
-    const { treeNodes, leaves } = useMemo(() => {
+    // ─── Build tree: root at BOTTOM, descendants grow UPWARD ─────────
+    const { treeNodes } = useMemo(() => {
         const focused = members.find(m => m.id === focusId);
-        if (!focused) return { treeNodes: [], leaves: [] };
+        if (!focused) return { treeNodes: [] };
 
         const nodes: TreeNode[] = [];
-        const maxPerLayer = [1, 3, 5, 7, 7];
+        const maxPerLayer = [1, 3, 5, 6, 5];
+        // Vertical position: root at 80%, more compact spacing
+        const layerY = [80, 62, 44, 28, 14];
+        const layerSizes = [62, 52, 46, 40, 36];
 
-        // Root node
-        const rootNode: TreeNode = { member: focused, x: TRUNK_X, y: ROOT_Y, size: 52 };
+        // Root
+        const rootNode: TreeNode = {
+            member: focused, x: 50, y: layerY[0],
+            size: layerSizes[0], layer: 0,
+        };
         nodes.push(rootNode);
 
-        // BFS layer by layer
         let currentLayer: TreeNode[] = [rootNode];
 
-        for (let depth = 1; depth < LAYER_Y.length; depth++) {
+        for (let depth = 1; depth < layerY.length; depth++) {
             const nextLayer: TreeNode[] = [];
             const maxSlots = maxPerLayer[depth];
 
@@ -276,11 +272,8 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                 for (const kid of kids) {
                     if (nextLayer.length < maxSlots) {
                         nextLayer.push({
-                            member: kid,
-                            x: 0, // will calculate below
-                            y: LAYER_Y[depth],
-                            parentNode,
-                            size: Math.max(30, 48 - depth * 4),
+                            member: kid, x: 0, y: layerY[depth],
+                            parentNode, size: layerSizes[depth], layer: depth,
                         });
                     }
                 }
@@ -288,51 +281,20 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
 
             if (nextLayer.length === 0) break;
 
-            // Spread children horizontally 
-            const layerWidth = Math.min(SVG_W - 200, nextLayer.length * 160);
-            const startX = TRUNK_X - layerWidth / 2;
-            const step = nextLayer.length > 1 ? layerWidth / (nextLayer.length - 1) : 0;
+            // Spread horizontally (wider for deeper layers to match tree canopy shape)
+            const maxWidth = depth === 1 ? 30 : depth === 2 ? 46 : depth === 3 ? 56 : 56;
+            const startX = 50 - maxWidth / 2;
+            const step = nextLayer.length > 1 ? maxWidth / (nextLayer.length - 1) : 0;
 
             nextLayer.forEach((n, i) => {
-                n.x = nextLayer.length === 1 ? TRUNK_X : startX + i * step;
+                n.x = nextLayer.length === 1 ? 50 : startX + i * step;
             });
 
             nodes.push(...nextLayer);
             currentLayer = nextLayer;
         }
 
-        // Generate decorative leaves along branches
-        const leafData: { cx: number; cy: number; rotation: number; scale: number }[] = [];
-        for (const node of nodes) {
-            if (node.parentNode) {
-                const px = node.parentNode.x;
-                const py = node.parentNode.y;
-                const dx = node.x - px;
-                const dy = node.y - py;
-                // Place 2-4 leaves along each branch
-                for (let t = 0.2; t < 0.9; t += 0.25) {
-                    const lx = px + dx * t + (Math.random() - 0.5) * 30;
-                    const ly = py + dy * t + (Math.random() - 0.5) * 15;
-                    leafData.push({
-                        cx: lx,
-                        cy: ly,
-                        rotation: Math.random() * 360,
-                        scale: 0.6 + Math.random() * 0.6,
-                    });
-                }
-            }
-        }
-        // Extra leaves around the crown
-        for (let i = 0; i < 20; i++) {
-            leafData.push({
-                cx: TRUNK_X + (Math.random() - 0.5) * (SVG_W * 0.7),
-                cy: 20 + Math.random() * 180,
-                rotation: Math.random() * 360,
-                scale: 0.5 + Math.random() * 0.8,
-            });
-        }
-
-        return { treeNodes: nodes, leaves: leafData };
+        return { treeNodes: nodes };
     }, [focusId, members]);
 
     // ─── Relationship path ───────────────────────────────────────────
@@ -365,7 +327,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             if (found !== -1) { lcaA = i; lcaB = found; break; }
         }
 
-        if (lcaA === -1) return { relationResult: 'Không tìm thấy quan hệ trong dữ liệu', relationPath: new Set<string>() };
+        if (lcaA === -1) return { relationResult: 'Không tìm thấy quan hệ', relationPath: new Set<string>() };
 
         const pIds = new Set<string>();
         for (let i = 0; i <= lcaA; i++) pIds.add(pathA[i].id);
@@ -379,8 +341,10 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         const termAB = getRelationTerm(diff, lcaA, lcaB);
         const termBA = getRelationTerm(-diff, lcaB, lcaA);
 
-        const result = `🔴 ${personA.name} gọi ${personB.name} là ${termAB}\n🔵 ${personB.name} gọi ${personA.name} là ${termBA}`;
-        return { relationResult: result, relationPath: pIds };
+        return {
+            relationResult: `🔴 ${personA.name} gọi ${personB.name} là ${termAB}\n🔵 ${personB.name} gọi ${personA.name} là ${termBA}`,
+            relationPath: pIds,
+        };
     }, [calcA, calcB, members]);
 
     // ─── Search ──────────────────────────────────────────────────────
@@ -390,9 +354,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         return members.filter(m => removeDiacritics(m.name.toLowerCase()).includes(term)).slice(0, 8);
     }, [searchTerm, members]);
 
-    const handleClickMember = useCallback((m: MemberData) => {
-        setDetailMember(m);
-    }, []);
+    const handleClickMember = useCallback((m: MemberData) => setDetailMember(m), []);
 
     const navigateToMember = useCallback((id: string) => {
         setFocusId(id);
@@ -402,79 +364,34 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
 
     // ─── Render ──────────────────────────────────────────────────────
     return (
-        <div className="w-full h-full relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, #d4e8c2, #f5f0e1 30%, #f5f0e1 80%, #8b6f47 100%)' }}>
-            {/* SVG Tree */}
-            <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                    {/* Sheen gradient for circles */}
-                    <radialGradient id="sheenGrad" cx="40%" cy="30%">
-                        <stop offset="0%" stopColor="white" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="white" stopOpacity="0" />
-                    </radialGradient>
-                    {/* Trunk gradient */}
-                    <linearGradient id="trunkGrad" x1="0" x2="1" y1="0" y2="0">
-                        <stop offset="0%" stopColor="#4a3220" />
-                        <stop offset="30%" stopColor="#6d4c2e" />
-                        <stop offset="50%" stopColor="#8b6f47" />
-                        <stop offset="70%" stopColor="#6d4c2e" />
-                        <stop offset="100%" stopColor="#4a3220" />
-                    </linearGradient>
-                    {/* Root texture */}
-                    <linearGradient id="rootGrad" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stopColor="#6d4c2e" />
-                        <stop offset="100%" stopColor="#3d2b1f" />
-                    </linearGradient>
-                </defs>
+        <div className="w-full h-full relative overflow-hidden bg-[#f5f0e1]">
+            {/* Beautiful tree background image */}
+            <div className="absolute inset-0">
+                <img src="/tree_bg.png" alt="" className="w-full h-full object-cover opacity-70" draggable={false} />
+            </div>
 
-                {/* Ground */}
-                <ellipse cx={TRUNK_X} cy={TRUNK_BOTTOM + 15} rx={200} ry={20} fill="#8b6f47" opacity="0.3" />
+            {/* Soft vignette overlay */}
+            <div className="absolute inset-0" style={{
+                background: 'radial-gradient(ellipse at center, transparent 40%, rgba(62,39,35,0.2) 100%)',
+            }} />
 
-                {/* Tree Trunk — thick at bottom, narrows upward */}
-                <path d={`
-                    M ${TRUNK_X - 40} ${TRUNK_BOTTOM}
-                    C ${TRUNK_X - 45} ${TRUNK_TOP + 40}, ${TRUNK_X - 20} ${TRUNK_TOP + 20}, ${TRUNK_X - 15} ${TRUNK_TOP}
-                    L ${TRUNK_X + 15} ${TRUNK_TOP}
-                    C ${TRUNK_X + 20} ${TRUNK_TOP + 20}, ${TRUNK_X + 45} ${TRUNK_TOP + 40}, ${TRUNK_X + 40} ${TRUNK_BOTTOM}
-                    Z
-                `} fill="url(#trunkGrad)" />
-
-                {/* Trunk bark texture lines */}
-                {[0.2, 0.4, 0.6, 0.8].map((t, i) => {
-                    const ty = TRUNK_TOP + (TRUNK_BOTTOM - TRUNK_TOP) * t;
-                    return (
-                        <line key={`bark${i}`} x1={TRUNK_X - 15 + i * 5} y1={ty - 8} x2={TRUNK_X - 10 + i * 3} y2={ty + 8}
-                            stroke="#3d2b1f" strokeWidth="1" opacity="0.2" />
-                    );
-                })}
-
-                {/* Roots */}
-                {[-60, -30, 30, 60].map((offset, i) => (
-                    <path key={`root${i}`}
-                        d={`M ${TRUNK_X + offset * 0.4} ${TRUNK_BOTTOM} Q ${TRUNK_X + offset} ${TRUNK_BOTTOM + 20}, ${TRUNK_X + offset * 1.2} ${TRUNK_BOTTOM + 10}`}
-                        fill="none" stroke="url(#rootGrad)" strokeWidth={4 - i * 0.5} strokeLinecap="round"
-                    />
-                ))}
-
-                {/* Decorative leaves (behind branches) */}
-                {leaves.map((l, i) => (
-                    <SvgLeaf key={`leaf${i}`} cx={l.cx} cy={l.cy} rotation={l.rotation} scale={l.scale} />
-                ))}
-
-                {/* Branches (from parent to child) */}
+            {/* Branch lines SVG overlay */}
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
                 {treeNodes.filter(n => n.parentNode).map((node, i) => (
-                    <SvgBranch
-                        key={`branch${i}`}
+                    <BranchLine
+                        key={`branch-${i}`}
                         x1={node.parentNode!.x}
                         y1={node.parentNode!.y}
                         x2={node.x}
                         y2={node.y}
-                        thickness={Math.max(4, 10 - i)}
                     />
                 ))}
+            </svg>
 
-                {/* Person circles */}
+            {/* Person bubbles (HTML overlay for rich styling) */}
+            <div className="absolute inset-0" style={{ zIndex: 10 }}>
                 {treeNodes.map(node => (
-                    <SvgPerson
+                    <PersonBubble
                         key={node.member.id}
                         node={node}
                         isFocused={node.member.id === focusId}
@@ -482,11 +399,11 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                         onClick={handleClickMember}
                     />
                 ))}
-            </svg>
+            </div>
 
             {/* Title */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30">
-                <div className="bg-[#4e342e]/90 backdrop-blur-sm text-white px-5 py-1.5 rounded-xl shadow-lg border border-[#8d6e63]">
+                <div className="bg-[#4e342e]/90 backdrop-blur-sm text-white px-6 py-2 rounded-2xl shadow-xl border border-[#8d6e63]">
                     <h1 className="font-serif font-bold text-sm sm:text-base text-center">🌳 Phả Đồ Họ {data.familyName}</h1>
                 </div>
             </div>
@@ -556,51 +473,63 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                 )}
             </div>
 
-            {/* Back button */}
-            <div className="absolute top-14 right-3 z-30">
-                <a href="/tree" className="bg-[#4e342e] hover:bg-[#3e2723] text-white px-3 py-2 rounded-xl text-xs font-bold shadow-lg transition-colors">
+            {/* Back + Navigation */}
+            <div className="absolute top-14 right-3 z-30 flex flex-col gap-2">
+                <a href="/tree" className="bg-[#4e342e] hover:bg-[#3e2723] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg transition-colors text-center">
                     ← Cây chính
                 </a>
             </div>
 
-            {/* Hint */}
+            {/* Legend */}
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30">
-                <span className="bg-white/80 backdrop-blur-sm text-[#5d4037] text-[10px] font-bold px-4 py-1.5 rounded-full shadow border border-[#d2b48c]">
-                    🌳 Gốc ở dưới thân cây · Bấm vào người → chi tiết → &quot;Đặt làm gốc&quot; để duyệt nhánh
+                <span className="bg-[#4e342e]/80 backdrop-blur-sm text-white/90 text-[10px] font-bold px-5 py-2 rounded-full shadow-lg border border-[#8d6e63]/50">
+                    🌳 Gốc ở dưới · Bấm vào người → chi tiết → &quot;Đặt làm gốc&quot; để duyệt nhánh
                 </span>
             </div>
 
             {/* Detail popup */}
             {detailMember && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setDetailMember(null)}>
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-                    <div className="relative bg-[#fdfbf7] border-2 border-[#d2b48c] rounded-2xl shadow-2xl max-w-sm w-full p-5"
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-md" />
+                    <div className="relative bg-[#fdfbf7] border-2 border-[#c8912c] rounded-3xl shadow-2xl max-w-sm w-full p-6 bg-gradient-to-b from-[#fdfbf7] to-[#f4efe6]"
                         onClick={e => e.stopPropagation()}>
-                        <button onClick={() => setDetailMember(null)} className="absolute top-3 right-3 p-1 hover:bg-gray-100 rounded-full">
+                        <button onClick={() => setDetailMember(null)} className="absolute top-3 right-3 p-1.5 hover:bg-gray-100 rounded-full">
                             <X size={20} className="text-[#8b5a2b]" />
                         </button>
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg
-                                ${detailMember.gender === 'female' ? 'bg-[#c27ba0]' : 'bg-[#795548]'}`}>
-                                {detailMember.gender === 'female' ? '♀' : '♂'}
+
+                        {/* Header */}
+                        <div className="flex items-center gap-4 mb-5">
+                            <div className="relative rounded-full"
+                                style={{
+                                    width: 64,
+                                    height: 64,
+                                    background: 'conic-gradient(from 0deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b)',
+                                    padding: 3,
+                                }}>
+                                <div className={`w-full h-full rounded-full flex items-center justify-center text-3xl
+                                    ${detailMember.gender === 'female' ? 'bg-pink-100' : 'bg-amber-50'}`}>
+                                    {detailMember.gender === 'female' ? '👩' : '👨'}
+                                </div>
                             </div>
                             <div>
-                                <h3 className="text-lg font-bold text-[#3e2723] font-serif">{detailMember.name}</h3>
-                                <p className="text-xs text-[#8b5a2b]">
+                                <h3 className="text-xl font-bold text-[#3e2723] font-serif">{detailMember.name}</h3>
+                                <p className="text-xs text-[#8b5a2b] mt-0.5">
                                     Đời {detailMember.generation ?? '?'} • {detailMember.gender === 'female' ? 'Nữ' : 'Nam'}
                                     {detailMember.status ? ` • ${detailMember.status}` : ''}
                                 </p>
                             </div>
                         </div>
-                        <div className="space-y-2 text-sm mb-4">
+
+                        {/* Info */}
+                        <div className="space-y-2 text-sm mb-5">
                             {detailMember.spouse && (
-                                <div className="flex gap-2 p-2 bg-[#f4efe6] rounded-lg">
+                                <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
                                     <span className="text-[#8b5a2b] font-bold">{detailMember.gender === 'female' ? 'Chồng:' : 'Vợ:'}</span>
                                     <span className="text-[#3e2723]">{detailMember.spouse}</span>
                                 </div>
                             )}
                             {detailMember.birthSolar && (
-                                <div className="flex gap-2 p-2 bg-[#f4efe6] rounded-lg">
+                                <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
                                     <span className="text-[#8b5a2b] font-bold">Sinh:</span>
                                     <span className="text-[#3e2723]">{detailMember.birthSolar}</span>
                                 </div>
@@ -608,20 +537,20 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                             {(() => {
                                 const par = members.find(m => m.id === detailMember.parentId);
                                 return par ? (
-                                    <div className="flex gap-2 p-2 bg-[#f4efe6] rounded-lg">
+                                    <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
                                         <span className="text-[#8b5a2b] font-bold">Cha:</span>
-                                        <span className="text-[#3e2723] underline cursor-pointer" onClick={() => navigateToMember(par.id)}>{par.name}</span>
+                                        <span className="text-[#3e2723] underline cursor-pointer hover:text-[#8b5a2b]" onClick={() => navigateToMember(par.id)}>{par.name}</span>
                                     </div>
                                 ) : null;
                             })()}
                             {(() => {
                                 const kids = members.filter(m => m.parentId === detailMember.id);
                                 return kids.length > 0 ? (
-                                    <div className="p-2 bg-[#f4efe6] rounded-lg">
-                                        <span className="text-[#8b5a2b] font-bold block mb-1">Con ({kids.length}):</span>
-                                        <div className="flex flex-wrap gap-1">
+                                    <div className="p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
+                                        <span className="text-[#8b5a2b] font-bold block mb-1.5">Con ({kids.length}):</span>
+                                        <div className="flex flex-wrap gap-1.5">
                                             {kids.slice(0, 10).map(c => (
-                                                <span key={c.id} className={`text-xs px-2 py-0.5 rounded-full text-white cursor-pointer hover:opacity-80
+                                                <span key={c.id} className={`text-xs px-2.5 py-1 rounded-full text-white cursor-pointer hover:opacity-80 font-medium
                                                     ${c.gender === 'female' ? 'bg-[#c27ba0]' : 'bg-[#795548]'}`}
                                                     onClick={() => navigateToMember(c.id)}>
                                                     {c.name}
@@ -632,9 +561,10 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                                 ) : null;
                             })()}
                         </div>
+
                         {detailMember.id !== focusId && (
                             <button onClick={() => navigateToMember(detailMember.id)}
-                                className="w-full py-2.5 bg-[#4e342e] hover:bg-[#3e2723] text-white rounded-xl font-bold text-sm shadow-md transition-colors">
+                                className="w-full py-3 bg-gradient-to-r from-[#8b5a2b] to-[#5c4033] hover:from-[#5c4033] hover:to-[#3e2723] text-white rounded-2xl font-bold text-sm shadow-lg transition-all">
                                 🌳 Đặt làm gốc cây
                             </button>
                         )}
