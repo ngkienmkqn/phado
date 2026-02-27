@@ -446,32 +446,6 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                                     className="text-sm font-medium text-[#3e2723] group-hover:text-[#8b5a2b] cursor-pointer flex-1"
                                                 >{child.name}</span>
                                                 <div className="flex items-center gap-1">
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            const reason = prompt(`Gỡ liên kết cha/mẹ-con giữa "${member.name}" và "${child.name}"?\n(Chỉ xóa mối quan hệ, không xóa người)\n\nLý do:`);
-                                                            if (reason !== null) {
-                                                                fetch('/api/family-data', {
-                                                                    method: 'POST',
-                                                                    headers: { 'Content-Type': 'application/json' },
-                                                                    body: JSON.stringify({
-                                                                        type: 'unlink_parent_child',
-                                                                        parentId: member.id,
-                                                                        parentName: member.name,
-                                                                        childId: child.id,
-                                                                        childName: child.name,
-                                                                        reason: reason || 'Không có lý do',
-                                                                        timestamp: new Date().toISOString(),
-                                                                    }),
-                                                                });
-                                                                alert(`Yêu cầu gỡ liên kết "${member.name}" ↔ "${child.name}" đã gửi lên Admin.`);
-                                                            }
-                                                        }}
-                                                        className="p-1 hover:bg-red-50 rounded-full transition-colors"
-                                                        title="Gỡ liên kết cha/mẹ-con"
-                                                    >
-                                                        <X size={14} className="text-red-400 hover:text-red-600" />
-                                                    </button>
                                                     <ChevronRight size={14} className="text-[#d2b48c] group-hover:text-[#8b5a2b] cursor-pointer" onClick={() => onViewMember(child.id)} />
                                                 </div>
                                             </div>
@@ -537,6 +511,46 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                     💡 <strong>Lưu ý:</strong> Xóa tên ở đây sẽ mất trên danh bạ. Nếu ông/bà có nhiều vợ/chồng, hãy thoát ra và chọn "Thêm Vợ/Chồng Mới".
                                 </p>
                             </div>
+
+                            {/* Children List in Edit Mode - with unlink button */}
+                            {childrenNodes.length > 0 && (
+                                <div>
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Con cái ({childrenNodes.length})</label>
+                                    <div className="space-y-2">
+                                        {childrenNodes.map(child => (
+                                            <div key={child.id} className="flex items-center justify-between p-2.5 bg-[#fdfbf7] border border-[#e8dcb8] rounded-lg">
+                                                <span className="text-sm font-medium text-[#3e2723]">{child.name}</span>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        const reason = prompt(`Gỡ liên kết cha/mẹ-con giữa "${member.name}" và "${child.name}"?\n(Chỉ xóa mối quan hệ, không xóa người)\n\nLý do:`);
+                                                        if (reason !== null) {
+                                                            fetch('/api/family-data', {
+                                                                method: 'POST',
+                                                                headers: { 'Content-Type': 'application/json' },
+                                                                body: JSON.stringify({
+                                                                    type: 'unlink_parent_child',
+                                                                    parentId: member.id,
+                                                                    parentName: member.name,
+                                                                    childId: child.id,
+                                                                    childName: child.name,
+                                                                    reason: reason || 'Không có lý do',
+                                                                    timestamp: new Date().toISOString(),
+                                                                }),
+                                                            });
+                                                            alert(`Yêu cầu gỡ liên kết "${member.name}" ↔ "${child.name}" đã gửi lên Admin.`);
+                                                        }
+                                                    }}
+                                                    className="p-1 hover:bg-red-50 rounded-full transition-colors"
+                                                    title="Gỡ liên kết cha/mẹ-con"
+                                                >
+                                                    <X size={14} className="text-red-400 hover:text-red-600" />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
