@@ -534,12 +534,10 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     }, []);
 
     // ─── Render ──────────────────────────────────────────────────────
-    // Compute tree bounds for dynamic trunk
-    const treeBounds = useMemo(() => {
-        if (treeNodes.length === 0) return { rootX: 50, rootY: 85, topY: 15 };
-        const rootNode = treeNodes[0];
-        const topY = Math.min(...treeNodes.map(n => n.y));
-        return { rootX: rootNode?.x ?? 50, rootY: rootNode?.y ?? 80, topY };
+    // Compute bottom boundary for the root trunk
+    const bottomY = useMemo(() => {
+        if (treeNodes.length === 0) return 100;
+        return Math.max(...treeNodes.map(n => n.y)) + 15;
     }, [treeNodes]);
 
     // Decorative leaves — big bright green leaves filling the canopy
@@ -651,41 +649,22 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                         </symbol>
                     </defs>
 
-                    {/* ═══ GREEN CANOPY BLOB ═══ Large dark green ellipse behind all nodes */}
-                    {(() => {
-                        const xs = treeNodes.map(n => n.x);
-                        const ys = treeNodes.map(n => n.y);
-                        const cx = xs.length ? (Math.min(...xs) + Math.max(...xs)) / 2 : 50;
-                        const cy = ys.length ? (Math.min(...ys) + Math.max(...ys)) / 2 : 40;
-                        const rx = xs.length ? (Math.max(...xs) - Math.min(...xs)) / 2 + 12 : 35;
-                        const ry = ys.length ? (Math.max(...ys) - Math.min(...ys)) / 2 + 10 : 30;
-                        return (<>
-                            {/* Shadow */}
-                            <ellipse cx={cx + 0.5} cy={cy + 0.5} rx={rx} ry={ry} fill="#1B5E20" opacity="0.2" />
-                            {/* Main canopy */}
-                            <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="#2E7D32" />
-                            {/* Lighter inner canopy */}
-                            <ellipse cx={cx} cy={cy - 2} rx={rx * 0.85} ry={ry * 0.8} fill="#388E3C" opacity="0.7" />
-                            {/* Highlight */}
-                            <ellipse cx={cx - rx * 0.15} cy={cy - ry * 0.2} rx={rx * 0.5} ry={ry * 0.4} fill="#43A047" opacity="0.4" />
-                        </>);
-                    })()}
 
-                    {/* ═══ SIMPLE THICK TRUNK ═══ */}
-                    {(() => {
-                        const tx = treeBounds.rootX;
-                        const topY = treeBounds.rootY;
-                        const bottomY = 98;
-                        const baseW = 8, topW = 4;
-                        return (<>
-                            {/* Trunk shadow */}
-                            <path d={`M ${tx - baseW / 2} ${bottomY} Q ${tx - topW / 2 - 0.5} ${(bottomY + topY) / 2}, ${tx - topW / 2} ${topY} L ${tx + topW / 2} ${topY} Q ${tx + topW / 2 + 0.5} ${(bottomY + topY) / 2}, ${tx + baseW / 2} ${bottomY} Z`} fill="#3E2723" opacity="0.3" transform="translate(0.3, 0.3)" />
-                            {/* Main trunk */}
-                            <path d={`M ${tx - baseW / 2} ${bottomY} Q ${tx - topW / 2 - 0.5} ${(bottomY + topY) / 2}, ${tx - topW / 2} ${topY} L ${tx + topW / 2} ${topY} Q ${tx + topW / 2 + 0.5} ${(bottomY + topY) / 2}, ${tx + baseW / 2} ${bottomY} Z`} fill="url(#trunkGrad)" />
-                        </>);
-                    })()}
 
                     {/* ═══ PROCEDURAL BRANCHES ═══ */}
+                    {/* Root Trunk to Ground */}
+                    {treeNodes.length > 0 && (
+                        <BranchLine
+                            key="root-trunk"
+                            x1={treeNodes[0].x}
+                            y1={bottomY}
+                            x2={treeNodes[0].x}
+                            y2={treeNodes[0].y}
+                            layer={0}
+                            randomSeed={42}
+                        />
+                    )}
+
                     {treeNodes.map((node) => {
                         if (!node.parentNode) return null;
                         return (
