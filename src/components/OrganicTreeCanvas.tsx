@@ -565,153 +565,103 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                 transformOrigin: 'center center',
             }}>
 
-                {/* ALGORITHMIC TREE SVG — massive trunk, branches, twigs, leaves */}
+                {/* ARTISTIC TREE SVG — matching tree_bg.png style */}
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
                     <defs>
-                        {/* Bark gradient — horizontal for trunk */}
                         <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
                             <stop offset="0%" stopColor="#3a2510" />
-                            <stop offset="15%" stopColor="#4a3020" />
-                            <stop offset="35%" stopColor="#5d3a1a" />
-                            <stop offset="50%" stopColor="#6d4c2e" />
-                            <stop offset="65%" stopColor="#5d3a1a" />
-                            <stop offset="85%" stopColor="#4a3020" />
+                            <stop offset="20%" stopColor="#5d3a1a" />
+                            <stop offset="50%" stopColor="#7a5a3c" />
+                            <stop offset="80%" stopColor="#5d3a1a" />
                             <stop offset="100%" stopColor="#3a2510" />
                         </linearGradient>
                         <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor="#5d3a1a" />
                             <stop offset="100%" stopColor="#3d2510" />
                         </linearGradient>
-                        {/* Oak leaf — lobed shape */}
-                        <symbol id="oakLeaf" viewBox="0 0 20 24" overflow="visible">
-                            <path d="M10 0 C8 2, 4 3, 2 5 C0 7, 1 9, 3 10 C1 11, 0 13, 1 15 C2 17, 4 17, 5 16 C4 18, 4 20, 6 22 C8 24, 10 24, 10 24 C10 24, 12 24, 14 22 C16 20, 16 18, 15 16 C16 17, 18 17, 19 15 C20 13, 19 11, 17 10 C19 9, 20 7, 18 5 C16 3, 12 2, 10 0Z" />
-                            <line x1="10" y1="3" x2="10" y2="21" stroke="#5a6a28" strokeWidth="0.5" opacity="0.3" />
+                        <symbol id="oakLeaf" viewBox="0 0 24 30" overflow="visible">
+                            <path d="M12 0 C10 3, 5 4, 2 7 C0 10, 1 13, 4 14 C1 15, 0 18, 2 21 C4 24, 7 24, 8 22 C7 25, 8 28, 10 30 C11 30, 13 30, 14 30 C16 28, 17 25, 16 22 C17 24, 20 24, 22 21 C24 18, 23 15, 20 14 C23 13, 24 10, 22 7 C19 4, 14 3, 12 0Z" />
+                            <path d="M12 4 Q11 12, 12 28" fill="none" stroke="#5a6a28" strokeWidth="0.4" opacity="0.25" />
+                            <path d="M12 10 Q8 8, 5 9 M12 10 Q16 8, 19 9 M12 17 Q8 15, 4 16 M12 17 Q16 15, 20 16" fill="none" stroke="#5a6a28" strokeWidth="0.3" opacity="0.15" />
                         </symbol>
                     </defs>
 
-                    {/* ═══ THICK GNARLY ROOTS ═══ */}
-                    {[[-18, 8, 2.5], [-11, 6, 2], [-6, 4, 1.5], [6, 4.5, 1.5], [12, 6.5, 2], [19, 7, 2.2], [-3, 3, 1.2], [4, 3.5, 1.3]].map(([offsetX, h, w], i) => {
-                        const tx = treeBounds.rootX;
-                        const endX = tx + offsetX;
-                        const endY = 97;
-                        return (
-                            <path key={`root-${i}`}
-                                d={`M ${tx - w * 0.4} ${treeBounds.rootY + 4}
-                                    Q ${tx + offsetX * 0.3} ${endY - h * 0.3}, ${endX - w * 0.15} ${endY}
-                                    L ${endX + w * 0.15} ${endY}
-                                    Q ${tx + offsetX * 0.3 + w * 0.2} ${endY - h * 0.3}, ${tx + w * 0.4} ${treeBounds.rootY + 4}
-                                    Z`}
-                                fill="url(#rootGrad)" opacity={0.7}
-                            />
-                        );
-                    })}
-
-                    {/* ═══ MASSIVE TRUNK ═══ Thick ancient tree trunk */}
+                    {/* ═══ ROOTS ═══ */}
                     {(() => {
-                        const tx = treeBounds.rootX;
-                        const bottomY = 96;
-                        const topY = treeBounds.rootY;
-                        const baseW = 12; // Much wider trunk
-                        const topW = 6;
-                        const mid = (bottomY + topY) / 2;
-                        return (
-                            <>
-                                {/* Trunk shadow */}
-                                <path d={`M ${tx - baseW / 2} ${bottomY}
-                                    C ${tx - baseW / 2 + 1} ${mid + 5}, ${tx - topW / 2 - 2} ${mid - 5}, ${tx - topW / 2} ${topY}
-                                    L ${tx + topW / 2} ${topY}
-                                    C ${tx + topW / 2 + 2} ${mid - 5}, ${tx + baseW / 2 - 1} ${mid + 5}, ${tx + baseW / 2} ${bottomY}
-                                    Z`}
-                                    fill="#2a1a0a" opacity="0.15" transform="translate(0.5, 0.5)"
-                                />
-                                {/* Main trunk body */}
-                                <path d={`M ${tx - baseW / 2} ${bottomY}
-                                    C ${tx - baseW / 2 + 1} ${mid + 5}, ${tx - topW / 2 - 2} ${mid - 5}, ${tx - topW / 2} ${topY}
-                                    L ${tx + topW / 2} ${topY}
-                                    C ${tx + topW / 2 + 2} ${mid - 5}, ${tx + baseW / 2 - 1} ${mid + 5}, ${tx + baseW / 2} ${bottomY}
-                                    Z`}
-                                    fill="url(#trunkGrad)"
-                                />
-                                {/* Bark texture — many horizontal lines */}
-                                {Array.from({ length: 12 }, (_, i) => {
-                                    const t = (i + 1) / 13;
-                                    const cy = bottomY + (topY - bottomY) * t;
-                                    const w = baseW + (topW - baseW) * t;
-                                    return (
-                                        <line key={`bark-${i}`}
-                                            x1={tx - w / 2.2 + (i % 2) * 0.3} y1={cy}
-                                            x2={tx + w / 2.2 - (i % 3) * 0.2} y2={cy + 0.2}
-                                            stroke="#3a2510" strokeWidth={0.12 + (i % 3) * 0.04} opacity={0.25 + (i % 2) * 0.1}
-                                        />
-                                    );
-                                })}
-                                {/* Trunk knots / texture details */}
-                                <ellipse cx={tx - 1.5} cy={mid + 3} rx="1.2" ry="0.8" fill="#3a2510" opacity="0.15" />
-                                <ellipse cx={tx + 1} cy={mid - 4} rx="0.9" ry="0.6" fill="#3a2510" opacity="0.12" />
-                                <ellipse cx={tx - 0.5} cy={mid + 8} rx="1.5" ry="0.9" fill="#3a2510" opacity="0.1" />
-                            </>
-                        );
+                        const tx = treeBounds.rootX, ry = treeBounds.rootY;
+                        return [
+                            [-20, 16, 2.8], [-14, 14, 2.2], [-8, 10, 1.8], [-4, 8, 1.4],
+                            [4, 8, 1.4], [8, 10, 1.8], [14, 14, 2.2], [20, 16, 2.8],
+                        ].map(([dx, dy, w], i) => (
+                            <path key={`root-${i}`}
+                                d={`M ${tx - w * 0.3} ${ry + 3} Q ${tx + dx * 0.4} ${ry + dy * 0.5}, ${tx + dx} ${ry + dy} Q ${tx + dx * 0.4 + w * 0.2} ${ry + dy * 0.5}, ${tx + w * 0.3} ${ry + 3} Z`}
+                                fill="url(#rootGrad)" opacity={0.7} stroke="#3a2510" strokeWidth="0.1" />
+                        ));
                     })()}
 
-                    {/* ═══ MAIN BRANCHES ═══ Parent-to-child connections */}
+                    {/* ═══ TWISTED TRUNK ═══ */}
+                    {(() => {
+                        const tx = treeBounds.rootX, by = treeBounds.rootY + 5, ty = treeBounds.rootY;
+                        const bw = 10, tw = 5, mid = (by + ty) / 2 + (by - ty) * 0.15;
+                        return (<>
+                            <path d={`M ${tx - bw / 2} ${by} C ${tx - bw / 2 + 0.5} ${mid + 2}, ${tx - 1} ${mid - 3}, ${tx - tw / 2 - 0.5} ${ty} L ${tx - 0.5} ${ty} C ${tx - 0.5} ${mid - 2}, ${tx - bw / 4} ${mid + 1}, ${tx - bw / 6} ${by} Z`} fill="#5d3a1a" stroke="#3a2510" strokeWidth="0.15" />
+                            <path d={`M ${tx + bw / 6} ${by} C ${tx + bw / 4} ${mid + 1}, ${tx + 0.5} ${mid - 2}, ${tx + 0.5} ${ty} L ${tx + tw / 2 + 0.5} ${ty} C ${tx + 1} ${mid - 3}, ${tx + bw / 2 - 0.5} ${mid + 2}, ${tx + bw / 2} ${by} Z`} fill="#5d3a1a" stroke="#3a2510" strokeWidth="0.15" />
+                            <path d={`M ${tx - bw / 6} ${by} C ${tx - bw / 8} ${mid + 1}, ${tx + 0.3} ${mid}, ${tx + 0.3} ${ty + 2} L ${tx - 0.3} ${ty + 2} C ${tx - 0.3} ${mid}, ${tx + bw / 8} ${mid + 1}, ${tx + bw / 6} ${by} Z`} fill="#6d4c2e" opacity="0.6" />
+                            {Array.from({ length: 14 }, (_, i) => { const t = (i + 1) / 15; const cy = by + (ty - by) * t; const w = bw - (bw - tw) * t; return <line key={`bark-${i}`} x1={tx - w / 2.2 + Math.sin(i * 0.7) * 0.3} y1={cy} x2={tx + w / 2.2 + Math.sin(i * 0.7) * 0.3} y2={cy + 0.15} stroke="#3a2510" strokeWidth={0.08 + (i % 3) * 0.03} opacity={0.2 + (i % 2) * 0.08} />; })}
+                            <ellipse cx={tx - 2} cy={mid + 1} rx="0.8" ry="0.5" fill="#3a2510" opacity="0.12" />
+                            <ellipse cx={tx + 1.5} cy={mid - 1} rx="0.6" ry="0.4" fill="#3a2510" opacity="0.1" />
+                        </>);
+                    })()}
+
+                    {/* ═══ DECORATIVE BRANCHES ═══ */}
+                    {(() => {
+                        const tx = treeBounds.rootX, ty = treeBounds.rootY;
+                        const els: React.ReactNode[] = [];
+                        let k = 0;
+                        [-140, -115, -90, -65, -40, 40, 65, 90, 115, 140].forEach((deg, pi) => {
+                            const rad = (deg * Math.PI) / 180;
+                            const len = 14 + (pi % 3) * 3;
+                            const ex = tx + Math.cos(rad) * len;
+                            const ey = ty + Math.sin(rad) * len * 0.55;
+                            const cx1 = (tx + ex) / 2 + Math.sin(rad) * 3;
+                            const cy1 = (ty + ey) / 2 - 2;
+                            const w = 1.6 - pi * 0.04;
+                            els.push(<path key={`p${k++}`} d={`M ${tx} ${ty} Q ${cx1} ${cy1}, ${ex} ${ey}`} fill="none" stroke="#5d3a1a" strokeWidth={w} strokeLinecap="round" opacity="0.65" />);
+                            for (let si = 0; si < 2 + (pi % 2); si++) {
+                                const t = 0.4 + si * 0.25;
+                                const sx = (1 - t) * (1 - t) * tx + 2 * (1 - t) * t * cx1 + t * t * ex;
+                                const sy = (1 - t) * (1 - t) * ty + 2 * (1 - t) * t * cy1 + t * t * ey;
+                                const sa = deg + ((si % 2 === 0) ? -35 : 35) + (pi * 7 % 20 - 10);
+                                const sr = (sa * Math.PI) / 180;
+                                const sl = 7 + (si + pi) % 3 * 2;
+                                const sex = sx + Math.cos(sr) * sl;
+                                const sey = sy + Math.sin(sr) * sl * 0.5;
+                                els.push(<path key={`s${k++}`} d={`M ${sx} ${sy} Q ${(sx + sex) / 2 + Math.sin(sr) * 1.5} ${(sy + sey) / 2 - 1}, ${sex} ${sey}`} fill="none" stroke="#6d4c2e" strokeWidth={w * 0.45} strokeLinecap="round" opacity="0.5" />);
+                                for (let ti = 0; ti < 2 + ((pi + si) % 2); ti++) {
+                                    const tt = 0.5 + ti * 0.2;
+                                    const tsx = sx + (sex - sx) * tt;
+                                    const tsy = sy + (sey - sy) * tt;
+                                    const ta = sa + ((ti % 2 === 0) ? -30 : 30);
+                                    const tr = (ta * Math.PI) / 180;
+                                    const tl = 3 + ((pi + si + ti) % 3);
+                                    els.push(<line key={`t${k++}`} x1={tsx} y1={tsy} x2={tsx + Math.cos(tr) * tl} y2={tsy + Math.sin(tr) * tl * 0.4} stroke="#7a5a3c" strokeWidth={w * 0.15} strokeLinecap="round" opacity="0.35" />);
+                                }
+                            }
+                        });
+                        return els;
+                    })()}
+
+                    {/* ═══ NODE BRANCHES ═══ */}
                     {treeNodes.filter(n => n.parentNode).map((node, i) => (
-                        <BranchLine
-                            key={`branch-${i}`}
-                            x1={node.parentNode!.x}
-                            y1={node.parentNode!.y}
-                            x2={node.x}
-                            y2={node.y}
-                            layer={node.layer}
-                        />
+                        <BranchLine key={`branch-${i}`} x1={node.parentNode!.x} y1={node.parentNode!.y} x2={node.x} y2={node.y} layer={node.layer} />
                     ))}
 
-                    {/* ═══ SUB-BRANCHES / TWIGS ═══ Small branches extending from main branches */}
-                    {treeNodes.filter(n => n.parentNode).map((node, ni) => {
-                        // Generate 2-4 small twigs per main branch
-                        const twigs: { sx: number; sy: number; ex: number; ey: number; w: number }[] = [];
-                        const px = node.parentNode!.x;
-                        const py = node.parentNode!.y;
-                        const cx = node.x;
-                        const cy = node.y;
-                        const dx = cx - px;
-                        const dy = cy - py;
-                        const twigCount = node.layer <= 1 ? 3 : node.layer <= 2 ? 4 : 2;
-
-                        for (let t = 0; t < twigCount; t++) {
-                            const along = 0.3 + (t / twigCount) * 0.5;
-                            const mx = px + dx * along;
-                            const my = py + dy * along;
-                            const angle = ((ni * 37 + t * 73) % 120) - 60;
-                            const len = 3 + ((ni + t) % 4) * 1.5;
-                            const rad = (angle * Math.PI) / 180;
-                            twigs.push({
-                                sx: mx, sy: my,
-                                ex: mx + Math.cos(rad) * len * (dx > 0 ? 1 : dx < 0 ? -1 : ((t % 2) * 2 - 1)),
-                                ey: my + Math.sin(rad) * len - 2,
-                                w: node.layer <= 1 ? 0.6 : 0.35,
-                            });
-                        }
-
-                        return twigs.map((tw, ti) => (
-                            <line key={`twig-${ni}-${ti}`}
-                                x1={tw.sx} y1={tw.sy}
-                                x2={tw.ex} y2={tw.ey}
-                                stroke="#6d4c2e" strokeWidth={tw.w}
-                                strokeLinecap="round" opacity="0.5"
-                            />
-                        ));
-                    })}
-
-                    {/* ═══ OAK LEAVES ═══ Growing from branch tips and twig ends */}
+                    {/* ═══ OAK LEAVES ═══ */}
                     {leafSeeds.map((leaf, i) => (
-                        <use key={`leaf-${i}`}
-                            href="#oakLeaf"
-                            x={leaf.x - leaf.scale * 1.2}
-                            y={leaf.y - leaf.scale * 1.4}
-                            width={leaf.scale * 2.4}
-                            height={leaf.scale * 2.8}
-                            fill={leaf.color}
-                            opacity={0.6 + (i % 3) * 0.1}
+                        <use key={`leaf-${i}`} href="#oakLeaf"
+                            x={leaf.x - leaf.scale * 1.5} y={leaf.y - leaf.scale * 1.8}
+                            width={leaf.scale * 3} height={leaf.scale * 3.6}
+                            fill={leaf.color} opacity={0.65 + (i % 3) * 0.1}
                             transform={`rotate(${leaf.rotate}, ${leaf.x}, ${leaf.y})`}
                             style={{ animation: `leafSway ${2.5 + (i % 4) * 0.5}s ease-in-out ${leaf.delay}s infinite` }}
                         />
