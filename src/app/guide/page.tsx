@@ -25,12 +25,12 @@ const steps = [
         color: 'from-green-500 to-emerald-600',
         borderColor: 'border-green-400/30',
         content: [
-            { emoji: '1️⃣', text: 'Ở trang chủ, nhấn vào ô "Cây Gia Phả" hoặc "Cây Phả Đồ Organic"' },
-            { emoji: '2️⃣', text: 'Bản đồ gia phả hiện ra — mỗi ô hoặc vòng tròn là một người trong dòng họ' },
+            { emoji: '1️⃣', text: 'Ở trang chủ, nhấn vào ô "Cây Gia Phả"' },
+            { emoji: '2️⃣', text: 'Bản đồ gia phả hiện ra — mỗi vòng tròn là một người trong dòng họ' },
             { emoji: '3️⃣', text: 'Dùng ngón tay KÉO để di chuyển bản đồ' },
             { emoji: '4️⃣', text: 'NHẤN vào tên người bất kỳ → hiện thông tin chi tiết' },
         ],
-        tip: '💡 "Cây Organic" có hình cây thật rất đẹp — gốc ở dưới, tán lá ở trên!',
+        tip: '💡 Nhớ bấm vào một người nào đó để xem đầy đủ ngày sinh, quê quán nhé!',
     },
     {
         icon: '🔍',

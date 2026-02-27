@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Users, TreeDeciduous, BookOpen, Settings, Leaf, HelpCircle } from "lucide-react";
+import { Users, TreeDeciduous, BookOpen, Settings, HelpCircle } from "lucide-react";
 import BlogSection from '@/components/BlogSection';
 import FloatingHelp from '@/components/FloatingHelp';
 import { useState, useEffect } from 'react';
@@ -99,12 +99,12 @@ export default function Home() {
               <p className="text-sm text-gold-200/50 text-center font-medium">Bản đồ tương tác đa chiều</p>
             </Link>
 
-            <Link href="/tree-organic" className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-[#14100c]/80 border border-green-900/30 hover:border-green-500/50 hover:bg-[#111f14] transition-all overflow-hidden">
+            {/* <Link href="/tree-organic" className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-[#14100c]/80 border border-green-900/30 hover:border-green-500/50 hover:bg-[#111f14] transition-all overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.1)_0,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <Leaf className="w-12 h-12 text-green-400 mb-4 group-hover:-translate-y-2 group-hover:scale-110 group-hover:text-green-300 transition-all duration-300 drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
               <h3 className="font-serif font-bold text-xl text-green-100 mb-2">Cây Phả Đồ Organic</h3>
               <p className="text-sm text-green-200/50 text-center font-medium">Biểu đồ nghệ thuật dạng cây</p>
-            </Link>
+            </Link> */}
 
             <Link href="/directory" className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-[#14100c]/80 border border-blue-900/30 hover:border-blue-500/50 hover:bg-[#11141f] transition-all overflow-hidden lg:-translate-y-4 shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -149,7 +149,6 @@ export default function Home() {
 
       <FloatingHelp pageName="Trang Chủ" tips={[
         { emoji: '🌳', text: 'Nhấn "Cây Gia Phả" để xem bản đồ gia phả tương tác' },
-        { emoji: '🍃', text: 'Nhấn "Cây Phả Đồ Organic" để xem phả đồ dạng cây đẹp' },
         { emoji: '👥', text: 'Nhấn "Danh Bạ" để tra cứu thành viên' },
         { emoji: '📖', text: 'Nhấn "Sách Gia Phả" để xem và in sách' },
         { emoji: '📱', text: 'Chữ nhỏ? Dùng 2 ngón tay phóng to trên điện thoại' },
