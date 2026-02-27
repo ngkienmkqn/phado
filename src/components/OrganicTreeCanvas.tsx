@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { Search, X, ChevronRight, Calculator } from 'lucide-react';
 
 // ─── Types ───────────────────────────────────────────────────────────
@@ -296,16 +296,43 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     const [calcA, setCalcA] = useState('');
     const [calcB, setCalcB] = useState('');
 
-    // ─── Build tree: root at BOTTOM, descendants grow UPWARD ─────────
+    // ─── Pan and Zoom ────────────────────────────────────────────────
+    const [pan, setPan] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const isDragging = useRef(false);
+    const lastPos = useRef({ x: 0, y: 0 });
+
+    const handleMouseDown = useCallback((e: React.MouseEvent) => {
+        if ((e.target as HTMLElement).closest('button, input, a, [data-no-drag]')) return;
+        isDragging.current = true;
+        lastPos.current = { x: e.clientX, y: e.clientY };
+    }, []);
+
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        if (!isDragging.current) return;
+        const dx = e.clientX - lastPos.current.x;
+        const dy = e.clientY - lastPos.current.y;
+        lastPos.current = { x: e.clientX, y: e.clientY };
+        setPan(prev => ({ x: prev.x + dx, y: prev.y + dy }));
+    }, []);
+
+    const handleMouseUp = useCallback(() => { isDragging.current = false; }, []);
+
+    const handleWheel = useCallback((e: React.WheelEvent) => {
+        e.preventDefault();
+        setZoom(prev => Math.max(0.3, Math.min(3, prev - e.deltaY * 0.001)));
+    }, []);
+
+    // ─── Build tree: root at BOTTOM, all children grow UPWARD ────────
     const { treeNodes } = useMemo(() => {
         const focused = members.find(m => m.id === focusId);
         if (!focused) return { treeNodes: [] };
 
         const nodes: TreeNode[] = [];
-        const maxPerLayer = [1, 3, 5, 6, 5];
-        // Vertical position: root at 80%, more compact spacing
-        const layerY = [80, 62, 44, 28, 14];
-        const layerSizes = [62, 52, 46, 40, 36];
+        const maxDepth = 5;
+        // Vertical positions (percentage) — root at bottom, children up
+        const layerY = [80, 62, 44, 28, 14, 5];
+        const layerSizes = [62, 50, 44, 38, 34, 30];
 
         // Root
         const rootNode: TreeNode = {
@@ -316,31 +343,29 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
 
         let currentLayer: TreeNode[] = [rootNode];
 
-        for (let depth = 1; depth < layerY.length; depth++) {
+        for (let depth = 1; depth <= maxDepth; depth++) {
             const nextLayer: TreeNode[] = [];
-            const maxSlots = maxPerLayer[depth];
 
             for (const parentNode of currentLayer) {
                 const kids = members.filter(m => m.parentId === parentNode.member.id);
                 for (const kid of kids) {
-                    if (nextLayer.length < maxSlots) {
-                        nextLayer.push({
-                            member: kid, x: 0, y: layerY[depth],
-                            parentNode, size: layerSizes[depth], layer: depth,
-                        });
-                    }
+                    nextLayer.push({
+                        member: kid, x: 0, y: layerY[depth] ?? (14 - (depth - 4) * 8),
+                        parentNode, size: layerSizes[depth] ?? 28, layer: depth,
+                    });
                 }
             }
 
             if (nextLayer.length === 0) break;
 
-            // Spread horizontally (wider for deeper layers to match tree canopy shape)
-            const maxWidth = depth === 1 ? 30 : depth === 2 ? 46 : depth === 3 ? 56 : 56;
+            // Dynamic width based on count — expands for more children
+            const count = nextLayer.length;
+            const maxWidth = Math.min(88, 20 + count * 8);
             const startX = 50 - maxWidth / 2;
-            const step = nextLayer.length > 1 ? maxWidth / (nextLayer.length - 1) : 0;
+            const step = count > 1 ? maxWidth / (count - 1) : 0;
 
             nextLayer.forEach((n, i) => {
-                n.x = nextLayer.length === 1 ? 50 : startX + i * step;
+                n.x = count === 1 ? 50 : startX + i * step;
             });
 
             nodes.push(...nextLayer);
@@ -427,6 +452,8 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         setFocusId(id);
         setDetailMember(null);
         setSearchTerm('');
+        setPan({ x: 0, y: 0 });
+        setZoom(1);
     }, []);
 
     // ─── Render ──────────────────────────────────────────────────────
@@ -438,8 +465,46 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         return { rootX: rootNode?.x ?? 50, rootY: rootNode?.y ?? 80, topY };
     }, [treeNodes]);
 
+    // Leaf animation seeds (deterministic based on tree shape)
+    const leafSeeds = useMemo(() => {
+        return treeNodes.flatMap((node, ni) => {
+            if (node.layer < 1) return [];
+            const count = node.layer >= 3 ? 5 : 3;
+            return Array.from({ length: count }, (_, i) => ({
+                x: node.x + ((ni * 7 + i * 13) % 20 - 10),
+                y: node.y - ((ni * 3 + i * 11) % 8) - 2,
+                size: 1 + ((ni + i) % 3),
+                delay: ((ni * 5 + i * 3) % 10) * 0.3,
+                color: ['#4a8b2e', '#5ca33a', '#3d7a22', '#6db840', '#2d6a1e'][(ni + i) % 5],
+            }));
+        });
+    }, [treeNodes]);
+
     return (
-        <div className="w-full h-full relative overflow-hidden bg-[#f5f0e1]">
+        <div
+            className="w-full h-full relative overflow-hidden bg-[#f5f0e1]"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onWheel={handleWheel}
+            style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
+        >
+            {/* Leaf sway animation CSS */}
+            <style>{`
+                @keyframes leafSway {
+                    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+                    25% { transform: translate(0.5px, -0.3px) rotate(5deg); }
+                    50% { transform: translate(-0.3px, 0.5px) rotate(-3deg); }
+                    75% { transform: translate(0.4px, 0.2px) rotate(4deg); }
+                }
+                @keyframes leafFall {
+                    0% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+                    50% { transform: translateY(3px) rotate(15deg); opacity: 0.3; }
+                    100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+                }
+            `}</style>
+
             {/* Sky / ground gradient background */}
             <div className="absolute inset-0" style={{
                 background: 'linear-gradient(to bottom, #d4e8c2 0%, #e8dfc4 35%, #f5f0e1 55%, #d4c4a0 85%, #8b7355 100%)',
@@ -450,141 +515,145 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                 background: 'radial-gradient(ellipse at 50% 70%, transparent 30%, rgba(62,39,35,0.15) 100%)',
             }} />
 
-            {/* ALGORITHMIC TREE SVG — trunk, branches, roots, leaves */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
-                <defs>
-                    {/* Bark gradient for the main trunk */}
-                    <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="#4a3020" />
-                        <stop offset="25%" stopColor="#5d3a1a" />
-                        <stop offset="50%" stopColor="#6d4c2e" />
-                        <stop offset="75%" stopColor="#5d3a1a" />
-                        <stop offset="100%" stopColor="#4a3020" />
-                    </linearGradient>
-                    {/* Root gradient */}
-                    <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#5d3a1a" />
-                        <stop offset="100%" stopColor="#3d2510" />
-                    </linearGradient>
-                    {/* Leaf cluster filter */}
-                    <filter id="leafShadow">
-                        <feDropShadow dx="0" dy="0.5" stdDeviation="0.8" floodColor="#2d5a1e" floodOpacity="0.3" />
-                    </filter>
-                </defs>
+            {/* Pan/zoom transform wrapper */}
+            <div className="absolute inset-0 transition-transform duration-100" style={{
+                transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                transformOrigin: 'center center',
+            }}>
 
-                {/* ═══ ROOTS ═══ Decorative roots spreading from trunk base */}
-                {[[-12, 6], [-7, 4], [7, 4.5], [13, 5.5], [-4, 3], [5, 3.5]].map(([offsetX, height], i) => {
-                    const rx = treeBounds.rootX + offsetX;
-                    const ry = 95;
-                    const baseW = 1.2 + Math.abs(offsetX) * 0.06;
-                    return (
-                        <path key={`root-${i}`}
-                            d={`M ${treeBounds.rootX - baseW * 0.3} ${treeBounds.rootY + 6}
+                {/* ALGORITHMIC TREE SVG — trunk, branches, roots, leaves */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
+                    <defs>
+                        {/* Bark gradient for the main trunk */}
+                        <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#4a3020" />
+                            <stop offset="25%" stopColor="#5d3a1a" />
+                            <stop offset="50%" stopColor="#6d4c2e" />
+                            <stop offset="75%" stopColor="#5d3a1a" />
+                            <stop offset="100%" stopColor="#4a3020" />
+                        </linearGradient>
+                        {/* Root gradient */}
+                        <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#5d3a1a" />
+                            <stop offset="100%" stopColor="#3d2510" />
+                        </linearGradient>
+                        {/* Leaf cluster filter */}
+                        <filter id="leafShadow">
+                            <feDropShadow dx="0" dy="0.5" stdDeviation="0.8" floodColor="#2d5a1e" floodOpacity="0.3" />
+                        </filter>
+                    </defs>
+
+                    {/* ═══ ROOTS ═══ Decorative roots spreading from trunk base */}
+                    {[[-12, 6], [-7, 4], [7, 4.5], [13, 5.5], [-4, 3], [5, 3.5]].map(([offsetX, height], i) => {
+                        const rx = treeBounds.rootX + offsetX;
+                        const ry = 95;
+                        const baseW = 1.2 + Math.abs(offsetX) * 0.06;
+                        return (
+                            <path key={`root-${i}`}
+                                d={`M ${treeBounds.rootX - baseW * 0.3} ${treeBounds.rootY + 6}
                                 Q ${treeBounds.rootX + offsetX * 0.4} ${ry - height * 0.2}, ${rx} ${ry}
                                 L ${rx + baseW * 0.3} ${ry}
                                 Q ${treeBounds.rootX + offsetX * 0.4 + baseW * 0.3} ${ry - height * 0.2}, ${treeBounds.rootX + baseW * 0.3} ${treeBounds.rootY + 6}
                                 Z`}
-                            fill="url(#rootGrad)" opacity={0.6 + i * 0.05}
+                                fill="url(#rootGrad)" opacity={0.6 + i * 0.05}
+                            />
+                        );
+                    })}
+
+                    {/* ═══ MAIN TRUNK ═══ From bottom ground up to root node */}
+                    {(() => {
+                        const tx = treeBounds.rootX;
+                        const bottomY = 95;
+                        const topY = treeBounds.rootY;
+                        const baseWidth = 5;
+                        const topWidth = 3;
+                        // Slight curve for organic feel
+                        const wobble = 0.8;
+                        return (
+                            <>
+                                {/* Trunk shadow */}
+                                <path
+                                    d={`M ${tx - baseWidth / 2} ${bottomY}
+                                    Q ${tx - topWidth / 2 - wobble} ${(bottomY + topY) / 2}, ${tx - topWidth / 2} ${topY}
+                                    L ${tx + topWidth / 2} ${topY}
+                                    Q ${tx + topWidth / 2 + wobble} ${(bottomY + topY) / 2}, ${tx + baseWidth / 2} ${bottomY}
+                                    Z`}
+                                    fill="#3d2510" opacity="0.2" transform="translate(0.4, 0.4)"
+                                />
+                                {/* Main trunk */}
+                                <path
+                                    d={`M ${tx - baseWidth / 2} ${bottomY}
+                                    Q ${tx - topWidth / 2 - wobble} ${(bottomY + topY) / 2}, ${tx - topWidth / 2} ${topY}
+                                    L ${tx + topWidth / 2} ${topY}
+                                    Q ${tx + topWidth / 2 + wobble} ${(bottomY + topY) / 2}, ${tx + baseWidth / 2} ${bottomY}
+                                    Z`}
+                                    fill="url(#trunkGrad)"
+                                />
+                                {/* Bark texture lines */}
+                                {[0.2, 0.35, 0.5, 0.65, 0.8].map((t, i) => {
+                                    const cy = bottomY + (topY - bottomY) * t;
+                                    const w = baseWidth + (topWidth - baseWidth) * t;
+                                    return (
+                                        <line key={`bark-${i}`}
+                                            x1={tx - w / 2.5} y1={cy}
+                                            x2={tx + w / 2.5} y2={cy + 0.3}
+                                            stroke="#4a3020" strokeWidth="0.15" opacity="0.3"
+                                        />
+                                    );
+                                })}
+                            </>
+                        );
+                    })()}
+
+                    {/* ═══ BRANCH CONNECTIONS ═══ Parent-to-child branches */}
+                    {treeNodes.filter(n => n.parentNode).map((node, i) => (
+                        <BranchLine
+                            key={`branch-${i}`}
+                            x1={node.parentNode!.x}
+                            y1={node.parentNode!.y}
+                            x2={node.x}
+                            y2={node.y}
+                            layer={node.layer}
                         />
-                    );
-                })}
+                    ))}
 
-                {/* ═══ MAIN TRUNK ═══ From bottom ground up to root node */}
-                {(() => {
-                    const tx = treeBounds.rootX;
-                    const bottomY = 95;
-                    const topY = treeBounds.rootY;
-                    const baseWidth = 5;
-                    const topWidth = 3;
-                    // Slight curve for organic feel
-                    const wobble = 0.8;
-                    return (
-                        <>
-                            {/* Trunk shadow */}
-                            <path
-                                d={`M ${tx - baseWidth / 2} ${bottomY}
-                                    Q ${tx - topWidth / 2 - wobble} ${(bottomY + topY) / 2}, ${tx - topWidth / 2} ${topY}
-                                    L ${tx + topWidth / 2} ${topY}
-                                    Q ${tx + topWidth / 2 + wobble} ${(bottomY + topY) / 2}, ${tx + baseWidth / 2} ${bottomY}
-                                    Z`}
-                                fill="#3d2510" opacity="0.2" transform="translate(0.4, 0.4)"
-                            />
-                            {/* Main trunk */}
-                            <path
-                                d={`M ${tx - baseWidth / 2} ${bottomY}
-                                    Q ${tx - topWidth / 2 - wobble} ${(bottomY + topY) / 2}, ${tx - topWidth / 2} ${topY}
-                                    L ${tx + topWidth / 2} ${topY}
-                                    Q ${tx + topWidth / 2 + wobble} ${(bottomY + topY) / 2}, ${tx + baseWidth / 2} ${bottomY}
-                                    Z`}
-                                fill="url(#trunkGrad)"
-                            />
-                            {/* Bark texture lines */}
-                            {[0.2, 0.35, 0.5, 0.65, 0.8].map((t, i) => {
-                                const cy = bottomY + (topY - bottomY) * t;
-                                const w = baseWidth + (topWidth - baseWidth) * t;
-                                return (
-                                    <line key={`bark-${i}`}
-                                        x1={tx - w / 2.5} y1={cy}
-                                        x2={tx + w / 2.5} y2={cy + 0.3}
-                                        stroke="#4a3020" strokeWidth="0.15" opacity="0.3"
-                                    />
-                                );
-                            })}
-                        </>
-                    );
-                })()}
-
-                {/* ═══ BRANCH CONNECTIONS ═══ Parent-to-child branches */}
-                {treeNodes.filter(n => n.parentNode).map((node, i) => (
-                    <BranchLine
-                        key={`branch-${i}`}
-                        x1={node.parentNode!.x}
-                        y1={node.parentNode!.y}
-                        x2={node.x}
-                        y2={node.y}
-                        layer={node.layer}
-                    />
-                ))}
-
-                {/* ═══ LEAF CLUSTERS ═══ Decorative green blobs at top of tree */}
-                {treeNodes.filter(n => n.layer >= 2).map((node, i) => {
-                    const r = 3 + Math.random() * 2;
-                    return (
+                    {/* ═══ ANIMATED LEAVES ═══ */}
+                    {leafSeeds.map((leaf, i) => (
                         <circle key={`leaf-${i}`}
-                            cx={node.x} cy={node.y - node.size * 0.035}
-                            r={r}
-                            fill={i % 3 === 0 ? '#4a8b2e' : i % 3 === 1 ? '#5ca33a' : '#3d7a22'}
-                            opacity={0.15 + (i % 4) * 0.03}
-                            filter="url(#leafShadow)"
+                            cx={leaf.x} cy={leaf.y}
+                            r={leaf.size}
+                            fill={leaf.color}
+                            opacity={0.25}
+                            style={{ animation: `leafSway ${2 + (i % 3)}s ease-in-out ${leaf.delay}s infinite` }}
                         />
-                    );
-                })}
+                    ))}
 
-                {/* ═══ EXTRA CANOPY ═══ Large leaf masses behind top nodes */}
-                {treeNodes.length > 3 && (
-                    <>
-                        <ellipse cx={treeBounds.rootX - 8} cy={treeBounds.topY + 2} rx="14" ry="7"
-                            fill="#4a8b2e" opacity="0.08" />
-                        <ellipse cx={treeBounds.rootX + 8} cy={treeBounds.topY + 3} rx="16" ry="8"
-                            fill="#5ca33a" opacity="0.07" />
-                        <ellipse cx={treeBounds.rootX} cy={treeBounds.topY - 1} rx="20" ry="9"
-                            fill="#3d7a22" opacity="0.06" />
-                    </>
-                )}
-            </svg>
+                    {/* ═══ CANOPY ELLIPSES ═══ */}
+                    {treeNodes.filter(n => n.layer >= 2).map((node, i) => (
+                        <ellipse key={`canopy-${i}`}
+                            cx={node.x} cy={node.y - 3}
+                            rx={5 + (i % 3) * 2} ry={3 + (i % 2) * 1.5}
+                            fill={i % 2 === 0 ? '#4a8b2e' : '#5ca33a'}
+                            opacity={0.12}
+                            style={{ animation: `leafSway ${3 + (i % 2)}s ease-in-out ${(i % 5) * 0.5}s infinite` }}
+                        />
+                    ))}
+                </svg>
 
-            {/* Person bubbles (HTML overlay for rich styling) */}
-            <div className="absolute inset-0" style={{ zIndex: 10 }}>
-                {treeNodes.map(node => (
-                    <PersonBubble
-                        key={node.member.id}
-                        node={node}
-                        isFocused={node.member.id === focusId}
-                        isOnRelPath={relationPath.has(node.member.id)}
-                        onClick={handleClickMember}
-                    />
-                ))}
-            </div>
+                {/* Person bubbles (HTML overlay for rich styling) */}
+                <div className="absolute inset-0" style={{ zIndex: 10 }}>
+                    {treeNodes.map(node => (
+                        <PersonBubble
+                            key={node.member.id}
+                            node={node}
+                            isFocused={node.member.id === focusId}
+                            isOnRelPath={relationPath.has(node.member.id)}
+                            onClick={handleClickMember}
+                        />
+                    ))}
+                </div>
+
+            </div> {/* End pan/zoom transform wrapper */}
 
             {/* Title */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30">
