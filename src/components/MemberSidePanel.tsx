@@ -449,13 +449,13 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            const reason = prompt(`Bạn muốn xóa "${child.name}" khỏi danh sách con của "${member.name}"?\n\nLý do:`);
+                                                            const reason = prompt(`Gỡ liên kết cha/mẹ-con giữa "${member.name}" và "${child.name}"?\n(Chỉ xóa mối quan hệ, không xóa người)\n\nLý do:`);
                                                             if (reason !== null) {
                                                                 fetch('/api/family-data', {
                                                                     method: 'POST',
                                                                     headers: { 'Content-Type': 'application/json' },
                                                                     body: JSON.stringify({
-                                                                        type: 'remove_child',
+                                                                        type: 'unlink_parent_child',
                                                                         parentId: member.id,
                                                                         parentName: member.name,
                                                                         childId: child.id,
@@ -464,11 +464,11 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                                                         timestamp: new Date().toISOString(),
                                                                     }),
                                                                 });
-                                                                alert(`Yêu cầu xóa "${child.name}" đã được gửi lên Admin duyệt.`);
+                                                                alert(`Yêu cầu gỡ liên kết "${member.name}" ↔ "${child.name}" đã gửi lên Admin.`);
                                                             }
                                                         }}
                                                         className="p-1 hover:bg-red-50 rounded-full transition-colors"
-                                                        title="Đề xuất xóa con"
+                                                        title="Gỡ liên kết cha/mẹ-con"
                                                     >
                                                         <X size={14} className="text-red-400 hover:text-red-600" />
                                                     </button>
