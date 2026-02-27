@@ -465,17 +465,21 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         return { rootX: rootNode?.x ?? 50, rootY: rootNode?.y ?? 80, topY };
     }, [treeNodes]);
 
-    // Leaf animation seeds (deterministic based on tree shape)
+    // Leaf animation seeds — dense oak leaf canopy
     const leafSeeds = useMemo(() => {
         return treeNodes.flatMap((node, ni) => {
             if (node.layer < 1) return [];
-            const count = node.layer >= 3 ? 5 : 3;
+            // More leaves at higher layers for a dense canopy
+            const count = node.layer >= 3 ? 12 : node.layer >= 2 ? 8 : 5;
             return Array.from({ length: count }, (_, i) => ({
-                x: node.x + ((ni * 7 + i * 13) % 20 - 10),
-                y: node.y - ((ni * 3 + i * 11) % 8) - 2,
-                size: 1 + ((ni + i) % 3),
+                x: node.x + ((ni * 7 + i * 17) % 28 - 14),
+                y: node.y - ((ni * 3 + i * 11) % 12) - 3,
+                scale: 0.6 + ((ni + i) % 4) * 0.25,
+                rotate: ((ni * 37 + i * 73) % 360),
                 delay: ((ni * 5 + i * 3) % 10) * 0.3,
-                color: ['#4a8b2e', '#5ca33a', '#3d7a22', '#6db840', '#2d6a1e'][(ni + i) % 5],
+                // Oak-like olive/golden green colors to match background
+                color: ['#7a8a3a', '#8b9a40', '#6b7a30', '#9aaa50', '#5a6a28',
+                    '#a4a44a', '#768338', '#8c9c42'][((ni + i) * 3) % 8],
             }));
         });
     }, [treeNodes]);
@@ -537,10 +541,11 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                             <stop offset="0%" stopColor="#5d3a1a" />
                             <stop offset="100%" stopColor="#3d2510" />
                         </linearGradient>
-                        {/* Leaf cluster filter */}
-                        <filter id="leafShadow">
-                            <feDropShadow dx="0" dy="0.5" stdDeviation="0.8" floodColor="#2d5a1e" floodOpacity="0.3" />
-                        </filter>
+                        {/* Oak leaf shape — lobed leaf like in the background image */}
+                        <symbol id="oakLeaf" viewBox="0 0 20 24" overflow="visible">
+                            <path d="M10 0 C8 2, 4 3, 2 5 C0 7, 1 9, 3 10 C1 11, 0 13, 1 15 C2 17, 4 17, 5 16 C4 18, 4 20, 6 22 C8 24, 10 24, 10 24 C10 24, 12 24, 14 22 C16 20, 16 18, 15 16 C16 17, 18 17, 19 15 C20 13, 19 11, 17 10 C19 9, 20 7, 18 5 C16 3, 12 2, 10 0Z" />
+                            <line x1="10" y1="2" x2="10" y2="22" stroke="#5a6a28" strokeWidth="0.6" opacity="0.4" />
+                        </symbol>
                     </defs>
 
                     {/* ═══ ROOTS ═══ Decorative roots spreading from trunk base */}
@@ -617,25 +622,18 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                         />
                     ))}
 
-                    {/* ═══ ANIMATED LEAVES ═══ */}
+                    {/* ═══ OAK LEAVES ═══ Realistic leaf shapes scattered around branches */}
                     {leafSeeds.map((leaf, i) => (
-                        <circle key={`leaf-${i}`}
-                            cx={leaf.x} cy={leaf.y}
-                            r={leaf.size}
+                        <use key={`leaf-${i}`}
+                            href="#oakLeaf"
+                            x={leaf.x - leaf.scale * 1.2}
+                            y={leaf.y - leaf.scale * 1.4}
+                            width={leaf.scale * 2.4}
+                            height={leaf.scale * 2.8}
                             fill={leaf.color}
-                            opacity={0.25}
-                            style={{ animation: `leafSway ${2 + (i % 3)}s ease-in-out ${leaf.delay}s infinite` }}
-                        />
-                    ))}
-
-                    {/* ═══ CANOPY ELLIPSES ═══ */}
-                    {treeNodes.filter(n => n.layer >= 2).map((node, i) => (
-                        <ellipse key={`canopy-${i}`}
-                            cx={node.x} cy={node.y - 3}
-                            rx={5 + (i % 3) * 2} ry={3 + (i % 2) * 1.5}
-                            fill={i % 2 === 0 ? '#4a8b2e' : '#5ca33a'}
-                            opacity={0.12}
-                            style={{ animation: `leafSway ${3 + (i % 2)}s ease-in-out ${(i % 5) * 0.5}s infinite` }}
+                            opacity={0.55 + (i % 3) * 0.1}
+                            transform={`rotate(${leaf.rotate}, ${leaf.x}, ${leaf.y})`}
+                            style={{ animation: `leafSway ${2.5 + (i % 4) * 0.5}s ease-in-out ${leaf.delay}s infinite` }}
                         />
                     ))}
                 </svg>
