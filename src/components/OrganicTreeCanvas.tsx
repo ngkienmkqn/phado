@@ -128,22 +128,75 @@ function PersonBubble({
     );
 }
 
-// ─── SVG Branch Line connecting parent to child ──────────────────────
-function BranchLine({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) {
-    const midY = y1 + (y2 - y1) * 0.45;
+// ─── SVG Branch Line connecting parent to child (tree trunk/branch style) ────
+function BranchLine({ x1, y1, x2, y2, layer }: { x1: number; y1: number; x2: number; y2: number; layer: number }) {
+    // Branch width tapers: thick at trunk (parent), thin at tip (child)
+    const baseWidth = layer === 0 ? 3.5 : layer === 1 ? 2.2 : layer === 2 ? 1.4 : 0.9;
+    const tipWidth = baseWidth * 0.45;
+
+    // Control points for natural curve
+    const midY = y1 + (y2 - y1) * 0.4;
+    // Slight organic offset for natural look
+    const dx = x2 - x1;
+    const wobble = dx * 0.08;
+
+    // Build a filled "branch" shape using 2 bezier curves (left edge + right edge)
+    // Left edge goes from parent to child
+    const lx1 = x1 - baseWidth / 2;
+    const rx1 = x1 + baseWidth / 2;
+    const lx2 = x2 - tipWidth / 2;
+    const rx2 = x2 + tipWidth / 2;
+
+    const path = [
+        // Start at parent left
+        `M ${lx1} ${y1}`,
+        // Curve to child left
+        `C ${lx1 + wobble} ${midY}, ${lx2 - wobble * 0.3} ${midY + (y2 - y1) * 0.12}, ${lx2} ${y2}`,
+        // Line across child tip
+        `L ${rx2} ${y2}`,
+        // Curve back to parent right
+        `C ${rx2 + wobble * 0.3} ${midY + (y2 - y1) * 0.12}, ${rx1 + wobble} ${midY}, ${rx1} ${y1}`,
+        `Z`,
+    ].join(' ');
+
+    // Unique gradient id
+    const gradId = `bark-${x1.toFixed(1)}-${y1.toFixed(1)}-${x2.toFixed(1)}-${y2.toFixed(1)}`.replace(/\./g, '_');
+
     return (
         <>
+            <defs>
+                <linearGradient id={gradId} x1="0" y1={y1} x2="0" y2={y2} gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#5d3a1a" />
+                    <stop offset="35%" stopColor="#6d4c2e" />
+                    <stop offset="70%" stopColor="#7a5a3c" />
+                    <stop offset="100%" stopColor="#8b6e50" />
+                </linearGradient>
+            </defs>
+            {/* Shadow / depth */}
             <path
-                d={`M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY + (y2 - y1) * 0.08}, ${x2} ${y2}`}
-                fill="none" stroke="#3d2b1f" strokeWidth="4" opacity="0.15" strokeLinecap="round"
+                d={path}
+                fill="#3d2b1f"
+                opacity="0.25"
+                transform="translate(0.3, 0.3)"
             />
+            {/* Main branch body */}
             <path
-                d={`M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY + (y2 - y1) * 0.08}, ${x2} ${y2}`}
-                fill="none" stroke="#6d4c2e" strokeWidth="2.5" strokeLinecap="round"
+                d={path}
+                fill={`url(#${gradId})`}
+            />
+            {/* Bark center highlight (thin line for texture) */}
+            <path
+                d={`M ${x1} ${y1} C ${x1 + wobble} ${midY}, ${x2 - wobble * 0.3} ${midY + (y2 - y1) * 0.12}, ${x2} ${y2}`}
+                fill="none"
+                stroke="#8b7355"
+                strokeWidth={baseWidth * 0.15}
+                opacity="0.35"
+                strokeLinecap="round"
             />
         </>
     );
 }
+
 
 // ─── Searchable Dropdown ─────────────────────────────────────────────
 function MemberDropdown({ value, onChange, members, placeholder }: {
@@ -377,20 +430,111 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     }, []);
 
     // ─── Render ──────────────────────────────────────────────────────
+    // Compute tree bounds for dynamic trunk
+    const treeBounds = useMemo(() => {
+        if (treeNodes.length === 0) return { rootX: 50, rootY: 85, topY: 15 };
+        const rootNode = treeNodes[0];
+        const topY = Math.min(...treeNodes.map(n => n.y));
+        return { rootX: rootNode?.x ?? 50, rootY: rootNode?.y ?? 80, topY };
+    }, [treeNodes]);
+
     return (
         <div className="w-full h-full relative overflow-hidden bg-[#f5f0e1]">
-            {/* Beautiful tree background image */}
-            <div className="absolute inset-0">
-                <img src="/tree_bg.png" alt="" className="w-full h-full object-cover opacity-70" draggable={false} />
-            </div>
-
-            {/* Soft vignette overlay */}
+            {/* Sky / ground gradient background */}
             <div className="absolute inset-0" style={{
-                background: 'radial-gradient(ellipse at center, transparent 40%, rgba(62,39,35,0.2) 100%)',
+                background: 'linear-gradient(to bottom, #d4e8c2 0%, #e8dfc4 35%, #f5f0e1 55%, #d4c4a0 85%, #8b7355 100%)',
             }} />
 
-            {/* Branch lines SVG overlay */}
+            {/* Soft vignette */}
+            <div className="absolute inset-0" style={{
+                background: 'radial-gradient(ellipse at 50% 70%, transparent 30%, rgba(62,39,35,0.15) 100%)',
+            }} />
+
+            {/* ALGORITHMIC TREE SVG — trunk, branches, roots, leaves */}
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 5 }}>
+                <defs>
+                    {/* Bark gradient for the main trunk */}
+                    <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#4a3020" />
+                        <stop offset="25%" stopColor="#5d3a1a" />
+                        <stop offset="50%" stopColor="#6d4c2e" />
+                        <stop offset="75%" stopColor="#5d3a1a" />
+                        <stop offset="100%" stopColor="#4a3020" />
+                    </linearGradient>
+                    {/* Root gradient */}
+                    <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#5d3a1a" />
+                        <stop offset="100%" stopColor="#3d2510" />
+                    </linearGradient>
+                    {/* Leaf cluster filter */}
+                    <filter id="leafShadow">
+                        <feDropShadow dx="0" dy="0.5" stdDeviation="0.8" floodColor="#2d5a1e" floodOpacity="0.3" />
+                    </filter>
+                </defs>
+
+                {/* ═══ ROOTS ═══ Decorative roots spreading from trunk base */}
+                {[[-12, 6], [-7, 4], [7, 4.5], [13, 5.5], [-4, 3], [5, 3.5]].map(([offsetX, height], i) => {
+                    const rx = treeBounds.rootX + offsetX;
+                    const ry = 95;
+                    const baseW = 1.2 + Math.abs(offsetX) * 0.06;
+                    return (
+                        <path key={`root-${i}`}
+                            d={`M ${treeBounds.rootX - baseW * 0.3} ${treeBounds.rootY + 6}
+                                Q ${treeBounds.rootX + offsetX * 0.4} ${ry - height * 0.2}, ${rx} ${ry}
+                                L ${rx + baseW * 0.3} ${ry}
+                                Q ${treeBounds.rootX + offsetX * 0.4 + baseW * 0.3} ${ry - height * 0.2}, ${treeBounds.rootX + baseW * 0.3} ${treeBounds.rootY + 6}
+                                Z`}
+                            fill="url(#rootGrad)" opacity={0.6 + i * 0.05}
+                        />
+                    );
+                })}
+
+                {/* ═══ MAIN TRUNK ═══ From bottom ground up to root node */}
+                {(() => {
+                    const tx = treeBounds.rootX;
+                    const bottomY = 95;
+                    const topY = treeBounds.rootY;
+                    const baseWidth = 5;
+                    const topWidth = 3;
+                    // Slight curve for organic feel
+                    const wobble = 0.8;
+                    return (
+                        <>
+                            {/* Trunk shadow */}
+                            <path
+                                d={`M ${tx - baseWidth / 2} ${bottomY}
+                                    Q ${tx - topWidth / 2 - wobble} ${(bottomY + topY) / 2}, ${tx - topWidth / 2} ${topY}
+                                    L ${tx + topWidth / 2} ${topY}
+                                    Q ${tx + topWidth / 2 + wobble} ${(bottomY + topY) / 2}, ${tx + baseWidth / 2} ${bottomY}
+                                    Z`}
+                                fill="#3d2510" opacity="0.2" transform="translate(0.4, 0.4)"
+                            />
+                            {/* Main trunk */}
+                            <path
+                                d={`M ${tx - baseWidth / 2} ${bottomY}
+                                    Q ${tx - topWidth / 2 - wobble} ${(bottomY + topY) / 2}, ${tx - topWidth / 2} ${topY}
+                                    L ${tx + topWidth / 2} ${topY}
+                                    Q ${tx + topWidth / 2 + wobble} ${(bottomY + topY) / 2}, ${tx + baseWidth / 2} ${bottomY}
+                                    Z`}
+                                fill="url(#trunkGrad)"
+                            />
+                            {/* Bark texture lines */}
+                            {[0.2, 0.35, 0.5, 0.65, 0.8].map((t, i) => {
+                                const cy = bottomY + (topY - bottomY) * t;
+                                const w = baseWidth + (topWidth - baseWidth) * t;
+                                return (
+                                    <line key={`bark-${i}`}
+                                        x1={tx - w / 2.5} y1={cy}
+                                        x2={tx + w / 2.5} y2={cy + 0.3}
+                                        stroke="#4a3020" strokeWidth="0.15" opacity="0.3"
+                                    />
+                                );
+                            })}
+                        </>
+                    );
+                })()}
+
+                {/* ═══ BRANCH CONNECTIONS ═══ Parent-to-child branches */}
                 {treeNodes.filter(n => n.parentNode).map((node, i) => (
                     <BranchLine
                         key={`branch-${i}`}
@@ -398,8 +542,35 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                         y1={node.parentNode!.y}
                         x2={node.x}
                         y2={node.y}
+                        layer={node.layer}
                     />
                 ))}
+
+                {/* ═══ LEAF CLUSTERS ═══ Decorative green blobs at top of tree */}
+                {treeNodes.filter(n => n.layer >= 2).map((node, i) => {
+                    const r = 3 + Math.random() * 2;
+                    return (
+                        <circle key={`leaf-${i}`}
+                            cx={node.x} cy={node.y - node.size * 0.035}
+                            r={r}
+                            fill={i % 3 === 0 ? '#4a8b2e' : i % 3 === 1 ? '#5ca33a' : '#3d7a22'}
+                            opacity={0.15 + (i % 4) * 0.03}
+                            filter="url(#leafShadow)"
+                        />
+                    );
+                })}
+
+                {/* ═══ EXTRA CANOPY ═══ Large leaf masses behind top nodes */}
+                {treeNodes.length > 3 && (
+                    <>
+                        <ellipse cx={treeBounds.rootX - 8} cy={treeBounds.topY + 2} rx="14" ry="7"
+                            fill="#4a8b2e" opacity="0.08" />
+                        <ellipse cx={treeBounds.rootX + 8} cy={treeBounds.topY + 3} rx="16" ry="8"
+                            fill="#5ca33a" opacity="0.07" />
+                        <ellipse cx={treeBounds.rootX} cy={treeBounds.topY - 1} rx="20" ry="9"
+                            fill="#3d7a22" opacity="0.06" />
+                    </>
+                )}
             </svg>
 
             {/* Person bubbles (HTML overlay for rich styling) */}
