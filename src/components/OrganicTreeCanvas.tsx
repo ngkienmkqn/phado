@@ -607,8 +607,12 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
 
                     {/* ═══ VECTOR LEAF CLUSTERS ═══ */}
                     {treeNodes.map((node) => {
+                        // Only render leaves at the tips of the branches (nodes with no drawn children)
+                        const isLeafNode = !treeNodes.some(n => n.parentNode?.member.id === node.member.id);
+                        if (!isLeafNode) return null;
+
                         // Seed for random variation in leaf clusters
-                        const scale = 0.6 + ((node.x + node.y) % 5) * 0.1;
+                        const scale = 0.25 + ((node.x + node.y) % 5) * 0.05; // Reduced scale significantly
                         const rotate = ((node.x * 17 + node.y * 31) % 40) - 20; // -20 to 20 deg
                         const offsetX = ((node.x * 7) % 4) - 2;
                         const offsetY = ((node.y * 11) % 4) - 2;
