@@ -131,7 +131,8 @@ function PersonBubble({
 // ─── SVG Branch Line connecting parent to child (tree trunk/branch style) ────
 function BranchLine({ x1, y1, x2, y2, layer, randomSeed = 0 }: { x1: number; y1: number; x2: number; y2: number; layer: number, randomSeed?: number }) {
     // Advanced procedural branch generation for vector-like appearance
-    const baseWidth = layer === 0 ? 5.5 : layer === 1 ? 3.5 : layer === 2 ? 2.2 : 1.2;
+    // Make trunk massive at the bottom and rapidly taper off
+    const baseWidth = layer === 0 ? 28 : layer === 1 ? 14 : layer === 2 ? 7 : layer === 3 ? 3.5 : 1.5;
     const tipWidth = baseWidth * 0.4;
 
     // Seeded random helper for consistent organic shapes
@@ -374,31 +375,15 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
     const [calcB, setCalcB] = useState('');
 
     // ─── Pan and Zoom ────────────────────────────────────────────────
+    // Disabled as per user request to fix the tree root
     const [pan, setPan] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const isDragging = useRef(false);
-    const lastPos = useRef({ x: 0, y: 0 });
 
-    const handleMouseDown = useCallback((e: React.MouseEvent) => {
-        if ((e.target as HTMLElement).closest('button, input, a, [data-no-drag]')) return;
-        isDragging.current = true;
-        lastPos.current = { x: e.clientX, y: e.clientY };
-    }, []);
-
-    const handleMouseMove = useCallback((e: React.MouseEvent) => {
-        if (!isDragging.current) return;
-        const dx = e.clientX - lastPos.current.x;
-        const dy = e.clientY - lastPos.current.y;
-        lastPos.current = { x: e.clientX, y: e.clientY };
-        setPan(prev => ({ x: prev.x + dx, y: prev.y + dy }));
-    }, []);
-
-    const handleMouseUp = useCallback(() => { isDragging.current = false; }, []);
-
-    const handleWheel = useCallback((e: React.WheelEvent) => {
-        e.preventDefault();
-        setZoom(prev => Math.max(0.3, Math.min(3, prev - e.deltaY * 0.001)));
-    }, []);
+    const handleMouseDown = useCallback(() => { }, []);
+    const handleMouseMove = useCallback(() => { }, []);
+    const handleMouseUp = useCallback(() => { }, []);
+    const handleWheel = useCallback(() => { }, []);
 
     // ─── Build tree: root at BOTTOM, all children grow UPWARD ────────
     const { treeNodes } = useMemo(() => {
@@ -577,6 +562,16 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                             <stop offset="70%" stopColor="#5D4037" />
                             <stop offset="100%" stopColor="#3E2723" />
                         </linearGradient>
+
+                        {/* Beautiful vector leaf cluster (túm lá) */}
+                        <g id="leafCluster">
+                            <path d="M0,0 C-15,-10 -20,-30 0,-40 C20,-30 15,-10 0,0" fill="#2E7D32" opacity="0.9" />
+                            <path d="M0,0 C-25,-5 -35,-20 -10,-35 C-5,-20 0,-10 0,0" fill="#388E3C" opacity="0.8" />
+                            <path d="M0,0 C25,-5 35,-20 10,-35 C5,-20 0,-10 0,0" fill="#43A047" opacity="0.8" />
+                            <path d="M-5,-10 C-15,-20 -10,-35 5,-30 C10,-20 0,-15 -5,-10" fill="#4CAF50" opacity="0.7" />
+                            <path d="M5,-10 C15,-20 10,-35 -5,-30 C-10,-20 0,-15 5,-10" fill="#66BB6A" opacity="0.7" />
+                            <path d="M0,0 C-10,-10 -5,-25 0,-30 C5,-25 10,-10 0,0" fill="#1B5E20" opacity="0.6" />
+                        </g>
                     </defs>
 
 
@@ -606,6 +601,26 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                                 y2={node.y}
                                 layer={node.layer - 1}
                                 randomSeed={node.x + node.y}
+                            />
+                        );
+                    })}
+
+                    {/* ═══ VECTOR LEAF CLUSTERS ═══ */}
+                    {treeNodes.map((node) => {
+                        // Seed for random variation in leaf clusters
+                        const scale = 0.6 + ((node.x + node.y) % 5) * 0.1;
+                        const rotate = ((node.x * 17 + node.y * 31) % 40) - 20; // -20 to 20 deg
+                        const offsetX = ((node.x * 7) % 4) - 2;
+                        const offsetY = ((node.y * 11) % 4) - 2;
+
+                        return (
+                            <use
+                                key={`leaf-${node.member.id}`}
+                                href="#leafCluster"
+                                x={node.x + offsetX}
+                                y={node.y + offsetY + 2}
+                                transform={`rotate(${rotate} ${node.x + offsetX} ${node.y + offsetY + 2}) scale(${scale})`}
+                                style={{ transformOrigin: `${node.x + offsetX}px ${node.y + offsetY + 2}px` }}
                             />
                         );
                     })}
