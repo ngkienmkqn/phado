@@ -21,21 +21,44 @@ interface FloatingHelpProps {
  */
 export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [showOnboarding, setShowOnboarding] = useState(false);
+    const [isPermanentlyHidden, setIsPermanentlyHidden] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('phado_hide_all_help') === 'true';
+        }
+        return false;
+    });
+    const [showOnboarding, setShowOnboarding] = useState(() => {
+        if (typeof window !== 'undefined') {
+            if (localStorage.getItem('phado_hide_all_help') === 'true') return false;
+            const key = `phado_visited_${pageName}`;
+            return !localStorage.getItem(key);
+        }
+        return false;
+    });
 
     useEffect(() => {
-        const key = `phado_visited_${pageName}`;
-        if (!localStorage.getItem(key)) {
-            setShowOnboarding(true);
+        if (showOnboarding && typeof window !== 'undefined') {
+            const key = `phado_visited_${pageName}`;
             localStorage.setItem(key, 'true');
         }
-    }, [pageName]);
+    }, [showOnboarding, pageName]);
+
+    const handleHidePermanently = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('phado_hide_all_help', 'true');
+        }
+        setIsPermanentlyHidden(true);
+        setIsOpen(false);
+        setShowOnboarding(false);
+    };
+
+    if (isPermanentlyHidden) return null;
 
     return (
         <>
             {/* First-time onboarding overlay */}
             {showOnboarding && (
-                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
+                <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
                     <div className="bg-[#1a1510] border border-amber-500/30 rounded-3xl max-w-md mx-4 p-8 shadow-2xl shadow-amber-500/10 relative">
                         <button onClick={() => setShowOnboarding(false)} className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors">
                             <X className="w-6 h-6" />
@@ -63,10 +86,16 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                 href="/guide"
                                 className="flex items-center justify-center gap-1 bg-white/10 hover:bg-white/20 text-amber-200 font-medium py-3 px-4 rounded-xl transition-colors text-sm"
                             >
-                                Xem đầy đủ
+                                Xem chi tiết
                                 <ChevronRight className="w-4 h-4" />
                             </Link>
                         </div>
+                        <button
+                            onClick={handleHidePermanently}
+                            className="mt-4 w-full text-center text-sm text-white/40 hover:text-white/80 transition-colors underline decoration-white/20 underline-offset-4"
+                        >
+                            Đừng hiện lại hướng dẫn ở tất cả các trang
+                        </button>
                     </div>
                 </div>
             )}
@@ -85,16 +114,22 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                         <div className="p-4 space-y-3">
                             {tips.map((tip, i) => (
                                 <div key={i} className="flex items-start gap-3 bg-white/5 rounded-xl px-4 py-3 hover:bg-white/10 transition-colors">
-                                    <span className="text-lg flex-shrink-0">{tip.emoji}</span>
+                                    <span className="text-lg shrink-0">{tip.emoji}</span>
                                     <p className="text-sm text-amber-100/80 leading-relaxed">{tip.text}</p>
                                 </div>
                             ))}
                         </div>
-                        <div className="p-4 border-t border-amber-500/10">
+                        <div className="p-4 border-t border-amber-500/10 flex flex-col gap-2">
                             <Link href="/guide" className="flex items-center justify-center gap-2 w-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 py-3 rounded-xl transition-colors text-sm font-medium">
-                                📖 Xem hướng dẫn đầy đủ
+                                📖 Xem hướng dẫn chi tiết
                                 <ChevronRight className="w-4 h-4" />
                             </Link>
+                            <button
+                                onClick={handleHidePermanently}
+                                className="w-full text-center text-xs text-white/40 hover:text-white/80 py-2 transition-colors"
+                            >
+                                Đừng hiện nút trợ giúp này nữa
+                            </button>
                         </div>
                     </div>
                 )}
