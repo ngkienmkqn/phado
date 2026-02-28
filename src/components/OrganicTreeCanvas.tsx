@@ -540,47 +540,6 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
         return Math.max(...treeNodes.map(n => n.y)) + 15;
     }, [treeNodes]);
 
-    // Decorative leaves — big bright green leaves filling the canopy
-    const leafSeeds = useMemo(() => {
-        const seeds: { x: number; y: number; scale: number; rotate: number; delay: number; color: string }[] = [];
-        const colors = ['#4CAF50', '#388E3C', '#66BB6A', '#2E7D32', '#43A047', '#81C784', '#1B5E20', '#A5D6A7'];
-        const xs = treeNodes.map(n => n.x);
-        const ys = treeNodes.map(n => n.y);
-        const cxCenter = xs.length ? (Math.min(...xs) + Math.max(...xs)) / 2 : 50;
-        const cyCenter = ys.length ? (Math.min(...ys) + Math.max(...ys)) / 2 : 40;
-        const radiusX = xs.length ? (Math.max(...xs) - Math.min(...xs)) / 2 + 10 : 30;
-        const radiusY = ys.length ? (Math.max(...ys) - Math.min(...ys)) / 2 + 8 : 25;
-
-        // Leaves around each node
-        treeNodes.forEach((node, ni) => {
-            const count = node.layer <= 1 ? 10 : node.layer <= 2 ? 8 : 5;
-            for (let i = 0; i < count; i++) {
-                seeds.push({
-                    x: node.x + ((ni * 13 + i * 19) % 18 - 9),
-                    y: node.y + ((ni * 7 + i * 11) % 14 - 7),
-                    scale: 1.2 + ((ni + i) % 5) * 0.6,
-                    rotate: ((ni * 37 + i * 73) % 360),
-                    delay: ((ni * 5 + i * 3) % 10) * 0.3,
-                    color: colors[((ni + i) * 3) % colors.length],
-                });
-            }
-        });
-
-        // Edge leaves to form canopy perimeter
-        for (let i = 0; i < 40; i++) {
-            const angle = (i / 40) * Math.PI * 2;
-            seeds.push({
-                x: cxCenter + Math.cos(angle) * radiusX * (0.75 + (i % 3) * 0.1),
-                y: cyCenter + Math.sin(angle) * radiusY * (0.75 + (i % 3) * 0.1),
-                scale: 1.8 + (i % 4) * 0.5,
-                rotate: ((i * 47) % 360),
-                delay: (i % 8) * 0.4,
-                color: colors[i % colors.length],
-            });
-        }
-        return seeds;
-    }, [treeNodes]);
-
     return (
         <div
             className="w-full h-full relative overflow-hidden bg-[#f5f0d0]"
@@ -591,26 +550,6 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             onWheel={handleWheel}
             style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
         >
-            {/* Leaf sway animation CSS */}
-            <style>{`
-                @keyframes leafSway {
-                    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-                    25% { transform: translate(0.5px, -0.3px) rotate(5deg); }
-                    50% { transform: translate(-0.3px, 0.5px) rotate(-3deg); }
-                    75% { transform: translate(0.4px, 0.2px) rotate(4deg); }
-                }
-                @keyframes leafFall {
-                    0% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-                    50% { transform: translateY(3px) rotate(15deg); opacity: 0.3; }
-                    100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-                }
-                .tree-canopy .tree-leaf {
-                    animation-play-state: paused;
-                }
-                .tree-canopy:hover .tree-leaf {
-                    animation-play-state: running;
-                }
-            `}</style>
 
             {/* Sky / ground gradient background */}
             <div className="absolute inset-0" style={{
@@ -638,15 +577,6 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                             <stop offset="70%" stopColor="#5D4037" />
                             <stop offset="100%" stopColor="#3E2723" />
                         </linearGradient>
-                        {/* Leaf shape — pointed oval with lobes */}
-                        <symbol id="greenLeaf" viewBox="0 0 30 40" overflow="visible">
-                            <path d="M15 0 C12 5, 3 8, 1 15 C0 20, 3 28, 8 34 C11 38, 14 40, 15 40 C16 40, 19 38, 22 34 C27 28, 30 20, 29 15 C27 8, 18 5, 15 0Z" />
-                            <path d="M15 5 Q14 20, 15 38" fill="none" stroke="#1B5E20" strokeWidth="0.5" opacity="0.3" />
-                            <path d="M15 14 Q10 11, 5 13" fill="none" stroke="#1B5E20" strokeWidth="0.3" opacity="0.2" />
-                            <path d="M15 14 Q20 11, 25 13" fill="none" stroke="#1B5E20" strokeWidth="0.3" opacity="0.2" />
-                            <path d="M15 24 Q9 21, 4 23" fill="none" stroke="#1B5E20" strokeWidth="0.3" opacity="0.2" />
-                            <path d="M15 24 Q21 21, 26 23" fill="none" stroke="#1B5E20" strokeWidth="0.3" opacity="0.2" />
-                        </symbol>
                     </defs>
 
 
@@ -679,28 +609,6 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
                             />
                         );
                     })}
-
-                    {/* ═══ BACK LEAVES ═══ Behind nodes */}
-                    {leafSeeds.slice(0, Math.floor(leafSeeds.length / 2)).map((leaf, i) => (
-                        <use key={`bl-${i}`} href="#greenLeaf" className="tree-leaf"
-                            x={leaf.x - leaf.scale * 1.8} y={leaf.y - leaf.scale * 2.4}
-                            width={leaf.scale * 3.6} height={leaf.scale * 4.8}
-                            fill={leaf.color} opacity={0.75 + (i % 3) * 0.08}
-                            transform={`rotate(${leaf.rotate}, ${leaf.x}, ${leaf.y})`}
-                            style={{ animation: `leafSway ${3 + (i % 4) * 0.5}s ease-in-out ${leaf.delay}s infinite` }}
-                        />
-                    ))}
-
-                    {/* ═══ FRONT LEAVES ═══ On top of nodes for depth */}
-                    {leafSeeds.slice(Math.floor(leafSeeds.length / 2)).map((leaf, i) => (
-                        <use key={`fl-${i}`} href="#greenLeaf" className="tree-leaf"
-                            x={leaf.x - leaf.scale * 1.8} y={leaf.y - leaf.scale * 2.4}
-                            width={leaf.scale * 3.6} height={leaf.scale * 4.8}
-                            fill={leaf.color} opacity={0.6 + (i % 3) * 0.08}
-                            transform={`rotate(${leaf.rotate}, ${leaf.x}, ${leaf.y})`}
-                            style={{ animation: `leafSway ${3 + (i % 4) * 0.5}s ease-in-out ${leaf.delay}s infinite` }}
-                        />
-                    ))}
                 </svg>
 
                 {/* Person bubbles (HTML overlay for rich styling) */}
@@ -721,7 +629,7 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             {/* Title */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 z-30">
                 <div className="bg-[#4e342e]/90 backdrop-blur-sm text-white px-6 py-2 rounded-2xl shadow-xl border border-[#8d6e63]">
-                    <h1 className="font-serif font-bold text-sm sm:text-base text-center">🌳 Phả Đồ Họ {data.familyName}</h1>
+                    <h1 className="font-serif font-bold text-sm sm:text-base text-center">🌳 Phả Đồ Họ {data?.familyName || 'Nguyễn'}</h1>
                 </div>
             </div>
 
@@ -805,89 +713,91 @@ export default function OrganicTreeCanvas({ data }: { data: FamilyData }) {
             </div>
 
             {/* Detail popup */}
-            {detailMember && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setDetailMember(null)}>
-                    <div className="absolute inset-0 bg-black/50 backdrop-blur-md" />
-                    <div className="relative bg-[#fdfbf7] border-2 border-[#c8912c] rounded-3xl shadow-2xl max-w-sm w-full p-6 bg-gradient-to-b from-[#fdfbf7] to-[#f4efe6]"
-                        onClick={e => e.stopPropagation()}>
-                        <button onClick={() => setDetailMember(null)} className="absolute top-3 right-3 p-1.5 hover:bg-gray-100 rounded-full">
-                            <X size={20} className="text-[#8b5a2b]" />
-                        </button>
-
-                        {/* Header */}
-                        <div className="flex items-center gap-4 mb-5">
-                            <div className="relative rounded-full"
-                                style={{
-                                    width: 64,
-                                    height: 64,
-                                    background: 'conic-gradient(from 0deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b)',
-                                    padding: 3,
-                                }}>
-                                <div className={`w-full h-full rounded-full flex items-center justify-center text-3xl
-                                    ${detailMember.gender === 'female' ? 'bg-pink-100' : 'bg-amber-50'}`}>
-                                    {detailMember.gender === 'female' ? '👩' : '👨'}
-                                </div>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-[#3e2723] font-serif">{detailMember.name}</h3>
-                                <p className="text-xs text-[#8b5a2b] mt-0.5">
-                                    Đời {detailMember.generation ?? '?'} • {detailMember.gender === 'female' ? 'Nữ' : 'Nam'}
-                                    {detailMember.status ? ` • ${detailMember.status}` : ''}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Info */}
-                        <div className="space-y-2 text-sm mb-5">
-                            {detailMember.spouse && (
-                                <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
-                                    <span className="text-[#8b5a2b] font-bold">{detailMember.gender === 'female' ? 'Chồng:' : 'Vợ:'}</span>
-                                    <span className="text-[#3e2723]">{detailMember.spouse}</span>
-                                </div>
-                            )}
-                            {detailMember.birthSolar && (
-                                <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
-                                    <span className="text-[#8b5a2b] font-bold">Sinh:</span>
-                                    <span className="text-[#3e2723]">{detailMember.birthSolar}</span>
-                                </div>
-                            )}
-                            {(() => {
-                                const par = members.find(m => m.id === detailMember.parentId);
-                                return par ? (
-                                    <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
-                                        <span className="text-[#8b5a2b] font-bold">Cha:</span>
-                                        <span className="text-[#3e2723] underline cursor-pointer hover:text-[#8b5a2b]" onClick={() => navigateToMember(par.id)}>{par.name}</span>
-                                    </div>
-                                ) : null;
-                            })()}
-                            {(() => {
-                                const kids = members.filter(m => m.parentId === detailMember.id);
-                                return kids.length > 0 ? (
-                                    <div className="p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
-                                        <span className="text-[#8b5a2b] font-bold block mb-1.5">Con ({kids.length}):</span>
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {kids.slice(0, 10).map(c => (
-                                                <span key={c.id} className={`text-xs px-2.5 py-1 rounded-full text-white cursor-pointer hover:opacity-80 font-medium
-                                                    ${c.gender === 'female' ? 'bg-[#c27ba0]' : 'bg-[#795548]'}`}
-                                                    onClick={() => navigateToMember(c.id)}>
-                                                    {c.name}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ) : null;
-                            })()}
-                        </div>
-
-                        {detailMember.id !== focusId && (
-                            <button onClick={() => navigateToMember(detailMember.id)}
-                                className="w-full py-3 bg-gradient-to-r from-[#8b5a2b] to-[#5c4033] hover:from-[#5c4033] hover:to-[#3e2723] text-white rounded-2xl font-bold text-sm shadow-lg transition-all">
-                                🌳 Đặt làm gốc cây
+            {
+                detailMember && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setDetailMember(null)}>
+                        <div className="absolute inset-0 bg-black/50 backdrop-blur-md" />
+                        <div className="relative bg-[#fdfbf7] border-2 border-[#c8912c] rounded-3xl shadow-2xl max-w-sm w-full p-6 bg-gradient-to-b from-[#fdfbf7] to-[#f4efe6]"
+                            onClick={e => e.stopPropagation()}>
+                            <button onClick={() => setDetailMember(null)} className="absolute top-3 right-3 p-1.5 hover:bg-gray-100 rounded-full">
+                                <X size={20} className="text-[#8b5a2b]" />
                             </button>
-                        )}
+
+                            {/* Header */}
+                            <div className="flex items-center gap-4 mb-5">
+                                <div className="relative rounded-full"
+                                    style={{
+                                        width: 64,
+                                        height: 64,
+                                        background: 'conic-gradient(from 0deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b)',
+                                        padding: 3,
+                                    }}>
+                                    <div className={`w-full h-full rounded-full flex items-center justify-center text-3xl
+                                    ${detailMember.gender === 'female' ? 'bg-pink-100' : 'bg-amber-50'}`}>
+                                        {detailMember.gender === 'female' ? '👩' : '👨'}
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-[#3e2723] font-serif">{detailMember.name}</h3>
+                                    <p className="text-xs text-[#8b5a2b] mt-0.5">
+                                        Đời {detailMember.generation ?? '?'} • {detailMember.gender === 'female' ? 'Nữ' : 'Nam'}
+                                        {detailMember.status ? ` • ${detailMember.status}` : ''}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Info */}
+                            <div className="space-y-2 text-sm mb-5">
+                                {detailMember.spouse && (
+                                    <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
+                                        <span className="text-[#8b5a2b] font-bold">{detailMember.gender === 'female' ? 'Chồng:' : 'Vợ:'}</span>
+                                        <span className="text-[#3e2723]">{detailMember.spouse}</span>
+                                    </div>
+                                )}
+                                {detailMember.birthSolar && (
+                                    <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
+                                        <span className="text-[#8b5a2b] font-bold">Sinh:</span>
+                                        <span className="text-[#3e2723]">{detailMember.birthSolar}</span>
+                                    </div>
+                                )}
+                                {(() => {
+                                    const par = members.find(m => m.id === detailMember.parentId);
+                                    return par ? (
+                                        <div className="flex gap-2 p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
+                                            <span className="text-[#8b5a2b] font-bold">Cha:</span>
+                                            <span className="text-[#3e2723] underline cursor-pointer hover:text-[#8b5a2b]" onClick={() => navigateToMember(par.id)}>{par.name}</span>
+                                        </div>
+                                    ) : null;
+                                })()}
+                                {(() => {
+                                    const kids = members.filter(m => m.parentId === detailMember.id);
+                                    return kids.length > 0 ? (
+                                        <div className="p-2.5 bg-white rounded-xl border border-[#e8dcb8]">
+                                            <span className="text-[#8b5a2b] font-bold block mb-1.5">Con ({kids.length}):</span>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {kids.slice(0, 10).map(c => (
+                                                    <span key={c.id} className={`text-xs px-2.5 py-1 rounded-full text-white cursor-pointer hover:opacity-80 font-medium
+                                                    ${c.gender === 'female' ? 'bg-[#c27ba0]' : 'bg-[#795548]'}`}
+                                                        onClick={() => navigateToMember(c.id)}>
+                                                        {c.name}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ) : null;
+                                })()}
+                            </div>
+
+                            {detailMember.id !== focusId && (
+                                <button onClick={() => navigateToMember(detailMember.id)}
+                                    className="w-full py-3 bg-gradient-to-r from-[#8b5a2b] to-[#5c4033] hover:from-[#5c4033] hover:to-[#3e2723] text-white rounded-2xl font-bold text-sm shadow-lg transition-all">
+                                    🌳 Đặt làm gốc cây
+                                </button>
+                            )}
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
         </div>
     );
 }
