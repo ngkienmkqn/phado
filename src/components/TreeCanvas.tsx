@@ -330,8 +330,8 @@ export default function TreeCanvas({ data }: { data: FamilyData }) {
         if (Object.keys(overlay).length === 0) return base;
 
         // Fields that should NEVER be overridden by localStorage overlay
-        // parentId and childrenIds must come from server data only
-        const protectedFields = new Set(['parentId', 'childrenIds', 'id', 'generation']);
+        // childrenIds must come from server data only (parentId CAN be overridden for unlink)
+        const protectedFields = new Set(['childrenIds', 'id', 'generation']);
 
         const updated = base.map(m => {
             if (overlay[m.id]) {
