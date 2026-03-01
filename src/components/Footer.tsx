@@ -67,6 +67,24 @@ export default function Footer() {
                     <div>
                         <h4 className="text-sm font-bold text-amber-300/80 uppercase tracking-[0.15em] mb-4">Ban Quản Trị & Phát Triển</h4>
                         <div className="bg-white/3 border border-white/6 rounded-2xl p-5 flex flex-col gap-4">
+
+                            {/* Kien */}
+                            <div className="flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-full bg-linear-to-br from-amber-400/20 to-amber-600/20 border border-amber-500/20 flex items-center justify-center shrink-0 mt-1">
+                                    <User className="w-5 h-5 text-amber-400" />
+                                </div>
+                                <div>
+                                    <p className="text-[11px] text-white/50 uppercase tracking-widest mb-1">Xây dựng kỹ thuật Website</p>
+                                    <p className="text-base font-bold text-amber-200">Nguyễn Trung Kiên</p>
+                                    <p className="text-xs text-amber-500/60 mt-0.5 mb-2">Đời thứ 21 · Con của Nguyễn Văn Hải</p>
+                                    <a href="tel:0983545091" className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 bg-amber-500/10 px-3 py-1.5 rounded-lg transition-colors border border-amber-500/20 hover:bg-amber-500/20">
+                                        <Phone className="w-3.5 h-3.5" /> 0983 545 091
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="h-px bg-white/5 w-full my-2"></div>
+
                             {/* Doanh */}
                             <div className="flex items-start gap-4">
                                 <div className="w-10 h-10 rounded-full bg-linear-to-br from-amber-400/20 to-amber-600/20 border border-amber-500/20 flex items-center justify-center shrink-0 mt-1">
@@ -78,23 +96,6 @@ export default function Footer() {
                                     <p className="text-xs text-amber-500/60 mt-0.5 mb-2">Đời thứ 19</p>
                                     <a href="tel:0913568292" className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 bg-amber-500/10 px-3 py-1.5 rounded-lg transition-colors border border-amber-500/20 hover:bg-amber-500/20">
                                         <Phone className="w-3.5 h-3.5" /> 0913 568 292
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div className="h-px bg-white/5 w-full my-2"></div>
-
-                            {/* Kien */}
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-full bg-linear-to-br from-amber-400/20 to-amber-600/20 border border-amber-500/20 flex items-center justify-center shrink-0 mt-1">
-                                    <User className="w-5 h-5 text-amber-400" />
-                                </div>
-                                <div>
-                                    <p className="text-[11px] text-white/50 uppercase tracking-widest mb-1">Xây dựng kỹ thuật Website</p>
-                                    <p className="text-base font-bold text-amber-200">Nguyễn Trung Kiên</p>
-                                    <p className="text-xs text-amber-500/60 mt-0.5 mb-2">Đời thứ 21 · Con Nguyễn Văn Hải</p>
-                                    <a href="tel:0983545091" className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 bg-amber-500/10 px-3 py-1.5 rounded-lg transition-colors border border-amber-500/20 hover:bg-amber-500/20">
-                                        <Phone className="w-3.5 h-3.5" /> 0983 545 091
                                     </a>
                                 </div>
                             </div>
