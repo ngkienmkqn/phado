@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, TreeDeciduous, Users, BookOpen, HelpCircle, Phone, User, Heart } from 'lucide-react';
@@ -15,6 +15,19 @@ const quickLinks = [
 
 export default function Footer() {
     const pathname = usePathname();
+
+    const [generations, setGenerations] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetch('/api/family-data')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.totalGenerations) {
+                    setGenerations(data.totalGenerations);
+                }
+            })
+            .catch(console.error);
+    }, []);
 
     // Don't show footer on tree page (fullscreen canvas)
     if (pathname === '/tree' || pathname === '/tree-organic') return null;
@@ -32,7 +45,7 @@ export default function Footer() {
                         <div className="flex items-center gap-3 mb-4">
                             <div>
                                 <h3 className="text-lg font-serif font-bold text-amber-200">Họ Nguyễn Cẩm Giang</h3>
-                                <p className="text-[11px] text-amber-500/60 tracking-[0.12em] uppercase">Từ năm 1469 · 22 đời</p>
+                                <p className="text-[11px] text-amber-500/60 tracking-[0.12em] uppercase">Từ năm 1469 {generations ? `· ${generations} đời` : ''}</p>
                             </div>
                         </div>
                         <p className="text-sm text-white/40 leading-relaxed">
