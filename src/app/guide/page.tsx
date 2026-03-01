@@ -88,6 +88,19 @@ const steps = [
         ],
         tip: '💡 Gặp khó khăn gì cứ nhờ con cháu hỗ trợ — đừng ngại hỏi!',
     },
+    {
+        icon: '👨‍💻',
+        title: 'Thông Tin Người Tạo',
+        subtitle: 'Liên hệ & góp ý',
+        color: 'from-rose-500 to-pink-600',
+        borderColor: 'border-rose-400/30',
+        content: [
+            { emoji: '👤', text: 'Website được tạo bởi: Nguyễn Trung Kiên — Đời thứ 21, con của Nguyễn Văn Hải' },
+            { emoji: '📞', text: 'Số điện thoại liên hệ: 0983 545 091' },
+            { emoji: '💬', text: 'Nếu có thắc mắc, muốn chỉnh sửa hoặc bổ sung thông tin, vui lòng liên hệ qua số điện thoại trên' },
+        ],
+        tip: '💡 Mọi đóng góp ý kiến đều được trân trọng để hoàn thiện gia phả dòng họ!',
+    },
 ];
 
 export default function GuidePage() {
@@ -137,7 +150,7 @@ export default function GuidePage() {
             <main className="relative z-10 max-w-2xl mx-auto px-4 pb-32">
                 <div className={`bg-[#14110e]/80 border ${step.borderColor} rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl`}>
                     {/* Card header */}
-                    <div className={`bg-gradient-to-r ${step.color} px-6 py-6 md:px-8 md:py-8`}>
+                    <div className={`bg-linear-to-r ${step.color} px-6 py-6 md:px-8 md:py-8`}>
                         <div className="text-5xl mb-3">{step.icon}</div>
                         <h2 className="text-3xl md:text-4xl font-serif font-black text-white mb-1">{step.title}</h2>
                         <p className="text-lg text-white/80 font-medium">{step.subtitle}</p>
@@ -147,7 +160,7 @@ export default function GuidePage() {
                     <div className="px-6 py-6 md:px-8 md:py-8 space-y-5">
                         {step.content.map((item, i) => (
                             <div key={i} className="flex items-start gap-4 group">
-                                <span className="text-2xl md:text-3xl flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                                <span className="text-2xl md:text-3xl shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
                                     {item.emoji}
                                 </span>
                                 <p className="text-lg md:text-xl text-[#e8dcc8] leading-relaxed font-medium">

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Users, TreeDeciduous, BookOpen, Settings, HelpCircle } from "lucide-react";
+import { Users, TreeDeciduous, BookOpen, HelpCircle } from "lucide-react";
 import BlogSection from '@/components/BlogSection';
 import FloatingHelp from '@/components/FloatingHelp';
 import { useState, useEffect } from 'react';
@@ -53,14 +53,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <header className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4">
-        {/* Top Right Admin Link */}
-        <div className="absolute top-6 right-6 z-20">
-          <Link href="/admin" className="flex items-center gap-2 text-gold-200/50 hover:text-gold-400 transition-colors bg-white/5 border border-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
-            <Settings className="w-4 h-4" />
-            <span className="text-sm font-medium">Bảng Điều Khiển</span>
-          </Link>
-        </div>
+      <header className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 -mt-16 pt-16">
 
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <h1 className="text-5xl md:text-[5.5rem] font-serif font-black mb-6 bg-linear-to-b from-[#ffedb3] via-[#facc15] to-[#996515] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] leading-tight tracking-tight uppercase px-4 pt-16 text-center">

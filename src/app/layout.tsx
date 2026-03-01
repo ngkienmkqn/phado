@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,7 +31,9 @@ export default function RootLayout({
         className={`${inter.variable} ${notoSerif.variable} antialiased`}
         style={{ fontFamily: "var(--font-inter), var(--font-noto-serif), serif" }}
       >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

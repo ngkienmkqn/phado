@@ -96,6 +96,9 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                         >
                             Đừng hiện lại hướng dẫn ở tất cả các trang
                         </button>
+                        <p className="mt-4 text-xs text-amber-400/50 text-center leading-relaxed">
+                            Liên hệ người tạo Website: <span className="text-amber-300/70 font-medium">Nguyễn Trung Kiên</span> đời thứ 21 con bố Nguyễn Văn Hải. SĐT: <a href="tel:0983545091" className="text-amber-300/70 font-medium hover:text-amber-200 underline underline-offset-2">0983545091</a> nếu có yêu cầu chỉnh sửa.
+                        </p>
                     </div>
                 </div>
             )}
