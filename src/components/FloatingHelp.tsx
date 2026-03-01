@@ -74,11 +74,19 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                     <p className="text-base text-amber-100/80">{tip.text}</p>
                                 </div>
                             ))}
-                            <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
-                                <span className="text-xl flex-shrink-0">👨‍💻</span>
-                                <p className="text-sm text-amber-100/90 leading-relaxed">
-                                    Liên hệ người tạo Website: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời thứ 21 con bố Nguyễn Văn Hải). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a> nếu có yêu cầu chỉnh sửa.
-                                </p>
+                            <div className="flex flex-col gap-3 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
+                                <div className="flex items-start gap-3 border-b border-amber-500/20 pb-3">
+                                    <span className="text-xl shrink-0">📝</span>
+                                    <p className="text-sm text-amber-100/90 leading-relaxed">
+                                        Nội dung Gia Phả: <span className="text-amber-300 font-bold">Nguyễn Đức Doanh</span> (đời thứ 19). SĐT: <a href="tel:0913568292" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0913568292</a>
+                                    </p>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <span className="text-xl shrink-0">👨‍💻</span>
+                                    <p className="text-sm text-amber-100/90 leading-relaxed">
+                                        Kỹ thuật Website: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời thứ 21). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="flex gap-3">
@@ -124,11 +132,19 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                     <p className="text-sm text-amber-100/80 leading-relaxed">{tip.text}</p>
                                 </div>
                             ))}
-                            <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
-                                <span className="text-xl flex-shrink-0">👨‍💻</span>
-                                <p className="text-xs text-amber-100/90 leading-relaxed">
-                                    Liên hệ: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời 21). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
-                                </p>
+                            <div className="flex flex-col gap-3 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
+                                <div className="flex items-start gap-3 border-b border-amber-500/20 pb-3">
+                                    <span className="text-xl shrink-0">📝</span>
+                                    <p className="text-xs text-amber-100/90 leading-relaxed">
+                                        Nội dung: <span className="text-amber-300 font-bold">Nguyễn Đức Doanh</span> (đời 19). SĐT: <a href="tel:0913568292" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0913568292</a>
+                                    </p>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <span className="text-xl shrink-0">👨‍💻</span>
+                                    <p className="text-xs text-amber-100/90 leading-relaxed">
+                                        Kỹ thuật: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời 21). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="p-4 border-t border-amber-500/10 flex flex-col gap-2">

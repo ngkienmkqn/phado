@@ -90,14 +90,14 @@ const steps = [
     },
     {
         icon: '👨‍💻',
-        title: 'Thông Tin Người Tạo',
+        title: 'Ban Quản Trị Website',
         subtitle: 'Liên hệ & góp ý',
         color: 'from-rose-500 to-pink-600',
         borderColor: 'border-rose-400/30',
         content: [
-            { emoji: '👤', text: 'Website được tạo bởi: Nguyễn Trung Kiên — Đời thứ 21, con của Nguyễn Văn Hải' },
-            { emoji: '📞', text: 'Số điện thoại liên hệ: 0983 545 091' },
-            { emoji: '💬', text: 'Nếu có thắc mắc, muốn chỉnh sửa hoặc bổ sung thông tin, vui lòng liên hệ qua số điện thoại trên' },
+            { emoji: '📝', text: 'Quản trị & Cập nhật nội dung gia phả: Nguyễn Đức Doanh — Đời thứ 19 | SĐT: 0913 568 292' },
+            { emoji: '👨‍💻', text: 'Xây dựng & Kỹ thuật Website: Nguyễn Trung Kiên — Đời thứ 21 | SĐT: 0983 545 091' },
+            { emoji: '💬', text: 'Nếu có thắc mắc, muốn chỉnh sửa hoặc bổ sung thông tin, vui lòng liên hệ qua các số điện thoại trên' },
         ],
         tip: '💡 Mọi đóng góp ý kiến đều được trân trọng để hoàn thiện gia phả dòng họ!',
     },
