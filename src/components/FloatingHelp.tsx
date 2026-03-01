@@ -84,7 +84,7 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                 <div className="flex items-start gap-3">
                                     <span className="text-xl shrink-0">👨‍💻</span>
                                     <p className="text-sm text-amber-100/90 leading-relaxed">
-                                        Kỹ thuật Website: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời thứ 21). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
+                                        Kỹ thuật Website: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời thứ 21, con bố Nguyễn Văn Hải). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
                                     </p>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                 <div className="flex items-start gap-3">
                                     <span className="text-xl shrink-0">👨‍💻</span>
                                     <p className="text-xs text-amber-100/90 leading-relaxed">
-                                        Kỹ thuật: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời 21). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
+                                        Kỹ thuật: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời 21, con bố Nguyễn Văn Hải). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
                                     </p>
                                 </div>
                             </div>
