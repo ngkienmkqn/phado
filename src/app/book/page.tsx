@@ -87,29 +87,63 @@ export default function BookPage() {
                                 <div className="h-px bg-gray-300 w-full" />
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
+                            <div className="grid grid-cols-1 gap-y-8 gap-x-12">
                                 {groupedMembers[Number(gen)].map((member: any) => (
-                                    <div key={member.id} className="flex flex-col border-b border-gray-100 pb-4">
-                                        <div className="flex justify-between items-baseline mb-1">
-                                            <span className={`font-bold text-lg ${member.gender === 'female' ? 'text-gray-600' : 'text-black'}`}>
-                                                {member.name}
-                                            </span>
+                                    <div key={member.id} className="flex flex-col border-b border-gray-200 pb-6 print:break-inside-avoid shadow-sm hover:shadow-md transition-shadow p-6 rounded-xl bg-white/50 print:bg-transparent print:shadow-none print:p-0 print:border-b-2">
+                                        <div className="flex justify-between items-start mb-3">
+                                            <div className="flex flex-col">
+                                                <h4 className={`font-bold text-2xl ${member.gender === 'female' ? 'text-gray-700' : 'text-black'}`}>
+                                                    {member.name}
+                                                </h4>
+                                                {member.spouse && (
+                                                    <span className="text-gray-600 font-medium mt-1">
+                                                        Phối ngẫu: {member.spouse}
+                                                    </span>
+                                                )}
+                                            </div>
                                             {member.status === 'Đã mất' && (
-                                                <span className="text-[10px] uppercase tracking-wider text-gray-400 ml-2">Đã mất</span>
+                                                <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-widest rounded-full border border-gray-200">Đã mất</span>
                                             )}
                                         </div>
 
-                                        {member.spouse && (
-                                            <div className="text-sm text-gray-600 italic">
-                                                Phối ngẫu: {member.spouse}
-                                            </div>
-                                        )}
-
-                                        {(member.birthSolar || member.birthLunar) && (
-                                            <div className="text-sm text-gray-500 mt-1">
-                                                Sinh: {member.birthSolar || member.birthLunar}
-                                            </div>
-                                        )}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 text-sm text-gray-700">
+                                            {member.birthSolar && (
+                                                <div className="flex gap-2">
+                                                    <span className="text-gray-400 w-20">Ngày sinh:</span>
+                                                    <span className="font-medium">{member.birthSolar}</span>
+                                                </div>
+                                            )}
+                                            {member.deathDate && (
+                                                <div className="flex gap-2">
+                                                    <span className="text-gray-400 w-20">Ngày mất:</span>
+                                                    <span className="font-medium">{member.deathDate}</span>
+                                                </div>
+                                            )}
+                                            {member.hometown && (
+                                                <div className="flex gap-2 sm:col-span-2">
+                                                    <span className="text-gray-400 w-20 shrink-0">Quê quán:</span>
+                                                    <span className="font-medium">{member.hometown}</span>
+                                                </div>
+                                            )}
+                                            {member.address && (
+                                                <div className="flex gap-2 sm:col-span-2">
+                                                    <span className="text-gray-400 w-20 shrink-0">Địa chỉ:</span>
+                                                    <span className="font-medium">{member.address}</span>
+                                                </div>
+                                            )}
+                                            {member.burialPlace && (
+                                                <div className="flex gap-2 sm:col-span-2">
+                                                    <span className="text-gray-400 w-20 shrink-0">Nơi an nghỉ:</span>
+                                                    <span className="font-medium">{member.burialPlace}</span>
+                                                </div>
+                                            )}
+                                            {member.phone && (
+                                                <div className="flex gap-2">
+                                                    <span className="text-gray-400 w-20 shrink-0">Điện thoại:</span>
+                                                    <span className="font-medium whitespace-nowrap">{member.phone}</span>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

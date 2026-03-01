@@ -58,8 +58,8 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
         <>
             {/* First-time onboarding overlay */}
             {showOnboarding && (
-                <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
-                    <div className="bg-[#1a1510] border border-amber-500/30 rounded-3xl max-w-md mx-4 p-8 shadow-2xl shadow-amber-500/10 relative">
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-300 p-4">
+                    <div className="bg-[#1a1510] border border-amber-500/30 rounded-3xl w-full max-w-md p-6 sm:p-8 shadow-2xl shadow-amber-500/10 relative max-h-[90vh] overflow-y-auto">
                         <button onClick={() => setShowOnboarding(false)} className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors">
                             <X className="w-6 h-6" />
                         </button>
@@ -74,6 +74,12 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                     <p className="text-base text-amber-100/80">{tip.text}</p>
                                 </div>
                             ))}
+                            <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
+                                <span className="text-xl flex-shrink-0">👨‍💻</span>
+                                <p className="text-sm text-amber-100/90 leading-relaxed">
+                                    Liên hệ người tạo Website: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời thứ 21 con bố Nguyễn Văn Hải). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a> nếu có yêu cầu chỉnh sửa.
+                                </p>
+                            </div>
                         </div>
                         <div className="flex gap-3">
                             <button
@@ -96,9 +102,6 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                         >
                             Đừng hiện lại hướng dẫn ở tất cả các trang
                         </button>
-                        <p className="mt-4 text-xs text-amber-400/50 text-center leading-relaxed">
-                            Liên hệ người tạo Website: <span className="text-amber-300/70 font-medium">Nguyễn Trung Kiên</span> đời thứ 21 con bố Nguyễn Văn Hải. SĐT: <a href="tel:0983545091" className="text-amber-300/70 font-medium hover:text-amber-200 underline underline-offset-2">0983545091</a> nếu có yêu cầu chỉnh sửa.
-                        </p>
                     </div>
                 </div>
             )}
@@ -121,6 +124,12 @@ export default function FloatingHelp({ pageName, tips }: FloatingHelpProps) {
                                     <p className="text-sm text-amber-100/80 leading-relaxed">{tip.text}</p>
                                 </div>
                             ))}
+                            <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
+                                <span className="text-xl flex-shrink-0">👨‍💻</span>
+                                <p className="text-xs text-amber-100/90 leading-relaxed">
+                                    Liên hệ: <span className="text-amber-300 font-bold">Nguyễn Trung Kiên</span> (đời 21). SĐT: <a href="tel:0983545091" className="text-amber-300 font-bold hover:text-amber-200 underline underline-offset-2">0983545091</a>
+                                </p>
+                            </div>
                         </div>
                         <div className="p-4 border-t border-amber-500/10 flex flex-col gap-2">
                             <Link href="/guide" className="flex items-center justify-center gap-2 w-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 py-3 rounded-xl transition-colors text-sm font-medium">

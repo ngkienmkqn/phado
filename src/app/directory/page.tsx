@@ -96,9 +96,23 @@ export default function DirectoryPage() {
                                 )}
                             </div>
                             <div className="mt-auto pt-4 flex flex-col gap-2">
-                                <div className="flex items-center gap-2 text-sm text-gray-300 bg-black/20 p-2 rounded-lg">
-                                    <Calendar className="w-4 h-4 text-gray-500" />
-                                    <span>{member.birthSolar || 'Chưa cập nhật ngày sinh'}</span>
+                                <div className="flex flex-col gap-1.5 text-sm text-gray-300 bg-black/20 p-3 rounded-xl border border-white/5">
+                                    <div className="flex items-center gap-2">
+                                        <Calendar className="w-4 h-4 text-gray-400 shrink-0" />
+                                        <span className="font-medium text-amber-200/90">{member.birthSolar || 'Chưa rõ năm sinh'}</span>
+                                        {member.deathDate && (
+                                            <>
+                                                <span className="text-gray-500">-</span>
+                                                <span className="font-medium text-gray-400">{member.deathDate}</span>
+                                            </>
+                                        )}
+                                    </div>
+                                    {(member.hometown || member.address) && (
+                                        <div className="flex items-start gap-2 mt-1">
+                                            <span className="text-gray-500 shrink-0 text-xs uppercase tracking-wider mt-0.5">Đ/c:</span>
+                                            <span className="text-gray-300 text-xs leading-relaxed">{member.address || member.hometown}</span>
+                                        </div>
+                                    )}
                                 </div>
                                 {member.phone && (
                                     <a
@@ -106,7 +120,7 @@ export default function DirectoryPage() {
                                         className="mt-2 w-full flex items-center justify-center gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-500/30 py-3 rounded-xl transition-colors font-medium text-lg"
                                     >
                                         <Phone className="w-5 h-5" />
-                                        Gọi Điện
+                                        Gọi Điện ({member.phone})
                                     </a>
                                 )}
                             </div>

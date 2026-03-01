@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   description: "Gia phả điện tử dòng họ Nguyễn Cẩm Giang - Từ năm 1469",
 };
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
