@@ -24,6 +24,7 @@ interface PendingRequest {
     memberName: string;
     memberGeneration: number;
     changes: FieldChange[];
+    pendingUnlinks?: { childId: string; childName: string }[];
     note: string;
     by: string;
     phone?: string;
@@ -146,7 +147,17 @@ export default function AdminDashboard() {
             // Normal edit
             if (!overlay[req.memberId]) overlay[req.memberId] = {};
             for (const change of req.changes || []) {
-                overlay[req.memberId][change.field] = change.newValue;
+                if (change.field !== 'unlink_child') {
+                    overlay[req.memberId][change.field] = change.newValue;
+                }
+            }
+
+            // Handle pending unlinks — set child's parentId to empty
+            if (req.pendingUnlinks && req.pendingUnlinks.length > 0) {
+                for (const unlink of req.pendingUnlinks) {
+                    if (!overlay[unlink.childId]) overlay[unlink.childId] = {};
+                    overlay[unlink.childId].parentId = '';
+                }
             }
         }
 
@@ -401,6 +412,25 @@ export default function AdminDashboard() {
                                                                 <span className="text-sm text-red-400 line-through">{c.oldValue || `(tr\u1ED1ng)`}</span>
                                                                 <span className="text-gray-500">{'\u2192'}</span>
                                                                 <span className="text-sm text-green-400 font-bold">{c.newValue || `(tr\u1ED1ng)`}</span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+
+                                                {/* Unlink Info */}
+                                                {req.pendingUnlinks && req.pendingUnlinks.length > 0 && (
+                                                    <div className="bg-red-900/20 rounded-xl border border-red-500/30 overflow-hidden mb-3">
+                                                        <div className="px-4 py-2 bg-red-500/10 border-b border-red-500/20">
+                                                            <span className="text-xs font-bold text-red-400 uppercase tracking-wider">
+                                                                {`\u26a0\ufe0f G\u1ee1 ${req.pendingUnlinks.length} li\u00ean k\u1ebft cha/m\u1eb9-con`}
+                                                            </span>
+                                                        </div>
+                                                        {req.pendingUnlinks.map((ul, i) => (
+                                                            <div key={i} className="px-4 py-3 flex items-center gap-3 border-b border-white/5 last:border-b-0">
+                                                                <span className="text-sm text-gray-400 w-24 shrink-0 font-medium">{`G\u1ee1 con:`}</span>
+                                                                <span className="text-sm text-red-400 font-bold">{ul.childName}</span>
+                                                                <span className="text-gray-500">{`\u2192`}</span>
+                                                                <span className="text-sm text-red-300 italic">{`(Kh\u00f4ng c\u00f2n li\u00ean k\u1ebft)`}</span>
                                                             </div>
                                                         ))}
                                                     </div>

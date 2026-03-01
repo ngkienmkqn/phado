@@ -65,6 +65,13 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
     const [editIndustry, setEditIndustry] = useState('');
     const [editAvatarUrl, setEditAvatarUrl] = useState('');
 
+    // Separate submitter phone (not the member's phone)
+    const [submitterPhone, setSubmitterPhone] = useState('');
+    const [phoneError, setPhoneError] = useState(false);
+
+    // Pending unlink children (inline, no popup)
+    const [pendingUnlinks, setPendingUnlinks] = useState<string[]>([]);
+
     // Advanced Spouse States
     // In our legacy data, spouse is single string. We parse it into an array for editing.
     const [spouses, setSpouses] = useState<string[]>([]);
@@ -129,6 +136,8 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             setSearchChildTerm('');
             setSelectedSpouse(null);
             setSelectedChild(null);
+            setPendingUnlinks([]);
+            setPhoneError(false);
         }
     }, [member]);
 
@@ -174,12 +183,36 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             changes.push({ field: 'spouse', label: 'Vợ/Chồng', oldValue: oldSpouseStr, newValue: currentSpouseStr });
         }
 
+        // Include pending unlinks as changes
+        for (const childId of pendingUnlinks) {
+            const child = childrenNodes.find(c => c.id === childId);
+            if (child) {
+                changes.push({ field: 'unlink_child', label: 'Gỡ liên kết con', oldValue: child.name, newValue: '(Gỡ liên kết)' });
+            }
+        }
+
         return changes;
     };
 
+    const isValidPhone = (phone: string) => /^0\d{8,9}$/.test(phone.replace(/[\s.-]/g, ''));
+
     const handleSubmit = () => {
         if (!member) return;
+
+        // Validate submitter phone
+        if (!submitterPhone.trim() || !isValidPhone(submitterPhone.trim())) {
+            setPhoneError(true);
+            return;
+        }
+        setPhoneError(false);
+
         const changes = getChanges();
+
+        // Build pending unlinks data for admin
+        const unlinkData = pendingUnlinks.map(childId => {
+            const child = childrenNodes.find(c => c.id === childId);
+            return { childId, childName: child?.name || childId };
+        });
 
         const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
 
@@ -191,21 +224,29 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             memberName: member.name,
             memberGeneration: member.generation,
             changes,
+            pendingUnlinks: unlinkData.length > 0 ? unlinkData : undefined,
             note: editNote || '',
             by: editBy || 'Ẩn danh',
-            phone: editPhone || '',
+            phone: submitterPhone.trim(),
             time: new Date().toLocaleString('vi-VN'),
         });
 
         localStorage.setItem('phado_requests', JSON.stringify(requests));
         setSubmitted(true);
-        setTimeout(() => { setSubmitted(false); setMode('view'); }, 2000);
+        setTimeout(() => { setSubmitted(false); setMode('view'); setPendingUnlinks([]); }, 2000);
     };
 
     const handleAddSpouseSubmit = () => {
         if (!member) return;
         if (spouseInputMode === 'new' && !newSpouse.trim()) return;
         if (spouseInputMode === 'existing' && !selectedSpouse) return;
+
+        // Validate submitter phone
+        if (!submitterPhone.trim() || !isValidPhone(submitterPhone.trim())) {
+            setPhoneError(true);
+            return;
+        }
+        setPhoneError(false);
 
         const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
         const nameToUse = spouseInputMode === 'existing' ? selectedSpouse!.name : newSpouse.trim();
@@ -230,7 +271,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
             },
             note: editNote || `Đề xuất thêm Vợ/Chồng cho ${member.name}`,
             by: editBy || 'Ẩn danh',
-            phone: editPhone || '',
+            phone: submitterPhone.trim(),
             time: new Date().toLocaleString('vi-VN'),
         });
         localStorage.setItem('phado_requests', JSON.stringify(requests));
@@ -242,6 +283,13 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
         if (!member) return;
         if (childInputMode === 'new' && !newChildName.trim()) return;
         if (childInputMode === 'existing' && !selectedChild) return;
+
+        // Validate submitter phone
+        if (!submitterPhone.trim() || !isValidPhone(submitterPhone.trim())) {
+            setPhoneError(true);
+            return;
+        }
+        setPhoneError(false);
 
         const requests = JSON.parse(localStorage.getItem('phado_requests') || '[]');
 
@@ -257,7 +305,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                 ],
                 note: editNote || `Gắn kết bé ${selectedChild!.name} làm con của ${member.name} (Chưa được nối cành nhánh).`,
                 by: editBy || 'Ẩn danh',
-                phone: editPhone || '',
+                phone: submitterPhone.trim(),
                 time: new Date().toLocaleString('vi-VN'),
             });
         } else {
@@ -282,7 +330,7 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                 },
                 note: editNote || `Đề xuất thêm Con mới cho ${member.name}`,
                 by: editBy || 'Ẩn danh',
-                phone: editPhone || '',
+                phone: submitterPhone.trim(),
                 time: new Date().toLocaleString('vi-VN'),
             });
         }
@@ -512,43 +560,48 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                 </p>
                             </div>
 
-                            {/* Children List in Edit Mode - with unlink button */}
+                            {/* Children List in Edit Mode - with inline unlink toggle */}
                             {childrenNodes.length > 0 && (
                                 <div>
                                     <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">Con cái ({childrenNodes.length})</label>
                                     <div className="space-y-2">
-                                        {childrenNodes.map(child => (
-                                            <div key={child.id} className="flex items-center justify-between p-2.5 bg-[#fdfbf7] border border-[#e8dcb8] rounded-lg">
-                                                <span className="text-sm font-medium text-[#3e2723]">{child.name}</span>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        const reason = prompt(`Gỡ liên kết cha/mẹ-con giữa "${member.name}" và "${child.name}"?\n(Chỉ xóa mối quan hệ, không xóa người)\n\nLý do:`);
-                                                        if (reason !== null) {
-                                                            fetch('/api/family-data', {
-                                                                method: 'POST',
-                                                                headers: { 'Content-Type': 'application/json' },
-                                                                body: JSON.stringify({
-                                                                    type: 'unlink_parent_child',
-                                                                    parentId: member.id,
-                                                                    parentName: member.name,
-                                                                    childId: child.id,
-                                                                    childName: child.name,
-                                                                    reason: reason || 'Không có lý do',
-                                                                    timestamp: new Date().toISOString(),
-                                                                }),
-                                                            });
-                                                            alert(`Yêu cầu gỡ liên kết "${member.name}" ↔ "${child.name}" đã gửi lên Admin.`);
-                                                        }
-                                                    }}
-                                                    className="p-1 hover:bg-red-50 rounded-full transition-colors"
-                                                    title="Gỡ liên kết cha/mẹ-con"
-                                                >
-                                                    <X size={14} className="text-red-400 hover:text-red-600" />
-                                                </button>
-                                            </div>
-                                        ))}
+                                        {childrenNodes.map(child => {
+                                            const isMarkedForUnlink = pendingUnlinks.includes(child.id);
+                                            return (
+                                                <div key={child.id} className={`flex items-center justify-between p-2.5 rounded-lg border transition-all ${isMarkedForUnlink ? 'bg-red-50 border-red-300' : 'bg-[#fdfbf7] border-[#e8dcb8]'}`}>
+                                                    <div className="flex items-center gap-2 flex-1">
+                                                        <span className={`text-sm font-medium ${isMarkedForUnlink ? 'text-red-400 line-through' : 'text-[#3e2723]'}`}>{child.name}</span>
+                                                        {isMarkedForUnlink && (
+                                                            <span className="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-bold border border-red-200">Sẽ gỡ</span>
+                                                        )}
+                                                    </div>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            if (isMarkedForUnlink) {
+                                                                setPendingUnlinks(prev => prev.filter(id => id !== child.id));
+                                                            } else {
+                                                                setPendingUnlinks(prev => [...prev, child.id]);
+                                                            }
+                                                        }}
+                                                        className={`p-1 rounded-full transition-colors ${isMarkedForUnlink ? 'hover:bg-green-50' : 'hover:bg-red-50'}`}
+                                                        title={isMarkedForUnlink ? 'Hoàn tác — giữ liên kết' : 'Đánh dấu gỡ liên kết cha/mẹ-con'}
+                                                    >
+                                                        {isMarkedForUnlink ? (
+                                                            <ArrowLeft size={14} className="text-green-500 hover:text-green-700" />
+                                                        ) : (
+                                                            <X size={14} className="text-red-400 hover:text-red-600" />
+                                                        )}
+                                                    </button>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
+                                    {pendingUnlinks.length > 0 && (
+                                        <p className="text-[10px] text-red-600 mt-1.5 bg-red-50 p-2 rounded border border-red-200">
+                                            ⚠️ <strong>{pendingUnlinks.length} liên kết</strong> sẽ được gỡ khi Admin duyệt. Chỉ gỡ mối quan hệ, không xóa người.
+                                        </p>
+                                    )}
                                 </div>
                             )}
 
@@ -659,9 +712,10 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo liên hệ</label>
-                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
-                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo liên hệ <span className="text-red-500">*</span></label>
+                                    <input type="tel" value={submitterPhone} onChange={e => { setSubmitterPhone(e.target.value); setPhoneError(false); }} placeholder="VD: 0912345678"
+                                        className={`w-full border rounded-lg py-2 px-3 text-sm outline-none ${phoneError ? 'border-red-500 bg-red-50 focus:border-red-500' : 'border-[#d2b48c] focus:border-[#8b5a2b]'}`} />
+                                    {phoneError && <p className="text-[10px] text-red-500 mt-1 font-medium">⚠️ Vui lòng nhập SĐT thật (VD: 0912345678)</p>}
                                 </div>
                             </div>
                         </div>
@@ -827,9 +881,10 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo</label>
-                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
-                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo <span className="text-red-500">*</span></label>
+                                    <input type="tel" value={submitterPhone} onChange={e => { setSubmitterPhone(e.target.value); setPhoneError(false); }} placeholder="VD: 0912345678"
+                                        className={`w-full border rounded-lg py-2 px-3 text-sm outline-none ${phoneError ? 'border-red-500 bg-red-50 focus:border-red-500' : 'border-[#d2b48c] focus:border-[#8b5a2b]'}`} />
+                                    {phoneError && <p className="text-[10px] text-red-500 mt-1 font-medium">⚠️ Vui lòng nhập SĐT thật (VD: 0912345678)</p>}
                                 </div>
                             </div>
                         </div>
@@ -1004,9 +1059,10 @@ export default function MemberSidePanel({ member, onClose, allMembers, onViewMem
                                         className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo</label>
-                                    <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} placeholder="VD: 0912..."
-                                        className="w-full border border-[#d2b48c] rounded-lg py-2 px-3 text-sm focus:border-[#8b5a2b] outline-none" />
+                                    <label className="text-xs text-[#8b5a2b] font-bold block mb-1.5">SĐT / Zalo <span className="text-red-500">*</span></label>
+                                    <input type="tel" value={submitterPhone} onChange={e => { setSubmitterPhone(e.target.value); setPhoneError(false); }} placeholder="VD: 0912345678"
+                                        className={`w-full border rounded-lg py-2 px-3 text-sm outline-none ${phoneError ? 'border-red-500 bg-red-50 focus:border-red-500' : 'border-[#d2b48c] focus:border-[#8b5a2b]'}`} />
+                                    {phoneError && <p className="text-[10px] text-red-500 mt-1 font-medium">⚠️ Vui lòng nhập SĐT thật (VD: 0912345678)</p>}
                                 </div>
                             </div>
                         </div>
