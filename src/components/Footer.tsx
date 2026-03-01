@@ -30,9 +30,6 @@ export default function Footer() {
                     {/* Column 1: About */}
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-amber-400 to-amber-700 flex items-center justify-center text-lg font-bold text-black shadow-lg shadow-amber-500/20 font-serif">
-                                族
-                            </div>
                             <div>
                                 <h3 className="text-lg font-serif font-bold text-amber-200">Họ Nguyễn Cẩm Giang</h3>
                                 <p className="text-[11px] text-amber-500/60 tracking-[0.12em] uppercase">Từ năm 1469 · 22 đời</p>

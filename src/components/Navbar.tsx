@@ -62,9 +62,6 @@ export default function Navbar() {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-3 group shrink-0">
-                            <div className="w-9 h-9 rounded-xl bg-linear-to-br from-amber-400 to-amber-700 flex items-center justify-center text-base font-bold text-black shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow font-serif">
-                                族
-                            </div>
                             <div className="hidden sm:block">
                                 <span className="text-base font-serif font-bold text-amber-200 group-hover:text-amber-100 transition-colors">
                                     Họ Nguyễn
