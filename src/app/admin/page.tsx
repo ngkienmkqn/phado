@@ -4,13 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Users, ShieldCheck, CheckCircle, XCircle, Lock, LogOut, Trash2, Eye, EyeOff, FileText } from 'lucide-react';
 
-const DEFAULT_PASSWORD = '123456';
-const getAdminPassword = () => {
-    if (typeof window !== 'undefined') {
-        return localStorage.getItem('phado_admin_pass') || DEFAULT_PASSWORD;
-    }
-    return DEFAULT_PASSWORD;
-};
+// Auth is handled server-side via /api/admin-auth
 
 interface FieldChange {
     field: string;
@@ -38,6 +32,7 @@ interface PendingRequest {
 
 export default function AdminDashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [adminRole, setAdminRole] = useState<'admin' | 'system_admin' | null>(null);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState<'pending' | 'members' | 'blog'>('pending');
@@ -49,12 +44,17 @@ export default function AdminDashboard() {
     const [newBlogAuthor, setNewBlogAuthor] = useState('');
     const [showPassChange, setShowPassChange] = useState(false);
     const [newPass, setNewPass] = useState('');
+    const [currentPass, setCurrentPass] = useState('');
     const [passMsg, setPassMsg] = useState('');
+    const [loginLoading, setLoginLoading] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const saved = sessionStorage.getItem('phado_admin');
-            if (saved === 'true') setIsAuthenticated(true);
+            if (saved === 'true') {
+                setIsAuthenticated(true);
+                setAdminRole(sessionStorage.getItem('phado_admin_role') as 'admin' | 'system_admin' || 'admin');
+            }
         }
         // Load family data from API (realtime)
         fetch('/api/family-data', { cache: 'no-store' })
@@ -76,19 +76,36 @@ export default function AdminDashboard() {
         }
     }, [isAuthenticated]);
 
-    const handleLogin = () => {
-        if (password === getAdminPassword()) {
-            setIsAuthenticated(true);
-            sessionStorage.setItem('phado_admin', 'true');
-            setError('');
-        } else {
-            setError('Sai mật khẩu. Vui lòng thử lại.');
+    const handleLogin = async () => {
+        setLoginLoading(true);
+        try {
+            const res = await fetch('/api/admin-auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'login', password }),
+            });
+            const data = await res.json();
+            if (data.success) {
+                setIsAuthenticated(true);
+                setAdminRole(data.role);
+                sessionStorage.setItem('phado_admin', 'true');
+                sessionStorage.setItem('phado_admin_role', data.role);
+                setError('');
+            } else {
+                setError('Sai mật khẩu. Vui lòng thử lại.');
+            }
+        } catch {
+            setError('Lỗi kết nối server.');
+        } finally {
+            setLoginLoading(false);
         }
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
+        setAdminRole(null);
         sessionStorage.removeItem('phado_admin');
+        sessionStorage.removeItem('phado_admin_role');
     };
 
     // AUTO-APPLY: When admin approves, apply changes to localStorage overlay
@@ -258,14 +275,29 @@ export default function AdminDashboard() {
                     </button>
                     {showPassChange && (
                         <div className="px-4 pb-2 space-y-2">
+                            <input type="password" value={currentPass} onChange={e => setCurrentPass(e.target.value)} placeholder="Mật khẩu hiện tại..."
+                                className="w-full bg-[#1a1a24] border border-white/10 rounded-lg py-2 px-3 text-white text-sm focus:outline-none focus:border-gold-500" />
                             <input type="password" value={newPass} onChange={e => setNewPass(e.target.value)} placeholder="Mật khẩu mới..."
                                 className="w-full bg-[#1a1a24] border border-white/10 rounded-lg py-2 px-3 text-white text-sm focus:outline-none focus:border-gold-500" />
-                            <button onClick={() => {
-                                if (newPass.length < 4) { setPassMsg('Mật khẩu phải ít nhất 4 ký tự'); return; }
-                                localStorage.setItem('phado_admin_pass', newPass);
-                                setPassMsg('✅ Đã đổi mật khẩu thành công!');
-                                setNewPass('');
-                                setTimeout(() => setPassMsg(''), 3000);
+                            <button onClick={async () => {
+                                if (newPass.length < 4) { setPassMsg('❌ Mật khẩu phải ít nhất 4 ký tự'); return; }
+                                try {
+                                    const res = await fetch('/api/admin-auth', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ action: 'change-password', currentPassword: currentPass, newPassword: newPass }),
+                                    });
+                                    const data = await res.json();
+                                    if (data.success) {
+                                        setPassMsg('✅ Đã đổi mật khẩu thành công! Tất cả mọi người sẽ phải dùng mật khẩu mới.');
+                                        setNewPass(''); setCurrentPass('');
+                                    } else {
+                                        setPassMsg(`❌ ${data.error}`);
+                                    }
+                                } catch {
+                                    setPassMsg('❌ Lỗi kết nối server');
+                                }
+                                setTimeout(() => setPassMsg(''), 5000);
                             }} className="w-full bg-gold-600 hover:bg-gold-500 text-black font-bold py-2 rounded-lg text-sm transition-colors">
                                 Lưu
                             </button>
@@ -288,7 +320,7 @@ export default function AdminDashboard() {
                     <div className="flex items-center gap-4">
                         <span className="text-sm border border-gold-500/30 bg-gold-500/10 text-gold-400 px-3 py-1 rounded-full flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
-                            Admin
+                            {adminRole === 'system_admin' ? '🛡️ System Admin' : 'Admin'}
                         </span>
                         <button onClick={handleLogout} className="md:hidden text-gray-400 hover:text-red-400">
                             <LogOut className="w-5 h-5" />
